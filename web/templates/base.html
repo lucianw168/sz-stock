@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SZ 每日选股{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="{{ root }}static/style.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="brand" href="{{ root }}index.html">SZ 选股</a></li>
+            <li><a href="{{ root }}index.html"{% if active == 'index' %} class="active"{% endif %}>今日选股</a></li>
+            <li><a href="{{ root }}history.html"{% if active == 'history' %} class="active"{% endif %}>历史记录</a></li>
+            {% for name in strategies %}
+            <li><a href="{{ root }}strategy/{{ name }}.html"{% if active == 'strategy-' + name %} class="active"{% endif %}>{{ name }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>SZ 量化选股系统 &mdash; 生成于 {{ generated_at }}</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

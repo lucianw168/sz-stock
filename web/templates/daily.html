@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}选股详情 - {{ date }}{% endblock %}
+
+{% block content %}
+<div style="display:flex;justify-content:space-between;align-items:center">
+    <h1>{{ date }} 选股详情</h1>
+    <div>
+        {% if prev_date %}
+        <a href="{{ root }}days/{{ prev_date }}.html" role="button" class="outline">&laquo; {{ prev_date }}</a>
+        {% endif %}
+        {% if next_date %}
+        <a href="{{ root }}days/{{ next_date }}.html" role="button" class="outline">{{ next_date }} &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
+{% if pattern_signals %}
+<h2>形态识别信号</h2>
+<div class="pattern-signals">
+    {% for s in pattern_signals %}
+    <article class="card pattern-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3><a href="{{ root }}stock/{{ s.code }}.html">{{ s.code }}</a></h3>
+            <span class="badge confidence">胜率 {{ (s.confidence * 100)|round(0)|int }}%</span>
+        </div>
+        <p class="pattern-explanation">{{ s.explanation }}</p>
+        <div class="pattern-metrics">
+            <span>价格: {{ s.signal_price|round(2) }}</span>
+            {% if s.consol_days > 0 %}
+            <span>横盘: {{ s.consol_days }}天</span>
+            {% endif %}
+            {% if s.breakout_vol_ratio > 0 %}
+            <span>涨停量比: {{ s.breakout_vol_ratio|round(2) }}</span>
+            {% endif %}
+            {% if s.pullback_vol_ratio > 0 %}
+            <span>回踩量比: {{ s.pullback_vol_ratio|round(1) }}x</span>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% for name, stocks in screen_results.items() %}
+{% if name != '形态识别' or not pattern_signals %}
+<h2>{{ name }}</h2>
+{% if stocks %}
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>代码</th>
+            <th>收盘价</th>
+            <th>涨幅%</th>
+            <th>RSI-6</th>
+            <th>RSI-12</th>
+            <th>CRSI</th>
+            <th>CCI</th>
+            <th>OBV</th>
+            <th>成交量比 7d</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in stocks %}
+        <tr>
+            <td><a href="{{ root }}stock/{{ s.code }}.html">{{ s.code }}</a></td>
+            <td>{{ s.close }}</td>
+            <td class="{{ 'text-green' if s.change_pct > 0 else 'text-red' }}">{{ s.change_pct }}%</td>
+            <td>{{ s.rsi6 }}</td>
+            <td>{{ s.rsi12 }}</td>
+            <td>{{ s.crsi }}</td>
+            <td>{{ s.cci }}</td>
+            <td>{{ s.obv }}</td>
+            <td>{{ s.vol_7d }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<p><em>该策略今日无选股</em></p>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endblock %}

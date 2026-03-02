@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}SZ 选股 - {{ date }}{% endblock %}
+
+{% block content %}
+<h1>每日选股 <small>{{ date }}</small></h1>
+
+<h2>近 30 日导航</h2>
+<div class="calendar">
+    {% for d in calendar_dates %}
+    <a href="{{ root }}days/{{ d }}.html">{{ d[-5:] }}</a>
+    {% endfor %}
+</div>
+
+{% if pattern_signals %}
+<h2>形态识别信号</h2>
+<div class="pattern-signals">
+    {% for s in pattern_signals %}
+    <article class="card pattern-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3><a href="{{ root }}stock/{{ s.code }}.html">{{ s.code }}</a></h3>
+            <span class="badge confidence">胜率 {{ (s.confidence * 100)|round(0)|int }}%</span>
+        </div>
+        <p class="pattern-explanation">{{ s.explanation }}</p>
+        <div class="pattern-metrics">
+            <span>价格: {{ s.signal_price|round(2) }}</span>
+            {% if s.consol_days > 0 %}
+            <span>横盘: {{ s.consol_days }}天</span>
+            {% endif %}
+            {% if s.breakout_vol_ratio > 0 %}
+            <span>涨停量比: {{ s.breakout_vol_ratio|round(2) }}</span>
+            {% endif %}
+            {% if s.pullback_vol_ratio > 0 %}
+            <span>回踩量比: {{ s.pullback_vol_ratio|round(1) }}x</span>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h2>今日选股结果</h2>
+<div class="card-grid">
+    {% for name, codes in screen_results.items() %}
+    <article class="card">
+        <h3><a href="{{ root }}strategy/{{ name }}.html">{{ name }}</a></h3>
+        <p style="font-size:0.8rem;color:var(--pico-muted-color)">
+            {% if backtest_summaries and name in backtest_summaries %}
+            胜率 {{ backtest_summaries[name].win_rate }}% &middot;
+            涨停率 {{ backtest_summaries[name].limit_up_rate }}% &middot;
+            {{ backtest_summaries[name].total_trades }} 笔交易
+            {% endif %}
+        </p>
+        {% if codes %}
+        <div class="tag-list">
+            {% for code in codes %}
+            <span class="tag"><a href="{{ root }}stock/{{ code }}.html">{{ code }}</a></span>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p><em>今日无选股</em></p>
+        {% endif %}
+    </article>
+    {% endfor %}
+</div>
+
+{% if backtest_summaries %}
+<h2>策略回测摘要</h2>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>策略</th>
+            <th>交易数</th>
+            <th>胜率</th>
+            <th>涨停率</th>
+            <th>盈亏比</th>
+            <th>累计收益</th>
+            <th>夏普</th>
+            <th>最大回撤</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for name, r in backtest_summaries.items() %}
+        <tr>
+            <td><a href="{{ root }}strategy/{{ name }}.html">{{ name }}</a></td>
+            <td>{{ r.total_trades }}</td>
+            <td>{{ r.win_rate }}%</td>
+            <td>{{ r.limit_up_rate }}%</td>
+            <td>{{ r.profit_factor }}</td>
+            <td class="{{ 'text-green' if r.cumulative_return > 0 else 'text-red' }}">{{ r.cumulative_return }}%</td>
+            <td>{{ r.sharpe_ratio }}</td>
+            <td class="text-red">{{ r.max_drawdown }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endif %}
+{% endblock %}

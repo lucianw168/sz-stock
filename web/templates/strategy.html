@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}策略 - {{ name }}{% endblock %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1>{{ name }}</h1>
+<p>{{ description }}</p>
+
+<h2>回测指标</h2>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value">{{ report.total_trades }}</div>
+        <div class="label">总交易</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ report.win_rate }}%</div>
+        <div class="label">胜率</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ report.limit_up_rate }}%</div>
+        <div class="label">涨停率</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ report.profit_factor }}</div>
+        <div class="label">盈亏比</div>
+    </div>
+    <div class="metric">
+        <div class="value {{ 'text-green' if report.cumulative_return > 0 else 'text-red' }}">{{ report.cumulative_return }}%</div>
+        <div class="label">累计收益</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ report.sharpe_ratio }}</div>
+        <div class="label">夏普比率</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ report.sortino_ratio }}</div>
+        <div class="label">索提诺</div>
+    </div>
+    <div class="metric">
+        <div class="value text-red">{{ report.max_drawdown }}%</div>
+        <div class="label">最大回撤</div>
+    </div>
+</div>
+
+{% if equity_data.dates %}
+<h2>收益曲线</h2>
+<div id="equity-chart" class="chart-container"></div>
+
+<h2>回撤</h2>
+<div id="drawdown-chart" class="chart-container-sm"></div>
+{% endif %}
+
+{% if trade_details %}
+<h2>交易明细</h2>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>买入日期</th>
+            <th>卖出日期</th>
+            <th>代码</th>
+            <th>买入价</th>
+            <th>卖出价</th>
+            <th>次日涨幅</th>
+            <th>达标</th>
+            <th>涨停</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in trade_details %}
+        <tr>
+            <td>{{ t.buy_date }}</td>
+            <td>{{ t.sell_date }}</td>
+            <td><a href="{{ root }}stock/{{ t.code }}.html">{{ t.code }}</a></td>
+            <td>{{ t.buy_price }}</td>
+            <td>{{ t.sell_price }}</td>
+            <td class="{{ 'text-green' if t.pnl_pct > 0 else 'text-red' }}">{{ t.pnl_pct }}%</td>
+            <td>{{ '✓' if t.hit_target else '' }}</td>
+            <td>{{ '✓' if t.hit_limit_up else '' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if equity_data.dates %}
+<script>
+(function() {
+    var data = {{ equity_data | tojson }};
+
+    // Equity curve
+    var ec = echarts.init(document.getElementById('equity-chart'));
+    ec.setOption({
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: data.dates },
+        yAxis: { type: 'value', name: '净值' },
+        series: [{
+            type: 'line',
+            data: data.equity,
+            smooth: true,
+            areaStyle: { opacity: 0.15 },
+            lineStyle: { width: 2 }
+        }],
+        grid: { left: 60, right: 20, top: 20, bottom: 40 }
+    });
+
+    // Drawdown
+    var dd = echarts.init(document.getElementById('drawdown-chart'));
+    dd.setOption({
+        tooltip: { trigger: 'axis', formatter: function(p) { return p[0].name + ': ' + (p[0].value * 100).toFixed(2) + '%'; } },
+        xAxis: { type: 'category', data: data.dates },
+        yAxis: { type: 'value', name: '回撤', axisLabel: { formatter: function(v) { return (v*100).toFixed(0)+'%'; } } },
+        series: [{
+            type: 'line',
+            data: data.drawdown,
+            areaStyle: { color: '#db4437', opacity: 0.3 },
+            lineStyle: { color: '#db4437', width: 1 },
+            itemStyle: { color: '#db4437' }
+        }],
+        grid: { left: 60, right: 20, top: 20, bottom: 40 }
+    });
+
+    window.addEventListener('resize', function() { ec.resize(); dd.resize(); });
+})();
+</script>
+{% endif %}
+{% endblock %}
