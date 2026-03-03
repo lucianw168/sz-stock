@@ -16,7 +16,7 @@ for _d in [RAW_DIR, PROCESSED_DIR, FEATURES_DIR, PREDICTIONS_DIR, MODEL_DIR]:
     os.makedirs(_d, exist_ok=True)
 
 # --- Tushare ---
-TUSHARE_TOKEN = os.environ.get('TUSHARE_TOKEN', '')
+TUSHARE_TOKEN = os.environ.get('TUSHARE_TOKEN', '2ed1b1d65a86d49ad17dc9af9f523fa4f6b5aa9880e2715db2da43c2')
 API_CALL_INTERVAL = 0.12  # seconds between API calls (500/min limit)
 
 # --- Date configuration ---
