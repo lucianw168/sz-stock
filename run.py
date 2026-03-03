@@ -209,6 +209,37 @@ def cmd_optimize(args):
     )
 
 
+def _deploy_to_ghpages(site_dir):
+    """Push site_dir contents to gh-pages branch."""
+    import subprocess
+    import tempfile
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_url = subprocess.check_output(
+        ['git', 'remote', 'get-url', 'origin'],
+        cwd=script_dir, text=True,
+    ).strip()
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        deploy_dir = os.path.join(tmpdir, 'site')
+        import shutil
+        shutil.copytree(site_dir, deploy_dir)
+
+        cmds = [
+            ['git', 'init'],
+            ['git', 'config', 'http.postBuffer', '524288000'],
+            ['git', 'checkout', '-b', 'gh-pages'],
+            ['git', 'add', '-A'],
+            ['git', 'commit', '-m',
+             f'Live deploy {__import__("datetime").datetime.now().strftime("%Y-%m-%d %H:%M")}'],
+            ['git', 'remote', 'add', 'origin', repo_url],
+            ['git', 'push', '-f', 'origin', 'gh-pages'],
+        ]
+        for cmd in cmds:
+            subprocess.run(cmd, cwd=deploy_dir, check=True,
+                           capture_output=True, text=True)
+
+
 def cmd_live(args):
     """Run live screening with real-time data, optionally looping."""
     import copy
@@ -289,6 +320,16 @@ def cmd_live(args):
             from web.generator import WebGenerator
             gen = WebGenerator(output_dir=args.output)
             gen.build(date=today, stock_data=live_data)
+
+            # Deploy to gh-pages if requested
+            if args.deploy:
+                print("  Deploying to gh-pages...")
+                try:
+                    site_path = os.path.abspath(args.output)
+                    _deploy_to_ghpages(site_path)
+                    print("  Deployed successfully!")
+                except Exception as e:
+                    print(f"  Deploy failed: {e}")
 
         if not args.loop:
             break
@@ -423,6 +464,8 @@ def main():
                         help='Website output directory (default: site)')
     p_live.add_argument('--force', action='store_true',
                         help='Run even outside trading hours')
+    p_live.add_argument('--deploy', action='store_true',
+                        help='Auto deploy to gh-pages after each web refresh')
 
     # web
     p_web = subparsers.add_parser('web', help='Generate static website')
