@@ -13,8 +13,24 @@ MAX_RETRIES=3
 RETRY_INTERVAL=600  # 秒
 
 for attempt in $(seq 1 $MAX_RETRIES); do
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 尝试第 $attempt 次生成网站..."
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 尝试第 $attempt 次更新数据并生成网站..."
     cd "$SCRIPT_DIR"
+
+    # 1. 先从 Tushare 下载/更新最新日线数据
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 更新日线数据..."
+    if ! python3 run.py daily; then
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 日线数据更新失败"
+        if [ "$attempt" -eq "$MAX_RETRIES" ]; then
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] 已达最大重试次数 ($MAX_RETRIES)，放弃部署"
+            exit 1
+        fi
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] 等待 ${RETRY_INTERVAL}s 后重试..."
+        sleep $RETRY_INTERVAL
+        continue
+    fi
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 日线数据更新成功"
+
+    # 2. 用最新数据生成网站
     if python3 run.py web --output "$SITE_DIR"; then
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] 网站生成成功"
         break
