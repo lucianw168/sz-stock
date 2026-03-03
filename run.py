@@ -251,16 +251,18 @@ def cmd_live(args):
             time_mod.sleep(interval_sec)
             continue
 
-        # Fetch real-time data
-        print("  Fetching real-time quotes (rt_k)...")
-        realtime = downloader.fetch_realtime_szse()
+        # Fetch real-time data (Tushare → yfinance fallback)
+        print("  Fetching real-time quotes...")
+        realtime, source = downloader.fetch_realtime(
+            stock_codes=base_data.keys()
+        )
         if not realtime:
             print("  No real-time data returned.")
             if not args.loop:
                 break
             time_mod.sleep(interval_sec)
             continue
-        print(f"  Got {len(realtime)} stocks.")
+        print(f"  Got {len(realtime)} stocks via {source}.")
 
         # Deep copy historical data + inject real-time as today's row
         live_data = copy.deepcopy(base_data)

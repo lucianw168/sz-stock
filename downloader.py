@@ -558,7 +558,7 @@ def import_from_limit_up(limit_up_raw_dir=None):
 # Real-time data (intraday)
 # ======================================================================
 
-def fetch_realtime_szse():
+def _fetch_rt_tushare():
     """Fetch real-time daily K-line for all SZSE stocks via pro.rt_k().
 
     Returns:
@@ -577,7 +577,7 @@ def fetch_realtime_szse():
         df = dl.pro.rt_k(ts_code='0*.SZ,3*.SZ')
     except Exception as e:
         logger.warning(f'rt_k API call failed: {e}')
-        print(f"  Failed to fetch real-time data: {e}")
+        print(f"  Tushare rt_k failed: {e}")
         return {}
 
     if df is None or df.empty:
@@ -609,14 +609,115 @@ def fetch_realtime_szse():
     return result
 
 
+def _fetch_rt_yfinance(stock_codes):
+    """Fetch real-time data via yfinance as fallback (~15 min delay).
+
+    Args:
+        stock_codes: iterable of stock codes (e.g., ['000001', '000002'])
+
+    Returns:
+        dict[str, dict] — same format as _fetch_rt_tushare().
+    """
+    try:
+        import yfinance as yf
+    except ImportError:
+        print("  yfinance not installed. pip install yfinance")
+        return {}
+
+    codes = list(stock_codes)
+    tickers = [f"{c}.SZ" for c in codes]
+    today = datetime.now().strftime('%Y-%m-%d')
+    result = {}
+
+    BATCH = 500
+    total_batches = (len(tickers) + BATCH - 1) // BATCH
+
+    for b in range(total_batches):
+        batch = tickers[b * BATCH : (b + 1) * BATCH]
+        print(f"    yfinance batch {b + 1}/{total_batches} "
+              f"({len(batch)} tickers)...")
+
+        try:
+            df = yf.download(
+                batch, period='1d', progress=False,
+                threads=True, group_by='ticker',
+            )
+        except Exception as e:
+            print(f"    yfinance download error: {e}")
+            continue
+
+        if df is None or df.empty:
+            continue
+
+        multi_ticker = len(batch) > 1
+
+        for ticker in batch:
+            code = ticker.split('.')[0]
+            try:
+                if multi_ticker:
+                    ohlcv = df[ticker].dropna()
+                else:
+                    ohlcv = df.dropna()
+
+                if ohlcv.empty:
+                    continue
+
+                row = ohlcv.iloc[-1]
+                close_val = float(row['Close'])
+                if close_val <= 0:
+                    continue
+
+                result[code] = {
+                    'date': today,
+                    'Open': float(row['Open']),
+                    'High': float(row['High']),
+                    'Low': float(row['Low']),
+                    'Close': close_val,
+                    'Volume': float(row['Volume']) / 100,  # 股 → 手
+                    'amount': 0,
+                    'pre_close': 0,  # yfinance 不提供，inject_realtime 会回退
+                }
+            except (KeyError, IndexError, TypeError):
+                continue
+
+    return result
+
+
+def fetch_realtime(stock_codes=None):
+    """Fetch real-time quotes: try Tushare rt_k first, fall back to yfinance.
+
+    Args:
+        stock_codes: iterable of codes for yfinance fallback.
+                     If None, yfinance fallback is skipped.
+
+    Returns:
+        (dict[str, dict], source_str)
+    """
+    data = _fetch_rt_tushare()
+    if data:
+        return data, 'tushare'
+
+    if stock_codes is None:
+        return {}, 'none'
+
+    print("  Tushare unavailable, falling back to yfinance (≈15 min delay)...")
+    data = _fetch_rt_yfinance(stock_codes)
+    if data:
+        return data, 'yfinance'
+
+    return {}, 'none'
+
+
 def inject_realtime(stock_data, realtime):
     """Inject real-time data as today's row into each stock's DataFrame.
 
     If today's row already exists it is replaced with the latest quote.
+    When pre_close is missing (yfinance fallback), it is derived from
+    the last historical close.
 
     Args:
         stock_data: dict[code, DataFrame] — historical daily data
-        realtime: dict[code, dict] from fetch_realtime_szse()
+        realtime: dict[code, dict] from fetch_realtime()
 
     Returns:
         (stock_data, injected_count)
@@ -631,6 +732,13 @@ def inject_realtime(stock_data, realtime):
 
         df = stock_data[code]
 
+        # Derive pre_close from last historical close when missing
+        pre_close = rt.get('pre_close', 0)
+        if pre_close <= 0:
+            hist = df[df.index < today_ts]
+            if not hist.empty:
+                pre_close = float(hist['Close'].iloc[-1])
+
         new_row = pd.DataFrame({
             'Open': [rt['Open']],
             'High': [rt['High']],
@@ -643,12 +751,14 @@ def inject_realtime(stock_data, realtime):
         if 'amount' in df.columns:
             new_row['amount'] = rt.get('amount', 0)
         if 'pre_close' in df.columns:
-            new_row['pre_close'] = rt.get('pre_close', 0)
+            new_row['pre_close'] = pre_close
         if 'change' in df.columns:
-            new_row['change'] = rt['Close'] - rt['pre_close']
+            new_row['change'] = rt['Close'] - pre_close if pre_close > 0 else 0
         if 'pct_chg' in df.columns:
-            prc = rt['pre_close']
-            new_row['pct_chg'] = (rt['Close'] - prc) / prc * 100 if prc > 0 else 0
+            new_row['pct_chg'] = (
+                (rt['Close'] - pre_close) / pre_close * 100
+                if pre_close > 0 else 0
+            )
 
         # Drop existing today row, append new one
         if today_ts in df.index:
