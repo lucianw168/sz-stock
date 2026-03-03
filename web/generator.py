@@ -92,8 +92,11 @@ class WebGenerator:
         self.all_dates = list_available_dates(self.stock_data)
 
         if date:
-            # Build for a single specified date + surrounding dates
-            self.target_dates = [date]
+            # Last 30 historical dates + today (if not already included)
+            recent = self.all_dates[-30:]
+            if date not in recent:
+                recent.append(date)
+            self.target_dates = recent
         else:
             # Use last 30 trading days
             self.target_dates = self.all_dates[-30:]
