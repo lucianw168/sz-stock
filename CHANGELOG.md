@@ -58,8 +58,18 @@
 - `--loop`：持续循环刷新
 - `--interval N`：刷新间隔（分钟，默认 15）
 - `--web`：每次刷新后重新生成网站
+- `--deploy`：每次刷新后自动部署到 gh-pages（需配合 `--web`）
 - `--force`：非交易时段也执行
 - 历史数据只加载一次，每次循环 deepcopy + 注入实时数据 + 重算指标
+- 新增 `_deploy_to_ghpages()` 辅助函数：临时目录 → git init → force push gh-pages
+
+**`deploy.sh`** — 修复数据更新流程：
+- 部署前先运行 `python run.py daily` 从 Tushare 增量下载最新日线数据
+- 修复了之前只运行 `web` 导致网站数据不更新的问题
+
+**`web/generator.py`** — 修复历史页面：
+- `_determine_dates(date=)` 传入特定日期时，不再只生成单日页面
+- 改为包含最近 30 个历史交易日 + 当日，确保历史记录完整
 
 ---
 

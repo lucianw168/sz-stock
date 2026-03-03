@@ -130,7 +130,7 @@ python run.py screen
 盘中使用实时行情数据运行选股，在收盘前发现候选标的。
 
 ```bash
-python run.py live [--loop] [--interval N] [--web] [--output DIR] [--force]
+python run.py live [--loop] [--interval N] [--web] [--deploy] [--output DIR] [--force]
 ```
 
 | 参数 | 默认值 | 说明 |
@@ -138,6 +138,7 @@ python run.py live [--loop] [--interval N] [--web] [--output DIR] [--force]
 | `--loop` | 否 | 持续循环刷新（否则只运行一次） |
 | `--interval` | 15 | 刷新间隔（分钟） |
 | `--web` | 否 | 每次刷新后重新生成网站 |
+| `--deploy` | 否 | 每次刷新后自动部署到 gh-pages（需配合 `--web`） |
 | `--output` | site | 网站输出目录 |
 | `--force` | 否 | 非交易时段也执行（测试用） |
 
@@ -159,8 +160,11 @@ python run.py live [--loop] [--interval N] [--web] [--output DIR] [--force]
 **典型使用方式**：
 
 ```bash
-# 开盘后启动，每 15 分钟自动刷新 + 生成网站
-nohup python run.py live --loop --interval 15 --web >> live.log 2>&1 &
+# 开盘后启动，每 15 分钟自动刷新 + 生成网站 + 自动部署
+nohup python run.py live --loop --interval 15 --web --deploy >> live.log 2>&1 &
+
+# 只生成本地网站（不部署）
+python run.py live --loop --interval 15 --web
 
 # 午后密集观察，5 分钟间隔
 python run.py live --loop --interval 5
@@ -270,15 +274,24 @@ python run.py scan [--date 2026-03-02]
 ```
 
 部署脚本会：
-1. 运行 `python run.py web` 生成静态网站
-2. 在临时目录创建 gh-pages 分支
-3. 强制推送到远程 gh-pages 分支
+1. 运行 `python run.py daily` 从 Tushare 增量下载最新日线数据
+2. 运行 `python run.py web` 用最新数据生成静态网站
+3. 在临时目录创建 gh-pages 分支
+4. 强制推送到远程 gh-pages 分支
 
-**定时自动部署**（cron）：
+**盘后定时部署**（cron）：
 
 ```bash
-# 工作日 15:15 自动部署（A股 15:00 收盘，数据约 15:10 就绪）
-15 15 * * 1-5 cd /path/to/sz && ./deploy.sh >> deploy.log 2>&1
+# 工作日 16:30 自动部署（A股 15:00 收盘，Tushare 约 15:30-16:00 数据就绪）
+30 16 * * 1-5 cd /path/to/sz && ./deploy.sh >> deploy.log 2>&1
+```
+
+**盘中实时部署**：
+
+使用 `live --deploy` 代替 `deploy.sh`，盘中每次刷新自动部署到 gh-pages：
+
+```bash
+python run.py live --loop --interval 15 --web --deploy
 ```
 
 ---
@@ -352,10 +365,10 @@ python run.py scan [--date 2026-03-02]
 # 1. 确保历史数据已更新
 python run.py daily
 
-# 2. 开盘后启动实时选股（每 15 分钟刷新 + 生成网站）
-python run.py live --loop --interval 15 --web
+# 2. 开盘后启动实时选股（每 15 分钟刷新 + 生成网站 + 自动部署）
+python run.py live --loop --interval 15 --web --deploy
 
-# 3. 浏览器打开 site/index.html 查看实时候选
+# 3. 浏览器打开 GitHub Pages 网站查看实时候选
 # 4. 午后 13:00-14:50 密集观察候选列表
 # 5. 14:55 对候选股下单买入
 ```
@@ -363,16 +376,13 @@ python run.py live --loop --interval 15 --web
 ### 盘后分析
 
 ```bash
-# 1. 更新当日数据
-python run.py daily
+# 1. 一键更新数据 + 生成网站 + 部署
+./deploy.sh
 
 # 2. 查看筛选结果
 python run.py screen
 
-# 3. 生成网站 + 部署
-python run.py web && ./deploy.sh
-
-# 4. 查看个股 K 线
+# 3. 查看个股 K 线
 python run.py plot 002906
 ```
 
