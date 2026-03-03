@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>历史记录</h1>
-<p>共 {{ dates | length }} 个交易日</p>
+<p style="color:var(--text-secondary)">共 {{ dates | length }} 个交易日</p>
 
 <div class="overflow-auto">
 <table>
@@ -12,9 +12,9 @@
         <tr>
             <th>日期</th>
             {% for name in strategies %}
-            <th>{{ name }}</th>
+            <th class="num">{{ name }}</th>
             {% endfor %}
-            <th>合计</th>
+            <th class="num">合计</th>
         </tr>
     </thead>
     <tbody>
@@ -22,9 +22,9 @@
         <tr>
             <td><a href="{{ root }}days/{{ d.date }}.html">{{ d.date }}</a></td>
             {% for name in strategies %}
-            <td>{{ d.counts.get(name, 0) }}</td>
+            <td class="num">{{ d.counts.get(name, 0) }}</td>
             {% endfor %}
-            <td><strong>{{ d.total }}</strong></td>
+            <td class="num"><strong>{{ d.total }}</strong></td>
         </tr>
         {% endfor %}
     </tbody>

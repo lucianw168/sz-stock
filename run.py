@@ -11,6 +11,7 @@ Usage:
     python run.py backtest [--days ...]        # Run backtest
     python run.py diagnose [--screen ...]      # Feature diagnosis
     python run.py plot 002906 [--tail 40]      # K-line chart
+    python run.py live [--loop] [--interval 15] # Live real-time screening
     python run.py web [--output site]          # Generate static website
 """
 
@@ -208,6 +209,94 @@ def cmd_optimize(args):
     )
 
 
+def cmd_live(args):
+    """Run live screening with real-time data, optionally looping."""
+    import copy
+    import time as time_mod
+    from datetime import datetime as dt, timedelta
+
+    import downloader
+    import indicators
+
+    interval_sec = args.interval * 60
+
+    # Load historical data once
+    print("Loading historical data...")
+    base_data = downloader.load_processed()
+    if not base_data:
+        print("No processed data. Run 'init' or 'daily' first.")
+        return
+
+    # Pre-compute indicators on historical data (saves time on each loop)
+    print("Computing indicators on historical data...")
+    for code in list(base_data.keys()):
+        base_data[code] = indicators.compute_all(base_data[code])
+    print(f"  Ready: {len(base_data)} stocks.\n")
+
+    iteration = 0
+    while True:
+        iteration += 1
+        now = dt.now()
+        hhmm = now.hour * 100 + now.minute
+
+        print(f"\n{'='*60}")
+        print(f"  Live #{iteration} @ {now.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"{'='*60}")
+
+        # Trading hours check (9:15 - 15:05), skip outside unless --force
+        if (hhmm < 915 or hhmm > 1505) and not args.force:
+            print("  Market closed. Waiting for next interval...")
+            if not args.loop:
+                break
+            time_mod.sleep(interval_sec)
+            continue
+
+        # Fetch real-time data
+        print("  Fetching real-time quotes (rt_k)...")
+        realtime = downloader.fetch_realtime_szse()
+        if not realtime:
+            print("  No real-time data returned.")
+            if not args.loop:
+                break
+            time_mod.sleep(interval_sec)
+            continue
+        print(f"  Got {len(realtime)} stocks.")
+
+        # Deep copy historical data + inject real-time as today's row
+        live_data = copy.deepcopy(base_data)
+        live_data, injected = downloader.inject_realtime(live_data, realtime)
+        print(f"  Injected real-time for {injected} stocks.")
+
+        # Re-compute indicators (only today's row is new, but indicators
+        # are cumulative so we recompute the full series)
+        print("  Recomputing indicators...")
+        for code in list(live_data.keys()):
+            live_data[code] = indicators.compute_all(live_data[code])
+
+        # Run screens
+        today = now.strftime('%Y-%m-%d')
+        print(f"\n  Screening results for {today}:")
+        results = screener.run_all_screens(live_data, today)
+
+        total = sum(len(codes) for codes in results.values())
+        print(f"\n  Total candidates: {total}")
+
+        # Generate website if requested
+        if args.web:
+            print("\n  Generating website...")
+            from web.generator import WebGenerator
+            gen = WebGenerator(output_dir=args.output)
+            gen.build(date=today, stock_data=live_data)
+
+        if not args.loop:
+            break
+
+        print(f"\n  Next refresh in {args.interval} min "
+              f"({now.strftime('%H:%M')} → "
+              f"{(now + timedelta(minutes=args.interval)).strftime('%H:%M')})...")
+        time_mod.sleep(interval_sec)
+
+
 def cmd_web(args):
     """Generate static website."""
     from web.generator import WebGenerator
@@ -319,6 +408,20 @@ def main():
     p_plot.add_argument('--tail', type=int, default=40,
                         help='Number of days to show')
 
+    # live
+    p_live = subparsers.add_parser('live',
+                                    help='Live screening with real-time data')
+    p_live.add_argument('--interval', type=int, default=15,
+                        help='Refresh interval in minutes (default: 15)')
+    p_live.add_argument('--loop', action='store_true',
+                        help='Keep looping (default: run once)')
+    p_live.add_argument('--web', action='store_true',
+                        help='Also regenerate website on each refresh')
+    p_live.add_argument('--output', type=str, default='site',
+                        help='Website output directory (default: site)')
+    p_live.add_argument('--force', action='store_true',
+                        help='Run even outside trading hours')
+
     # web
     p_web = subparsers.add_parser('web', help='Generate static website')
     p_web.add_argument('--date', type=str, default=None,
@@ -342,6 +445,7 @@ def main():
         'backtest': cmd_backtest,
         'diagnose': cmd_diagnose,
         'optimize': cmd_optimize,
+        'live': cmd_live,
         'plot': cmd_plot,
         'web': cmd_web,
     }

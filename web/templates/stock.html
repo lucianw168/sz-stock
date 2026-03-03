@@ -12,7 +12,7 @@
 <div id="kline-chart" style="width:100%;height:900px;margin:1rem 0"></div>
 
 {% if appearances %}
-<h2>策略选股记录</h2>
+<h2 class="section-title">策略选股记录</h2>
 <div class="overflow-auto">
 <table>
     <thead>
@@ -37,6 +37,8 @@
     var data = {{ chart_data | tojson }};
     var chart = echarts.init(document.getElementById('kline-chart'));
 
+    var gridColor = '#1E2A3A';
+    var textColor = '#9FB0C6';
     var upColor = '#ec0000', downColor = '#00da3c';
 
     // Determine volume colors based on OHLC close vs open
@@ -46,20 +48,24 @@
     });
 
     chart.setOption({
+        backgroundColor: 'transparent',
         animation: false,
         tooltip: {
             trigger: 'axis',
-            axisPointer: { type: 'cross' }
+            axisPointer: { type: 'cross', crossStyle: { color: textColor } },
+            backgroundColor: '#101A2E',
+            borderColor: gridColor,
+            textStyle: { color: '#E6EDF7', fontSize: 12 }
         },
         axisPointer: { link: [{ xAxisIndex: 'all' }] },
         legend: {
             data: ['ADX', 'ADXR', '+DM', '-DM', 'CRSI', 'RSI-6', 'RSI-12', 'OBV'],
             top: 0,
-            textStyle: { fontSize: 10 }
+            textStyle: { fontSize: 10, color: textColor }
         },
         dataZoom: [
             { type: 'inside', xAxisIndex: [0,1,2,3,4], start: 0, end: 100 },
-            { type: 'slider', xAxisIndex: [0,1,2,3,4], bottom: 5, height: 20 }
+            { type: 'slider', xAxisIndex: [0,1,2,3,4], bottom: 5, height: 20, borderColor: gridColor, backgroundColor: '#0B1220', dataBackground: { lineStyle: { color: gridColor }, areaStyle: { color: 'rgba(76,141,255,0.1)' } }, fillerColor: 'rgba(76,141,255,0.15)', handleStyle: { color: '#4C8DFF' }, textStyle: { color: textColor } }
         ],
         grid: [
             { left: 60, right: 20, top: '5%',  height: '28%' },
@@ -69,18 +75,18 @@
             { left: 60, right: 20, top: '80%', height: '13%' }
         ],
         xAxis: [
-            { type: 'category', data: data.dates, gridIndex: 0, axisLabel: { show: false }, axisTick: { show: false } },
-            { type: 'category', data: data.dates, gridIndex: 1, axisLabel: { show: false }, axisTick: { show: false } },
-            { type: 'category', data: data.dates, gridIndex: 2, axisLabel: { show: false }, axisTick: { show: false } },
-            { type: 'category', data: data.dates, gridIndex: 3, axisLabel: { show: false }, axisTick: { show: false } },
-            { type: 'category', data: data.dates, gridIndex: 4 }
+            { type: 'category', data: data.dates, gridIndex: 0, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 1, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 2, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 3, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 4, axisLabel: { color: textColor, fontSize: 10 }, axisLine: { lineStyle: { color: gridColor } } }
         ],
         yAxis: [
-            { gridIndex: 0, scale: true, splitArea: { show: true }, name: '价格', nameTextStyle: { fontSize: 10 } },
-            { gridIndex: 1, scale: true, name: '成交量', nameTextStyle: { fontSize: 10 }, axisLabel: { formatter: function(v) { return v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v; } } },
-            { gridIndex: 2, scale: true, name: 'ADX', nameTextStyle: { fontSize: 10 } },
-            { gridIndex: 3, scale: true, name: 'RSI/CRSI', nameTextStyle: { fontSize: 10 } },
-            { gridIndex: 4, scale: true, name: 'OBV', nameTextStyle: { fontSize: 10 } }
+            { gridIndex: 0, scale: true, splitArea: { show: false }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor }, name: '价格', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 1, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, formatter: function(v) { return v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v; } }, name: '成交量', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 2, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor }, name: 'ADX', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 3, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor }, name: 'RSI/CRSI', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 4, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor }, name: 'OBV', nameTextStyle: { fontSize: 10, color: textColor } }
         ],
         series: [
             // Grid 0: Candlestick
@@ -90,7 +96,7 @@
                 xAxisIndex: 0, yAxisIndex: 0,
                 itemStyle: { color: upColor, color0: downColor, borderColor: upColor, borderColor0: downColor }
             },
-            // Grid 1: Volume bars (separate panel)
+            // Grid 1: Volume bars
             {
                 type: 'bar',
                 data: data.volume,
@@ -111,7 +117,7 @@
             { type: 'line', data: data.rsi6, xAxisIndex: 3, yAxisIndex: 3, name: 'RSI-6', symbol: 'none', lineStyle: { width: 1, color: '#ff9800' } },
             { type: 'line', data: data.rsi12, xAxisIndex: 3, yAxisIndex: 3, name: 'RSI-12', symbol: 'none', lineStyle: { width: 1, color: '#2196f3' } },
             // Grid 4: OBV
-            { type: 'line', data: data.obv, xAxisIndex: 4, yAxisIndex: 4, name: 'OBV', symbol: 'none', lineStyle: { width: 1.5, color: '#f44336' }, areaStyle: { opacity: 0.1 } }
+            { type: 'line', data: data.obv, xAxisIndex: 4, yAxisIndex: 4, name: 'OBV', symbol: 'none', lineStyle: { width: 1.5, color: '#f44336' }, areaStyle: { opacity: 0.1, color: '#f44336' } }
         ]
     });
 

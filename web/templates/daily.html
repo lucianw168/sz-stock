@@ -16,7 +16,10 @@
 </div>
 
 {% if pattern_signals %}
-<h2>形态识别信号</h2>
+<h2 class="section-title">形态识别</h2>
+{% if trading_methods.get('形态识别') %}
+<div class="trading-method">{{ trading_methods['形态识别'] }}</div>
+{% endif %}
 <div class="pattern-signals">
     {% for s in pattern_signals %}
     <article class="card pattern-card">
@@ -44,42 +47,70 @@
 
 {% for name, stocks in screen_results.items() %}
 {% if name != '形态识别' or not pattern_signals %}
-<h2>{{ name }}</h2>
+<h2 class="section-title">{{ name }}</h2>
+{% if trading_methods.get(name) %}
+<div class="trading-method">{{ trading_methods[name] }}</div>
+{% endif %}
 {% if stocks %}
 <div class="overflow-auto">
 <table>
     <thead>
         <tr>
             <th>代码</th>
-            <th>收盘价</th>
-            <th>涨幅%</th>
-            <th>RSI-6</th>
-            <th>RSI-12</th>
-            <th>CRSI</th>
-            <th>CCI</th>
-            <th>OBV</th>
-            <th>成交量比 7d</th>
+            <th class="num">收盘价</th>
+            <th class="num">涨幅%</th>
+            <th class="num">CCI</th>
+            <th class="num">OBV</th>
+            <th class="num">量比7d</th>
+            <th class="num">ADX</th>
+            {% if name in ('OBV涨停梦', 'OBV波段') %}
+            <th>动机</th>
+            {% endif %}
+            <th>信号诊断</th>
         </tr>
     </thead>
     <tbody>
         {% for s in stocks %}
         <tr>
             <td><a href="{{ root }}stock/{{ s.code }}.html">{{ s.code }}</a></td>
-            <td>{{ s.close }}</td>
-            <td class="{{ 'text-green' if s.change_pct > 0 else 'text-red' }}">{{ s.change_pct }}%</td>
-            <td>{{ s.rsi6 }}</td>
-            <td>{{ s.rsi12 }}</td>
-            <td>{{ s.crsi }}</td>
-            <td>{{ s.cci }}</td>
-            <td>{{ s.obv }}</td>
-            <td>{{ s.vol_7d }}</td>
+            <td class="num">{{ s.close }}</td>
+            <td class="num {{ 'text-green' if s.change_pct > 0 else 'text-red' }}{% if s.change_pct > 0 %} arrow-up{% elif s.change_pct < 0 %} arrow-down{% endif %}">{{ s.change_pct }}%</td>
+            <td class="num">{{ s.cci }}</td>
+            <td class="num">{{ s.obv }}</td>
+            <td class="num">{{ s.vol_7d }}</td>
+            <td class="num">{{ s.adx }}</td>
+            {% if name in ('OBV涨停梦', 'OBV波段') %}
+            <td><span class="badge motive-{{ s.motive|default('待确认') }}">{{ s.motive|default('待确认') }}</span></td>
+            {% endif %}
+            <td>
+                {% if s.diagnostics %}
+                <details class="diag-detail">
+                    <summary>查看</summary>
+                    {% for sig_key, sig_info in s.diagnostics.items() %}
+                    <div class="diag-signal">
+                        <strong>{{ sig_info['label'] }}</strong>
+                        {% for item in sig_info['items'] %}
+                        <div class="diag-item">
+                            <span>{{ item.name }}: <strong>{{ item.value }}</strong></span>
+                            {% if item.threshold %}
+                            <span class="diag-thresh">{{ item.op|default('') }} {{ item.threshold }}</span>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </details>
+                {% else %}
+                -
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 </div>
 {% else %}
-<p><em>该策略今日无选股</em></p>
+<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
 {% endif %}
 {% endif %}
 {% endfor %}

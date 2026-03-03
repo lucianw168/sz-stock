@@ -3,17 +3,45 @@
 {% block title %}SZ 选股 - {{ date }}{% endblock %}
 
 {% block content %}
-<h1>每日选股 <small>{{ date }}</small></h1>
-
-<h2>近 30 日导航</h2>
-<div class="calendar">
-    {% for d in calendar_dates %}
-    <a href="{{ root }}days/{{ d }}.html">{{ d[-5:] }}</a>
-    {% endfor %}
+{# --- 3a. Header --- #}
+<div class="dashboard-header">
+    <h1>每日选股</h1>
+    <span class="date-label">Data as of: {{ date }}</span>
 </div>
 
+{# --- 3b. KPI Cards --- #}
+<div class="kpi-row">
+    <div class="kpi-card">
+        <div class="kpi-value">{{ total_candidates }}</div>
+        <div class="kpi-label">今日候选数</div>
+    </div>
+    {% if best_strategy %}
+    <div class="kpi-card green">
+        <div class="kpi-value text-green">{{ best_strategy.win_rate }}%</div>
+        <div class="kpi-label">最佳策略胜率 ({{ best_strategy.name }})</div>
+    </div>
+    <div class="kpi-card {% if best_strategy.cumulative_return > 0 %}green{% else %}red{% endif %}">
+        <div class="kpi-value {% if best_strategy.cumulative_return > 0 %}text-green{% else %}text-red{% endif %}">{{ best_strategy.cumulative_return }}%</div>
+        <div class="kpi-label">30日累计收益</div>
+    </div>
+    <div class="kpi-card red">
+        <div class="kpi-value text-red">{{ best_strategy.max_drawdown }}%</div>
+        <div class="kpi-label">最大回撤</div>
+    </div>
+    {% endif %}
+    <div class="kpi-card">
+        <div class="kpi-value">{{ strategies|length }}</div>
+        <div class="kpi-label">活跃策略数</div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-value">{{ total_bt_trades }}</div>
+        <div class="kpi-label">总回测交易</div>
+    </div>
+</div>
+
+{# --- Pattern Signals (if any) --- #}
 {% if pattern_signals %}
-<h2>形态识别信号</h2>
+<h2 class="section-title">形态识别信号</h2>
 <div class="pattern-signals">
     {% for s in pattern_signals %}
     <article class="card pattern-card">
@@ -39,62 +67,70 @@
 </div>
 {% endif %}
 
-<h2>今日选股结果</h2>
-<div class="card-grid">
-    {% for name, codes in screen_results.items() %}
-    <article class="card">
-        <h3><a href="{{ root }}strategy/{{ name }}.html">{{ name }}</a></h3>
-        <p style="font-size:0.8rem;color:var(--pico-muted-color)">
-            {% if backtest_summaries and name in backtest_summaries %}
-            胜率 {{ backtest_summaries[name].win_rate }}% &middot;
-            涨停率 {{ backtest_summaries[name].limit_up_rate }}% &middot;
-            {{ backtest_summaries[name].total_trades }} 笔交易
-            {% endif %}
-        </p>
-        {% if codes %}
-        <div class="tag-list">
-            {% for code in codes %}
-            <span class="tag"><a href="{{ root }}stock/{{ code }}.html">{{ code }}</a></span>
+{# --- 3c. Two-Column Bottom --- #}
+<div class="two-col">
+    {# Left: Today's picks #}
+    <div>
+        <h2 class="section-title">今日选股结果</h2>
+        <div class="card-grid">
+            {% for name, codes in screen_results.items() %}
+            <article class="card">
+                <h3><a href="{{ root }}strategy/{{ name }}.html">{{ name }}</a></h3>
+                <p style="font-size:0.8rem;color:var(--text-secondary)">
+                    {% if backtest_summaries and name in backtest_summaries %}
+                    胜率 {{ backtest_summaries[name].win_rate }}% &middot;
+                    涨停率 {{ backtest_summaries[name].limit_up_rate }}% &middot;
+                    {{ backtest_summaries[name].total_trades }} 笔交易
+                    {% endif %}
+                </p>
+                {% if codes %}
+                <div class="tag-list">
+                    {% for code in codes %}
+                    <span class="tag"><a href="{{ root }}stock/{{ code }}.html">{{ code }}</a></span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p style="color:var(--text-secondary)"><em>今日无选股</em></p>
+                {% endif %}
+            </article>
             {% endfor %}
         </div>
-        {% else %}
-        <p><em>今日无选股</em></p>
-        {% endif %}
-    </article>
-    {% endfor %}
-</div>
+    </div>
 
-{% if backtest_summaries %}
-<h2>策略回测摘要</h2>
-<div class="overflow-auto">
-<table>
-    <thead>
-        <tr>
-            <th>策略</th>
-            <th>交易数</th>
-            <th>胜率</th>
-            <th>涨停率</th>
-            <th>盈亏比</th>
-            <th>累计收益</th>
-            <th>夏普</th>
-            <th>最大回撤</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for name, r in backtest_summaries.items() %}
-        <tr>
-            <td><a href="{{ root }}strategy/{{ name }}.html">{{ name }}</a></td>
-            <td>{{ r.total_trades }}</td>
-            <td>{{ r.win_rate }}%</td>
-            <td>{{ r.limit_up_rate }}%</td>
-            <td>{{ r.profit_factor }}</td>
-            <td class="{{ 'text-green' if r.cumulative_return > 0 else 'text-red' }}">{{ r.cumulative_return }}%</td>
-            <td>{{ r.sharpe_ratio }}</td>
-            <td class="text-red">{{ r.max_drawdown }}%</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    {# Right: Strategy ranking + Calendar #}
+    <div>
+        {% if backtest_summaries %}
+        <h2 class="section-title">策略排行榜</h2>
+        <div class="overflow-auto">
+        <table class="ranking-table">
+            <thead>
+                <tr>
+                    <th>策略</th>
+                    <th class="num">胜率</th>
+                    <th class="num">收益</th>
+                    <th class="num">回撤</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name, r in backtest_summaries.items()|sort(attribute='1.win_rate', reverse=true) %}
+                <tr>
+                    <td><a href="{{ root }}strategy/{{ name }}.html">{{ name }}</a></td>
+                    <td class="num">{{ r.win_rate }}%</td>
+                    <td class="num {{ 'text-green' if r.cumulative_return > 0 else 'text-red' }}">{{ r.cumulative_return }}%</td>
+                    <td class="num text-red">{{ r.max_drawdown }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        {% endif %}
+
+        <h2 class="section-title" style="margin-top:2rem">近 30 日导航</h2>
+        <div class="calendar">
+            {% for d in calendar_dates %}
+            <a href="{{ root }}days/{{ d }}.html">{{ d[-5:] }}</a>
+            {% endfor %}
+        </div>
+    </div>
 </div>
-{% endif %}
 {% endblock %}

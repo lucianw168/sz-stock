@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'
 import screener
 from web.data_prep import (
     SCREEN_DESCRIPTIONS,
+    TRADING_METHODS,
     load_stock_data,
     run_screen_for_date,
     list_available_dates,
@@ -19,6 +20,8 @@ from web.data_prep import (
     prepare_candlestick_data,
     run_all_backtests,
     get_pattern_signals_for_date,
+    get_signal_diagnostics,
+    compute_motive_label,
 )
 
 
@@ -43,13 +46,23 @@ class WebGenerator:
         self.all_selected_codes = set()  # all codes selected by any strategy on any date
         self.stock_appearances = {}  # code -> [{date, screen}]
 
-    def build(self, date=None):
-        """Full site build."""
+    def build(self, date=None, stock_data=None):
+        """Full site build.
+
+        Args:
+            date: build for a specific date (default: last 30 days).
+            stock_data: pre-loaded dict[code, DataFrame] with indicators
+                        already computed.  When provided, skips disk loading.
+        """
         print("=" * 60)
         print("  Building static website...")
         print("=" * 60)
 
-        self._load_data()
+        if stock_data is not None:
+            self.stock_data = stock_data
+            print(f"\n[1/7] Using pre-loaded data ({len(stock_data)} stocks)")
+        else:
+            self._load_data()
         self._determine_dates(date)
         self._run_screens()
         self._run_backtests()
@@ -164,6 +177,27 @@ class WebGenerator:
 
         pattern_signals = self.pattern_signals_by_date.get(latest_date, [])
 
+        # KPI aggregation
+        total_candidates = sum(len(codes) for codes in screen_results.values())
+
+        total_bt_trades = sum(
+            r.get('total_trades', 0)
+            for r in backtest_summaries.values()
+        )
+
+        best_strategy = None
+        best_wr = -1
+        for sname, rpt in backtest_summaries.items():
+            wr = rpt.get('win_rate', 0)
+            if wr > best_wr:
+                best_wr = wr
+                best_strategy = {
+                    'name': sname,
+                    'win_rate': rpt.get('win_rate', 0),
+                    'cumulative_return': rpt.get('cumulative_return', 0),
+                    'max_drawdown': rpt.get('max_drawdown', 0),
+                }
+
         html = tmpl.render(
             **self._common_ctx(active='index', root=''),
             date=latest_date,
@@ -171,6 +205,9 @@ class WebGenerator:
             calendar_dates=calendar_dates,
             backtest_summaries=backtest_summaries,
             pattern_signals=pattern_signals,
+            total_candidates=total_candidates,
+            best_strategy=best_strategy,
+            total_bt_trades=total_bt_trades,
         )
         self._write('index.html', html)
 
@@ -200,13 +237,18 @@ class WebGenerator:
             print(f"  days/{d}.html")
             results = self.screen_results_by_date.get(d, {})
 
-            # Enrich with indicators
+            # Enrich with indicators, diagnostics, and motive labels
             enriched = {}
             for name, codes in results.items():
                 stocks = []
                 for code in codes:
                     info = get_stock_indicators(self.stock_data, code, d)
                     if info:
+                        info['diagnostics'] = get_signal_diagnostics(
+                            self.stock_data, code, d, name)
+                        if name in ('OBV涨停梦', 'OBV波段'):
+                            info['motive'] = compute_motive_label(
+                                self.stock_data, code, d)
                         stocks.append(info)
                 enriched[name] = stocks
 
@@ -221,6 +263,7 @@ class WebGenerator:
                 prev_date=prev_date,
                 next_date=next_date,
                 pattern_signals=pattern_signals,
+                trading_methods=TRADING_METHODS,
             )
             self._write(f'days/{d}.html', html)
 
@@ -239,6 +282,8 @@ class WebGenerator:
                 report=bt.get('report', {}),
                 equity_data=bt.get('equity_data', {'dates': [], 'equity': [], 'drawdown': []}),
                 trade_details=bt.get('trade_details', []),
+                trading_method=TRADING_METHODS.get(name, ''),
+                failure_analysis=bt.get('failure_analysis'),
             )
             self._write(f'strategy/{name}.html', html)
 

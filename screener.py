@@ -1,6 +1,7 @@
 """Composite signal screening + daily stock selection.
 
-Encapsulates the 7 composite screens from the original notebook.
+Retained strategies: 形态识别, OBV涨停梦, CCI快进出, OBV波段.
+Removed: 超卖(=CCI快进出重复), 当日金叉买入, 近日上涨, 底部异动, OBV底部突破.
 """
 
 import sys, os
@@ -8,8 +9,31 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import pandas as pd
 
+import config
 import strategies as sig
 from pattern_screen import screen_pattern
+from universe import get_limit_ratio
+
+
+def _exclude_limit_up(stock_data, codes, date):
+    """Exclude stocks that hit limit-up on the given date (cannot buy at close)."""
+    ts = pd.Timestamp(date)
+    result = []
+    for code in codes:
+        df = stock_data[code]
+        if ts not in df.index:
+            continue
+        idx = df.index.get_loc(ts)
+        if idx == 0:
+            result.append(code)
+            continue
+        prev_close = float(df['Close'].iloc[idx - 1])
+        cur_close = float(df['Close'].iloc[idx])
+        limit_ratio = get_limit_ratio(code)
+        limit_price = round(prev_close * (1 + limit_ratio), 2)
+        if cur_close < limit_price * (1 - config.LIMIT_TOLERANCE):
+            result.append(code)
+    return result
 
 
 def _filter_on_date(stock_data: dict[str, pd.DataFrame],
@@ -44,57 +68,14 @@ def _filter_on_date(stock_data: dict[str, pd.DataFrame],
     return result
 
 
-def screen_oversold(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """超卖: CCI crosses -100 + escape bottom + CCI deep oversold + daily gain < 3%."""
-    return _filter_on_date(stock_data, date, [
-        sig.signal_cci_cross_neg100,
-        sig.signal_escape_bottom,
-        sig.signal_cci_deep_oversold,
-        sig.signal_daily_gain_lt3,
-    ])
-
-
-def screen_golden_cross(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """当日金叉买入: UOS cross 65 + no limit up + RSI golden cross."""
-    return _filter_on_date(stock_data, date, [
-        sig.signal_uos_cross65,
-        sig.signal_no_limit_up,
-        sig.signal_rsi_golden_cross,
-    ])
-
-
-def screen_bottom_activity(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """底部异动: Volume surge + escape bottom."""
-    return _filter_on_date(stock_data, date, [
-        sig.signal_volume_surge,
-        sig.signal_escape_bottom,
-    ])
-
-
-def screen_oscillation(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """震荡指标: ADX crosses ADXR + escape bottom."""
-    return _filter_on_date(stock_data, date, [
-        sig.signal_adx_cross_adxr,
-        sig.signal_escape_bottom,
-    ])
-
-
-def screen_recent_uptrend(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """近日上涨: ADX crosses ADXR + DM positive + no limit up."""
-    return _filter_on_date(stock_data, date, [
-        sig.signal_adx_cross_adxr,
-        sig.signal_dm_positive,
-        sig.signal_no_limit_up,
-    ])
-
-
 def screen_cci_quick(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """CCI快进出: CCI crosses -100 + escape bottom + CCI deep oversold + daily gain < 3%."""
+    """CCI快进出: CCI超卖反弹 + 底部确认 + 价格贴近EMA5均线."""
     return _filter_on_date(stock_data, date, [
         sig.signal_cci_cross_neg100,
         sig.signal_escape_bottom,
         sig.signal_cci_deep_oversold,
         sig.signal_daily_gain_lt3,
+        sig.signal_ema5_proximity,
     ])
 
 
@@ -107,40 +88,30 @@ def screen_obv_momentum(stock_data: dict[str, pd.DataFrame], date: str) -> list[
         sig.signal_daily_gain_gt2,
     ])
     # Main board only: exclude ChiNext (300/301) which have 20% limit-up
-    return [c for c in codes if not c.startswith(('300', '301'))]
+    codes = [c for c in codes if not c.startswith(('300', '301'))]
+    # Exclude stocks at limit-up (cannot buy at close)
+    return _exclude_limit_up(stock_data, codes, date)
 
 
 def screen_obv_wave(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """OBV波段: OBV涨停梦 + ADX<40 filter for wave trading."""
-    return _filter_on_date(stock_data, date, [
+    """OBV波段: OBV涨停梦 + ADX趋势过滤 + 底部确认."""
+    codes = _filter_on_date(stock_data, date, [
         sig.signal_obv_breakout,
         sig.signal_volume_surge,
         sig.signal_cci_momentum_floor,
         sig.signal_daily_gain_gt2,
         sig.signal_adx_below_max,
-    ])
-
-
-def screen_obv_bottom_breakout(stock_data: dict[str, pd.DataFrame], date: str) -> list[str]:
-    """OBV底部突破: OBV breakout + volume surge + escape bottom."""
-    return _filter_on_date(stock_data, date, [
-        sig.signal_obv_breakout,
-        sig.signal_volume_surge,
         sig.signal_escape_bottom,
     ])
+    # Exclude stocks at limit-up (cannot buy at close)
+    return _exclude_limit_up(stock_data, codes, date)
 
 
 # Registry of all screens with display names
 ALL_SCREENS = {
-    '超卖': screen_oversold,
-    '当日金叉买入': screen_golden_cross,
-    '底部异动': screen_bottom_activity,
-    '震荡指标': screen_oscillation,
-    '近日上涨': screen_recent_uptrend,
     'CCI快进出': screen_cci_quick,
     'OBV涨停梦': screen_obv_momentum,
     'OBV波段': screen_obv_wave,
-    'OBV底部突破': screen_obv_bottom_breakout,
     '形态识别': screen_pattern,
 }
 

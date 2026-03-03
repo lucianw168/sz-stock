@@ -8,9 +8,15 @@
 
 {% block content %}
 <h1>{{ name }}</h1>
-<p>{{ description }}</p>
+<p style="color:var(--text-secondary)">{{ description }}</p>
 
-<h2>回测指标</h2>
+{% if trading_method %}
+<div class="trading-method-box">
+    <strong>交易方针：</strong>{{ trading_method }}
+</div>
+{% endif %}
+
+<h2 class="section-title">回测指标</h2>
 <div class="metric-grid">
     <div class="metric">
         <div class="value">{{ report.total_trades }}</div>
@@ -47,15 +53,15 @@
 </div>
 
 {% if equity_data.dates %}
-<h2>收益曲线</h2>
+<h2 class="section-title">收益曲线</h2>
 <div id="equity-chart" class="chart-container"></div>
 
-<h2>回撤</h2>
+<h2 class="section-title">回撤</h2>
 <div id="drawdown-chart" class="chart-container-sm"></div>
 {% endif %}
 
 {% if trade_details %}
-<h2>交易明细</h2>
+<h2 class="section-title">交易明细</h2>
 <div class="overflow-auto">
 <table>
     <thead>
@@ -63,9 +69,9 @@
             <th>买入日期</th>
             <th>卖出日期</th>
             <th>代码</th>
-            <th>买入价</th>
-            <th>卖出价</th>
-            <th>次日涨幅</th>
+            <th class="num">买入价</th>
+            <th class="num">卖出价</th>
+            <th class="num">次日涨幅</th>
             <th>达标</th>
             <th>涨停</th>
         </tr>
@@ -76,9 +82,9 @@
             <td>{{ t.buy_date }}</td>
             <td>{{ t.sell_date }}</td>
             <td><a href="{{ root }}stock/{{ t.code }}.html">{{ t.code }}</a></td>
-            <td>{{ t.buy_price }}</td>
-            <td>{{ t.sell_price }}</td>
-            <td class="{{ 'text-green' if t.pnl_pct > 0 else 'text-red' }}">{{ t.pnl_pct }}%</td>
+            <td class="num">{{ t.buy_price }}</td>
+            <td class="num">{{ t.sell_price }}</td>
+            <td class="num {{ 'text-green' if t.pnl_pct > 0 else 'text-red' }}{% if t.pnl_pct > 0 %} arrow-up{% elif t.pnl_pct < 0 %} arrow-down{% endif %}">{{ t.pnl_pct }}%</td>
             <td>{{ '✓' if t.hit_target else '' }}</td>
             <td>{{ '✓' if t.hit_limit_up else '' }}</td>
         </tr>
@@ -86,6 +92,65 @@
     </tbody>
 </table>
 </div>
+{% endif %}
+
+{% if failure_analysis %}
+<h2 class="section-title">失败特征分析</h2>
+<p class="failure-summary">{{ failure_analysis.summary }}</p>
+<div class="failure-stats">
+    <div class="failure-stat">
+        <div class="failure-count">{{ failure_analysis.long_upper_shadow }}</div>
+        <div class="failure-label">上影线过长</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">{{ failure_analysis.next_day_gap_down }}</div>
+        <div class="failure-label">次日低开</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">{{ failure_analysis.high_volume_retreat }}</div>
+        <div class="failure-label">放量回落</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">{{ failure_analysis.bearish_close }}</div>
+        <div class="failure-label">收阴</div>
+    </div>
+</div>
+
+{% if failure_analysis.trades %}
+<details>
+    <summary>失败交易明细（{{ failure_analysis.total_losses }}笔）</summary>
+    <div class="overflow-auto">
+    <table>
+        <thead>
+            <tr>
+                <th>买入日期</th>
+                <th>卖出日期</th>
+                <th>代码</th>
+                <th class="num">涨幅</th>
+                <th class="num">上影线比</th>
+                <th class="num">次日缺口%</th>
+                <th class="num">卖出量比</th>
+                <th>特征</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ft in failure_analysis.trades %}
+            <tr>
+                <td>{{ ft.buy_date }}</td>
+                <td>{{ ft.sell_date }}</td>
+                <td><a href="{{ root }}stock/{{ ft.code }}.html">{{ ft.code }}</a></td>
+                <td class="num text-red">{{ ft.pnl_pct }}%</td>
+                <td class="num">{{ ft.upper_shadow }}</td>
+                <td class="num {{ 'text-red' if ft.gap_pct < -1 else '' }}">{{ ft.gap_pct }}%</td>
+                <td class="num">{{ ft.sell_vol_ratio }}x</td>
+                <td>{{ ft.flags|join(', ') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</details>
+{% endif %}
 {% endif %}
 {% endblock %}
 
@@ -95,36 +160,46 @@
 (function() {
     var data = {{ equity_data | tojson }};
 
+    var gridColor = '#1E2A3A';
+    var textColor = '#9FB0C6';
+    var accentBlue = '#4C8DFF';
+    var lossRed = '#FF4D4F';
+
     // Equity curve
     var ec = echarts.init(document.getElementById('equity-chart'));
     ec.setOption({
-        tooltip: { trigger: 'axis' },
-        xAxis: { type: 'category', data: data.dates },
-        yAxis: { type: 'value', name: '净值' },
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', backgroundColor: '#101A2E', borderColor: gridColor, textStyle: { color: '#E6EDF7' } },
+        xAxis: { type: 'category', data: data.dates, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, fontSize: 11 }, axisTick: { lineStyle: { color: gridColor } } },
+        yAxis: { type: 'value', name: '净值', nameTextStyle: { color: textColor }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor } },
         series: [{
             type: 'line',
             data: data.equity,
             smooth: true,
-            areaStyle: { opacity: 0.15 },
-            lineStyle: { width: 2 }
+            areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{offset: 0, color: 'rgba(76,141,255,0.25)'}, {offset: 1, color: 'rgba(76,141,255,0.02)'}] } },
+            lineStyle: { width: 2, color: accentBlue },
+            itemStyle: { color: accentBlue },
+            symbol: 'none'
         }],
-        grid: { left: 60, right: 20, top: 20, bottom: 40 }
+        grid: { left: 60, right: 20, top: 30, bottom: 40 }
     });
 
     // Drawdown
     var dd = echarts.init(document.getElementById('drawdown-chart'));
     dd.setOption({
-        tooltip: { trigger: 'axis', formatter: function(p) { return p[0].name + ': ' + (p[0].value * 100).toFixed(2) + '%'; } },
-        xAxis: { type: 'category', data: data.dates },
-        yAxis: { type: 'value', name: '回撤', axisLabel: { formatter: function(v) { return (v*100).toFixed(0)+'%'; } } },
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', backgroundColor: '#101A2E', borderColor: gridColor, textStyle: { color: '#E6EDF7' }, formatter: function(p) { return p[0].name + ': ' + (p[0].value * 100).toFixed(2) + '%'; } },
+        xAxis: { type: 'category', data: data.dates, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, fontSize: 11 }, axisTick: { lineStyle: { color: gridColor } } },
+        yAxis: { type: 'value', name: '回撤', nameTextStyle: { color: textColor }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, formatter: function(v) { return (v*100).toFixed(0)+'%'; } } },
         series: [{
             type: 'line',
             data: data.drawdown,
-            areaStyle: { color: '#db4437', opacity: 0.3 },
-            lineStyle: { color: '#db4437', width: 1 },
-            itemStyle: { color: '#db4437' }
+            areaStyle: { color: 'rgba(255,77,79,0.2)' },
+            lineStyle: { color: lossRed, width: 1 },
+            itemStyle: { color: lossRed },
+            symbol: 'none'
         }],
-        grid: { left: 60, right: 20, top: 20, bottom: 40 }
+        grid: { left: 60, right: 20, top: 30, bottom: 40 }
     });
 
     window.addEventListener('resize', function() { ec.resize(); dd.resize(); });

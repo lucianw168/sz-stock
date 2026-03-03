@@ -552,3 +552,109 @@ def import_from_limit_up(limit_up_raw_dir=None):
 
     print("Import complete.")
     return True
+
+
+# ======================================================================
+# Real-time data (intraday)
+# ======================================================================
+
+def fetch_realtime_szse():
+    """Fetch real-time daily K-line for all SZSE stocks via pro.rt_k().
+
+    Returns:
+        dict[str, dict]: code -> {Open, High, Low, Close, Volume, pre_close}
+        Volume is converted from 股 to 手 to match pro.daily() units.
+    """
+    try:
+        dl = _get_downloader()
+    except ValueError as e:
+        print(f"  Tushare not configured: {e}")
+        return {}
+    dl._throttle()
+
+    try:
+        # Main board (0*) + ChiNext (3*)
+        df = dl.pro.rt_k(ts_code='0*.SZ,3*.SZ')
+    except Exception as e:
+        logger.warning(f'rt_k API call failed: {e}')
+        print(f"  Failed to fetch real-time data: {e}")
+        return {}
+
+    if df is None or df.empty:
+        return {}
+
+    today = datetime.now().strftime('%Y-%m-%d')
+    result = {}
+
+    for _, row in df.iterrows():
+        ts_code = row['ts_code']
+        code = _ts_code_to_code(ts_code)
+
+        if pd.isna(row['close']) or row['close'] <= 0:
+            continue
+        if pd.isna(row['open']) or row['open'] <= 0:
+            continue
+
+        result[code] = {
+            'date': today,
+            'Open': float(row['open']),
+            'High': float(row['high']),
+            'Low': float(row['low']),
+            'Close': float(row['close']),
+            'Volume': float(row['vol']) / 100,  # 股 → 手 (match daily API)
+            'amount': float(row['amount']) / 1000 if pd.notna(row.get('amount')) else 0,
+            'pre_close': float(row['pre_close']),
+        }
+
+    return result
+
+
+def inject_realtime(stock_data, realtime):
+    """Inject real-time data as today's row into each stock's DataFrame.
+
+    If today's row already exists it is replaced with the latest quote.
+
+    Args:
+        stock_data: dict[code, DataFrame] — historical daily data
+        realtime: dict[code, dict] from fetch_realtime_szse()
+
+    Returns:
+        (stock_data, injected_count)
+    """
+    today = datetime.now().strftime('%Y-%m-%d')
+    today_ts = pd.Timestamp(today)
+
+    injected = 0
+    for code, rt in realtime.items():
+        if code not in stock_data:
+            continue
+
+        df = stock_data[code]
+
+        new_row = pd.DataFrame({
+            'Open': [rt['Open']],
+            'High': [rt['High']],
+            'Low': [rt['Low']],
+            'Close': [rt['Close']],
+            'Volume': [rt['Volume']],
+        }, index=[today_ts])
+
+        # Carry optional columns
+        if 'amount' in df.columns:
+            new_row['amount'] = rt.get('amount', 0)
+        if 'pre_close' in df.columns:
+            new_row['pre_close'] = rt.get('pre_close', 0)
+        if 'change' in df.columns:
+            new_row['change'] = rt['Close'] - rt['pre_close']
+        if 'pct_chg' in df.columns:
+            prc = rt['pre_close']
+            new_row['pct_chg'] = (rt['Close'] - prc) / prc * 100 if prc > 0 else 0
+
+        # Drop existing today row, append new one
+        if today_ts in df.index:
+            df = df.drop(today_ts)
+
+        stock_data[code] = pd.concat([df, new_row]).sort_index()
+        injected += 1
+
+    return stock_data, injected
