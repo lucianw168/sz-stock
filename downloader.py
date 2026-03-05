@@ -134,6 +134,13 @@ class TushareDownloader:
             'daily', key, _fetch, 'trade_date', start_date, end_date
         )
 
+    def fetch_daily_by_date(self, trade_date):
+        """Fetch all stocks' daily data for a single trade_date (one API call)."""
+        key = f'date_{trade_date}'
+        def _fetch():
+            return self.pro.daily(trade_date=trade_date)
+        return self._load_or_fetch('daily_by_date', key, _fetch)
+
     def fetch_limit_list(self, trade_date):
         key = f'date_{trade_date}'
         def _fetch():
@@ -301,7 +308,12 @@ def download_full(start_date=None):
 
 
 def download_incremental(days=None):
-    """Incremental download of recent data.
+    """Incremental download using date-based batch queries.
+
+    Instead of querying each stock individually (~2883 API calls),
+    queries by trade_date to get all stocks at once (1 API call per day).
+    New rows are appended to per-stock raw caches so that forward
+    adjustment can be computed on the full history.
 
     Returns:
         dict mapping stock code to DataFrame (sz format).
@@ -314,31 +326,67 @@ def download_incremental(days=None):
     start_date = (datetime.now() - timedelta(days=days)).strftime('%Y%m%d')
     end_date = datetime.now().strftime('%Y%m%d')
 
-    stock_list = dl.fetch_stock_list()
-    if stock_list.empty:
-        print("No stock list available.")
-        return {}
+    # Load existing processed data to find the latest date
+    existing = load_processed()
+    if existing:
+        latest_dates = [df.index.max() for df in existing.values() if not df.empty]
+        if latest_dates:
+            last_date = max(latest_dates)
+            next_date = (last_date + timedelta(days=1)).strftime('%Y%m%d')
+            start_date = max(start_date, next_date)
 
-    ts_codes = sorted(stock_list['ts_code'].tolist())
-    stock_data = {}
-
-    print(f"Incremental download: last {days} days ({start_date} to {end_date})...")
-    for i, ts_code in enumerate(ts_codes):
-        if (i + 1) % 100 == 0:
-            print(f"  Progress: {i + 1}/{len(ts_codes)}")
-        raw = dl.fetch_daily(ts_code, start_date, end_date)
-        if raw is not None and not raw.empty:
-            code = _ts_code_to_code(ts_code)
-            converted = _convert_daily_to_sz_format(raw)
-            if converted is not None:
-                stock_data[code] = converted
-
-    # Update limit list
+    # Get trading dates to download
     trading_dates = dl.get_trading_dates(start_date, end_date)
+    if not trading_dates:
+        print("No new trading dates to download.")
+        return existing or {}
+
+    print(f"Downloading {len(trading_dates)} new trading day(s): "
+          f"{trading_dates[0]}~{trading_dates[-1]}...")
+
+    # Batch download by date (1 API call per trading day)
+    all_new_rows = []
     for td in trading_dates:
+        df = dl.fetch_daily_by_date(td)
+        if df is not None and not df.empty:
+            all_new_rows.append(df)
         dl.fetch_limit_list(td)
 
-    print(f"Downloaded {len(stock_data)} stocks.")
+    if not all_new_rows:
+        print("No new data returned.")
+        return existing or {}
+
+    new_data = pd.concat(all_new_rows, ignore_index=True)
+
+    # Filter to SZSE stocks only (pro.daily returns all exchanges)
+    new_data = new_data[new_data['ts_code'].str.endswith('.SZ')]
+    print(f"  Fetched {len(new_data)} rows for "
+          f"{new_data['ts_code'].nunique()} SZSE stocks.")
+
+    # Append to per-stock raw caches and convert
+    stock_data = {}
+    for ts_code, group in new_data.groupby('ts_code'):
+        code = _ts_code_to_code(ts_code)
+        cache_key = ts_code.replace('.', '_')
+
+        # Load existing raw cache for this stock
+        cached = dl._load_cache('daily', cache_key)
+        if cached is not None and not cached.empty:
+            combined = pd.concat([cached, group], ignore_index=True)
+            combined = combined.drop_duplicates(subset=['trade_date'], keep='last')
+            combined = combined.sort_values('trade_date').reset_index(drop=True)
+        else:
+            combined = group.sort_values('trade_date').reset_index(drop=True)
+
+        # Save updated raw cache
+        dl._save_cache(combined, 'daily', cache_key)
+
+        # Convert full history to SZ format (includes forward adjustment)
+        converted = _convert_daily_to_sz_format(combined)
+        if converted is not None:
+            stock_data[code] = converted
+
+    print(f"Downloaded and processed {len(stock_data)} stocks.")
     return stock_data
 
 
