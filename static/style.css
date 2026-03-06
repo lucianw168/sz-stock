@@ -1,0 +1,501 @@
+/* ===== SZ Financial Terminal — Dark Theme ===== */
+
+/* --- 2a. Color System --- */
+:root {
+    --bg-primary: #0B1220;
+    --bg-card: #101A2E;
+    --bg-card-hover: #162240;
+    --text-primary: #E6EDF7;
+    --text-secondary: #9FB0C6;
+    --green: #24D18A;
+    --red: #FF4D4F;
+    --accent: #4C8DFF;
+    --border: #1E2A3A;
+
+    /* Pico overrides */
+    --pico-background-color: var(--bg-primary);
+    --pico-card-background-color: var(--bg-card);
+    --pico-color: var(--text-primary);
+    --pico-muted-color: var(--text-secondary);
+    --pico-muted-border-color: var(--border);
+    --pico-primary: var(--accent);
+    --pico-primary-hover: #6BA3FF;
+    --pico-secondary-background: #1A2540;
+    --pico-table-row-stripped-background-color: rgba(255,255,255,0.02);
+}
+
+/* --- 2b. Font System --- */
+body {
+    font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* --- Navigation --- */
+nav {
+    background: #080E1A;
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.15s;
+}
+nav a:hover, nav a.active {
+    color: #fff;
+}
+nav .brand {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+}
+
+/* --- Charts --- */
+.chart-container {
+    width: 100%;
+    height: 500px;
+    margin: 1rem 0;
+}
+.chart-container-sm {
+    width: 100%;
+    height: 300px;
+    margin: 1rem 0;
+}
+
+/* --- 2c. Table Terminal Style --- */
+table {
+    font-size: 0.88rem;
+    border-collapse: collapse;
+    width: 100%;
+}
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #0D1526;
+    border-bottom: 2px solid var(--border);
+    padding: 0.6rem 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: none;
+    white-space: nowrap;
+}
+tbody td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+}
+tbody tr {
+    transition: background 0.12s;
+}
+tbody tr:hover {
+    background: rgba(76, 141, 255, 0.06);
+}
+table tbody tr:nth-child(even) {
+    background: rgba(255,255,255,0.015);
+}
+table tbody tr:nth-child(even):hover {
+    background: rgba(76, 141, 255, 0.06);
+}
+
+/* Numeric columns right-align */
+.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-family: 'Inter', monospace;
+}
+
+/* Gain/loss colors + arrows */
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.arrow-up::after { content: ' ↑'; }
+.arrow-down::after { content: ' ↓'; }
+
+/* --- Card Grid --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    transition: background 0.15s;
+}
+.card:hover {
+    background: var(--bg-card-hover);
+}
+.card h3 {
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+/* --- Tags --- */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+.tag {
+    display: inline-block;
+    background: var(--pico-secondary-background);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Inter', monospace;
+    border: 1px solid var(--border);
+}
+.tag a {
+    text-decoration: none;
+    color: var(--accent);
+}
+.tag a:hover {
+    color: #fff;
+}
+
+/* --- 2d. KPI Cards --- */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+}
+.kpi-card.green { border-left-color: var(--green); }
+.kpi-card.red { border-left-color: var(--red); }
+.kpi-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-family: 'Inter', monospace;
+    line-height: 1.2;
+}
+.kpi-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+}
+
+/* --- Dashboard Layout --- */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+.dashboard-header h1 {
+    margin-bottom: 0;
+}
+.dashboard-header .date-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+@media (max-width: 900px) {
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Strategy Ranking Table --- */
+.ranking-table {
+    width: 100%;
+}
+.ranking-table th, .ranking-table td {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+}
+
+/* --- Calendar --- */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    max-width: 360px;
+}
+.calendar a, .calendar span {
+    text-align: center;
+    padding: 5px 2px;
+    font-size: 0.78rem;
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+}
+.calendar a {
+    background: var(--pico-secondary-background);
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: background 0.15s;
+}
+.calendar a:hover {
+    background: var(--bg-card-hover);
+    color: #fff;
+}
+
+/* --- Metric Grid (strategy page) --- */
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.8rem;
+    margin: 1rem 0;
+}
+.metric {
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem 0.5rem;
+}
+.metric .value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.metric .label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* --- Pattern Signal Cards --- */
+.pattern-signals {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+}
+.pattern-card {
+    border-left: 4px solid var(--accent);
+    background: linear-gradient(135deg, rgba(76,141,255,0.06), transparent);
+}
+.pattern-explanation {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+    color: var(--text-secondary);
+}
+.pattern-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+.pattern-metrics span {
+    white-space: nowrap;
+}
+
+/* --- 2e. Badges --- */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge.confidence {
+    background: var(--green);
+    color: #000;
+}
+.badge.motive-出货 {
+    background: var(--red);
+    color: #fff;
+}
+.badge.motive-试盘 {
+    background: #D4A017;
+    color: #000;
+}
+.badge.motive-吸筹 {
+    background: var(--green);
+    color: #000;
+}
+.badge.motive-待确认 {
+    background: var(--pico-secondary-background);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+/* --- Trading Method --- */
+.trading-method {
+    border-left: 3px solid var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    margin: 0.3rem 0 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+.trading-method-box {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    margin: 0.5rem 0 1.5rem;
+    font-size: 0.9rem;
+    background: rgba(76, 141, 255, 0.04);
+    color: var(--text-secondary);
+}
+
+/* --- Signal Diagnostics --- */
+.diag-detail {
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.diag-detail summary {
+    color: var(--accent);
+    font-size: 0.8rem;
+}
+.diag-signal {
+    margin: 0.4rem 0;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.diag-signal:last-child {
+    border-bottom: none;
+}
+.diag-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.15rem 0;
+    font-size: 0.78rem;
+}
+.diag-thresh {
+    color: var(--text-secondary);
+    font-family: 'Inter', monospace;
+    font-size: 0.75rem;
+}
+
+/* --- Failure Analysis --- */
+.failure-summary {
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1rem;
+    color: var(--text-secondary);
+}
+.failure-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin: 1rem 0;
+}
+.failure-stat {
+    text-align: center;
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+}
+.failure-count {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--red);
+    font-variant-numeric: tabular-nums;
+}
+.failure-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+}
+
+/* --- Overflow auto wrapper --- */
+.overflow-auto {
+    overflow-x: auto;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+}
+
+/* --- Links --- */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+a:hover {
+    color: #6BA3FF;
+}
+
+/* --- Headings --- */
+h1, h2, h3 {
+    color: var(--text-primary);
+}
+h1 small, h2 small {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* --- Section titles --- */
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* --- Buttons (Pico override) --- */
+[role="button"].outline, button.outline {
+    border-color: var(--border);
+    color: var(--text-secondary);
+}
+[role="button"].outline:hover, button.outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: transparent;
+}
+
+/* --- Details/Summary --- */
+details summary {
+    cursor: pointer;
+    color: var(--accent);
+}
+
+/* --- Scrollbar (Webkit) --- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #2A3A50;
+}

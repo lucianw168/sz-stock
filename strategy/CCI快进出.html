@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>策略 - CCI快进出</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+    
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="brand" href="../index.html">SZ &alpha;</a></li>
+        </ul>
+        <ul>
+            <li><a href="../index.html">今日选股</a></li>
+            <li><a href="../history.html">历史记录</a></li>
+            
+            <li><a href="../strategy/CCI快进出.html" class="active">CCI快进出</a></li>
+            
+            <li><a href="../strategy/OBV涨停梦.html">OBV涨停梦</a></li>
+            
+            <li><a href="../strategy/OBV波段.html">OBV波段</a></li>
+            
+            <li><a href="../strategy/形态识别.html">形态识别</a></li>
+            
+        </ul>
+    </nav>
+
+    <main class="container">
+        
+<h1>CCI快进出</h1>
+<p style="color:var(--text-secondary)">CCI 穿越 -100 + 底部逃逸 + CCI 深度超卖 + 日涨幅 < 3% + 价格贴近EMA5</p>
+
+
+<div class="trading-method-box">
+    <strong>交易方针：</strong>信号日收盘买入 → 次日高点达5%目标价卖出，否则次日收盘卖出
+</div>
+
+
+<h2 class="section-title">回测指标</h2>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value">1</div>
+        <div class="label">总交易</div>
+    </div>
+    <div class="metric">
+        <div class="value">0.0%</div>
+        <div class="label">胜率</div>
+    </div>
+    <div class="metric">
+        <div class="value">0.0%</div>
+        <div class="label">涨停率</div>
+    </div>
+    <div class="metric">
+        <div class="value">0.0</div>
+        <div class="label">盈亏比</div>
+    </div>
+    <div class="metric">
+        <div class="value text-red">-0.8%</div>
+        <div class="label">累计收益</div>
+    </div>
+    <div class="metric">
+        <div class="value">0</div>
+        <div class="label">夏普比率</div>
+    </div>
+    <div class="metric">
+        <div class="value">0</div>
+        <div class="label">索提诺</div>
+    </div>
+    <div class="metric">
+        <div class="value text-red">0.0%</div>
+        <div class="label">最大回撤</div>
+    </div>
+</div>
+
+
+<h2 class="section-title">收益曲线</h2>
+<div id="equity-chart" class="chart-container"></div>
+
+<h2 class="section-title">回撤</h2>
+<div id="drawdown-chart" class="chart-container-sm"></div>
+
+
+
+<h2 class="section-title">交易明细</h2>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>买入日期</th>
+            <th>卖出日期</th>
+            <th>代码</th>
+            <th class="num">买入价</th>
+            <th class="num">卖出价</th>
+            <th class="num">次日涨幅</th>
+            <th>达标</th>
+            <th>涨停</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>2026-02-03</td>
+            <td>2026-02-04</td>
+            <td><a href="../stock/000158.html">000158</a></td>
+            <td class="num">20.17</td>
+            <td class="num">20.07</td>
+            <td class="num text-red arrow-down">-0.5%</td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
+
+
+
+<h2 class="section-title">失败特征分析</h2>
+<p class="failure-summary">最近1次失败无明显共同特征</p>
+<div class="failure-stats">
+    <div class="failure-stat">
+        <div class="failure-count">0</div>
+        <div class="failure-label">上影线过长</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">0</div>
+        <div class="failure-label">次日低开</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">0</div>
+        <div class="failure-label">放量回落</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">0</div>
+        <div class="failure-label">收阴</div>
+    </div>
+</div>
+
+
+<details>
+    <summary>失败交易明细（1笔）</summary>
+    <div class="overflow-auto">
+    <table>
+        <thead>
+            <tr>
+                <th>买入日期</th>
+                <th>卖出日期</th>
+                <th>代码</th>
+                <th class="num">涨幅</th>
+                <th class="num">上影线比</th>
+                <th class="num">次日缺口%</th>
+                <th class="num">卖出量比</th>
+                <th>特征</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>2026-02-03</td>
+                <td>2026-02-04</td>
+                <td><a href="../stock/000158.html">000158</a></td>
+                <td class="num text-red">-0.5%</td>
+                <td class="num">0.12</td>
+                <td class="num ">-0.74%</td>
+                <td class="num">0.62x</td>
+                <td></td>
+            </tr>
+            
+        </tbody>
+    </table>
+    </div>
+</details>
+
+
+
+    </main>
+
+    <footer>
+        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-03-06 13:09 | 仅供研究参考</p>
+    </footer>
+
+    
+
+<script>
+(function() {
+    var data = {"dates": ["2026-02-03"], "drawdown": [0.0], "equity": [0.9925]};
+
+    var gridColor = '#1E2A3A';
+    var textColor = '#9FB0C6';
+    var accentBlue = '#4C8DFF';
+    var lossRed = '#FF4D4F';
+
+    // Equity curve
+    var ec = echarts.init(document.getElementById('equity-chart'));
+    ec.setOption({
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', backgroundColor: '#101A2E', borderColor: gridColor, textStyle: { color: '#E6EDF7' } },
+        xAxis: { type: 'category', data: data.dates, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, fontSize: 11 }, axisTick: { lineStyle: { color: gridColor } } },
+        yAxis: { type: 'value', name: '净值', nameTextStyle: { color: textColor }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor } },
+        series: [{
+            type: 'line',
+            data: data.equity,
+            smooth: true,
+            areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{offset: 0, color: 'rgba(76,141,255,0.25)'}, {offset: 1, color: 'rgba(76,141,255,0.02)'}] } },
+            lineStyle: { width: 2, color: accentBlue },
+            itemStyle: { color: accentBlue },
+            symbol: 'none'
+        }],
+        grid: { left: 60, right: 20, top: 30, bottom: 40 }
+    });
+
+    // Drawdown
+    var dd = echarts.init(document.getElementById('drawdown-chart'));
+    dd.setOption({
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', backgroundColor: '#101A2E', borderColor: gridColor, textStyle: { color: '#E6EDF7' }, formatter: function(p) { return p[0].name + ': ' + (p[0].value * 100).toFixed(2) + '%'; } },
+        xAxis: { type: 'category', data: data.dates, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, fontSize: 11 }, axisTick: { lineStyle: { color: gridColor } } },
+        yAxis: { type: 'value', name: '回撤', nameTextStyle: { color: textColor }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, formatter: function(v) { return (v*100).toFixed(0)+'%'; } } },
+        series: [{
+            type: 'line',
+            data: data.drawdown,
+            areaStyle: { color: 'rgba(255,77,79,0.2)' },
+            lineStyle: { color: lossRed, width: 1 },
+            itemStyle: { color: lossRed },
+            symbol: 'none'
+        }],
+        grid: { left: 60, right: 20, top: 30, bottom: 40 }
+    });
+
+    window.addEventListener('resize', function() { ec.resize(); dd.resize(); });
+})();
+</script>
+
+
+</body>
+</html>
