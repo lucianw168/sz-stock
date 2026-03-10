@@ -11,7 +11,8 @@ REPO_URL=$(cd "$SCRIPT_DIR" && git remote get-url origin)
 # --- Step 1: 尝试更新日线数据（失败则用已有数据继续） ---
 cd "$SCRIPT_DIR"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] 更新日线数据..."
-if python3 run.py daily 2>&1; then
+PYTHON="/Users/catalpa/anaconda3/bin/python3"
+if $PYTHON run.py daily 2>&1; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 日线数据更新成功"
 else
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 日线数据更新失败（Tushare 不可用？），使用已有数据继续部署"
@@ -19,7 +20,7 @@ fi
 
 # --- Step 2: 生成网站 ---
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] 生成网站..."
-if ! python3 run.py web --output "$SITE_DIR"; then
+if ! $PYTHON run.py web --output "$SITE_DIR"; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 网站生成失败，放弃部署"
     exit 1
 fi

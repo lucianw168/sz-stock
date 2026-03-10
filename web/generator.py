@@ -13,6 +13,8 @@ import screener
 from web.data_prep import (
     SCREEN_DESCRIPTIONS,
     TRADING_METHODS,
+    STRATEGY_TARGET_PCT,
+    STRATEGY_EXPLANATIONS,
     load_stock_data,
     run_screen_for_date,
     list_available_dates,
@@ -22,6 +24,7 @@ from web.data_prep import (
     get_pattern_signals_for_date,
     get_signal_diagnostics,
     compute_motive_label,
+    compute_deep_stats,
 )
 
 
@@ -43,6 +46,7 @@ class WebGenerator:
         self.screen_results_by_date = {}  # date -> {screen_name: [codes]}
         self.pattern_signals_by_date = {}  # date -> [signal_dicts]
         self.backtest_reports = {}  # screen_name -> {report, equity_data, trade_details}
+        self.deep_stats = {}  # screen_name -> detailed multi-day performance stats
         self.all_selected_codes = set()  # all codes selected by any strategy on any date
         self.stock_appearances = {}  # code -> [{date, screen}]
 
@@ -130,6 +134,10 @@ class WebGenerator:
         # Use target dates for backtest (need at least 2 days)
         bt_days = self.target_dates if len(self.target_dates) >= 2 else self.all_dates[-60:]
         self.backtest_reports = run_all_backtests(self.stock_data, bt_days)
+
+        # Compute detailed multi-day performance stats over ALL dates
+        print("  Computing deep stats (all dates)...")
+        self.deep_stats = compute_deep_stats(self.stock_data, self.all_dates)
 
     def _prepare_output_dir(self):
         """Clean and create output directory structure."""
@@ -287,6 +295,8 @@ class WebGenerator:
                 trade_details=bt.get('trade_details', []),
                 trading_method=TRADING_METHODS.get(name, ''),
                 failure_analysis=bt.get('failure_analysis'),
+                explanation=STRATEGY_EXPLANATIONS.get(name),
+                deep=self.deep_stats.get(name),
             )
             self._write(f'strategy/{name}.html', html)
 

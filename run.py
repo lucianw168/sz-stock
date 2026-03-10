@@ -18,6 +18,7 @@ Usage:
 import argparse
 import sys
 import os
+from zoneinfo import ZoneInfo
 
 # Add the sz directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -91,11 +92,18 @@ def cmd_backtest(args):
         days = all_days
 
     engine = BacktestEngine()
-    target = args.target if args.target else config.DEFAULT_TARGET_PCT
+    from web.data_prep import STRATEGY_TARGET_PCT
+    override_target = args.target  # CLI override (None if not set)
 
     for name, screen_func in screener.ALL_SCREENS.items():
+        # Per-strategy target: CLI override > strategy-specific > default
+        if override_target:
+            target = override_target
+        else:
+            target = STRATEGY_TARGET_PCT.get(name, config.DEFAULT_TARGET_PCT)
+
         print(f"\n{'=' * 50}")
-        print(f"  Backtesting: {name}")
+        print(f"  Backtesting: {name} (target={target*100:.0f}%)")
         print(f"{'=' * 50}")
 
         results = engine.run(screen_func, stock_data, days, target_pct=target)
@@ -267,7 +275,7 @@ def cmd_live(args):
     iteration = 0
     while True:
         iteration += 1
-        now = dt.now()
+        now = dt.now(tz=ZoneInfo("Asia/Shanghai"))
         hhmm = now.hour * 100 + now.minute
 
         print(f"\n{'='*60}")

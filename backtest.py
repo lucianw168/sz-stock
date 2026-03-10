@@ -33,7 +33,8 @@ class BacktestEngine:
             screen_func,
             stock_data: dict[str, pd.DataFrame],
             days: list[str],
-            target_pct: float = None) -> pd.DataFrame:
+            target_pct: float = None,
+            stop_loss_pct: float = None) -> pd.DataFrame:
         """Run backtest for a given screen function over specified days.
 
         Args:
@@ -41,6 +42,9 @@ class BacktestEngine:
             stock_data: dict of code -> DataFrame with indicators
             days: list of trading day strings
             target_pct: target profit percentage (e.g., 0.03 for 3%)
+            stop_loss_pct: optional stop-loss percentage (e.g., -0.05 for -5%).
+                If next-day Low breaches stop price, sell at stop price.
+                Priority: stop-loss checked first (using Low), then target (using High).
 
         Returns:
             DataFrame with daily trade records.
@@ -68,18 +72,29 @@ class BacktestEngine:
                 cost_price = df.loc[pd.Timestamp(buy_date), 'Close']
                 target_price = cost_price * (1 + target_pct)
                 next_high = df.loc[pd.Timestamp(sell_date), 'High']
+                next_low = df.loc[pd.Timestamp(sell_date), 'Low']
                 next_close = df.loc[pd.Timestamp(sell_date), 'Close']
 
                 # Apply slippage to buy
                 actual_buy = cost_price * (1 + self.slippage)
 
-                # Determine sell price
-                if next_high >= target_price:
-                    actual_sell = target_price * (1 - self.slippage)
-                    hit_target = True
-                else:
-                    actual_sell = next_close * (1 - self.slippage)
-                    hit_target = False
+                # Determine sell price with stop-loss support
+                hit_stop = False
+                if stop_loss_pct is not None:
+                    stop_price = cost_price * (1 + stop_loss_pct)
+                    if next_low <= stop_price:
+                        # Stop-loss triggered (assume hit before target)
+                        actual_sell = stop_price * (1 - self.slippage)
+                        hit_target = False
+                        hit_stop = True
+
+                if not hit_stop:
+                    if next_high >= target_price:
+                        actual_sell = target_price * (1 - self.slippage)
+                        hit_target = True
+                    else:
+                        actual_sell = next_close * (1 - self.slippage)
+                        hit_target = False
 
                 # Check limit-up hit
                 ratio = get_limit_ratio(code)

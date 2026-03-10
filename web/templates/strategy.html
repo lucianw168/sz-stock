@@ -16,7 +16,159 @@
 </div>
 {% endif %}
 
-<h2 class="section-title">回测指标</h2>
+{% if explanation %}
+<details class="explanation-section" open>
+    <summary class="section-title" style="cursor:pointer">金融逻辑</summary>
+    <div class="explanation-grid">
+        <div class="explanation-card">
+            <div class="explanation-title">策略逻辑</div>
+            <div class="explanation-body">{{ explanation.logic }}</div>
+        </div>
+        <div class="explanation-card">
+            <div class="explanation-title">为什么有效</div>
+            <div class="explanation-body">{{ explanation.why_works | replace('\n', '<br>') }}</div>
+        </div>
+        <div class="explanation-card explanation-risk">
+            <div class="explanation-title">风险提示</div>
+            <div class="explanation-body">{{ explanation.risk }}</div>
+        </div>
+    </div>
+</details>
+{% endif %}
+
+{% if deep %}
+<h2 class="section-title">信号表现详析（全期 {{ deep.total_signals }} 笔，日均 {{ deep.daily_avg }}）</h2>
+
+{# --- D+1 收益率分析 --- #}
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">D+1 收益率分布</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value {{ 'text-green' if deep.d1_avg > 0 else 'text-red' }}">{{ deep.d1_avg }}%</div>
+        <div class="label">D+1 均值</div>
+    </div>
+    <div class="metric">
+        <div class="value {{ 'text-green' if deep.d1_median > 0 else 'text-red' }}">{{ deep.d1_median }}%</div>
+        <div class="label">D+1 中位数</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ deep.d1_win_rate }}%</div>
+        <div class="label">D+1 胜率</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ deep.d1_lu_rate }}%</div>
+        <div class="label">D+1 涨停率</div>
+    </div>
+</div>
+<div class="overflow-auto" style="margin-top:0.8rem">
+<table>
+    <thead>
+        <tr><th>D+1 涨幅阈值</th><th class="num">≥3%</th><th class="num">≥5%</th><th class="num">≥7%</th><th class="num">≥10%</th><th class="num">≤-5%</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>信号占比</td>
+            <td class="num">{{ deep.d1_ge3 }}%</td>
+            <td class="num">{{ deep.d1_ge5 }}%</td>
+            <td class="num">{{ deep.d1_ge7 }}%</td>
+            <td class="num">{{ deep.d1_ge10 }}%</td>
+            <td class="num text-red">{{ deep.d1_le_neg5 }}%</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+{# --- 涨停率分析 --- #}
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">涨停率分析</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value text-green">{{ deep.lu5_rate }}%</div>
+        <div class="label">5日涨停率</div>
+    </div>
+    {% for rate in deep.lu_by_day %}
+    <div class="metric">
+        <div class="value">{{ rate }}%</div>
+        <div class="label">D+{{ loop.index }} 涨停</div>
+    </div>
+    {% endfor %}
+</div>
+
+{# --- 5日最大涨幅分布 --- #}
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">5日最大涨幅分布</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value text-green">{{ deep.max5d_avg }}%</div>
+        <div class="label">max5d 均值</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ deep.max5d_median }}%</div>
+        <div class="label">max5d 中位</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ deep.max5d_ge5 }}%</div>
+        <div class="label">≥5% 概率</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ deep.max5d_ge10 }}%</div>
+        <div class="label">≥10% 概率</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ deep.max5d_ge15 }}%</div>
+        <div class="label">≥15% 概率</div>
+    </div>
+    <div class="metric">
+        <div class="value">{{ deep.max5d_ge20 }}%</div>
+        <div class="label">≥20% 概率</div>
+    </div>
+</div>
+
+{# --- 多日累计涨幅表 --- #}
+{% if deep.multiday %}
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">多日累计表现</h3>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>持有天数</th>
+            <th class="num">均值</th>
+            <th class="num">中位数</th>
+            <th class="num">胜率</th>
+            <th class="num">>5% 占比</th>
+            <th class="num">>10% 占比</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in deep.multiday %}
+        <tr>
+            <td>D+{{ row.day }}</td>
+            <td class="num {{ 'text-green' if row.avg > 0 else 'text-red' }}">{{ row.avg }}%</td>
+            <td class="num {{ 'text-green' if row.median > 0 else 'text-red' }}">{{ row.median }}%</td>
+            <td class="num">{{ row.win_rate }}%</td>
+            <td class="num">{{ row.gt5_pct }}%</td>
+            <td class="num">{{ row.gt10_pct }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endif %}
+
+{# --- PF 汇总 --- #}
+{% if deep.pf5 is defined %}
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">盈亏比（全期）</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value {{ 'text-green' if deep.pf5 > 1 else 'text-red' }}">{{ deep.pf5 }}</div>
+        <div class="label">PF@5% (WR {{ deep.wr5 }}%)</div>
+    </div>
+    <div class="metric">
+        <div class="value {{ 'text-green' if deep.pf7 > 1 else 'text-red' }}">{{ deep.pf7 }}</div>
+        <div class="label">PF@7% (WR {{ deep.wr7 }}%)</div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+<h2 class="section-title">回测指标（近30日）</h2>
 <div class="metric-grid">
     <div class="metric">
         <div class="value">{{ report.total_trades }}</div>
