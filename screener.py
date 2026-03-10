@@ -1,6 +1,6 @@
 """Composite signal screening + daily stock selection.
 
-Strategies: OBV涨停梦, 形态识别, 涨停接力, 跳空涨停基因, 缩量突破, 群龙夺宝.
+Strategies: OBV涨停梦, 蛰伏涨停, 倍阴回收, 涨停接力, 跳空涨停基因, 缩量突破, 群龙夺宝.
 """
 
 import sys, os
@@ -11,8 +11,39 @@ import pandas as pd
 
 import config
 import strategies as sig
-from pattern_screen import screen_pattern
+from pattern_screen import screen_pattern as screen_bei_yin
+from pattern_screen_legacy import screen_pattern as screen_zhe_fu
 from universe import get_limit_ratio
+
+
+def _filter_overheated(stock_data, codes, date, max_5d_ret):
+    """Reject stocks where 5-day cumulative return exceeds threshold (limit-down risk).
+
+    Stocks that have run up 20-30%+ in 5 days are at high risk of limit-down
+    reversal. This post-filter removes them without changing core strategy logic.
+    """
+    if max_5d_ret is None:
+        return codes
+    ts = pd.Timestamp(date)
+    result = []
+    for code in codes:
+        df = stock_data.get(code)
+        if df is None or ts not in df.index:
+            result.append(code)
+            continue
+        idx = df.index.get_loc(ts)
+        if idx < 5:
+            result.append(code)
+            continue
+        cur_close = float(df['Close'].iloc[idx])
+        prev5_close = float(df['Close'].iloc[idx - 5])
+        if prev5_close <= 0:
+            result.append(code)
+            continue
+        ret_5d = cur_close / prev5_close - 1
+        if ret_5d <= max_5d_ret:
+            result.append(code)
+    return result
 
 
 def _exclude_limit_up(stock_data, codes, date):
@@ -745,14 +776,28 @@ def screen_dragon_treasure(stock_data: dict[str, pd.DataFrame],
     return result
 
 
+# Apply overheat filter to strategies with high limit-down risk
+def _with_overheat(func, name):
+    """Wrap a screen function with overheat post-filter if configured."""
+    threshold = config.OVERHEAT_5D_MAX.get(name)
+    if threshold is None:
+        return func
+    def wrapped(stock_data, date):
+        codes = func(stock_data, date)
+        return _filter_overheated(stock_data, codes, date, threshold)
+    wrapped.__name__ = func.__name__
+    return wrapped
+
+
 # Registry of all screens with display names
 ALL_SCREENS = {
     'OBV涨停梦': screen_obv_momentum,
-    '形态识别': screen_pattern,
-    '涨停接力': screen_limit_relay,
-    '跳空涨停基因': screen_gap_lu_dna,
+    '蛰伏涨停': screen_zhe_fu,
+    '倍阴回收': screen_bei_yin,
+    '涨停接力': _with_overheat(screen_limit_relay, '涨停接力'),
+    '跳空涨停基因': _with_overheat(screen_gap_lu_dna, '跳空涨停基因'),
     '缩量突破': screen_squeeze_breakout,
-    '群龙夺宝': screen_dragon_treasure,
+    '群龙夺宝': _with_overheat(screen_dragon_treasure, '群龙夺宝'),
 }
 
 

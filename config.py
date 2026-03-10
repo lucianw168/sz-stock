@@ -172,6 +172,17 @@ DRAGON_MIN_DAILY_GAIN = 0.05   # Min daily gain on breakout day (≥5%)
 DRAGON_BVR_MIN = 2.0           # Breakout volume ratio: vol ≥ 2x platform avg (倍量过颈线)
 DRAGON_TARGET_PCT = 0.07       # Optimal target: 7%
 
+# --- Overheat filter (limit-down risk reduction) ---
+# Reject signals where 5-day cumulative return exceeds threshold.
+# Data-mined: limit-down signals have avg 5d_ret=25.9%; filtering by 5d_ret
+# removes 60-91% of limit-downs with minimal PF impact.
+# Set to None to disable for a strategy.
+OVERHEAT_5D_MAX = {
+    '涨停接力': 0.20,       # 8.8% LD→1.5%, PF 0.79→0.91
+    '跳空涨停基因': 0.25,   # 3.0% LD→1.4%, PF ~1.40
+    '群龙夺宝': 0.25,       # 3.3% LD→2.6%, PF ~1.07
+}
+
 # --- Backtest parameters ---
 COMMISSION_RATE = 0.0003    # 万三
 SLIPPAGE_RATE = 0.001       # 0.1%

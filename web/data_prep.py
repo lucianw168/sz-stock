@@ -2,6 +2,9 @@
 
 import sys
 import os
+import json
+import hashlib
+import shutil
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
@@ -16,10 +19,67 @@ import strategies as sig
 from backtest import BacktestEngine
 
 
+# ---------------------------------------------------------------------------
+# Screen result caching — avoids re-running all screens on historical dates
+# Cache is versioned by md5(screener.py + config.py + pattern_screen.py).
+# If any of these files change, the cache auto-invalidates.
+# ---------------------------------------------------------------------------
+SCREEN_CACHE_DIR = os.path.join(config.DATA_DIR, 'cache', 'screens')
+
+
+def _screen_cache_version():
+    """Compute version hash from source files that affect screen results."""
+    h = hashlib.md5()
+    for fname in ['screener.py', 'config.py', 'pattern_screen.py']:
+        path = os.path.join(config.BASE_DIR, fname)
+        try:
+            with open(path, 'rb') as f:
+                h.update(f.read())
+        except FileNotFoundError:
+            pass
+    return h.hexdigest()[:12]
+
+
+def _ensure_screen_cache():
+    """Ensure cache dir exists with correct version. Wipes stale cache."""
+    version_file = os.path.join(SCREEN_CACHE_DIR, '_version.txt')
+    current = _screen_cache_version()
+
+    if os.path.exists(version_file):
+        with open(version_file) as f:
+            if f.read().strip() == current:
+                return  # Cache valid
+
+    # Stale or missing — recreate
+    if os.path.exists(SCREEN_CACHE_DIR):
+        shutil.rmtree(SCREEN_CACHE_DIR)
+    os.makedirs(SCREEN_CACHE_DIR, exist_ok=True)
+    with open(version_file, 'w') as f:
+        f.write(current)
+
+
+def _load_screen_cache(date_str):
+    """Load cached screen results for a date. Returns dict or None."""
+    path = os.path.join(SCREEN_CACHE_DIR, f'{date_str}.json')
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+    return None
+
+
+def _save_screen_cache(date_str, results):
+    """Save screen results to cache. results = {name: [codes]}."""
+    path = os.path.join(SCREEN_CACHE_DIR, f'{date_str}.json')
+    with open(path, 'w') as f:
+        json.dump(results, f)
+
+
 # Strategy descriptions: which signals compose each screen
 SCREEN_DESCRIPTIONS = {
     'OBV涨停梦': 'OBV 突破 + 成交量激增 + CCI > 50 + 日涨幅 > 2%（仅主板）',
-    '形态识别': '横盘≥22天→缩量涨停突破→倍量阴线洗盘→回收确认+无下影线（仅主板）—— '
+    '蛰伏涨停': '状态机形态检测 — 横盘蛰伏→缩量涨停(供给枯竭)→回踩→延迟回收（仅主板）—— '
+               '从32,997个涨停事件中数据挖掘学习的形态模板，94.6%历史胜率',
+    '倍阴回收': '横盘≥22天→缩量涨停突破→倍量阴线洗盘→回收确认+无下影线（仅主板）—— '
                '投资笔记核心策略。数据挖掘验证：66信号中27%在5日内涨停，均最大涨幅10%',
     '涨停接力': '近5日有涨停 + 日涨幅≥5% + 收盘位≥90% + CCI>50（仅主板）—— '
                '数据挖掘10,000+涨停事件发现close_position≥0.9是关键区分因子，'
@@ -40,7 +100,9 @@ SCREEN_DESCRIPTIONS = {
 
 TRADING_METHODS = {
     'OBV涨停梦': '信号日收盘买入 → 次日高点达5%目标价卖出，否则次日收盘卖出',
-    '形态识别': '第3天回收确认信号日收盘买入，持有5天等待涨停或大涨。'
+    '蛰伏涨停': '回收确认信号日收盘买入，持有数天等待涨停或大涨。'
+               '状态机检测延迟回收，信号稀少但历史胜率极高（94.6%）',
+    '倍阴回收': '第3天回收确认信号日收盘买入，持有5天等待涨停或大涨。'
                '适合中线持有（5日涨停率27%），非次日短线策略',
     '涨停接力': '信号日收盘买入 → 次日高点达5%目标价卖出，否则次日收盘卖出。'
                '适合辅助人工判断（追涨策略，机械PF<1），需结合盘口和板块热度',
@@ -74,7 +136,22 @@ STRATEGY_EXPLANATIONS = {
         'risk': '放量突破可能是主力出货伪装。仅限主板（10%涨停板）以降低波动风险。'
                 '排除当日涨停股（封板无法买入）。',
     },
-    '形态识别': {
+    '蛰伏涨停': {
+        'logic': '从32,997个涨停事件中数据挖掘学习的形态模板，通过状态机逐日扫描。'
+                 '四阶段序列：横盘蛰伏（≥12天，振幅<14%）→ 缩量涨停突破'
+                 '（成交量0.5-1.0倍平台均量，说明供给枯竭）→ 倍量回踩'
+                 '（成交量≥涨停日1.7倍，主力洗盘）→ 延迟回收确认。',
+        'why_works': '蛰伏涨停的核心是"缩量涨停"——当一只长期横盘的股票以极低成交量封涨停，'
+                     '说明场内已无浮筹可卖（supply exhaustion），所有筹码已被主力锁定。\n'
+                     '随后的倍量阴线回踩是主力刻意打压洗出跟风盘，'
+                     '延迟回收确认洗盘结束后的再启动。\n'
+                     '机器学习从32,997个涨停事件中自动发现此模式，'
+                     '历史胜率94.6%，信号极稀少但质量极高。',
+        'risk': '信号极稀少，依赖pickle模型文件（pattern_library.pkl）。'
+                '状态机需要60天warmup，首次运行较慢。'
+                '大盘系统性下跌时形态失效。',
+    },
+    '倍阴回收': {
         'logic': '投资笔记核心形态：横盘≥22天（主力建仓期）→ 缩量涨停突破平台高点'
                  '（成交量非平台最大量，说明抛压已耗尽）→ 倍量阴线洗盘'
                  '（成交量≥涨停日1.5倍，震出跟风盘）→ 第3天收盘回到阴线上方 + 无下影线'
@@ -176,10 +253,13 @@ def compute_deep_stats(stock_data, all_dates):
     """Compute detailed multi-day performance stats for each strategy.
 
     Scans all strategies across ALL dates, tracks D+1..D+5 returns and
-    limit-ups. Returns a dict of detailed stats per strategy.
+    limit-ups. Uses disk cache for screen results (historical dates never
+    change). First run ~9min, subsequent runs ~10s.
     """
     import screener as _screener
     from universe import get_limit_ratio as _glr
+
+    _ensure_screen_cache()
 
     def _is_lu(code, close, prev_close):
         lr = _glr(code)
@@ -189,15 +269,29 @@ def compute_deep_stats(stock_data, all_dates):
     date_strs = [d if isinstance(d, str) else d.strftime('%Y-%m-%d') for d in all_dates]
     results = {name: [] for name in _screener.ALL_SCREENS}
 
+    cached_count = 0
+    computed_count = 0
     for di, date_str in enumerate(date_strs[:-5]):
         if di < 30:
             continue
-        for sname, sfunc in _screener.ALL_SCREENS.items():
-            try:
-                codes = sfunc(stock_data, date_str)
-            except Exception:
-                continue
-            ts = pd.Timestamp(date_str)
+
+        # Try cache first — huge speedup for repeat builds
+        cached = _load_screen_cache(date_str)
+        if cached is not None:
+            screen_results = cached
+            cached_count += 1
+        else:
+            screen_results = {}
+            for sname, sfunc in _screener.ALL_SCREENS.items():
+                try:
+                    screen_results[sname] = sfunc(stock_data, date_str)
+                except Exception:
+                    screen_results[sname] = []
+            _save_screen_cache(date_str, screen_results)
+            computed_count += 1
+
+        ts = pd.Timestamp(date_str)
+        for sname, codes in screen_results.items():
             for code in codes:
                 df = stock_data.get(code)
                 if df is None or ts not in df.index:
@@ -234,6 +328,9 @@ def compute_deep_stats(stock_data, all_dates):
                     sig['next_ret'] = float(c[idx + 1]) / buy - 1
                     sig['next_high'] = float(h[idx + 1]) / buy - 1
                 results[sname].append(sig)
+
+    if cached_count or computed_count:
+        print(f"    Deep stats: {cached_count} dates from cache, {computed_count} computed")
 
     # Build stats dict for each strategy
     target_map = dict(STRATEGY_TARGET_PCT)
@@ -332,15 +429,26 @@ def load_stock_data():
 
 
 def run_screen_for_date(stock_data, date):
-    """Run all screens for a given date.
+    """Run all screens for a given date (with disk cache for historical dates).
 
     Returns:
         dict[str, list[str]] mapping screen name -> list of stock codes.
     """
+    _ensure_screen_cache()
+
+    # Don't cache today's date (live data may update intraday)
+    if date != config.TODAY:
+        cached = _load_screen_cache(date)
+        if cached is not None:
+            return cached
+
     results = {}
     for name, func in screener.ALL_SCREENS.items():
         codes = func(stock_data, date)
         results[name] = codes
+
+    if date != config.TODAY:
+        _save_screen_cache(date, results)
     return results
 
 
