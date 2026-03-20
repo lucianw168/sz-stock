@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>策略 - 跳空涨停基因</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+    
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="brand" href="../index.html">SZ</a></li>
+            <li><a href="../index.html">今日选股</a></li>
+            <li><a href="../history.html">历史记录</a></li>
+            
+            <li><a href="../strategy/OBV涨停梦.html">OBV涨停梦</a></li>
+            
+            <li><a href="../strategy/蛰伏涨停.html">蛰伏涨停</a></li>
+            
+            <li><a href="../strategy/倍阴回收.html">倍阴回收</a></li>
+            
+            <li><a href="../strategy/跳空涨停基因.html" class="active">跳空涨停基因</a></li>
+            
+            <li><a href="../strategy/缩量突破.html">缩量突破</a></li>
+            
+            <li><a href="../strategy/群龙夺宝.html">群龙夺宝</a></li>
+            
+            <li><a href="../strategy/妖股起涨.html">妖股起涨</a></li>
+            
+        </ul>
+        <ul class="market-links">
+            <li><a class="market-btn" href="../../sh/index.html">SH</a></li>
+            <li><a class="market-btn" href="../../kc/index.html">KC</a></li>
+            <li><a class="market-btn" href="../../cy/index.html">CY</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        
+<h1>跳空涨停基因</h1>
+<p style="color:var(--text-secondary)">跳空高开不回补 + 收盘位≥70% + 近10日有涨停（仅主板）—— 三重共振筛选买盘极强的突破点。持有3天 + 止损-3%</p>
+
+
+<div class="trading-method-box">
+    <strong>交易方针：</strong>信号日收盘买入 → 持有最多3天，期间高点达7%目标价即卖出，跌破-3%止损即卖出，第3天收盘强制卖出。多日持有让突破行情充分展开
+</div>
+
+
+
+<details class="explanation-section" open>
+    <summary class="section-title" style="cursor:pointer">金融逻辑</summary>
+    <div class="explanation-grid">
+        <div class="explanation-card">
+            <div class="explanation-title">策略逻辑</div>
+            <div class="explanation-body">三重共振策略：①跳空高开不回补（开盘价>昨日最高价，最低价>昨日最高价，收盘价>开盘价）②收盘位≥70%（收盘价在当日振幅上方70%）③近10个交易日内有涨停记录。仅限主板（10%涨停板），排除当日涨停股。</div>
+        </div>
+        <div class="explanation-card">
+            <div class="explanation-title">为什么有效</div>
+            <div class="explanation-body">这是通过PF（盈亏比）优化挖掘出的首个盈利策略，其金融逻辑：<br>①跳空不回补 = 极强买压信号。开盘直接跳过昨日最高价且全天不回落，说明隔夜有重大利好或大资金集中挂单买入，买盘力度压倒性超过卖盘。<br>②收盘位≥70% = 无抛压确认。如果跳空后出现长上影线（收盘位低），说明高位有大量卖单等待出货；反之收盘位高意味着买盘持续到尾盘，没有人愿意在高位卖出。<br>③涨停基因 = 大资金参与证明。近期有涨停记录说明该股已被游资或机构关注，有能力推动涨停的大资金仍在运作中。跳空突破是这些资金的延续动作。<br>三重共振将随机噪声过滤掉，只留下买盘极强+无抛压+有大资金背景的标的。7%目标价优于5%是因为这类强势突破后通常有更大的上行空间。</div>
+        </div>
+        <div class="explanation-card explanation-risk">
+            <div class="explanation-title">风险提示</div>
+            <div class="explanation-body">信号稀少（730天仅276笔），单日可能多只股票同时触发导致集中风险。强依赖前一日有涨停记录，本质仍是追涨策略。训练PF=1.31，测试PF=1.49，是所有策略中唯一可机械交易的，但仍需注意大盘极端行情下的系统性风险。</div>
+        </div>
+        
+        <div class="explanation-card" style="border-color:#4C8DFF">
+            <div class="explanation-title" style="color:#4C8DFF">大盘依赖性</div>
+            <div class="explanation-body">
+                <div style="display:flex;gap:1rem;margin-bottom:0.6rem;flex-wrap:wrap">
+                    
+                    <div style="text-align:center;min-width:60px">
+                        <div style="font-size:1.3rem;font-weight:bold;color:#00e676">2.48</div>
+                        <div style="font-size:0.75rem;color:var(--text-secondary)">牛市PF</div>
+                    </div>
+                    
+                    
+                    <div style="text-align:center;min-width:60px">
+                        <div style="font-size:1.3rem;font-weight:bold;color:#00e676">1.61</div>
+                        <div style="font-size:0.75rem;color:var(--text-secondary)">震荡PF</div>
+                    </div>
+                    
+                    
+                    <div style="text-align:center;min-width:60px">
+                        <div style="font-size:1.3rem;font-weight:bold;color:#00e676">3.17</div>
+                        <div style="font-size:0.75rem;color:var(--text-secondary)">熊市PF</div>
+                    </div>
+                    
+                </div>
+                
+                
+                
+                    <b>全天候策略</b>：各市场环境PF均可盈利，对大盘方向依赖低。任何环境均可使用，震荡市表现尤佳（PF=1.61）。
+                
+            </div>
+        </div>
+        
+    </div>
+</details>
+
+
+
+<h2 class="section-title">信号表现详析（全期 76 笔，日均 0.2）</h2>
+
+
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">D+1 收益率分布</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value text-green">0.83%</div>
+        <div class="label">D+1 均值</div>
+    </div>
+    <div class="metric">
+        <div class="value text-green">0.28%</div>
+        <div class="label">D+1 中位数</div>
+    </div>
+    <div class="metric">
+        <div class="value">51.3%</div>
+        <div class="label">D+1 胜率</div>
+    </div>
+    <div class="metric">
+        <div class="value">6.6%</div>
+        <div class="label">D+1 涨停率</div>
+    </div>
+</div>
+<div class="overflow-auto" style="margin-top:0.8rem">
+<table>
+    <thead>
+        <tr><th>D+1 涨幅阈值</th><th class="num">≥3%</th><th class="num">≥5%</th><th class="num">≥7%</th><th class="num">≥10%</th><th class="num">≤-5%</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>信号占比</td>
+            <td class="num">21.1%</td>
+            <td class="num">13.2%</td>
+            <td class="num">11.8%</td>
+            <td class="num">1.3%</td>
+            <td class="num text-red">3.9%</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">涨停率分析</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value text-green">18.4%</div>
+        <div class="label">5日涨停率</div>
+    </div>
+    
+    <div class="metric">
+        <div class="value">6.6%</div>
+        <div class="label">D+1 涨停</div>
+    </div>
+    
+    <div class="metric">
+        <div class="value">3.9%</div>
+        <div class="label">D+2 涨停</div>
+    </div>
+    
+    <div class="metric">
+        <div class="value">5.3%</div>
+        <div class="label">D+3 涨停</div>
+    </div>
+    
+    <div class="metric">
+        <div class="value">2.6%</div>
+        <div class="label">D+4 涨停</div>
+    </div>
+    
+    <div class="metric">
+        <div class="value">6.6%</div>
+        <div class="label">D+5 涨停</div>
+    </div>
+    
+</div>
+
+
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">5日最大涨幅分布</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value text-green">8.2%</div>
+        <div class="label">max5d 均值</div>
+    </div>
+    <div class="metric">
+        <div class="value">5.8%</div>
+        <div class="label">max5d 中位</div>
+    </div>
+    <div class="metric">
+        <div class="value">52.6%</div>
+        <div class="label">≥5% 概率</div>
+    </div>
+    <div class="metric">
+        <div class="value">30.3%</div>
+        <div class="label">≥10% 概率</div>
+    </div>
+    <div class="metric">
+        <div class="value">18.4%</div>
+        <div class="label">≥15% 概率</div>
+    </div>
+    <div class="metric">
+        <div class="value">13.2%</div>
+        <div class="label">≥20% 概率</div>
+    </div>
+</div>
+
+
+
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">多日累计表现</h3>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>持有天数</th>
+            <th class="num">均值</th>
+            <th class="num">中位数</th>
+            <th class="num">胜率</th>
+            <th class="num">>5% 占比</th>
+            <th class="num">>10% 占比</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>D+1</td>
+            <td class="num text-green">0.8%</td>
+            <td class="num text-green">0.3%</td>
+            <td class="num">51.0%</td>
+            <td class="num">13.2%</td>
+            <td class="num">1.3%</td>
+        </tr>
+        
+        <tr>
+            <td>D+2</td>
+            <td class="num text-green">1.6%</td>
+            <td class="num text-green">0.6%</td>
+            <td class="num">53.0%</td>
+            <td class="num">15.8%</td>
+            <td class="num">9.2%</td>
+        </tr>
+        
+        <tr>
+            <td>D+3</td>
+            <td class="num text-green">2.1%</td>
+            <td class="num text-green">1.0%</td>
+            <td class="num">58.0%</td>
+            <td class="num">22.4%</td>
+            <td class="num">11.8%</td>
+        </tr>
+        
+        <tr>
+            <td>D+4</td>
+            <td class="num text-green">1.8%</td>
+            <td class="num text-green">0.4%</td>
+            <td class="num">53.0%</td>
+            <td class="num">22.4%</td>
+            <td class="num">14.5%</td>
+        </tr>
+        
+        <tr>
+            <td>D+5</td>
+            <td class="num text-green">1.7%</td>
+            <td class="num text-green">0.1%</td>
+            <td class="num">51.0%</td>
+            <td class="num">22.4%</td>
+            <td class="num">13.2%</td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
+
+
+
+
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">盈亏比（全期）</h3>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value text-green">1.39</div>
+        <div class="label">PF@5% (WR 19.7%)</div>
+    </div>
+    <div class="metric">
+        <div class="value text-green">1.54</div>
+        <div class="label">PF@7% (WR 14.5%)</div>
+    </div>
+</div>
+
+
+
+<h2 class="section-title">回测指标（近30日）</h2>
+<div class="metric-grid">
+    <div class="metric">
+        <div class="value">79</div>
+        <div class="label">总交易</div>
+    </div>
+    <div class="metric">
+        <div class="value">48.1%</div>
+        <div class="label">胜率</div>
+    </div>
+    <div class="metric">
+        <div class="value">11.4%</div>
+        <div class="label">涨停率</div>
+    </div>
+    <div class="metric">
+        <div class="value">2.55</div>
+        <div class="label">盈亏比</div>
+    </div>
+    <div class="metric">
+        <div class="value text-green">52.1%</div>
+        <div class="label">累计收益</div>
+    </div>
+    <div class="metric">
+        <div class="value">3.36</div>
+        <div class="label">夏普比率</div>
+    </div>
+    <div class="metric">
+        <div class="value">13.82</div>
+        <div class="label">索提诺</div>
+    </div>
+    <div class="metric">
+        <div class="value text-red">-14.0%</div>
+        <div class="label">最大回撤</div>
+    </div>
+</div>
+
+
+<h2 class="section-title">收益曲线</h2>
+<div id="equity-chart" class="chart-container"></div>
+
+<h2 class="section-title">回撤</h2>
+<div id="drawdown-chart" class="chart-container-sm"></div>
+
+
+
+<h2 class="section-title">交易明细</h2>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>买入日期</th>
+            <th>卖出日期</th>
+            <th>代码</th>
+            <th class="num">买入价</th>
+            <th class="num">卖出价</th>
+            <th class="num">次日涨幅</th>
+            <th>达标</th>
+            <th>涨停</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>2026-02-10</td>
+            <td>2026-02-13</td>
+            <td><a href="../stock/000571.html">000571</a></td>
+            <td class="num">7.14</td>
+            <td class="num">7.15</td>
+            <td class="num text-green arrow-up">0.14%</td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <tr>
+            <td>2026-02-25</td>
+            <td>2026-03-02</td>
+            <td><a href="../stock/000988.html">000988</a></td>
+            <td class="num">86.1</td>
+            <td class="num">94.97</td>
+            <td class="num text-green arrow-up">10.3%</td>
+            <td>✓</td>
+            <td></td>
+        </tr>
+        
+        <tr>
+            <td>2026-02-27</td>
+            <td>2026-03-02</td>
+            <td><a href="../stock/001400.html">001400</a></td>
+            <td class="num">121.32</td>
+            <td class="num">133.45</td>
+            <td class="num text-green arrow-up">10.0%</td>
+            <td>✓</td>
+            <td>✓</td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
+
+
+
+<h2 class="section-title">失败特征分析</h2>
+<p class="failure-summary">最近10次失败中，5次次日低开，1次放量回落，9次收阴</p>
+<div class="failure-stats">
+    <div class="failure-stat">
+        <div class="failure-count">0</div>
+        <div class="failure-label">上影线过长</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">5</div>
+        <div class="failure-label">次日低开</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">1</div>
+        <div class="failure-label">放量回落</div>
+    </div>
+    <div class="failure-stat">
+        <div class="failure-count">9</div>
+        <div class="failure-label">收阴</div>
+    </div>
+</div>
+
+
+<details>
+    <summary>失败交易明细（10笔）</summary>
+    <div class="overflow-auto">
+    <table>
+        <thead>
+            <tr>
+                <th>买入日期</th>
+                <th>卖出日期</th>
+                <th>代码</th>
+                <th class="num">涨幅</th>
+                <th class="num">上影线比</th>
+                <th class="num">次日缺口%</th>
+                <th class="num">卖出量比</th>
+                <th>特征</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>2025-05-07</td>
+                <td>2025-05-12</td>
+                <td><a href="../stock/000822.html">000822</a></td>
+                <td class="num text-red">-2.68%</td>
+                <td class="num">0.0</td>
+                <td class="num text-red">-1.96%</td>
+                <td class="num">0.44x</td>
+                <td>次日低开, 收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-06-24</td>
+                <td>2025-06-27</td>
+                <td><a href="../stock/001278.html">001278</a></td>
+                <td class="num text-red">-0.82%</td>
+                <td class="num">0.07</td>
+                <td class="num ">0.53%</td>
+                <td class="num">0.39x</td>
+                <td>收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-07-15</td>
+                <td>2025-07-16</td>
+                <td><a href="../stock/002724.html">002724</a></td>
+                <td class="num text-red">-2.82%</td>
+                <td class="num">0.16</td>
+                <td class="num ">-0.12%</td>
+                <td class="num">1.11x</td>
+                <td>收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-07-25</td>
+                <td>2025-07-30</td>
+                <td><a href="../stock/000409.html">000409</a></td>
+                <td class="num text-red">-3.07%</td>
+                <td class="num">0.14</td>
+                <td class="num ">-0.48%</td>
+                <td class="num">0.7x</td>
+                <td>收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-07-25</td>
+                <td>2025-07-30</td>
+                <td><a href="../stock/002279.html">002279</a></td>
+                <td class="num text-red">-3.19%</td>
+                <td class="num">0.29</td>
+                <td class="num ">-0.69%</td>
+                <td class="num">0.81x</td>
+                <td>收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-09-08</td>
+                <td>2025-09-10</td>
+                <td><a href="../stock/002250.html">002250</a></td>
+                <td class="num text-red">-2.35%</td>
+                <td class="num">0.11</td>
+                <td class="num text-red">-1.22%</td>
+                <td class="num">0.52x</td>
+                <td>次日低开, 收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-11-10</td>
+                <td>2025-11-13</td>
+                <td><a href="../stock/001231.html">001231</a></td>
+                <td class="num text-red">-0.38%</td>
+                <td class="num">0.29</td>
+                <td class="num ">0.13%</td>
+                <td class="num">0.89x</td>
+                <td>收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-11-26</td>
+                <td>2025-11-27</td>
+                <td><a href="../stock/002463.html">002463</a></td>
+                <td class="num text-red">-3.71%</td>
+                <td class="num">0.13</td>
+                <td class="num text-red">-2.02%</td>
+                <td class="num">1.8x</td>
+                <td>次日低开, 放量回落, 收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2025-12-01</td>
+                <td>2025-12-02</td>
+                <td><a href="../stock/002544.html">002544</a></td>
+                <td class="num text-red">-2.11%</td>
+                <td class="num">0.27</td>
+                <td class="num text-red">-2.18%</td>
+                <td class="num">1.39x</td>
+                <td>次日低开</td>
+            </tr>
+            
+            <tr>
+                <td>2026-01-13</td>
+                <td>2026-01-14</td>
+                <td><a href="../stock/002882.html">002882</a></td>
+                <td class="num text-red">-5.28%</td>
+                <td class="num">0.17</td>
+                <td class="num text-red">-4.77%</td>
+                <td class="num">1.42x</td>
+                <td>次日低开, 收阴</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    </div>
+</details>
+
+
+
+    </main>
+
+    <footer>
+        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-03-20 16:33 | 仅供研究参考</p>
+    </footer>
+
+    
+
+<script>
+(function() {
+    var data = {"dates": ["2024-03-21", "2024-04-01", "2024-04-02", "2024-04-18", "2024-04-25", "2024-04-29", "2024-04-30", "2024-05-06", "2024-05-07", "2024-05-15", "2024-06-11", "2024-07-01", "2024-07-29", "2024-08-07", "2024-08-30", "2024-09-27", "2024-11-05", "2024-11-20", "2025-01-08", "2025-01-14", "2025-02-06", "2025-02-10", "2025-02-20", "2025-03-05", "2025-03-13", "2025-03-17", "2025-04-10", "2025-04-22", "2025-04-23", "2025-04-30", "2025-05-06", "2025-05-07", "2025-05-19", "2025-06-24", "2025-07-15", "2025-07-25", "2025-08-05", "2025-08-12", "2025-08-18", "2025-09-08", "2025-10-27", "2025-11-10", "2025-11-26", "2025-12-01", "2025-12-29", "2026-01-13", "2026-01-23", "2026-01-26", "2026-02-10", "2026-02-25", "2026-02-27"], "drawdown": [0.0, -0.0325, -0.029, -0.0575, -0.0667, -0.0506, 0.0, 0.0, 0.0, -0.0325, -0.0084, -0.0406, -0.0719, -0.1021, -0.1313, -0.0728, -0.103, -0.092, -0.0309, -0.0072, 0.0, -0.0325, -0.064, -0.0832, -0.113, -0.1399, -0.0821, -0.1119, -0.1207, -0.0616, -0.0653, -0.0957, -0.0349, -0.0286, -0.0602, -0.0907, -0.0296, 0.0, 0.0, 0.0, 0.0, -0.0064, -0.0387, -0.07, -0.1002, -0.1295, -0.071, -0.0085, -0.0097, 0.0, 0.0], "equity": [0.9675, 0.936, 0.9394, 0.9119, 0.9029, 0.9185, 0.9803, 0.9866, 1.053, 1.0187, 1.0441, 1.0102, 0.9773, 0.9455, 0.9147, 0.9763, 0.9445, 0.9561, 1.0204, 1.0454, 1.1157, 1.0794, 1.0442, 1.0229, 0.9896, 0.9596, 1.0241, 0.9908, 0.981, 1.0469, 1.0428, 1.0089, 1.0768, 1.0838, 1.0485, 1.0144, 1.0827, 1.1555, 1.2332, 1.2638, 1.3488, 1.3402, 1.2966, 1.2544, 1.2136, 1.1741, 1.2531, 1.3374, 1.3358, 1.4256, 1.5215]};
+
+    var gridColor = '#1E2A3A';
+    var textColor = '#9FB0C6';
+    var accentBlue = '#4C8DFF';
+    var lossRed = '#FF4D4F';
+
+    // Equity curve
+    var ec = echarts.init(document.getElementById('equity-chart'));
+    ec.setOption({
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', backgroundColor: '#101A2E', borderColor: gridColor, textStyle: { color: '#E6EDF7' } },
+        xAxis: { type: 'category', data: data.dates, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, fontSize: 11 }, axisTick: { lineStyle: { color: gridColor } } },
+        yAxis: { type: 'value', name: '净值', nameTextStyle: { color: textColor }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor } },
+        series: [{
+            type: 'line',
+            data: data.equity,
+            smooth: true,
+            areaStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{offset: 0, color: 'rgba(76,141,255,0.25)'}, {offset: 1, color: 'rgba(76,141,255,0.02)'}] } },
+            lineStyle: { width: 2, color: accentBlue },
+            itemStyle: { color: accentBlue },
+            symbol: 'none'
+        }],
+        grid: { left: 60, right: 20, top: 30, bottom: 40 }
+    });
+
+    // Drawdown
+    var dd = echarts.init(document.getElementById('drawdown-chart'));
+    dd.setOption({
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', backgroundColor: '#101A2E', borderColor: gridColor, textStyle: { color: '#E6EDF7' }, formatter: function(p) { return p[0].name + ': ' + (p[0].value * 100).toFixed(2) + '%'; } },
+        xAxis: { type: 'category', data: data.dates, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, fontSize: 11 }, axisTick: { lineStyle: { color: gridColor } } },
+        yAxis: { type: 'value', name: '回撤', nameTextStyle: { color: textColor }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, formatter: function(v) { return (v*100).toFixed(0)+'%'; } } },
+        series: [{
+            type: 'line',
+            data: data.drawdown,
+            areaStyle: { color: 'rgba(255,77,79,0.2)' },
+            lineStyle: { color: lossRed, width: 1 },
+            itemStyle: { color: lossRed },
+            symbol: 'none'
+        }],
+        grid: { left: 60, right: 20, top: 30, bottom: 40 }
+    });
+
+    window.addEventListener('resize', function() { ec.resize(); dd.resize(); });
+})();
+</script>
+
+
+</body>
+</html>
