@@ -218,34 +218,30 @@ def cmd_optimize(args):
 
 
 def _deploy_to_ghpages(site_dir):
-    """Push site_dir contents to gh-pages branch."""
-    import subprocess
-    import tempfile
+    """DISABLED 2026-05-20 — this used to force-push an orphan gh-pages branch.
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_url = subprocess.check_output(
-        ['git', 'remote', 'get-url', 'origin'],
-        cwd=script_dir, text=True,
-    ).strip()
+    The old body did `git init` + `checkout -b gh-pages` + `git push -f`,
+    which wiped every directory not in this market's site_dir
+    (news, analyzer, methodology.html, manifest, and the other 3 markets).
+    Incidents traced to this code path:
+      - 2026-04-14/15: 早盘必读 disappeared (ghost force-push)
+      - 2026-05-18: orphan commit 680f54b wiped all modules
+      - 2026-05-19/20: orphan commit 99d1c09 wiped news/analyzer again
 
-    with tempfile.TemporaryDirectory() as tmpdir:
-        deploy_dir = os.path.join(tmpdir, 'site')
-        import shutil
-        shutil.copytree(site_dir, deploy_dir)
-
-        cmds = [
-            ['git', 'init'],
-            ['git', 'config', 'http.postBuffer', '524288000'],
-            ['git', 'checkout', '-b', 'gh-pages'],
-            ['git', 'add', '-A'],
-            ['git', 'commit', '-m',
-             f'Live deploy {__import__("datetime").datetime.now().strftime("%Y-%m-%d %H:%M")}'],
-            ['git', 'remote', 'add', 'origin', repo_url],
-            ['git', 'push', '-f', 'origin', 'gh-pages'],
-        ]
-        for cmd in cmds:
-            subprocess.run(cmd, cwd=deploy_dir, check=True,
-                           capture_output=True, text=True)
+    Use the modular publisher in the cn/ project instead:
+        cd .. && python -m publisher --modules sz   # one market only
+        cd .. && bash deploy_all.sh                 # all markets + news + analyzer
+    The publisher clones gh-pages first, only replaces the requested
+    module directories, and refuses to push orphan commits.
+    """
+    raise RuntimeError(
+        '_deploy_to_ghpages is permanently disabled. The previous '
+        'implementation force-pushed an orphan gh-pages branch and '
+        'wiped news / analyzer / other markets. Use the cn/ publisher '
+        'instead: `cd .. && bash deploy_all.sh` or '
+        '`cd .. && python -m publisher --modules sz`. '
+        'See the docstring for incident history.'
+    )
 
 
 def cmd_live(args):
