@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 个股综合分析</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="brand" href="search.html">🔍 个股分析</a>
+  <a href="../index.html">总览</a>
+  <a class="market-btn" data-market="news" href="../news/index.html">早盘必读</a>
+  <a class="market-btn" data-market="sz" href="../sz/index.html">SZ</a>
+  <a class="market-btn" data-market="sh" href="../sh/index.html">SH</a>
+  <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
+  <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
+</nav>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="">
+    <button onclick="doSearch()">分析</button>
+  </div>
+
+  <div class="card"><h2>搜索个股</h2><p style="color:#8b949e">输入股票代码查看综合分析（公司画像 + 财务 + 世界模型）</p></div><div class="card"><h2>已分析的股票</h2><div class="stock-list"><a href="002463.SZ.html" class="stock-link"><span class="code">002463.SZ</span> <span class="name">沪士电子股份有限公司</span><span class="mini-summary">**观望**（当前处于下跌加速期，盈亏比极差，建议等待回调至76.43附近或右侧突破107.02后再行介入）。</span></a><a href="000767.SZ.html" class="stock-link"><span class="code">000767.SZ</span> <span class="name">晋能控股山西电力股份有限公司</span><span class="mini-summary">**回避**。当前股价处于散户高位接力的危险区域，且基本面与估值严重错配，建议等待股价回调至3.61元附近并确认企稳后再做进一步观察。</span></a><a href="002442.SZ.html" class="stock-link"><span class="code">002442.SZ</span> <span class="name">龙星科技集团股份有限公司</span><span class="mini-summary">**回避**（当前仅适合观望，等待股价回踩5.47附近企稳后再评估）。</span></a><a href="000630.SZ.html" class="stock-link"><span class="code">000630.SZ</span> <span class="name">铜陵有色金属集团股份有限公司</span><span class="mini-summary">**谨慎观望**，建议等待股价回踩5.59元附近企稳，且确认主力资金重新净流入后再行介入，切勿追高。</span></a><a href="002364.SZ.html" class="stock-link"><span class="code">002364.SZ</span> <span class="name">杭州中恒电气股份有限公司</span><span class="mini-summary">**谨慎观望**（等待回调至29.04元附近再评估，切勿在当前高位接盘）。</span></a><a href="002733.SZ.html" class="stock-link"><span class="code">002733.SZ</span> <span class="name">深圳市雄韬电源科技股份有限公司</span><span class="mini-summary">**观望**（等待回调至24.51元附近确认企稳后再做决策）。</span></a><a href="002068.SZ.html" class="stock-link"><span class="code">002068.SZ</span> <span class="name">江西黑猫炭黑股份有限公司</span><span class="mini-summary">**谨慎观望**（当前不具备入场价值，需等待8.68元附近的企稳信号及资金回流确认）。</span></a><a href="002845.SZ.html" class="stock-link"><span class="code">002845.SZ</span> <span class="name">深圳同兴达科技股份有限公司</span><span class="mini-summary">**谨慎观望**：当前盈亏比极差且基本面亏损，建议等待股价回调至13.59元附近企稳或突破15.89元确认新趋势后再行介入。</span></a><a href="600714.SH.html" class="stock-link"><span class="code">600714.SH</span> <span class="name">青海金瑞矿业发展股份有限公司</span><span class="mini-summary">**观望**（等待股价回补至15.78附近或突破20.90均线后再做决策）。</span></a><a href="600183.SH.html" class="stock-link"><span class="code">600183.SH</span> <span class="name">广东生益科技股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于高位加速段，盈亏比极差，建议等待回调至关键支撑位（51.63或74.83）确认企稳后再行介入，切勿盲目追高。</span></a><a href="603931.SH.html" class="stock-link"><span class="code">603931.SH</span> <span class="name">杭州格林达电子材料股份有限公司</span><span class="mini-summary">**回避**（当前价格风险收益比极差，建议等待回调至26.88元附近再考虑介入）。</span></a><a href="600452.SH.html" class="stock-link"><span class="code">600452.SH</span> <span class="name">重庆涪陵电力实业股份有限公司</span><span class="mini-summary">**谨慎观望**（等待回调至10.84附近企稳或突破13.30后再做决策）。</span></a><a href="688143.SH.html" class="stock-link"><span class="code">688143.SH</span> <span class="name">武汉长盈通光电技术股份有限公司</span><span class="mini-summary">**观望**（当前处于高位加速末端，盈亏比极差，不宜追高，等待回调确认支撑后再做决策）。</span></a><a href="688130.SH.html" class="stock-link"><span class="code">688130.SH</span> <span class="name">杭州晶华微电子股份有限公司</span><span class="mini-summary">**观望**（等待回调至19.96附近再考虑介入，切勿在当前加速高位追涨）。</span></a><a href="688662.SH.html" class="stock-link"><span class="code">688662.SH</span> <span class="name">广东富信科技股份有限公司</span><span class="mini-summary">**谨慎观望**（建议等待回调至 56.17 附近或右侧突破信号出现后再行介入）。</span></a><a href="688689.SH.html" class="stock-link"><span class="code">688689.SH</span> <span class="name">常州银河世纪微电子股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于“加速赶顶”且“主力出货”的恶劣共振区间，建议等待股价回调至40日均线（37.68）或更深位置，并确认主力资金停止流出后再行介入。</span></a><a href="301362.SZ.html" class="stock-link"><span class="code">301362.SZ</span> <span class="name">深圳民爆光电股份有限公司</span><span class="mini-summary">**回避**（当前处于高位回调期，基本面恶化与资金背离，等待右侧反转信号）。</span></a><a href="301312.SZ.html" class="stock-link"><span class="code">301312.SZ</span> <span class="name">深圳市智立方自动化设备股份有限公司</span><span class="mini-summary">**观望**（当前处于下跌中继的加速段，盈亏比极差，需等待回调至113.50附近企稳后再行考虑）。</span></a><a href="300128.SZ.html" class="stock-link"><span class="code">300128.SZ</span> <span class="name">苏州锦富技术股份有限公司</span><span class="mini-summary">**谨慎观望**：基本面恶化与资金流出形成共振，当前处于高风险的顶部加速区，切勿因短期放量而盲目追高。</span></a><a href="300263.SZ.html" class="stock-link"><span class="code">300263.SZ</span> <span class="name">隆华科技集团(洛阳)股份有限公司</span><span class="mini-summary">**观望**：当前处于主力洗盘后的加速末端，盈亏比极差，建议耐心等待回调至9.27元附近再行介入。</span></a><a href="600000.SH.html" class="stock-link"><span class="code">600000.SH</span> <span class="name">上海浦东发展银行股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于下跌加速的末端而非底部，建议耐心等待第5笔结构走完及站稳40日均线后再行介入。</span></a><a href="600009.SH.html" class="stock-link"><span class="code">600009.SH</span> <span class="name">上海国际机场股份有限公司</span><span class="mini-summary">**谨慎观望**：建议等待股价回踩27.14附近确认支撑有效后，再结合放量信号进行低吸，切勿在当前加速段追高。</span></a><a href="600036.SH.html" class="stock-link"><span class="code">600036.SH</span> <span class="name">招商银行股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于下跌趋势中的低位震荡期，虽有主力吸筹迹象，但缺乏明确的反转信号，建议等待回踩37.97元支撑位企稳后再行布局。</span></a><a href="600276.SH.html" class="stock-link"><span class="code">600276.SH</span> <span class="name">江苏恒瑞医药股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于下跌趋势的中继阶段，虽有超跌迹象但主力未止跌，建议等待第5笔下跌结束或反弹确认后再做决策。</span></a><a href="600519.SH.html" class="stock-link"><span class="code">600519.SH</span> <span class="name">贵州茅台酒股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于“背驰 + 资金流出”的弱势震荡期，建议等待1375元支撑验证或40日均线突破后再行决策。</span></a><a href="600585.SH.html" class="stock-link"><span class="code">600585.SH</span> <span class="name">安徽海螺水泥股份有限公司</span><span class="mini-summary">**观望**（等待股价回踩19.71附近企稳或突破19.71后再做右侧交易，当前盈亏比虽理论有利但实战风险较高）。</span></a><a href="600887.SH.html" class="stock-link"><span class="code">600887.SH</span> <span class="name">内蒙古伊利实业集团股份有限公司</span><span class="mini-summary">**谨慎观望**：建议放弃当前26.27附近的追涨机会，耐心等待主力资金回补或股价回踩25.27支撑位企稳后再行布局。</span></a><a href="601318.SH.html" class="stock-link"><span class="code">601318.SH</span> <span class="name">中国平安保险(集团)股份有限公司</span><span class="mini-summary">**谨慎观望**（建议等待回调至56.33附近再行布局，避免在加速段追高）。</span></a><a href="601398.SH.html" class="stock-link"><span class="code">601398.SH</span> <span class="name">中国工商银行股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于下跌趋势的加速段，虽有低估值支撑，但缺乏右侧交易信号，建议等待突破40日均线后再行介入。</span></a><a href="603259.SH.html" class="stock-link"><span class="code">603259.SH</span> <span class="name">无锡药明康德新药开发股份有限公司</span><span class="mini-summary">- 建议仓位：不超过</span></a><a href="600050.SH.html" class="stock-link"><span class="code">600050.SH</span> <span class="name">中国联合网络通信股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于主力出货与散户接盘的博弈期，虽有技术面空间，但缺乏资金合力支撑，不宜盲目追涨。</span></a><a href="601012.SH.html" class="stock-link"><span class="code">601012.SH</span> <span class="name">隆基绿能科技股份有限公司</span><span class="mini-summary">**谨慎观望**（当前处于动能衰竭期，需等待方向选择或更优盈亏比信号）。</span></a><a href="600900.SH.html" class="stock-link"><span class="code">600900.SH</span> <span class="name">中国长江电力股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于“加速诱多”阶段，建议等待主力回补或股价回踩支撑位确认企稳后再行介入。</span></a><a href="000001.SZ.html" class="stock-link"><span class="code">000001.SZ</span> <span class="name">平安银行股份有限公司</span><span class="mini-summary">**谨慎观望**：等待主力资金回流确认后再行介入，切勿在当前高位盲目追涨。</span></a><a href="000002.SZ.html" class="stock-link"><span class="code">000002.SZ</span> <span class="name">万科企业股份有限公司</span><span class="mini-summary">**观望**（等待3.73支撑企稳或基本面出现实质性好转信号，切勿盲目抄底）。</span></a><a href="000063.SZ.html" class="stock-link"><span class="code">000063.SZ</span> <span class="name">中兴通讯股份有限公司</span><span class="mini-summary">**谨慎观望**（等待回调至32.59附近且资金面企稳后再做决策）。</span></a><a href="000333.SZ.html" class="stock-link"><span class="code">000333.SZ</span> <span class="name">美的集团股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于高位动能衰竭期，建议耐心等待回调至73.37元附近再行布局，切勿在高位追涨。</span></a><a href="000568.SZ.html" class="stock-link"><span class="code">000568.SZ</span> <span class="name">泸州老窖股份有限公司</span><span class="mini-summary">**积极关注**（建议利用当前低估值和主力流入信号，在91-92元区间进行左侧分批布局，博弈超跌反弹及后续业绩修复）。</span></a><a href="000651.SZ.html" class="stock-link"><span class="code">000651.SZ</span> <span class="name">珠海格力电器股份有限公司</span><span class="mini-summary">**谨慎观望**（建议等待回踩36.94元附近确认支撑后再做右侧交易，切勿在当前高位接飞刀）。</span></a><a href="000725.SZ.html" class="stock-link"><span class="code">000725.SZ</span> <span class="name">京东方科技集团股份有限公司</span><span class="mini-summary">**谨慎观望**（建议等待回调至3.87元附近再行布局，切勿在当前加速阶段追涨）。</span></a><a href="000858.SZ.html" class="stock-link"><span class="code">000858.SZ</span> <span class="name">宜宾五粮液股份有限公司</span><span class="mini-summary">**谨慎观望**：建议利用当前超跌区域进行观察，耐心等待股价回踩92.26附近确认支撑有效后再行介入，切勿在下跌趋势中急于抢反弹。</span></a><a href="002415.SZ.html" class="stock-link"><span class="code">002415.SZ</span> <span class="name">杭州海康威视数字技术股份有限公司</span><span class="mini-summary">**谨慎观望**（建议等待回调至30.26元附近且缩量企稳后再考虑介入，切勿在当前高位接飞刀）。</span></a><a href="002594.SZ.html" class="stock-link"><span class="code">002594.SZ</span> <span class="name">比亚迪股份有限公司</span><span class="mini-summary">**谨慎观望**（等待回调至97.98附近并确认资金回流后再做决策）。</span></a><a href="002714.SZ.html" class="stock-link"><span class="code">002714.SZ</span> <span class="name">牧原食品股份有限公司</span><span class="mini-summary">**谨慎观望**（等待40日均线附近的资金企稳信号，切勿盲目抄底）。</span></a><a href="002475.SZ.html" class="stock-link"><span class="code">002475.SZ</span> <span class="name">立讯精密工业股份有限公司</span><span class="mini-summary">**谨慎观望，逢低布局**：当前处于“下跌趋势中的中继调整”，虽然资金面显示主力在悄悄吸纳，但世界模型尚未给出明确的右侧反转信号，建议等待股价回踩40日均线（63.53）或下方支撑位（48.39）企稳后再行介入。</span></a><a href="000977.SZ.html" class="stock-link"><span class="code">000977.SZ</span> <span class="name">浪潮电子信息产业股份有限公司</span><span class="mini-summary">**谨慎观望**（当前价格不具备安全边际，需等待回调至56.70附近确认支撑后再行布局）。</span></a><a href="002049.SZ.html" class="stock-link"><span class="code">002049.SZ</span> <span class="name">紫光国芯微电子股份有限公司</span><span class="mini-summary">**谨慎观望**，建议等待回调至64.92元附近再行介入，切勿在当前高位盲目追涨。</span></a><a href="300750.SZ.html" class="stock-link"><span class="code">300750.SZ</span> <span class="name">宁德时代新能源科技股份有限公司</span><span class="mini-summary">**观望**（当前处于下跌趋势未结束阶段，且主力资金持续流出，建议等待股价企稳或突破40日均线后再行决策）。</span></a><a href="300059.SZ.html" class="stock-link"><span class="code">300059.SZ</span> <span class="name">东方财富信息股份有限公司</span><span class="mini-summary">**谨慎观望**：当前处于下跌趋势中的动能衰竭期，虽然模型显示上方空间大，但资金面的持续流出和极高的负债率构成了实质性风险，建议等待股价回踩18.45或17.90区域确认支撑有效后再做决策。</span></a><a href="300760.SZ.html" class="stock-link"><span class="code">300760.SZ</span> <span class="name">深圳迈瑞生物医疗电子股份有限公司</span><span class="mini-summary">**谨慎观望**（等待回调至156.30附近企稳后再行介入，切勿在当前加速阶段追高）。</span></a><a href="300015.SZ.html" class="stock-link"><span class="code">300015.SZ</span> <span class="name">爱尔眼科医院集团股份有限公司</span><span class="mini-summary">**谨慎观望，等待回调至9.60元附近企稳后再行轻仓试错。**</span></a><a href="688981.SH.html" class="stock-link"><span class="code">688981.SH</span> <span class="name">中芯国际集成电路制造有限公司</span><span class="mini-summary">**观望**：当前处于下跌趋势中的抵抗阶段，盈亏比极差，建议等待明确的底部结构形成或估值回落至合理区间后再行介入。</span></a><a href="688041.SH.html" class="stock-link"><span class="code">688041.SH</span> <span class="name">海光信息技术股份有限公司</span><span class="mini-summary">**谨慎观望**（建议等待回调至213.27附近再评估入场机会）。</span></a><a href="688256.SH.html" class="stock-link"><span class="code">688256.SH</span> <span class="name">中科寒武纪科技股份有限公司</span><span class="mini-summary">**谨慎观望，等待983元支撑确认后的右侧信号，切勿在当前位置盲目追高。**</span></a></div></div>
+
+  <div class="footer">
+    生成时间: 2026-05-25 13:52 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
+</div>
+
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>

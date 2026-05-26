@@ -34,6 +34,8 @@
             
         </ul>
         <ul class="market-links">
+            <li><a class="market-btn" href="../../news/index.html" style="background:#9c27b0;color:#fff">早盘必读</a></li>
+            <li><a class="market-btn" href="../../analyzer/search.html" style="background:#f0883e;color:#fff">🔍个股分析</a></li>
             <li><a class="market-btn" href="../../sh/index.html">SH</a></li>
             <li><a class="market-btn" href="../../kc/index.html">KC</a></li>
             <li><a class="market-btn" href="../../cy/index.html">CY</a></li>
@@ -46,7 +48,7 @@
     <h1>2026-04-13 选股详情</h1>
     <div>
         
-        <a href="../days/2026-04-09.html" role="button" class="outline">&laquo; 2026-04-09</a>
+        <a href="../days/2026-04-10.html" role="button" class="outline">&laquo; 2026-04-10</a>
         
         
         <a href="../days/2026-04-14.html" role="button" class="outline">2026-04-14 &raquo;</a>
@@ -63,17 +65,17 @@
         </div>
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">指数涨幅</span><br>
-            <span style="font-size:1.1rem;color:#00e676">+0.26%</span>
+            <span style="font-size:1.1rem;color:#00e676">+0.28%</span>
         </div>
         
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">涨跌比</span><br>
-            <span style="font-size:1.1rem">1351/1465</span>
+            <span style="font-size:1.1rem">1343/1453</span>
             <span style="color:var(--text-secondary);font-size:0.8rem">(47%)</span>
         </div>
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">涨停/跌停</span><br>
-            <span style="font-size:1.1rem;color:#00e676">42</span>
+            <span style="font-size:1.1rem;color:#00e676">43</span>
             /
             <span style="font-size:1.1rem;color:#ff5252">8</span>
         </div>
@@ -125,7 +127,7 @@
 
 <h2 class="section-title">OBV涨停梦</h2>
 
-<div class="trading-method">信号日收盘买入 → 次日高点达5%目标价卖出，否则次日收盘卖出。不设止损（波动大，-3%容易被洗出）。3天内同一只股不重复买入</div>
+<div class="trading-method">捕捉 OBV 突破 + 量能激增的资金加速介入信号，期望短期继续上冲。</div>
 
 
 <p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
@@ -135,7 +137,7 @@
 
 <h2 class="section-title">蛰伏涨停</h2>
 
-<div class="trading-method">回收确认信号日收盘买入，持有数天等待涨停或大涨。状态机检测延迟回收，信号稀少但历史胜率极高（94.6%）</div>
+<div class="trading-method">状态机检测「横盘蛰伏 → 缩量涨停 → 回踩 → 延迟回收」形态。从 32,997 个涨停事件中挖出的形态模板，历史胜率 94.6%。</div>
 
 
 <p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
@@ -145,7 +147,17 @@
 
 <h2 class="section-title">倍阴回收</h2>
 
-<div class="trading-method">第3天回收确认信号日收盘买入，持有5天等待涨停或大涨。适合中线持有（5日涨停率27%），非次日短线策略</div>
+<div class="trading-method">横盘 22+ 日 → 缩量涨停突破 → 倍量阴线洗盘 → 回收确认 + 无下影线。挖出 66 个信号中 27% 在 5 日内涨停，均最大涨幅 10%。</div>
+
+
+<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
+
+
+
+
+<h2 class="section-title">跳空涨停基因</h2>
+
+<div class="trading-method">跳空高开不回补 + 收盘位 ≥0.7 + 近 10 日有涨停的三重共振，筛选买盘极强的突破点。</div>
 
 
 <div class="overflow-auto">
@@ -160,20 +172,28 @@
             <th class="num">量比7d</th>
             <th class="num">ADX</th>
             
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
             <th>信号诊断</th>
         </tr>
     </thead>
     <tbody>
         
         <tr>
-            <td><a href="../stock/002181.html">002181</a></td>
-            <td class="num">12.82</td>
-            <td class="num text-green arrow-up">1.99%</td>
-            <td class="num">152.6</td>
-            <td class="num">20303708</td>
-            <td class="num">57.5</td>
-            <td class="num">28.0</td>
+            <td><a href="../stock/001309.html">001309</a></td>
+            <td class="num">481.49</td>
+            <td class="num text-green arrow-up">7.66%</td>
+            <td class="num">247.5</td>
+            <td class="num">8907722</td>
+            <td class="num">45.3</td>
+            <td class="num">51.5</td>
             
+            <td class="num text-green">3.98%</td>
+            <td class="num text-green">4.09%</td>
+            <td class="num text-green">11.74%</td>
+            <td></td>
             <td>
                 
                 -
@@ -188,19 +208,9 @@
 
 
 
-<h2 class="section-title">跳空涨停基因</h2>
-
-<div class="trading-method">信号日收盘买入 → 持有最多3天，期间高点达7%目标价即卖出，跌破-3%止损即卖出，第3天收盘强制卖出。多日持有让突破行情充分展开</div>
-
-
-<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
-
-
-
-
 <h2 class="section-title">缩量突破</h2>
 
-<div class="trading-method">信号日收盘买入 → 持有最多3天，期间高点达7%目标价即卖出，第3天收盘强制卖出。不设止损（突破后常先回撤再拉升，止损容易被洗）。D+3持有让SZ从亏损翻盈，SH利润暴增260%</div>
+<div class="trading-method">缩量回调（≤70% 均量）→ 放量突破 10 日高（≥1.5 倍）+ 收盘位 ≥0.8 + CCI>50，过滤 60 日新高。期望突破后 2~3 日确认行情。</div>
 
 
 <p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
@@ -210,7 +220,7 @@
 
 <h2 class="section-title">群龙夺宝</h2>
 
-<div class="trading-method">信号日收盘买入 → 持有最多5天，期间高点达7%目标价即卖出，跌破-5%止损即卖出，第5天收盘强制卖出。5天持有等待主升浪启动，5日涨停率30%+</div>
+<div class="trading-method">横盘平台内 ≥2 次涨停 + 阳成团阴分散 + 红肥绿瘦 + 放量突破颈线（≥2 倍均量），等待主升浪启动。</div>
 
 
 <p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
@@ -220,7 +230,7 @@
 
 <h2 class="section-title">妖股起涨</h2>
 
-<div class="trading-method">信号日收盘买入 → 持有最多5天，期间高点达7%目标价即卖出，跌破-7%止损即卖出，第5天收盘强制卖出。3天内同一只股不重复买入。妖股需要更宽的止损空间</div>
+<div class="trading-method">底部箱体 ≥20 天（振幅 ≤30%）+ 跳空放量涨停突破 + 低价 ≤15 元 + 流通市值 <50 亿 + 箱体内量能波动 + 信号日量比 <3x。作手「腰鼓」战法。</div>
 
 
 <div class="overflow-auto">
@@ -235,6 +245,10 @@
             <th class="num">量比7d</th>
             <th class="num">ADX</th>
             
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
             <th>信号诊断</th>
         </tr>
     </thead>
@@ -244,11 +258,35 @@
             <td><a href="../stock/000978.html">000978</a></td>
             <td class="num">7.82</td>
             <td class="num text-red arrow-down">-1.14%</td>
-            <td class="num">108.4</td>
-            <td class="num">6129109</td>
-            <td class="num">59.6</td>
-            <td class="num">25.9</td>
+            <td class="num">62.9</td>
+            <td class="num">15193233</td>
+            <td class="num">54.1</td>
+            <td class="num">27.9</td>
             
+            <td class="num text-green">2.3%</td>
+            <td class="num text-green">3.96%</td>
+            <td class="num text-green">10.74%</td>
+            <td></td>
+            <td>
+                
+                -
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td><a href="../stock/002663.html">002663</a></td>
+            <td class="num">2.38</td>
+            <td class="num text-green arrow-up">0.85%</td>
+            <td class="num">53.3</td>
+            <td class="num">7553565</td>
+            <td class="num">54.6</td>
+            <td class="num">17.8</td>
+            
+            <td class="num text-red">-2.94%</td>
+            <td class="num text-red">-9.24%</td>
+            <td class="num text-green">0.84%</td>
+            <td></td>
             <td>
                 
                 -
@@ -266,7 +304,13 @@
     </main>
 
     <footer>
-        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-05-25 17:19 | 仅供研究参考</p>
+        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-05-25 12:52 | 仅供研究参考</p>
+        <p style="font-size:0.75em;opacity:0.6">
+            build 18a3d269 · 
+            data_as_of 2026-05-25 · 
+            backtest_window 250d · 
+            <a href="../../methodology.html" style="color:inherit">方法论</a>
+        </p>
     </footer>
 
     

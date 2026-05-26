@@ -34,6 +34,8 @@
             
         </ul>
         <ul class="market-links">
+            <li><a class="market-btn" href="../../news/index.html" style="background:#9c27b0;color:#fff">早盘必读</a></li>
+            <li><a class="market-btn" href="../../analyzer/search.html" style="background:#f0883e;color:#fff">🔍个股分析</a></li>
             <li><a class="market-btn" href="../../sz/index.html">SZ</a></li>
             <li><a class="market-btn" href="../../kc/index.html">KC</a></li>
             <li><a class="market-btn" href="../../cy/index.html">CY</a></li>
@@ -43,12 +45,85 @@
     <main class="container">
         
 <h1>群龙夺宝</h1>
-<p style="color:var(--text-secondary)">横盘平台内≥2涨停 + 阳成团阴分散 + 红肥绿瘦 + 放量突破颈线(≥2倍均量) （仅上海主板）—— 持有5天，不设止损（SH无止损PF最优）</p>
+<p style="color:var(--text-secondary)">横盘平台内≥2涨停 + 阳成团阴分散 + 红肥绿瘦 + 放量突破颈线(≥2倍均量) （仅上海主板）—— 持有5天，不设止损（SH无止损PF最优）。</p>
+
+<div style="background:#1a2332;border-left:3px solid #4C8DFF;padding:0.5rem 0.8rem;margin:0.8rem 0;font-size:0.82rem;color:var(--text-secondary)">
+    执行口径：D+1 next_open 买入，目标价/止损/持仓到期任一触发即卖出
+</div>
 
 
 <div class="trading-method-box">
-    <strong>交易方针：</strong>信号日收盘买入 → 持有最多5天，期间高点达7%目标价即卖出，第5天收盘强制卖出。SH不设止损（无止损PF最优）
+    <strong>交易方针：</strong>横盘平台内 ≥2 次涨停 + 阳成团阴分散 + 红肥绿瘦 + 放量突破颈线（上海主板），等待主升浪启动（SH 不设止损）。
+    <span style="display:block;font-size:0.75rem;opacity:0.55;margin-top:0.2rem">↑ 信号意图（人工撰写）</span>
 </div>
+
+
+<div class="trading-method-box" style="border-color:#69f0ae;margin-top:0.4rem">
+    <strong style="color:#69f0ae">执行参数：</strong>D 日出信号 → D+1 开盘买入；目标 +7%；不设止损；最长持仓 5 个交易日（到期收盘强卖）；3 日 cooldown（同股不重复买入）。
+    <span style="display:block;font-size:0.75rem;opacity:0.55;margin-top:0.2rem">↑ 自动从 STRATEGY_TARGET_PCT / HOLD_DAYS / STOP_LOSS / COOLDOWN 渲染</span>
+</div>
+
+
+<details style="margin:0.3rem 0 0.6rem 0">
+    <summary style="cursor:pointer;font-size:0.82rem;color:var(--text-secondary)">为什么持仓 5 个交易日？（2026-05-11 exit 参数 sweep 证据）</summary>
+    <div style="font-size:0.78rem;padding:0.4rem 0">
+        固定 目标 +7% / 止损 不设止损 / cooldown 3d，回测窗口 250 交易日，扫 hold 1~5（含 万三佣金 + 千一印花税 + 千一滑点）：
+        <div class="overflow-auto" style="margin:0.4rem 0">
+        <table>
+            <thead><tr><th>持仓</th><th class="num">交易数</th><th class="num">PF</th><th class="num">胜率</th><th class="num">中位收益</th><th class="num">≤-5%尾部</th></tr></thead>
+            <tbody>
+            
+                <tr>
+                    <td>D+1</td>
+                    <td class="num">111</td>
+                    <td class="num">0.6</td>
+                    <td class="num">40.5%</td>
+                    <td class="num text-red">-0.74%</td>
+                    <td class="num">12.6%</td>
+                </tr>
+            
+                <tr>
+                    <td>D+2</td>
+                    <td class="num">108</td>
+                    <td class="num">0.59</td>
+                    <td class="num">50.9%</td>
+                    <td class="num text-green">0.57%</td>
+                    <td class="num">19.4%</td>
+                </tr>
+            
+                <tr>
+                    <td>D+3</td>
+                    <td class="num">108</td>
+                    <td class="num">0.72</td>
+                    <td class="num">56.5%</td>
+                    <td class="num text-green">1.66%</td>
+                    <td class="num">20.4%</td>
+                </tr>
+            
+                <tr>
+                    <td>D+4</td>
+                    <td class="num">107</td>
+                    <td class="num">0.83</td>
+                    <td class="num">58.9%</td>
+                    <td class="num text-green">2.11%</td>
+                    <td class="num">27.1%</td>
+                </tr>
+            
+                <tr style="background:rgba(105,240,174,0.10)">
+                    <td>D+5 ←当前</td>
+                    <td class="num">107</td>
+                    <td class="num">0.77</td>
+                    <td class="num">59.8%</td>
+                    <td class="num text-green">2.18%</td>
+                    <td class="num">28.0%</td>
+                </tr>
+            
+            </tbody>
+        </table>
+        </div>
+        <span style="opacity:0.55">当前配置 5 段 walk-forward PF（每段约 50 交易日）: [0.78, 1.86, 0.3, 1.59, 0.22]。完整 sweep（80 组：hold×target×stop×cooldown）: <code>research/winner_loser/tables/exit_param_sweep_sh.csv</code>。选取规则见 <a href="../../methodology.html">方法论</a> 及 <code>plans/EXIT_PARAMETER_AUDIT_PLAN.md</code>。</span>
+    </div>
+</details>
 
 
 
@@ -99,25 +174,25 @@
 
 
 
-<h2 class="section-title">信号表现详析（全期 74 笔，日均 0.1）</h2>
+<h2 class="section-title">信号表现详析（近 63 个交易日（2026-02-11 → 2026-05-22） · 16 笔 · 日均 0.3）</h2>
 
 
 <h3 style="margin-top:1.5rem;color:var(--text-secondary)">D+1 收益率分布</h3>
 <div class="metric-grid">
     <div class="metric">
-        <div class="value text-red">-0.49%</div>
+        <div class="value text-green">0.12%</div>
         <div class="label">D+1 均值</div>
     </div>
     <div class="metric">
-        <div class="value text-red">-1.19%</div>
+        <div class="value text-red">-1.14%</div>
         <div class="label">D+1 中位数</div>
     </div>
     <div class="metric">
-        <div class="value">35.1%</div>
+        <div class="value">37.5%</div>
         <div class="label">D+1 胜率</div>
     </div>
     <div class="metric">
-        <div class="value">8.1%</div>
+        <div class="value">6.2%</div>
         <div class="label">D+1 涨停率</div>
     </div>
 </div>
@@ -129,11 +204,11 @@
     <tbody>
         <tr>
             <td>信号占比</td>
-            <td class="num">20.3%</td>
-            <td class="num">10.8%</td>
-            <td class="num">9.5%</td>
-            <td class="num">4.1%</td>
-            <td class="num text-red">12.2%</td>
+            <td class="num">12.5%</td>
+            <td class="num">12.5%</td>
+            <td class="num">12.5%</td>
+            <td class="num">6.2%</td>
+            <td class="num text-red">0.0%</td>
         </tr>
     </tbody>
 </table>
@@ -143,32 +218,32 @@
 <h3 style="margin-top:1.5rem;color:var(--text-secondary)">涨停率分析</h3>
 <div class="metric-grid">
     <div class="metric">
-        <div class="value text-green">27.0%</div>
+        <div class="value text-green">12.5%</div>
         <div class="label">5日涨停率</div>
     </div>
     
     <div class="metric">
-        <div class="value">8.1%</div>
+        <div class="value">6.2%</div>
         <div class="label">D+1 涨停</div>
     </div>
     
     <div class="metric">
-        <div class="value">8.1%</div>
+        <div class="value">0.0%</div>
         <div class="label">D+2 涨停</div>
     </div>
     
     <div class="metric">
-        <div class="value">10.8%</div>
+        <div class="value">6.2%</div>
         <div class="label">D+3 涨停</div>
     </div>
     
     <div class="metric">
-        <div class="value">6.8%</div>
+        <div class="value">0.0%</div>
         <div class="label">D+4 涨停</div>
     </div>
     
     <div class="metric">
-        <div class="value">8.1%</div>
+        <div class="value">0.0%</div>
         <div class="label">D+5 涨停</div>
     </div>
     
@@ -178,27 +253,27 @@
 <h3 style="margin-top:1.5rem;color:var(--text-secondary)">5日最大涨幅分布</h3>
 <div class="metric-grid">
     <div class="metric">
-        <div class="value text-green">10.5%</div>
+        <div class="value text-green">6.6%</div>
         <div class="label">max5d 均值</div>
     </div>
     <div class="metric">
-        <div class="value">7.0%</div>
+        <div class="value">5.6%</div>
         <div class="label">max5d 中位</div>
     </div>
     <div class="metric">
-        <div class="value">58.1%</div>
+        <div class="value">56.2%</div>
         <div class="label">≥5% 概率</div>
     </div>
     <div class="metric">
-        <div class="value">36.5%</div>
+        <div class="value">25.0%</div>
         <div class="label">≥10% 概率</div>
     </div>
     <div class="metric">
-        <div class="value">24.3%</div>
+        <div class="value">12.5%</div>
         <div class="label">≥15% 概率</div>
     </div>
     <div class="metric">
-        <div class="value">17.6%</div>
+        <div class="value">6.2%</div>
         <div class="label">≥20% 概率</div>
     </div>
 </div>
@@ -222,47 +297,47 @@
         
         <tr>
             <td>D+1</td>
-            <td class="num text-red">-0.5%</td>
-            <td class="num text-red">-1.2%</td>
-            <td class="num">35.0%</td>
-            <td class="num">10.8%</td>
-            <td class="num">4.1%</td>
+            <td class="num text-green">0.1%</td>
+            <td class="num text-red">-1.1%</td>
+            <td class="num">38.0%</td>
+            <td class="num">12.5%</td>
+            <td class="num">6.2%</td>
         </tr>
         
         <tr>
             <td>D+2</td>
-            <td class="num text-green">0.7%</td>
             <td class="num text-red">-0.6%</td>
-            <td class="num">45.0%</td>
-            <td class="num">20.3%</td>
-            <td class="num">9.5%</td>
+            <td class="num text-red">-0.9%</td>
+            <td class="num">44.0%</td>
+            <td class="num">18.8%</td>
+            <td class="num">6.2%</td>
         </tr>
         
         <tr>
             <td>D+3</td>
-            <td class="num text-green">1.8%</td>
-            <td class="num text-green">0.6%</td>
-            <td class="num">54.0%</td>
-            <td class="num">24.3%</td>
-            <td class="num">14.9%</td>
+            <td class="num text-red">-0.4%</td>
+            <td class="num text-red">-0.4%</td>
+            <td class="num">50.0%</td>
+            <td class="num">18.8%</td>
+            <td class="num">6.2%</td>
         </tr>
         
         <tr>
             <td>D+4</td>
-            <td class="num text-green">2.1%</td>
-            <td class="num text-green">0.2%</td>
-            <td class="num">51.0%</td>
-            <td class="num">28.4%</td>
-            <td class="num">20.3%</td>
+            <td class="num text-red">-1.1%</td>
+            <td class="num text-red">-0.5%</td>
+            <td class="num">50.0%</td>
+            <td class="num">18.8%</td>
+            <td class="num">6.2%</td>
         </tr>
         
         <tr>
             <td>D+5</td>
-            <td class="num text-green">1.8%</td>
-            <td class="num text-red">-0.5%</td>
-            <td class="num">45.0%</td>
-            <td class="num">23.0%</td>
-            <td class="num">17.6%</td>
+            <td class="num text-red">-1.3%</td>
+            <td class="num text-red">-1.8%</td>
+            <td class="num">31.0%</td>
+            <td class="num">12.5%</td>
+            <td class="num">12.5%</td>
         </tr>
         
     </tbody>
@@ -272,52 +347,52 @@
 
 
 
-<h3 style="margin-top:1.5rem;color:var(--text-secondary)">盈亏比（全期）</h3>
+<h3 style="margin-top:1.5rem;color:var(--text-secondary)">盈亏比（近 63 个交易日（2026-02-11 → 2026-05-22））</h3>
 <div class="metric-grid">
     <div class="metric">
-        <div class="value text-red">0.72</div>
-        <div class="label">PF@5% (WR 27.0%)</div>
+        <div class="value text-red">0.71</div>
+        <div class="label">PF@5% (WR 12.5%)</div>
     </div>
     <div class="metric">
-        <div class="value text-red">0.79</div>
-        <div class="label">PF@7% (WR 18.9%)</div>
+        <div class="value text-red">0.93</div>
+        <div class="label">PF@7% (WR 12.5%)</div>
     </div>
 </div>
 
 
 
-<h2 class="section-title">回测指标（近30日）</h2>
+<h2 class="section-title">回测指标（近 250 个交易日（2025-05-13 → 2026-05-22））</h2>
 <div class="metric-grid">
     <div class="metric">
-        <div class="value">74</div>
+        <div class="value">109</div>
         <div class="label">总交易</div>
     </div>
     <div class="metric">
-        <div class="value">56.8%</div>
+        <div class="value">61.5%</div>
         <div class="label">胜率</div>
     </div>
     <div class="metric">
-        <div class="value">28.4%</div>
-        <div class="label">涨停率</div>
+        <div class="value">21.1%</div>
+        <div class="label" title="所有交易中，持仓期内股票任一天触及涨停价的比例。市场事实指标，不代表策略卖在涨停价 —— 详见交易明细「退出」列。">持仓内涨停率</div>
     </div>
     <div class="metric">
-        <div class="value">1.28</div>
+        <div class="value">0.95</div>
         <div class="label">盈亏比</div>
     </div>
     <div class="metric">
-        <div class="value text-red">-10.5%</div>
+        <div class="value text-red">-39.5%</div>
         <div class="label">累计收益</div>
     </div>
     <div class="metric">
-        <div class="value">0.31</div>
+        <div class="value">-1.1</div>
         <div class="label">夏普比率</div>
     </div>
     <div class="metric">
-        <div class="value">0.5</div>
+        <div class="value">-1.78</div>
         <div class="label">索提诺</div>
     </div>
     <div class="metric">
-        <div class="value text-red">-50.4%</div>
+        <div class="value text-red">-54.9%</div>
         <div class="label">最大回撤</div>
     </div>
 </div>
@@ -331,71 +406,1366 @@
 
 
 
-<h2 class="section-title">交易明细</h2>
+<h2 class="section-title">交易明细（近 250 个交易日（2025-05-13 → 2026-05-22），共 109 笔）</h2>
+<p style="font-size:0.78rem;color:var(--text-secondary);margin:0.2rem 0 0.4rem 0">
+    执行口径：next_open 买入；卖出按目标价 / 止损 / 持仓到期触发；净收益已扣 万三佣金 + 千一印花税 + 千一滑点。与上方 KPI 卡片一致。
+</p>
+<div style="margin:0.4rem 0 0.6rem 0;font-size:0.85rem">
+    <label><input type="radio" name="trade-filter" value="all" checked> 全部</label>
+    <label style="margin-left:1rem"><input type="radio" name="trade-filter" value="recent"> 仅近 30 个交易日</label>
+</div>
 <div class="overflow-auto">
-<table>
+<table id="trade-detail-table">
     <thead>
         <tr>
-            <th>买入日期</th>
-            <th>卖出日期</th>
+            <th title="信号产生日（D 日，收盘后筛选）">信号日</th>
+            <th>卖出日</th>
             <th>代码</th>
-            <th class="num">买入价</th>
+            <th class="num" title="D+1 开盘价为基准，经买入滑点（×1.001）后封顶于 D+1 涨停价（A 股硬约束：买入价 ≤ 涨停价）">买入价</th>
             <th class="num">卖出价</th>
-            <th class="num">次日涨幅</th>
-            <th>达标</th>
-            <th>涨停</th>
+            <th class="num" title="扣除万三佣金 + 千一印花税 + 千一滑点后的净收益">净收益%</th>
+            <th title="是否触达本策略目标价">达标</th>
+            <th title="持仓期内是否触及涨停。市场事实，与策略卖出价无关。若想看是否真卖在涨停，看「退出」列是否 lu_close / limit_up_extend">持仓内涨停</th>
+            <th title="退出原因（target / stop / timed / limit_up_extend）">退出</th>
         </tr>
     </thead>
     <tbody>
         
-        <tr>
+        <tr data-recent="0">
+            <td>2025-05-15</td>
+            <td>2025-05-22</td>
+            <td><span class="orphan-code" title="信号日 2025-05-15 在 30 日窗口外，未生成详情页">600370</span></td>
+            <td class="num">2.1</td>
+            <td class="num">1.95</td>
+            <td class="num text-red arrow-down">-7.48%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-05-19</td>
+            <td>2025-05-26</td>
+            <td><span class="orphan-code" title="信号日 2025-05-19 在 30 日窗口外，未生成详情页">600397</span></td>
+            <td class="num">5.96</td>
+            <td class="num">5.47</td>
+            <td class="num text-red arrow-down">-8.23%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-05-29</td>
+            <td>2025-06-06</td>
+            <td><span class="orphan-code" title="信号日 2025-05-29 在 30 日窗口外，未生成详情页">600805</span></td>
+            <td class="num">5.49</td>
+            <td class="num">5.17</td>
+            <td class="num text-red arrow-down">-6.08%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-05</td>
+            <td>2025-06-12</td>
+            <td><span class="orphan-code" title="信号日 2025-06-05 在 30 日窗口外，未生成详情页">603595</span></td>
+            <td class="num">19.47</td>
+            <td class="num">19.59</td>
+            <td class="num text-green arrow-up">0.46%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-05</td>
+            <td>2025-06-10</td>
+            <td><span class="orphan-code" title="信号日 2025-06-05 在 30 日窗口外，未生成详情页">603823</span></td>
+            <td class="num">11.47</td>
+            <td class="num">12.42</td>
+            <td class="num text-green arrow-up">8.11%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-06</td>
+            <td>2025-06-10</td>
+            <td><span class="orphan-code" title="信号日 2025-06-06 在 30 日窗口外，未生成详情页">600751</span></td>
+            <td class="num">3.26</td>
+            <td class="num">3.59</td>
+            <td class="num text-green arrow-up">9.7%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-06</td>
+            <td>2025-06-13</td>
+            <td><span class="orphan-code" title="信号日 2025-06-06 在 30 日窗口外，未生成详情页">603083</span></td>
+            <td class="num">44.87</td>
+            <td class="num">44.6</td>
+            <td class="num text-red arrow-down">-0.76%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-09</td>
+            <td>2025-06-10</td>
+            <td><span class="orphan-code" title="信号日 2025-06-09 在 30 日窗口外，未生成详情页">603680</span></td>
+            <td class="num">11.72</td>
+            <td class="num">12.67</td>
+            <td class="num text-green arrow-up">8.0%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-16</td>
+            <td>2025-06-23</td>
+            <td><span class="orphan-code" title="信号日 2025-06-16 在 30 日窗口外，未生成详情页">605167</span></td>
+            <td class="num">13.06</td>
+            <td class="num">11.82</td>
+            <td class="num text-red arrow-down">-9.68%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-17</td>
+            <td>2025-06-18</td>
+            <td><span class="orphan-code" title="信号日 2025-06-17 在 30 日窗口外，未生成详情页">603716</span></td>
+            <td class="num">13.29</td>
+            <td class="num">13.56</td>
+            <td class="num text-green arrow-up">1.82%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-06-24</td>
+            <td>2025-06-26</td>
+            <td><span class="orphan-code" title="信号日 2025-06-24 在 30 日窗口外，未生成详情页">600666</span></td>
+            <td class="num">2.95</td>
+            <td class="num">3.19</td>
+            <td class="num text-green arrow-up">7.79%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-09</td>
+            <td>2025-07-16</td>
+            <td><span class="orphan-code" title="信号日 2025-07-09 在 30 日窗口外，未生成详情页">603533</span></td>
+            <td class="num">22.27</td>
+            <td class="num">21.37</td>
+            <td class="num text-red arrow-down">-4.21%</td>
+            <td></td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-09</td>
+            <td>2025-07-16</td>
+            <td><span class="orphan-code" title="信号日 2025-07-09 在 30 日窗口外，未生成详情页">603800</span></td>
+            <td class="num">28.66</td>
+            <td class="num">26.64</td>
+            <td class="num text-red arrow-down">-7.18%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-11</td>
+            <td>2025-07-14</td>
+            <td><span class="orphan-code" title="信号日 2025-07-11 在 30 日窗口外，未生成详情页">600678</span></td>
+            <td class="num">9.28</td>
+            <td class="num">9.5</td>
+            <td class="num text-green arrow-up">2.18%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-14</td>
+            <td>2025-07-16</td>
+            <td><span class="orphan-code" title="信号日 2025-07-14 在 30 日窗口外，未生成详情页">603863</span></td>
+            <td class="num">15.55</td>
+            <td class="num">15.97</td>
+            <td class="num text-green arrow-up">2.56%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-18</td>
+            <td>2025-07-21</td>
+            <td><a href="../stock/600111.html">600111</a></td>
+            <td class="num">33.03</td>
+            <td class="num">34.64</td>
+            <td class="num text-green arrow-up">4.71%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-22</td>
+            <td>2025-07-29</td>
+            <td><span class="orphan-code" title="信号日 2025-07-22 在 30 日窗口外，未生成详情页">600802</span></td>
+            <td class="num">5.73</td>
+            <td class="num">5.36</td>
+            <td class="num text-red arrow-down">-6.46%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-22</td>
+            <td>2025-07-23</td>
+            <td><span class="orphan-code" title="信号日 2025-07-22 在 30 日窗口外，未生成详情页">601005</span></td>
+            <td class="num">1.68</td>
+            <td class="num">1.73</td>
+            <td class="num text-green arrow-up">2.98%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-28</td>
+            <td>2025-07-31</td>
+            <td><span class="orphan-code" title="信号日 2025-07-28 在 30 日窗口外，未生成详情页">601595</span></td>
+            <td class="num">35.97</td>
+            <td class="num">37.03</td>
+            <td class="num text-green arrow-up">2.77%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-28</td>
+            <td>2025-08-04</td>
+            <td><a href="../stock/603725.html">603725</a></td>
+            <td class="num">9.84</td>
+            <td class="num">9.9</td>
+            <td class="num text-green arrow-up">0.45%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-28</td>
+            <td>2025-08-04</td>
+            <td><a href="../stock/603922.html">603922</a></td>
+            <td class="num">22.17</td>
+            <td class="num">21.38</td>
+            <td class="num text-red arrow-down">-3.73%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-07-31</td>
+            <td>2025-08-06</td>
+            <td><span class="orphan-code" title="信号日 2025-07-31 在 30 日窗口外，未生成详情页">600410</span></td>
+            <td class="num">11.17</td>
+            <td class="num">12.02</td>
+            <td class="num text-green arrow-up">7.39%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-01</td>
+            <td>2025-08-08</td>
+            <td><span class="orphan-code" title="信号日 2025-08-01 在 30 日窗口外，未生成详情页">600828</span></td>
+            <td class="num">4.8</td>
+            <td class="num">4.17</td>
+            <td class="num text-red arrow-down">-13.44%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-04</td>
+            <td>2025-08-05</td>
+            <td><span class="orphan-code" title="信号日 2025-08-04 在 30 日窗口外，未生成详情页">603712</span></td>
+            <td class="num">22.32</td>
+            <td class="num">23.27</td>
+            <td class="num text-green arrow-up">4.06%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-07</td>
+            <td>2025-08-08</td>
+            <td><span class="orphan-code" title="信号日 2025-08-07 在 30 日窗口外，未生成详情页">605378</span></td>
+            <td class="num">24.07</td>
+            <td class="num">26.22</td>
+            <td class="num text-green arrow-up">8.75%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-11</td>
+            <td>2025-08-13</td>
+            <td><span class="orphan-code" title="信号日 2025-08-11 在 30 日窗口外，未生成详情页">603399</span></td>
+            <td class="num">10.52</td>
+            <td class="num">10.81</td>
+            <td class="num text-green arrow-up">2.63%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-14</td>
+            <td>2025-08-15</td>
+            <td><span class="orphan-code" title="信号日 2025-08-14 在 30 日窗口外，未生成详情页">603617</span></td>
+            <td class="num">9.09</td>
+            <td class="num">10.07</td>
+            <td class="num text-green arrow-up">10.6%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-18</td>
+            <td>2025-08-19</td>
+            <td><span class="orphan-code" title="信号日 2025-08-18 在 30 日窗口外，未生成详情页">600592</span></td>
+            <td class="num">25.06</td>
+            <td class="num">26.9</td>
+            <td class="num text-green arrow-up">7.18%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-18</td>
+            <td>2025-08-20</td>
+            <td><a href="../stock/603002.html">603002</a></td>
+            <td class="num">8.2</td>
+            <td class="num">8.75</td>
+            <td class="num text-green arrow-up">6.57%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-19</td>
+            <td>2025-08-21</td>
+            <td><span class="orphan-code" title="信号日 2025-08-19 在 30 日窗口外，未生成详情页">603601</span></td>
+            <td class="num">5.98</td>
+            <td class="num">6.19</td>
+            <td class="num text-green arrow-up">3.26%</td>
+            <td></td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-21</td>
+            <td>2025-08-28</td>
+            <td><span class="orphan-code" title="信号日 2025-08-21 在 30 日窗口外，未生成详情页">600805</span></td>
+            <td class="num">6.0</td>
+            <td class="num">5.57</td>
+            <td class="num text-red arrow-down">-7.3%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-26</td>
+            <td>2025-08-27</td>
+            <td><span class="orphan-code" title="信号日 2025-08-26 在 30 日窗口外，未生成详情页">600126</span></td>
+            <td class="num">10.79</td>
+            <td class="num">11.09</td>
+            <td class="num text-green arrow-up">2.57%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-28</td>
+            <td>2025-09-01</td>
+            <td><span class="orphan-code" title="信号日 2025-08-28 在 30 日窗口外，未生成详情页">600211</span></td>
+            <td class="num">45.64</td>
+            <td class="num">48.01</td>
+            <td class="num text-green arrow-up">5.03%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-08-29</td>
+            <td>2025-09-03</td>
+            <td><span class="orphan-code" title="信号日 2025-08-29 在 30 日窗口外，未生成详情页">603610</span></td>
+            <td class="num">16.46</td>
+            <td class="num">17.38</td>
+            <td class="num text-green arrow-up">5.47%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-02</td>
+            <td>2025-09-09</td>
+            <td><span class="orphan-code" title="信号日 2025-09-02 在 30 日窗口外，未生成详情页">603366</span></td>
+            <td class="num">12.01</td>
+            <td class="num">9.89</td>
+            <td class="num text-red arrow-down">-17.8%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-08</td>
+            <td>2025-09-15</td>
+            <td><span class="orphan-code" title="信号日 2025-09-08 在 30 日窗口外，未生成详情页">600210</span></td>
+            <td class="num">7.81</td>
+            <td class="num">7.6</td>
+            <td class="num text-red arrow-down">-2.79%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-08</td>
+            <td>2025-09-09</td>
+            <td><span class="orphan-code" title="信号日 2025-09-08 在 30 日窗口外，未生成详情页">603429</span></td>
+            <td class="num">11.77</td>
+            <td class="num">12.67</td>
+            <td class="num text-green arrow-up">7.42%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-08</td>
+            <td>2025-09-09</td>
+            <td><a href="../stock/603920.html">603920</a></td>
+            <td class="num">39.4</td>
+            <td class="num">41.07</td>
+            <td class="num text-green arrow-up">4.09%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-11</td>
+            <td>2025-09-15</td>
+            <td><span class="orphan-code" title="信号日 2025-09-11 在 30 日窗口外，未生成详情页">603239</span></td>
+            <td class="num">18.61</td>
+            <td class="num">19.2</td>
+            <td class="num text-green arrow-up">3.0%</td>
+            <td></td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-12</td>
+            <td>2025-09-18</td>
+            <td><span class="orphan-code" title="信号日 2025-09-12 在 30 日窗口外，未生成详情页">600846</span></td>
+            <td class="num">13.1</td>
+            <td class="num">13.42</td>
+            <td class="num text-green arrow-up">2.26%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-19</td>
+            <td>2025-09-26</td>
+            <td><span class="orphan-code" title="信号日 2025-09-19 在 30 日窗口外，未生成详情页">600984</span></td>
+            <td class="num">3.87</td>
+            <td class="num">3.67</td>
+            <td class="num text-red arrow-down">-5.51%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-09-24</td>
+            <td>2025-10-09</td>
+            <td><span class="orphan-code" title="信号日 2025-09-24 在 30 日窗口外，未生成详情页">605060</span></td>
+            <td class="num">29.92</td>
+            <td class="num">28.08</td>
+            <td class="num text-red arrow-down">-6.3%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-10-10</td>
+            <td>2025-10-13</td>
+            <td><span class="orphan-code" title="信号日 2025-10-10 在 30 日窗口外，未生成详情页">600172</span></td>
+            <td class="num">5.32</td>
+            <td class="num">5.47</td>
+            <td class="num text-green arrow-up">2.66%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-10-14</td>
+            <td>2025-10-21</td>
+            <td><span class="orphan-code" title="信号日 2025-10-14 在 30 日窗口外，未生成详情页">601606</span></td>
+            <td class="num">56.07</td>
+            <td class="num">48.83</td>
+            <td class="num text-red arrow-down">-13.05%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-10-22</td>
+            <td>2025-10-29</td>
+            <td><span class="orphan-code" title="信号日 2025-10-22 在 30 日窗口外，未生成详情页">600604</span></td>
+            <td class="num">6.92</td>
+            <td class="num">6.35</td>
+            <td class="num text-red arrow-down">-8.29%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-10-22</td>
+            <td>2025-10-27</td>
+            <td><span class="orphan-code" title="信号日 2025-10-22 在 30 日窗口外，未生成详情页">603020</span></td>
+            <td class="num">11.42</td>
+            <td class="num">11.82</td>
+            <td class="num text-green arrow-up">3.34%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-10-23</td>
+            <td>2025-10-30</td>
+            <td><span class="orphan-code" title="信号日 2025-10-23 在 30 日窗口外，未生成详情页">600626</span></td>
+            <td class="num">5.66</td>
+            <td class="num">5.33</td>
+            <td class="num text-red arrow-down">-5.83%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-10-28</td>
+            <td>2025-10-29</td>
+            <td><span class="orphan-code" title="信号日 2025-10-28 在 30 日窗口外，未生成详情页">603025</span></td>
+            <td class="num">19.67</td>
+            <td class="num">20.56</td>
+            <td class="num text-green arrow-up">4.36%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-03</td>
+            <td>2025-11-10</td>
+            <td><span class="orphan-code" title="信号日 2025-11-03 在 30 日窗口外，未生成详情页">600207</span></td>
+            <td class="num">5.89</td>
+            <td class="num">5.92</td>
+            <td class="num text-green arrow-up">0.49%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-03</td>
+            <td>2025-11-10</td>
+            <td><span class="orphan-code" title="信号日 2025-11-03 在 30 日窗口外，未生成详情页">600513</span></td>
+            <td class="num">23.44</td>
+            <td class="num">22.31</td>
+            <td class="num text-red arrow-down">-5.0%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-03</td>
+            <td>2025-11-10</td>
+            <td><span class="orphan-code" title="信号日 2025-11-03 在 30 日窗口外，未生成详情页">600654</span></td>
+            <td class="num">3.81</td>
+            <td class="num">3.88</td>
+            <td class="num text-green arrow-up">1.47%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-03</td>
+            <td>2025-11-05</td>
+            <td><span class="orphan-code" title="信号日 2025-11-03 在 30 日窗口外，未生成详情页">603556</span></td>
+            <td class="num">35.63</td>
+            <td class="num">36.92</td>
+            <td class="num text-green arrow-up">3.47%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-03</td>
+            <td>2025-11-10</td>
+            <td><span class="orphan-code" title="信号日 2025-11-03 在 30 日窗口外，未生成详情页">605155</span></td>
+            <td class="num">18.73</td>
+            <td class="num">17.41</td>
+            <td class="num text-red arrow-down">-7.18%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-05</td>
+            <td>2025-11-12</td>
+            <td><span class="orphan-code" title="信号日 2025-11-05 在 30 日窗口外，未生成详情页">603088</span></td>
+            <td class="num">12.55</td>
+            <td class="num">12.13</td>
+            <td class="num text-red arrow-down">-3.54%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-07</td>
+            <td>2025-11-14</td>
+            <td><span class="orphan-code" title="信号日 2025-11-07 在 30 日窗口外，未生成详情页">603399</span></td>
+            <td class="num">11.53</td>
+            <td class="num">11.23</td>
+            <td class="num text-red arrow-down">-2.78%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-07</td>
+            <td>2025-11-13</td>
+            <td><span class="orphan-code" title="信号日 2025-11-07 在 30 日窗口外，未生成详情页">603906</span></td>
+            <td class="num">20.36</td>
+            <td class="num">20.91</td>
+            <td class="num text-green arrow-up">2.54%</td>
+            <td></td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-10</td>
+            <td>2025-11-11</td>
+            <td><a href="../stock/600537.html">600537</a></td>
+            <td class="num">4.63</td>
+            <td class="num">4.96</td>
+            <td class="num text-green arrow-up">6.88%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-11</td>
+            <td>2025-11-18</td>
+            <td><span class="orphan-code" title="信号日 2025-11-11 在 30 日窗口外，未生成详情页">600808</span></td>
+            <td class="num">4.3</td>
+            <td class="num">4.1</td>
+            <td class="num text-red arrow-down">-5.0%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-17</td>
+            <td>2025-11-24</td>
+            <td><span class="orphan-code" title="信号日 2025-11-17 在 30 日窗口外，未生成详情页">600792</span></td>
+            <td class="num">5.41</td>
+            <td class="num">4.32</td>
+            <td class="num text-red arrow-down">-20.29%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-17</td>
+            <td>2025-11-24</td>
+            <td><span class="orphan-code" title="信号日 2025-11-17 在 30 日窗口外，未生成详情页">603977</span></td>
+            <td class="num">13.95</td>
+            <td class="num">12.49</td>
+            <td class="num text-red arrow-down">-10.66%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-11-25</td>
+            <td>2025-11-27</td>
+            <td><span class="orphan-code" title="信号日 2025-11-25 在 30 日窗口外，未生成详情页">603008</span></td>
+            <td class="num">19.89</td>
+            <td class="num">20.45</td>
+            <td class="num text-green arrow-up">2.64%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-01</td>
+            <td>2025-12-02</td>
+            <td><a href="../stock/603931.html">603931</a></td>
+            <td class="num">35.17</td>
+            <td class="num">36.05</td>
+            <td class="num text-green arrow-up">2.35%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-02</td>
+            <td>2025-12-09</td>
+            <td><span class="orphan-code" title="信号日 2025-12-02 在 30 日窗口外，未生成详情页">601113</span></td>
+            <td class="num">4.73</td>
+            <td class="num">4.4</td>
+            <td class="num text-red arrow-down">-7.31%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-08</td>
+            <td>2025-12-09</td>
+            <td><span class="orphan-code" title="信号日 2025-12-08 在 30 日窗口外，未生成详情页">603668</span></td>
+            <td class="num">17.35</td>
+            <td class="num">18.0</td>
+            <td class="num text-green arrow-up">3.62%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-15</td>
+            <td>2025-12-18</td>
+            <td><span class="orphan-code" title="信号日 2025-12-15 在 30 日窗口外，未生成详情页">603992</span></td>
+            <td class="num">36.0</td>
+            <td class="num">36.81</td>
+            <td class="num text-green arrow-up">2.11%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-22</td>
+            <td>2025-12-24</td>
+            <td><span class="orphan-code" title="信号日 2025-12-22 在 30 日窗口外，未生成详情页">600391</span></td>
+            <td class="num">32.59</td>
+            <td class="num">33.34</td>
+            <td class="num text-green arrow-up">2.14%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-23</td>
+            <td>2025-12-24</td>
+            <td><span class="orphan-code" title="信号日 2025-12-23 在 30 日窗口外，未生成详情页">600076</span></td>
+            <td class="num">3.3</td>
+            <td class="num">3.37</td>
+            <td class="num text-green arrow-up">1.92%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-23</td>
+            <td>2025-12-24</td>
+            <td><span class="orphan-code" title="信号日 2025-12-23 在 30 日窗口外，未生成详情页">600783</span></td>
+            <td class="num">16.1</td>
+            <td class="num">16.9</td>
+            <td class="num text-green arrow-up">4.83%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-24</td>
+            <td>2025-12-31</td>
+            <td><span class="orphan-code" title="信号日 2025-12-24 在 30 日窗口外，未生成详情页">601068</span></td>
+            <td class="num">6.08</td>
+            <td class="num">5.28</td>
+            <td class="num text-red arrow-down">-13.17%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-24</td>
+            <td>2025-12-26</td>
+            <td><span class="orphan-code" title="信号日 2025-12-24 在 30 日窗口外，未生成详情页">603212</span></td>
+            <td class="num">14.99</td>
+            <td class="num">15.7</td>
+            <td class="num text-green arrow-up">4.52%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2025-12-29</td>
+            <td>2025-12-30</td>
+            <td><span class="orphan-code" title="信号日 2025-12-29 在 30 日窗口外，未生成详情页">603095</span></td>
+            <td class="num">17.58</td>
+            <td class="num">18.49</td>
+            <td class="num text-green arrow-up">5.02%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-06</td>
+            <td>2026-01-07</td>
+            <td><span class="orphan-code" title="信号日 2026-01-06 在 30 日窗口外，未生成详情页">603052</span></td>
+            <td class="num">36.41</td>
+            <td class="num">39.16</td>
+            <td class="num text-green arrow-up">7.39%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-06</td>
+            <td>2026-01-13</td>
+            <td><span class="orphan-code" title="信号日 2026-01-06 在 30 日窗口外，未生成详情页">603528</span></td>
+            <td class="num">11.1</td>
+            <td class="num">10.91</td>
+            <td class="num text-red arrow-down">-1.89%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-09</td>
+            <td>2026-01-16</td>
+            <td><span class="orphan-code" title="信号日 2026-01-09 在 30 日窗口外，未生成详情页">600053</span></td>
+            <td class="num">21.87</td>
+            <td class="num">22.38</td>
+            <td class="num text-green arrow-up">2.18%</td>
+            <td></td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-09</td>
+            <td>2026-01-28</td>
+            <td><span class="orphan-code" title="信号日 2026-01-09 在 30 日窗口外，未生成详情页">605028</span></td>
+            <td class="num">30.86</td>
+            <td class="num">25.57</td>
+            <td class="num text-red arrow-down">-17.28%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">lu_max</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-16</td>
+            <td>2026-01-23</td>
+            <td><span class="orphan-code" title="信号日 2026-01-16 在 30 日窗口外，未生成详情页">603272</span></td>
+            <td class="num">23.02</td>
+            <td class="num">22.9</td>
+            <td class="num text-red arrow-down">-0.71%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-22</td>
+            <td>2026-01-30</td>
+            <td><span class="orphan-code" title="信号日 2026-01-22 在 30 日窗口外，未生成详情页">603001</span></td>
+            <td class="num">10.03</td>
+            <td class="num">10.27</td>
+            <td class="num text-green arrow-up">2.25%</td>
+            <td></td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-22</td>
+            <td>2026-01-23</td>
+            <td><span class="orphan-code" title="信号日 2026-01-22 在 30 日窗口外，未生成详情页">603077</span></td>
+            <td class="num">2.6</td>
+            <td class="num">2.66</td>
+            <td class="num text-green arrow-up">2.23%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-29</td>
+            <td>2026-02-05</td>
+            <td><span class="orphan-code" title="信号日 2026-01-29 在 30 日窗口外，未生成详情页">600173</span></td>
+            <td class="num">8.61</td>
+            <td class="num">8.84</td>
+            <td class="num text-green arrow-up">2.5%</td>
+            <td></td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-01-29</td>
+            <td>2026-01-30</td>
+            <td><span class="orphan-code" title="信号日 2026-01-29 在 30 日窗口外，未生成详情页">600740</span></td>
+            <td class="num">4.74</td>
+            <td class="num">4.93</td>
+            <td class="num text-green arrow-up">3.79%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-02-04</td>
+            <td>2026-02-10</td>
+            <td><span class="orphan-code" title="信号日 2026-02-04 在 30 日窗口外，未生成详情页">600586</span></td>
+            <td class="num">6.78</td>
+            <td class="num">7.72</td>
+            <td class="num text-green arrow-up">13.79%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-02-04</td>
+            <td>2026-02-10</td>
+            <td><span class="orphan-code" title="信号日 2026-02-04 在 30 日窗口外，未生成详情页">603031</span></td>
+            <td class="num">39.95</td>
+            <td class="num">41.52</td>
+            <td class="num text-green arrow-up">3.78%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-02-06</td>
+            <td>2026-02-10</td>
+            <td><span class="orphan-code" title="信号日 2026-02-06 在 30 日窗口外，未生成详情页">603381</span></td>
+            <td class="num">26.63</td>
+            <td class="num">27.45</td>
+            <td class="num text-green arrow-up">2.94%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-02-09</td>
+            <td>2026-02-10</td>
+            <td><span class="orphan-code" title="信号日 2026-02-09 在 30 日窗口外，未生成详情页">603959</span></td>
+            <td class="num">6.81</td>
+            <td class="num">7.04</td>
+            <td class="num text-green arrow-up">3.19%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-02-10</td>
+            <td>2026-02-11</td>
+            <td><span class="orphan-code" title="信号日 2026-02-10 在 30 日窗口外，未生成详情页">603881</span></td>
+            <td class="num">41.07</td>
+            <td class="num">42.52</td>
+            <td class="num text-green arrow-up">3.37%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-02-24</td>
+            <td>2026-03-03</td>
+            <td><span class="orphan-code" title="信号日 2026-02-24 在 30 日窗口外，未生成详情页">600960</span></td>
+            <td class="num">6.16</td>
+            <td class="num">5.43</td>
+            <td class="num text-red arrow-down">-11.87%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-02-25</td>
+            <td>2026-03-04</td>
+            <td><span class="orphan-code" title="信号日 2026-02-25 在 30 日窗口外，未生成详情页">600984</span></td>
+            <td class="num">5.2</td>
+            <td class="num">4.75</td>
+            <td class="num text-red arrow-down">-8.81%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-03-03</td>
+            <td>2026-03-10</td>
+            <td><span class="orphan-code" title="信号日 2026-03-03 在 30 日窗口外，未生成详情页">600792</span></td>
+            <td class="num">5.12</td>
+            <td class="num">4.89</td>
+            <td class="num text-red arrow-down">-4.65%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-03-06</td>
+            <td>2026-03-11</td>
+            <td><span class="orphan-code" title="信号日 2026-03-06 在 30 日窗口外，未生成详情页">600703</span></td>
+            <td class="num">16.34</td>
+            <td class="num">16.88</td>
+            <td class="num text-green arrow-up">3.17%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-03-06</td>
+            <td>2026-03-09</td>
+            <td><span class="orphan-code" title="信号日 2026-03-06 在 30 日窗口外，未生成详情页">600800</span></td>
+            <td class="num">5.18</td>
+            <td class="num">5.26</td>
+            <td class="num text-green arrow-up">1.51%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-03-16</td>
+            <td>2026-03-23</td>
+            <td><span class="orphan-code" title="信号日 2026-03-16 在 30 日窗口外，未生成详情页">600354</span></td>
+            <td class="num">7.69</td>
+            <td class="num">6.32</td>
+            <td class="num text-red arrow-down">-17.88%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-03-27</td>
+            <td>2026-03-30</td>
+            <td><span class="orphan-code" title="信号日 2026-03-27 在 30 日窗口外，未生成详情页">600698</span></td>
+            <td class="num">8.36</td>
+            <td class="num">8.6</td>
+            <td class="num text-green arrow-up">2.67%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="0">
+            <td>2026-03-30</td>
+            <td>2026-04-07</td>
+            <td><span class="orphan-code" title="信号日 2026-03-30 在 30 日窗口外，未生成详情页">600152</span></td>
+            <td class="num">11.51</td>
+            <td class="num">9.57</td>
+            <td class="num text-red arrow-down">-17.0%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-09</td>
+            <td>2026-04-14</td>
+            <td><a href="../stock/603158.html">603158</a></td>
+            <td class="num">12.89</td>
+            <td class="num">13.24</td>
+            <td class="num text-green arrow-up">2.51%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="1">
             <td>2026-04-09</td>
             <td>2026-04-16</td>
             <td><a href="../stock/603010.html">603010</a></td>
-            <td class="num">12.43</td>
-            <td class="num">12.42</td>
-            <td class="num text-red arrow-down">-0.08%</td>
+            <td class="num">12.37</td>
+            <td class="num">12.41</td>
+            <td class="num text-green arrow-up">0.12%</td>
             <td></td>
             <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
         </tr>
         
-        <tr>
+        <tr data-recent="1">
             <td>2026-04-09</td>
             <td>2026-04-16</td>
-            <td><a href="../stock/603158.html">603158</a></td>
-            <td class="num">13.16</td>
-            <td class="num">13.15</td>
-            <td class="num text-red arrow-down">-0.08%</td>
+            <td><a href="../stock/605016.html">605016</a></td>
+            <td class="num">28.42</td>
+            <td class="num">26.68</td>
+            <td class="num text-red arrow-down">-6.26%</td>
             <td></td>
             <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
         </tr>
         
-        <tr>
+        <tr data-recent="1">
             <td>2026-04-10</td>
-            <td>2026-04-17</td>
-            <td><a href="../stock/600732.html">600732</a></td>
-            <td class="num">15.27</td>
-            <td class="num">15.98</td>
-            <td class="num text-green arrow-up">4.65%</td>
+            <td>2026-04-15</td>
+            <td><a href="../stock/605222.html">605222</a></td>
+            <td class="num">24.06</td>
+            <td class="num">25.0</td>
+            <td class="num text-green arrow-up">3.73%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-13</td>
+            <td>2026-04-14</td>
+            <td><a href="../stock/603002.html">603002</a></td>
+            <td class="num">11.83</td>
+            <td class="num">12.46</td>
+            <td class="num text-green arrow-up">5.16%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-13</td>
+            <td>2026-04-20</td>
+            <td><a href="../stock/605117.html">605117</a></td>
+            <td class="num">104.69</td>
+            <td class="num">101.0</td>
+            <td class="num text-red arrow-down">-3.68%</td>
             <td></td>
             <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-13</td>
+            <td>2026-04-20</td>
+            <td><a href="../stock/603090.html">603090</a></td>
+            <td class="num">72.74</td>
+            <td class="num">72.44</td>
+            <td class="num text-red arrow-down">-0.56%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-20</td>
+            <td>2026-04-27</td>
+            <td><a href="../stock/601002.html">601002</a></td>
+            <td class="num">6.54</td>
+            <td class="num">6.22</td>
+            <td class="num text-red arrow-down">-5.03%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-21</td>
+            <td>2026-04-28</td>
+            <td><a href="../stock/600072.html">600072</a></td>
+            <td class="num">13.98</td>
+            <td class="num">13.03</td>
+            <td class="num text-red arrow-down">-6.99%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-23</td>
+            <td>2026-04-30</td>
+            <td><a href="../stock/603922.html">603922</a></td>
+            <td class="num">23.71</td>
+            <td class="num">19.89</td>
+            <td class="num text-red arrow-down">-16.26%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-04-29</td>
+            <td>2026-05-06</td>
+            <td><a href="../stock/600884.html">600884</a></td>
+            <td class="num">17.2</td>
+            <td class="num">17.51</td>
+            <td class="num text-green arrow-up">1.66%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-05-07</td>
+            <td>2026-05-12</td>
+            <td><a href="../stock/600158.html">600158</a></td>
+            <td class="num">13.44</td>
+            <td class="num">13.93</td>
+            <td class="num text-green arrow-up">3.49%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-05-07</td>
+            <td>2026-05-11</td>
+            <td><a href="../stock/600246.html">600246</a></td>
+            <td class="num">12.11</td>
+            <td class="num">12.76</td>
+            <td class="num text-green arrow-up">5.2%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-05-07</td>
+            <td>2026-05-11</td>
+            <td><a href="../stock/600301.html">600301</a></td>
+            <td class="num">59.84</td>
+            <td class="num">62.51</td>
+            <td class="num text-green arrow-up">4.3%</td>
+            <td>✓</td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-05-08</td>
+            <td>2026-05-15</td>
+            <td><a href="../stock/603030.html">603030</a></td>
+            <td class="num">3.07</td>
+            <td class="num">2.92</td>
+            <td class="num text-red arrow-down">-5.23%</td>
+            <td></td>
+            <td></td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">last</td>
+        </tr>
+        
+        <tr data-recent="1">
+            <td>2026-05-08</td>
+            <td>2026-05-11</td>
+            <td><a href="../stock/603657.html">603657</a></td>
+            <td class="num">33.18</td>
+            <td class="num">35.17</td>
+            <td class="num text-green arrow-up">5.81%</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td style="font-size:0.78rem;color:var(--text-secondary)">trail</td>
         </tr>
         
     </tbody>
 </table>
 </div>
+<script>
+(function(){
+    var radios = document.querySelectorAll('input[name="trade-filter"]');
+    var rows = document.querySelectorAll('#trade-detail-table tbody tr');
+    function apply(mode){
+        rows.forEach(function(r){
+            r.style.display = (mode === 'recent' && r.dataset.recent !== '1') ? 'none' : '';
+        });
+    }
+    radios.forEach(function(r){ r.addEventListener('change', function(){ apply(this.value); }); });
+})();
+</script>
 
 
 
 <h2 class="section-title">失败特征分析</h2>
-<p class="failure-summary">最近10次失败中，1次上影线过长，6次次日低开，6次收阴</p>
+<p class="failure-summary">最近10次失败中，2次次日低开，4次收阴</p>
 <div class="failure-stats">
     <div class="failure-stat">
-        <div class="failure-count">1</div>
+        <div class="failure-count">0</div>
         <div class="failure-label">上影线过长</div>
     </div>
     <div class="failure-stat">
-        <div class="failure-count">6</div>
+        <div class="failure-count">2</div>
         <div class="failure-label">次日低开</div>
     </div>
     <div class="failure-stat">
@@ -403,7 +1773,7 @@
         <div class="failure-label">放量回落</div>
     </div>
     <div class="failure-stat">
-        <div class="failure-count">6</div>
+        <div class="failure-count">4</div>
         <div class="failure-label">收阴</div>
     </div>
 </div>
@@ -420,7 +1790,7 @@
                 <th>代码</th>
                 <th class="num">涨幅</th>
                 <th class="num">上影线比</th>
-                <th class="num">次日缺口%</th>
+                <th class="num">买入次日缺口%</th>
                 <th class="num">卖出量比</th>
                 <th>特征</th>
             </tr>
@@ -428,78 +1798,12 @@
         <tbody>
             
             <tr>
-                <td>2025-11-03</td>
-                <td>2025-11-10</td>
-                <td><a href="../stock/600513.html">600513</a></td>
-                <td class="num text-red">-4.49%</td>
-                <td class="num">0.53</td>
-                <td class="num text-red">-7.57%</td>
-                <td class="num">0.9x</td>
-                <td>上影线过长, 次日低开</td>
-            </tr>
-            
-            <tr>
-                <td>2025-11-05</td>
-                <td>2025-11-12</td>
-                <td><a href="../stock/603088.html">603088</a></td>
-                <td class="num text-red">-4.26%</td>
-                <td class="num">0.39</td>
-                <td class="num text-red">-4.65%</td>
-                <td class="num">0.72x</td>
-                <td>次日低开</td>
-            </tr>
-            
-            <tr>
-                <td>2025-11-11</td>
-                <td>2025-11-18</td>
-                <td><a href="../stock/600808.html">600808</a></td>
-                <td class="num text-red">-6.18%</td>
-                <td class="num">0.13</td>
-                <td class="num ">-0.92%</td>
-                <td class="num">0.78x</td>
-                <td>收阴</td>
-            </tr>
-            
-            <tr>
-                <td>2025-11-17</td>
-                <td>2025-11-24</td>
-                <td><a href="../stock/603977.html">603977</a></td>
-                <td class="num text-red">-11.97%</td>
-                <td class="num">0.15</td>
-                <td class="num text-red">-14.08%</td>
-                <td class="num">0.54x</td>
-                <td>次日低开</td>
-            </tr>
-            
-            <tr>
-                <td>2025-12-02</td>
-                <td>2025-12-09</td>
-                <td><a href="../stock/601113.html">601113</a></td>
-                <td class="num text-red">-7.56%</td>
-                <td class="num">0.41</td>
-                <td class="num text-red">-5.67%</td>
-                <td class="num">0.63x</td>
-                <td>次日低开, 收阴</td>
-            </tr>
-            
-            <tr>
-                <td>2026-01-06</td>
-                <td>2026-01-13</td>
-                <td><a href="../stock/603528.html">603528</a></td>
-                <td class="num text-red">-0.46%</td>
-                <td class="num">0.27</td>
-                <td class="num ">3.83%</td>
-                <td class="num">0.62x</td>
-                <td>收阴</td>
-            </tr>
-            
-            <tr>
                 <td>2026-03-03</td>
                 <td>2026-03-10</td>
-                <td><a href="../stock/600792.html">600792</a></td>
-                <td class="num text-red">-9.78%</td>
+                <td><span class="orphan-code" title="买入日 2026-03-03 在 30 日窗口外，未生成详情页">600792</span></td>
+                <td class="num text-red">-4.65%</td>
                 <td class="num">0.02</td>
-                <td class="num text-red">-10.52%</td>
+                <td class="num text-red">-5.72%</td>
                 <td class="num">0.72x</td>
                 <td>次日低开</td>
             </tr>
@@ -507,34 +1811,100 @@
             <tr>
                 <td>2026-03-16</td>
                 <td>2026-03-23</td>
-                <td><a href="../stock/600354.html">600354</a></td>
-                <td class="num text-red">-20.18%</td>
+                <td><span class="orphan-code" title="买入日 2026-03-16 在 30 日窗口外，未生成详情页">600354</span></td>
+                <td class="num text-red">-17.88%</td>
                 <td class="num">0.22</td>
-                <td class="num text-red">-15.64%</td>
+                <td class="num text-red">-3.15%</td>
                 <td class="num">0.87x</td>
                 <td>次日低开, 收阴</td>
             </tr>
             
             <tr>
-                <td>2026-04-09</td>
-                <td>2026-04-16</td>
-                <td><a href="../stock/603010.html">603010</a></td>
-                <td class="num text-red">-0.08%</td>
-                <td class="num">0.19</td>
-                <td class="num ">0.4%</td>
-                <td class="num">0.98x</td>
+                <td>2026-03-30</td>
+                <td>2026-04-07</td>
+                <td><span class="orphan-code" title="买入日 2026-03-30 在 30 日窗口外，未生成详情页">600152</span></td>
+                <td class="num text-red">-17.0%</td>
+                <td class="num">0.17</td>
+                <td class="num ">1.5%</td>
+                <td class="num">0.66x</td>
                 <td>收阴</td>
             </tr>
             
             <tr>
                 <td>2026-04-09</td>
                 <td>2026-04-16</td>
-                <td><a href="../stock/603158.html">603158</a></td>
-                <td class="num text-red">-0.08%</td>
-                <td class="num">0.29</td>
-                <td class="num ">3.27%</td>
-                <td class="num">0.84x</td>
+                <td><a href="../stock/605016.html">605016</a></td>
+                <td class="num text-red">-6.26%</td>
+                <td class="num">0.15</td>
+                <td class="num ">1.14%</td>
+                <td class="num">0.59x</td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td>2026-04-13</td>
+                <td>2026-04-20</td>
+                <td><a href="../stock/605117.html">605117</a></td>
+                <td class="num text-red">-3.68%</td>
+                <td class="num">0.4</td>
+                <td class="num ">0.72%</td>
+                <td class="num">0.65x</td>
                 <td>收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2026-04-13</td>
+                <td>2026-04-20</td>
+                <td><a href="../stock/603090.html">603090</a></td>
+                <td class="num text-red">-0.56%</td>
+                <td class="num">0.2</td>
+                <td class="num ">1.21%</td>
+                <td class="num">0.9x</td>
+                <td>收阴</td>
+            </tr>
+            
+            <tr>
+                <td>2026-04-20</td>
+                <td>2026-04-27</td>
+                <td><a href="../stock/601002.html">601002</a></td>
+                <td class="num text-red">-5.03%</td>
+                <td class="num">0.21</td>
+                <td class="num ">-0.9%</td>
+                <td class="num">0.56x</td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td>2026-04-21</td>
+                <td>2026-04-28</td>
+                <td><a href="../stock/600072.html">600072</a></td>
+                <td class="num text-red">-6.99%</td>
+                <td class="num">0.45</td>
+                <td class="num ">-0.21%</td>
+                <td class="num">0.69x</td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td>2026-04-23</td>
+                <td>2026-04-30</td>
+                <td><a href="../stock/603922.html">603922</a></td>
+                <td class="num text-red">-16.26%</td>
+                <td class="num">0.17</td>
+                <td class="num ">-0.04%</td>
+                <td class="num">0.02x</td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td>2026-05-08</td>
+                <td>2026-05-15</td>
+                <td><a href="../stock/603030.html">603030</a></td>
+                <td class="num text-red">-5.23%</td>
+                <td class="num">0.33</td>
+                <td class="num ">0.33%</td>
+                <td class="num">0.45x</td>
+                <td></td>
             </tr>
             
         </tbody>
@@ -547,14 +1917,20 @@
     </main>
 
     <footer>
-        <p>SH 量化选股系统 v2.0 | 数据来源: 上交所 | 生成于 2026-05-25 23:42 | 仅供研究参考</p>
+        <p>SH 量化选股系统 v2.0 | 数据来源: 上交所 | 生成于 2026-05-25 12:57 | 仅供研究参考</p>
+        <p style="font-size:0.75em;opacity:0.6">
+            build 18a3d269 · 
+            data_as_of 2026-05-25 · 
+            backtest_window 250d · 
+            <a href="../../methodology.html" style="color:inherit">方法论</a>
+        </p>
     </footer>
 
     
 
 <script>
 (function() {
-    var data = {"dates": ["2024-04-26", "2024-05-06", "2024-05-14", "2024-05-27", "2024-06-05", "2024-06-11", "2024-06-12", "2024-06-20", "2024-07-09", "2024-07-30", "2024-08-27", "2024-09-05", "2024-09-06", "2024-09-19", "2024-09-23", "2024-09-24", "2024-09-26", "2024-09-27", "2024-11-07", "2024-12-27", "2025-01-27", "2025-02-14", "2025-03-05", "2025-03-07", "2025-03-10", "2025-03-11", "2025-03-14", "2025-03-21", "2025-03-25", "2025-04-03", "2025-04-08", "2025-04-10", "2025-04-11", "2025-04-21", "2025-05-29", "2025-06-05", "2025-06-06", "2025-06-24", "2025-07-09", "2025-07-22", "2025-07-31", "2025-08-04", "2025-08-11", "2025-08-18", "2025-08-28", "2025-09-11", "2025-09-19", "2025-10-10", "2025-10-22", "2025-11-03", "2025-11-05", "2025-11-11", "2025-11-17", "2025-11-25", "2025-12-02", "2025-12-08", "2025-12-23", "2025-12-24", "2026-01-06", "2026-01-09", "2026-02-04", "2026-02-10", "2026-03-03", "2026-03-06", "2026-03-16", "2026-04-09", "2026-04-10"], "drawdown": [0.0, 0.0, -0.0692, -0.1771, -0.1929, -0.1386, -0.1333, -0.227, -0.175, -0.1195, -0.0603, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0792, -0.2682, -0.219, -0.1664, -0.1637, -0.1075, -0.0474, -0.114, -0.2198, -0.1673, -0.231, -0.347, -0.3644, -0.356, -0.3127, -0.4002, -0.4411, -0.4377, -0.3999, -0.3595, -0.4002, -0.4537, -0.4169, -0.3777, -0.3913, -0.3503, -0.3066, -0.26, -0.3019, -0.2549, -0.3258, -0.3578, -0.3867, -0.4262, -0.4962, -0.4623, -0.5043, -0.471, -0.4354, -0.3974, -0.367, -0.346, -0.302, -0.2551, -0.3297, -0.2846, -0.4305, -0.4325, -0.4076], "equity": [0.9554, 1.0197, 0.9492, 0.8391, 0.823, 0.8784, 0.8837, 0.7882, 0.8412, 0.8978, 0.9582, 1.0226, 1.0914, 1.1648, 1.2432, 1.3268, 1.4161, 1.5113, 1.3916, 1.106, 1.1804, 1.2598, 1.2639, 1.3489, 1.4396, 1.3391, 1.1791, 1.2584, 1.1623, 0.9869, 0.9606, 0.9733, 1.0387, 0.9065, 0.8446, 0.8498, 0.907, 0.968, 0.9065, 0.8257, 0.8812, 0.9405, 0.92, 0.9819, 1.0479, 1.1184, 1.0551, 1.126, 1.0189, 0.9706, 0.9268, 0.8673, 0.7614, 0.8126, 0.7492, 0.7995, 0.8533, 0.9107, 0.9566, 0.9884, 1.0549, 1.1258, 1.013, 1.0812, 0.8606, 0.8577, 0.8953]};
+    var data = {"dates": ["2025-05-16", "2025-05-19", "2025-05-20", "2025-05-21", "2025-05-22", "2025-05-23", "2025-05-26", "2025-05-30", "2025-06-03", "2025-06-04", "2025-06-05", "2025-06-06", "2025-06-09", "2025-06-10", "2025-06-11", "2025-06-12", "2025-06-13", "2025-06-17", "2025-06-18", "2025-06-19", "2025-06-20", "2025-06-23", "2025-06-25", "2025-06-26", "2025-07-10", "2025-07-11", "2025-07-14", "2025-07-15", "2025-07-16", "2025-07-21", "2025-07-23", "2025-07-24", "2025-07-25", "2025-07-28", "2025-07-29", "2025-07-30", "2025-07-31", "2025-08-01", "2025-08-04", "2025-08-05", "2025-08-06", "2025-08-07", "2025-08-08", "2025-08-12", "2025-08-13", "2025-08-15", "2025-08-19", "2025-08-20", "2025-08-21", "2025-08-22", "2025-08-25", "2025-08-26", "2025-08-27", "2025-08-28", "2025-08-29", "2025-09-01", "2025-09-02", "2025-09-03", "2025-09-04", "2025-09-05", "2025-09-08", "2025-09-09", "2025-09-10", "2025-09-11", "2025-09-12", "2025-09-15", "2025-09-16", "2025-09-17", "2025-09-18", "2025-09-22", "2025-09-23", "2025-09-24", "2025-09-25", "2025-09-26", "2025-09-29", "2025-09-30", "2025-10-09", "2025-10-13", "2025-10-15", "2025-10-16", "2025-10-17", "2025-10-20", "2025-10-21", "2025-10-23", "2025-10-24", "2025-10-27", "2025-10-28", "2025-10-29", "2025-10-30", "2025-11-04", "2025-11-05", "2025-11-06", "2025-11-07", "2025-11-10", "2025-11-11", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-17", "2025-11-18", "2025-11-19", "2025-11-20", "2025-11-21", "2025-11-24", "2025-11-26", "2025-11-27", "2025-12-02", "2025-12-03", "2025-12-04", "2025-12-05", "2025-12-08", "2025-12-09", "2025-12-16", "2025-12-17", "2025-12-18", "2025-12-23", "2025-12-24", "2025-12-25", "2025-12-26", "2025-12-29", "2025-12-30", "2025-12-31", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-23", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-07", "2026-04-10", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-27", "2026-04-28", "2026-04-30", "2026-05-06", "2026-05-08", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15"], "drawdown": [0.0, 0.0, -0.0174, -0.0357, -0.0447, -0.0832, -0.0854, -0.1379, -0.1255, -0.1161, -0.1462, -0.144, -0.1492, -0.1359, -0.139, -0.1189, -0.1237, -0.176, -0.1784, -0.2035, -0.2047, -0.1878, -0.1768, -0.1229, -0.1382, -0.1521, -0.1611, -0.1763, -0.161, -0.1207, -0.1585, -0.1423, -0.1603, -0.1618, -0.1772, -0.1594, -0.1545, -0.1467, -0.1586, -0.1386, -0.1183, -0.1275, -0.0643, -0.0697, -0.039, 0.0, 0.0, 0.0, 0.0, -0.0099, -0.0263, -0.028, -0.0199, -0.0385, -0.0448, -0.0072, 0.0, -0.0089, -0.0699, -0.0576, -0.0583, -0.029, -0.044, -0.0403, -0.0661, -0.0319, -0.0341, -0.0186, -0.0277, -0.0452, -0.0649, -0.0625, -0.0545, -0.0948, -0.1002, -0.1207, -0.1181, -0.0938, -0.1605, -0.1423, -0.1963, -0.2143, -0.2082, -0.2146, -0.2346, -0.2201, -0.2406, -0.2218, -0.192, -0.2182, -0.2044, -0.2085, -0.2142, -0.2116, -0.2154, -0.225, -0.1839, -0.1988, -0.1969, -0.2302, -0.237, -0.2622, -0.3125, -0.3016, -0.296, -0.2824, -0.2649, -0.2695, -0.2973, -0.2884, -0.2959, -0.2798, -0.267, -0.2713, -0.2639, -0.2664, -0.2424, -0.2489, -0.2202, -0.2754, -0.2531, -0.2683, -0.2279, -0.2119, -0.2133, -0.2059, -0.2386, -0.2473, -0.2425, -0.1958, -0.2052, -0.2547, -0.2628, -0.2458, -0.2598, -0.2686, -0.2774, -0.2839, -0.216, -0.2247, -0.2599, -0.2487, -0.2304, -0.2549, -0.262, -0.2199, -0.1996, -0.1719, -0.1934, -0.1714, -0.1889, -0.2132, -0.2655, -0.2813, -0.2855, -0.28, -0.2731, -0.2864, -0.2539, -0.2704, -0.2894, -0.3107, -0.3313, -0.378, -0.3607, -0.4185, -0.4215, -0.4421, -0.4664, -0.4634, -0.4664, -0.4682, -0.4764, -0.4962, -0.4838, -0.4633, -0.4708, -0.4756, -0.4825, -0.4905, -0.5059, -0.5173, -0.5303, -0.549, -0.5272, -0.5249, -0.5061, -0.4953, -0.4821, -0.5024, -0.5004], "equity": [0.9857, 0.9904, 0.9732, 0.9551, 0.9462, 0.9081, 0.9059, 0.8539, 0.8661, 0.8755, 0.8456, 0.8478, 0.8426, 0.8558, 0.8528, 0.8727, 0.8679, 0.8161, 0.8138, 0.7889, 0.7876, 0.8045, 0.8154, 0.8687, 0.8535, 0.8398, 0.8308, 0.8158, 0.8309, 0.8709, 0.8335, 0.8495, 0.8317, 0.8302, 0.8149, 0.8326, 0.8374, 0.8452, 0.8333, 0.8531, 0.8733, 0.8642, 0.9267, 0.9214, 0.9518, 1.0536, 1.1121, 1.1401, 1.2106, 1.1986, 1.1787, 1.1768, 1.1865, 1.164, 1.1564, 1.2019, 1.2107, 1.1999, 1.126, 1.141, 1.1401, 1.1755, 1.1575, 1.1619, 1.1307, 1.1721, 1.1694, 1.1881, 1.1772, 1.1559, 1.1321, 1.135, 1.1447, 1.096, 1.0894, 1.0646, 1.0677, 1.0971, 1.0163, 1.0384, 0.9731, 0.9512, 0.9587, 0.9508, 0.9267, 0.9442, 0.9194, 0.9422, 0.9782, 0.9466, 0.9632, 0.9583, 0.9513, 0.9545, 0.9499, 0.9384, 0.9881, 0.97, 0.9723, 0.932, 0.9238, 0.8933, 0.8324, 0.8455, 0.8523, 0.8688, 0.89, 0.8844, 0.8507, 0.8615, 0.8524, 0.8719, 0.8874, 0.8822, 0.8912, 0.8882, 0.9172, 0.9094, 0.9441, 0.8772, 0.9043, 0.8859, 0.9348, 0.9542, 0.9525, 0.9614, 0.9218, 0.9113, 0.9171, 0.9737, 0.9623, 0.9024, 0.8925, 0.9131, 0.8961, 0.8855, 0.8748, 0.867, 0.9492, 0.9386, 0.8961, 0.9096, 0.9318, 0.9021, 0.8935, 0.9445, 0.969, 1.0026, 0.9766, 1.0032, 0.982, 0.9526, 0.8893, 0.8701, 0.865, 0.8718, 0.8801, 0.8639, 0.9033, 0.8833, 0.8603, 0.8346, 0.8096, 0.7531, 0.7739, 0.704, 0.7004, 0.6754, 0.6461, 0.6497, 0.6461, 0.6439, 0.6339, 0.6099, 0.6249, 0.6498, 0.6407, 0.6349, 0.6265, 0.6168, 0.5982, 0.5844, 0.5687, 0.546, 0.5724, 0.5752, 0.5979, 0.6111, 0.627, 0.6025, 0.6049]};
 
     var gridColor = '#1E2A3A';
     var textColor = '#9FB0C6';

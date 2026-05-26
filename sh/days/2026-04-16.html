@@ -32,6 +32,8 @@
             
         </ul>
         <ul class="market-links">
+            <li><a class="market-btn" href="../../news/index.html" style="background:#9c27b0;color:#fff">早盘必读</a></li>
+            <li><a class="market-btn" href="../../analyzer/search.html" style="background:#f0883e;color:#fff">🔍个股分析</a></li>
             <li><a class="market-btn" href="../../sz/index.html">SZ</a></li>
             <li><a class="market-btn" href="../../kc/index.html">KC</a></li>
             <li><a class="market-btn" href="../../cy/index.html">CY</a></li>
@@ -119,37 +121,7 @@
 
 <h2 class="section-title">OBV涨停梦</h2>
 
-<div class="trading-method">信号日收盘买入 → 次日高点达5%目标价卖出，否则次日收盘卖出。不设止损。3天内同一只股不重复买入</div>
-
-
-<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
-
-
-
-
-<h2 class="section-title">蛰伏涨停</h2>
-
-<div class="trading-method">回收确认信号日收盘买入，持有数天等待涨停或大涨。状态机检测延迟回收，信号稀少但历史胜率极高（94.6%）</div>
-
-
-<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
-
-
-
-
-<h2 class="section-title">跳空涨停基因</h2>
-
-<div class="trading-method">信号日收盘买入 → 次日高点达7%目标价卖出，否则次日收盘卖出。跌破-5%止损即卖出。SH市场D+1卖出更优</div>
-
-
-<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
-
-
-
-
-<h2 class="section-title">缩量突破</h2>
-
-<div class="trading-method">信号日收盘买入 → 持有最多3天，期间高点达7%目标价即卖出，跌破-7%止损即卖出，第3天收盘强制卖出。D+3持有让利润暴增260%</div>
+<div class="trading-method">捕捉 OBV 突破 + 量能激增的资金加速介入信号（上海主板），期望短期继续上冲。</div>
 
 
 <div class="overflow-auto">
@@ -164,20 +136,253 @@
             <th class="num">量比7d</th>
             <th class="num">ADX</th>
             
+            <th>动机</th>
+            
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
             <th>信号诊断</th>
         </tr>
     </thead>
     <tbody>
         
         <tr>
-            <td><a href="../stock/605088.html">605088</a></td>
-            <td class="num">36.42</td>
-            <td class="num text-green arrow-up">6.12%</td>
-            <td class="num">229.7</td>
-            <td class="num">1288002</td>
-            <td class="num">54.8</td>
-            <td class="num">27.5</td>
+            <td><a href="../stock/603701.html">603701</a></td>
+            <td class="num">24.78</td>
+            <td class="num text-green arrow-up">2.99%</td>
+            <td class="num">125.7</td>
+            <td class="num">5154517</td>
+            <td class="num">52.4</td>
+            <td class="num">31.7</td>
             
+            <td><span class="badge motive-待确认">待确认</span></td>
+            
+            <td class="num text-green">0.32%</td>
+            <td class="num text-green">0.89%</td>
+            <td class="num text-green">4.32%</td>
+            <td></td>
+            <td>
+                
+                <details class="diag-detail">
+                    <summary>查看</summary>
+                    
+                    <div class="diag-signal">
+                        <strong>OBV突破</strong>
+                        
+                        <div class="diag-item">
+                            <span>OBV: <strong>5154517</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>30日最高OBV: <strong>5093682</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>突破量: <strong>60834</strong></span>
+                            
+                            <span class="diag-thresh">> > 0</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>成交量激增</strong>
+                        
+                        <div class="diag-item">
+                            <span>量比7d%: <strong>52.4</strong></span>
+                            
+                            <span class="diag-thresh">区间 52~60</span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>量比3d%: <strong>34.2</strong></span>
+                            
+                            <span class="diag-thresh">< 40</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>CCI动量底线</strong>
+                        
+                        <div class="diag-item">
+                            <span>CCI: <strong>125.7</strong></span>
+                            
+                            <span class="diag-thresh">> 50</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>日涨幅>2%</strong>
+                        
+                        <div class="diag-item">
+                            <span>日涨幅%: <strong>2.99%</strong></span>
+                            
+                            <span class="diag-thresh">> 2%</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </details>
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td><a href="../stock/600551.html">600551</a></td>
+            <td class="num">8.2</td>
+            <td class="num text-green arrow-up">2.37%</td>
+            <td class="num">144.7</td>
+            <td class="num">3810183</td>
+            <td class="num">56.5</td>
+            <td class="num">21.3</td>
+            
+            <td><span class="badge motive-待确认">待确认</span></td>
+            
+            <td class="num text-green">0.24%</td>
+            <td class="num text-green">0.85%</td>
+            <td class="num text-green">1.46%</td>
+            <td></td>
+            <td>
+                
+                <details class="diag-detail">
+                    <summary>查看</summary>
+                    
+                    <div class="diag-signal">
+                        <strong>OBV突破</strong>
+                        
+                        <div class="diag-item">
+                            <span>OBV: <strong>3810183</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>30日最高OBV: <strong>3762529</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>突破量: <strong>47653</strong></span>
+                            
+                            <span class="diag-thresh">> > 0</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>成交量激增</strong>
+                        
+                        <div class="diag-item">
+                            <span>量比7d%: <strong>56.5</strong></span>
+                            
+                            <span class="diag-thresh">区间 52~60</span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>量比3d%: <strong>39.4</strong></span>
+                            
+                            <span class="diag-thresh">< 40</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>CCI动量底线</strong>
+                        
+                        <div class="diag-item">
+                            <span>CCI: <strong>144.7</strong></span>
+                            
+                            <span class="diag-thresh">> 50</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>日涨幅>2%</strong>
+                        
+                        <div class="diag-item">
+                            <span>日涨幅%: <strong>2.37%</strong></span>
+                            
+                            <span class="diag-thresh">> 2%</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </details>
+                
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
+
+
+
+
+<h2 class="section-title">蛰伏涨停</h2>
+
+<div class="trading-method">状态机检测「横盘蛰伏 → 缩量涨停 → 回踩 → 延迟回收」形态（上海主板）。从 32,997 个涨停事件中挖出的形态模板，历史胜率 94.6%。</div>
+
+
+<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
+
+
+
+
+<h2 class="section-title">跳空涨停基因</h2>
+
+<div class="trading-method">跳空高开不回补 + 收盘位 ≥0.7 + 近 10 日有涨停的三重共振（上海主板）。SH 市场 D+1 卖出更优。</div>
+
+
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>代码</th>
+            <th class="num">收盘价</th>
+            <th class="num">涨幅%</th>
+            <th class="num">CCI</th>
+            <th class="num">OBV</th>
+            <th class="num">量比7d</th>
+            <th class="num">ADX</th>
+            
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
+            <th>信号诊断</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td><a href="../stock/603815.html">603815</a></td>
+            <td class="num">6.69</td>
+            <td class="num text-green arrow-up">5.19%</td>
+            <td class="num">257.3</td>
+            <td class="num">12184967</td>
+            <td class="num">67.9</td>
+            <td class="num">43.6</td>
+            
+            <td class="num text-red">-1.79%</td>
+            <td class="num text-red">-3.89%</td>
+            <td class="num text-green">10.16%</td>
+            <td>✓</td>
             <td>
                 
                 -
@@ -185,31 +390,52 @@
             </td>
         </tr>
         
+    </tbody>
+</table>
+</div>
+
+
+
+
+<h2 class="section-title">缩量突破</h2>
+
+<div class="trading-method">缩量回调（≤70% 均量）→ 放量突破 10 日高 + 收盘位 ≥0.7 + CCI>50（上海主板），期望突破后 2~3 日确认行情。</div>
+
+
+<div class="overflow-auto">
+<table>
+    <thead>
         <tr>
-            <td><a href="../stock/600845.html">600845</a></td>
-            <td class="num">23.22</td>
-            <td class="num text-green arrow-up">4.45%</td>
-            <td class="num">144.9</td>
-            <td class="num">3476493</td>
-            <td class="num">49.2</td>
-            <td class="num">22.2</td>
+            <th>代码</th>
+            <th class="num">收盘价</th>
+            <th class="num">涨幅%</th>
+            <th class="num">CCI</th>
+            <th class="num">OBV</th>
+            <th class="num">量比7d</th>
+            <th class="num">ADX</th>
             
-            <td>
-                
-                -
-                
-            </td>
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
+            <th>信号诊断</th>
         </tr>
+    </thead>
+    <tbody>
         
         <tr>
-            <td><a href="../stock/603300.html">603300</a></td>
-            <td class="num">7.1</td>
-            <td class="num text-green arrow-up">4.87%</td>
-            <td class="num">177.5</td>
-            <td class="num">84529683</td>
-            <td class="num">51.9</td>
-            <td class="num">22.5</td>
+            <td><a href="../stock/603110.html">603110</a></td>
+            <td class="num">17.6</td>
+            <td class="num text-green arrow-up">6.09%</td>
+            <td class="num">205.9</td>
+            <td class="num">5810842</td>
+            <td class="num">51.1</td>
+            <td class="num">24.5</td>
             
+            <td class="num text-green">0.23%</td>
+            <td class="num text-green">2.39%</td>
+            <td class="num text-green">5.34%</td>
+            <td></td>
             <td>
                 
                 -
@@ -221,11 +447,75 @@
             <td><a href="../stock/600633.html">600633</a></td>
             <td class="num">13.17</td>
             <td class="num text-green arrow-up">3.78%</td>
-            <td class="num">141.9</td>
-            <td class="num">16780825</td>
-            <td class="num">50.1</td>
-            <td class="num">24.0</td>
+            <td class="num">143.3</td>
+            <td class="num">36830720</td>
+            <td class="num">55.7</td>
+            <td class="num">25.8</td>
             
+            <td class="num text-red">-1.52%</td>
+            <td class="num text-red">-0.46%</td>
+            <td class="num text-green">5.09%</td>
+            <td></td>
+            <td>
+                
+                -
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td><a href="../stock/603300.html">603300</a></td>
+            <td class="num">7.1</td>
+            <td class="num text-green arrow-up">4.87%</td>
+            <td class="num">172.9</td>
+            <td class="num">89479518</td>
+            <td class="num">56.7</td>
+            <td class="num">23.1</td>
+            
+            <td class="num text-green">0.99%</td>
+            <td class="num text-red">-0.14%</td>
+            <td class="num text-green">1.69%</td>
+            <td></td>
+            <td>
+                
+                -
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td><a href="../stock/600845.html">600845</a></td>
+            <td class="num">23.22</td>
+            <td class="num text-green arrow-up">4.45%</td>
+            <td class="num">97.1</td>
+            <td class="num">3876075</td>
+            <td class="num">44.1</td>
+            <td class="num">13.2</td>
+            
+            <td class="num text-red">-2.26%</td>
+            <td class="num text-red">-2.69%</td>
+            <td class="num text-green">0.64%</td>
+            <td></td>
+            <td>
+                
+                -
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td><a href="../stock/605088.html">605088</a></td>
+            <td class="num">36.42</td>
+            <td class="num text-green arrow-up">6.12%</td>
+            <td class="num">222.2</td>
+            <td class="num">2546958</td>
+            <td class="num">56.7</td>
+            <td class="num">25.8</td>
+            
+            <td class="num text-green">1.4%</td>
+            <td class="num text-red">-0.82%</td>
+            <td class="num text-green">4.42%</td>
+            <td></td>
             <td>
                 
                 -
@@ -237,11 +527,15 @@
             <td><a href="../stock/603918.html">603918</a></td>
             <td class="num">14.0</td>
             <td class="num text-green arrow-up">2.71%</td>
-            <td class="num">137.8</td>
-            <td class="num">13020436</td>
-            <td class="num">48.0</td>
-            <td class="num">27.7</td>
+            <td class="num">141.3</td>
+            <td class="num">30023452</td>
+            <td class="num">53.5</td>
+            <td class="num">23.3</td>
             
+            <td class="num text-red">-1.57%</td>
+            <td class="num text-red">-0.71%</td>
+            <td class="num text-red">-0.07%</td>
+            <td></td>
             <td>
                 
                 -
@@ -258,7 +552,7 @@
 
 <h2 class="section-title">群龙夺宝</h2>
 
-<div class="trading-method">信号日收盘买入 → 持有最多5天，期间高点达7%目标价即卖出，第5天收盘强制卖出。SH不设止损（无止损PF最优）</div>
+<div class="trading-method">横盘平台内 ≥2 次涨停 + 阳成团阴分散 + 红肥绿瘦 + 放量突破颈线（上海主板），等待主升浪启动（SH 不设止损）。</div>
 
 
 <p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
@@ -268,10 +562,53 @@
 
 <h2 class="section-title">妖股起涨</h2>
 
-<div class="trading-method">信号日收盘买入 → 持有最多5天，期间高点达7%目标价即卖出，跌破-5%止损即卖出，第5天收盘强制卖出。3天内同一只股不重复买入</div>
+<div class="trading-method">底部箱体 ≥20 天 + 跳空放量涨停突破 + 低价 + 小流通市值（上海主板）。作手「腰鼓」战法。</div>
 
 
-<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>代码</th>
+            <th class="num">收盘价</th>
+            <th class="num">涨幅%</th>
+            <th class="num">CCI</th>
+            <th class="num">OBV</th>
+            <th class="num">量比7d</th>
+            <th class="num">ADX</th>
+            
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
+            <th>信号诊断</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td><a href="../stock/600527.html">600527</a></td>
+            <td class="num">2.74</td>
+            <td class="num text-green arrow-up">2.24%</td>
+            <td class="num">115.3</td>
+            <td class="num">34221584</td>
+            <td class="num">59.9</td>
+            <td class="num">24.4</td>
+            
+            <td class="num text-red">-1.82%</td>
+            <td class="num text-red">0.0%</td>
+            <td class="num text-green">0.73%</td>
+            <td></td>
+            <td>
+                
+                -
+                
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
 
 
 
@@ -279,7 +616,13 @@
     </main>
 
     <footer>
-        <p>SH 量化选股系统 v2.0 | 数据来源: 上交所 | 生成于 2026-05-25 23:42 | 仅供研究参考</p>
+        <p>SH 量化选股系统 v2.0 | 数据来源: 上交所 | 生成于 2026-05-25 12:57 | 仅供研究参考</p>
+        <p style="font-size:0.75em;opacity:0.6">
+            build 18a3d269 · 
+            data_as_of 2026-05-25 · 
+            backtest_window 250d · 
+            <a href="../../methodology.html" style="color:inherit">方法论</a>
+        </p>
     </footer>
 
     

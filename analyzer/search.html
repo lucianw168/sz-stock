@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股搜索 — 全量A股分析</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,'PingFang SC',sans-serif; background:#0d1117; color:#c9d1d9; }
+.container { max-width:1000px; margin:0 auto; padding:20px; }
+h1 { color:#58a6ff; margin-bottom:5px; }
+.subtitle { color:#8b949e; margin-bottom:20px; }
+.search-box { display:flex; gap:10px; margin-bottom:20px; }
+.search-box input { flex:1; background:#161b22; border:1px solid #30363d; border-radius:8px; padding:12px 16px; color:#c9d1d9; font-size:16px; }
+.search-box input:focus { border-color:#58a6ff; outline:none; }
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:15px; }
+.filter-btn { background:#21262d; color:#8b949e; border:1px solid #30363d; border-radius:16px; padding:4px 12px; cursor:pointer; font-size:13px; }
+.filter-btn.active { background:#1f6feb33; color:#58a6ff; border-color:#58a6ff; }
+.stats { color:#8b949e; font-size:13px; margin-bottom:10px; }
+.stock-list { display:grid; grid-template-columns:1fr; gap:6px; }
+.stock-item { background:#161b22; border:1px solid #21262d; border-radius:8px; padding:12px 16px; display:grid; grid-template-columns:100px 1fr 120px 160px; align-items:center; gap:12px; cursor:pointer; transition:border-color 0.2s; }
+.stock-item:hover { border-color:#58a6ff; }
+.stock-code { font-weight:bold; color:#58a6ff; font-size:14px; }
+.stock-name { color:#c9d1d9; font-size:14px; }
+.stock-industry { color:#8b949e; font-size:12px; }
+.stock-price { text-align:right; }
+.stock-price .price { font-size:15px; font-weight:bold; }
+.stock-price .change { font-size:12px; }
+.positive { color:#3fb950; }
+.negative { color:#f85149; }
+.limit-up { color:#ff3030; font-weight:700; background:rgba(255,48,48,0.12); padding:2px 6px; border-radius:4px; }
+.limit-down { color:#3fb950; font-weight:700; background:rgba(63,185,80,0.12); padding:2px 6px; border-radius:4px; }
+.stock-wm { font-size:12px; }
+.phase-tag { display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; }
+.phase-oversold { background:#1f6feb33; color:#58a6ff; }
+.phase-decline { background:#f8514933; color:#f85149; }
+.phase-accumulation { background:#3fb95033; color:#3fb950; }
+.phase-breakout { background:#3fb95033; color:#3fb950; }
+.phase-markup { background:#3fb95033; color:#3fb950; }
+.phase-distribution { background:#f8514933; color:#f85149; }
+.phase-sideways { background:#8b949e22; color:#8b949e; }
+.overall-tag { font-size:12px; margin-top:4px; color:#f0883e; }
+.worth { border-left:3px solid #3fb950; }
+.footer { text-align:center; color:#484f58; font-size:12px; margin-top:30px; padding:20px; }
+.loading { text-align:center; padding:40px; color:#8b949e; }
+.detail-panel { background:#0d1117; border:1px solid #30363d; border-radius:0 0 8px 8px; margin-top:-6px; margin-bottom:6px; padding:16px; }
+.detail-section { margin-bottom:14px; }
+.detail-section h3 { color:#58a6ff; font-size:14px; margin-bottom:8px; border-bottom:1px solid #21262d; padding-bottom:4px; }
+.detail-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:8px; }
+.detail-metric { background:#161b22; border-radius:6px; padding:8px; }
+.detail-metric .label { color:#8b949e; font-size:11px; }
+.detail-metric .val { color:#c9d1d9; font-size:15px; font-weight:bold; }
+.signal-item { display:flex; gap:6px; padding:3px 0; font-size:13px; }
+.signal-on { color:#3fb950; }
+.signal-off { color:#484f58; }
+.trading-box { background:#161b22; border-left:3px solid #58a6ff; border-radius:6px; padding:12px; margin-top:8px; font-size:13px; line-height:1.8; }
+.trading-box.no-trade { border-color:#f85149; }
+.full-link { display:inline-block; margin-top:10px; color:#58a6ff; text-decoration:underline; cursor:pointer; font-size:13px; }
+.top-nav { background:#0d1117; border-bottom:1px solid #21262d; padding:0.6em 1em; display:flex; gap:0.6em; flex-wrap:wrap; align-items:center; }
+.top-nav .brand { color:#f0883e; font-weight:700; margin-right:0.6em; text-decoration:none; }
+.top-nav a { color:#9fb0c6; font-size:13px; text-decoration:none; padding:0.2em 0.6em; border-radius:4px; }
+.top-nav a:hover { background:#161b22; color:#c9d1d9; }
+.top-nav .market-btn { color:#fff; padding:0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background:#9c27b0; }
+.top-nav .market-btn[data-market="sz"] { background:#1f6feb; }
+.top-nav .market-btn[data-market="sh"] { background:#1f6feb; }
+.top-nav .market-btn[data-market="kc"] { background:#3fb950; }
+.top-nav .market-btn[data-market="cy"] { background:#3fb950; }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="brand" href="search.html">🔍 个股分析</a>
+  <a href="../index.html">总览</a>
+  <a class="market-btn" data-market="news" href="../news/index.html">早盘必读</a>
+  <a class="market-btn" data-market="sz" href="../sz/index.html">SZ</a>
+  <a class="market-btn" data-market="sh" href="../sh/index.html">SH</a>
+  <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
+  <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
+</nav>
+<div class="container">
+  <h1>个股搜索</h1>
+  <p class="subtitle">全量 A 股分析 (主板+创业板+科创板) · 世界模型结构评估 · <span id="genTime" style="color:#f0883e">加载中...</span></p>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="搜索代码、名称或行业 (如 000001、平安、银行)" oninput="doSearch()">
+  </div>
+
+  <div class="filters">
+    <span class="filter-btn active" onclick="setFilter('all')">全部</span>
+    <span class="filter-btn" onclick="setFilter('hot')">🔥今日热门</span>
+    <span class="filter-btn" onclick="setFilter('worth')">值得关注</span>
+    <span class="filter-btn" onclick="setFilter('oversold')">超跌</span>
+    <span class="filter-btn" onclick="setFilter('accumulation')">底部积累</span>
+    <span class="filter-btn" onclick="setFilter('breakout')">突破</span>
+    <span class="filter-btn" onclick="setFilter('decline')">下跌段</span>
+    <span class="filter-btn" onclick="setFilter('distribution')">出货</span>
+  </div>
+
+  <div class="stats" id="stats">加载中...</div>
+  <div class="stock-list" id="stockList"><div class="loading">正在加载全量数据...</div></div>
+</div>
+
+<div class="footer">
+  数据来源: Tushare · 世界模型: V6j<br>
+  信息仅供参考，请结合自身判断做出投资决策
+</div>
+
+<script>
+let allStocks = [];
+let currentFilter = 'all';
+
+// 从JSON文件加载数据
+fetch('all_stocks.json')
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('genTime').textContent = '数据更新: ' + data.generated_at;
+    allStocks = Object.values(data.stocks).sort((a,b) => b.mv - a.mv);
+    _rawData = data;
+    doSearch();
+  })
+  .catch(e => {
+    document.getElementById('stockList').innerHTML =
+      '<div class="loading">加载数据中...如果长时间无响应请刷新页面<br><br>' +
+      '<span style="font-size:12px;color:#484f58">本地查看请运行: python -m http.server 8000 --directory cn_analyzer/site</span></div>';
+  });
+var _rawData = {stocks:{}};
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  doSearch();
+}
+
+function doSearch() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  let filtered = allStocks;
+
+  if (q) {
+    filtered = filtered.filter(s =>
+      s.code.toLowerCase().includes(q) ||
+      s.name.toLowerCase().includes(q) ||
+      (s.industry && s.industry.toLowerCase().includes(q))
+    );
+  }
+
+  if (currentFilter === 'hot') {
+    filtered = filtered.filter(s => s.is_hot);
+  } else if (currentFilter === 'worth') {
+    filtered = filtered.filter(s => s.wm && s.wm.worth_trading);
+  } else if (currentFilter !== 'all') {
+    filtered = filtered.filter(s => s.wm && s.wm.phase === currentFilter);
+  }
+
+  document.getElementById('stats').textContent =
+    `显示 ${Math.min(filtered.length, 200)} / ${filtered.length} 只 (共${allStocks.length}只 A 股，主板+创业板+科创板)`;
+
+  const html = filtered.slice(0, 200).map(s => {
+    // 涨停判定: 主板 ±10%, 创业板 (300/301) / 科创板 (688) ±20%, 留 0.5pp 容差
+    const num = s.code.split('.')[0];
+    const isCYKC = num.startsWith('300') || num.startsWith('301') || num.startsWith('688');
+    const luThreshold = isCYKC ? 19.5 : 9.5;
+    const isLU = s.pct_chg >= luThreshold;
+    const isLD = s.pct_chg <= -luThreshold;
+    const pctCls = isLU ? 'limit-up' : isLD ? 'limit-down' : (s.pct_chg >= 0 ? 'positive' : 'negative');
+    const pctStr = (s.pct_chg >= 0 ? '+' : '') + s.pct_chg.toFixed(2) + '%' +
+                   (isLU ? ' 🔴涨停' : isLD ? ' 🟢跌停' : '');
+    const phaseCn = {oversold:'超跌',decline:'下跌',accumulation:'积累',
+                     breakout:'突破',markup:'上涨',distribution:'出货',sideways:'横盘'};
+    const phaseClass = s.wm ? 'phase-' + s.wm.phase : 'phase-sideways';
+    const worthCls = s.wm && s.wm.worth_trading ? ' worth' : '';
+    const wmHtml = s.wm ?
+      `<span class="phase-tag ${phaseClass}">${phaseCn[s.wm.phase]||s.wm.phase}</span>` +
+      ` <span style="color:#8b949e">${s.wm.move_segs}笔 ${s.wm.momentum}</span>` +
+      (s.wm.risk_reward > 1.5 ? ` <span style="color:#3fb950">RR${s.wm.risk_reward}</span>` : '')
+      : '<span style="color:#484f58">无数据</span>';
+    const hotHtml = s.is_hot ? '<span style="color:#f0883e;font-size:11px">🔥热门</span> ' : '';
+    const overallHtml = s.assessment ? `<div class="overall-tag">${hotHtml}${s.assessment.overall}</div>` : '';
+    const peStr = s.pe > 0 ? s.pe.toFixed(0) : '亏';
+    const codeNum = s.code.split('.')[0];
+    const suffix = s.code.split('.')[1];
+    const detailUrl = s.code + '.html';
+
+    return `<div class="stock-item${worthCls}" onclick="toggleDetail('${s.code}')">
+      <div><span class="stock-code">${codeNum}</span><br><span class="stock-industry">${s.industry||''}</span></div>
+      <div><span class="stock-name">${s.name}</span>${overallHtml}</div>
+      <div class="stock-price"><div class="price">${s.price.toFixed(2)}</div><div class="change ${pctCls}">${pctStr}</div></div>
+      <div class="stock-wm">${wmHtml}<br><span style="color:#484f58">PE${peStr} 市值${s.mv}亿</span></div>
+    </div><div id="detail-${s.code}" class="detail-panel" style="display:none"></div>`;
+  }).join('');
+
+  document.getElementById('stockList').innerHTML = html || '<div class="loading">未找到匹配股票</div>';
+}
+
+function toggleDetail(code) {
+  const panel = document.getElementById('detail-' + code);
+  if (!panel) return;
+
+  if (panel.style.display === 'none') {
+    const s = _rawData.stocks[code];
+    if (!s) return;
+    panel.innerHTML = buildDetail(s);
+    panel.style.display = 'block';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+function buildDetail(s) {
+  const w = s.wm;
+  const phaseCn = {oversold:'超跌区',decline:'下跌段',accumulation:'底部积累',
+                   breakout:'突破拉升',markup:'主升段',distribution:'顶部出货',sideways:'横盘震荡'};
+  let html = '';
+
+  // 世界模型结构分析
+  html += '<div class="detail-section"><h3>世界模型结构分析</h3>';
+  if (w) {
+    html += '<div class="detail-grid">';
+    html += `<div class="detail-metric"><div class="label">市场阶段</div><div class="val">${phaseCn[w.phase]||w.phase}</div></div>`;
+    html += `<div class="detail-metric"><div class="label">趋势</div><div class="val">${w.direction} ${w.move_segs}笔</div></div>`;
+    html += `<div class="detail-metric"><div class="label">动能</div><div class="val">${w.momentum}</div></div>`;
+    html += `<div class="detail-metric"><div class="label">量能</div><div class="val">${w.volume}</div></div>`;
+    html += `<div class="detail-metric"><div class="label">压力位</div><div class="val">${w.resistance}</div></div>`;
+    html += `<div class="detail-metric"><div class="label">支撑位</div><div class="val">${w.support}</div></div>`;
+    html += `<div class="detail-metric"><div class="label">40日均线</div><div class="val">${w.ma40}</div></div>`;
+    html += `<div class="detail-metric"><div class="label">盈亏比</div><div class="val ${w.risk_reward>=1.5?'positive':'negative'}">${w.risk_reward}:1</div></div>`;
+    html += '</div>';
+
+    // 信号检测
+    html += '<div style="margin-top:10px">';
+    const signals = [
+      ['MACD背驰', w.has_divergence, '动能衰竭，可能反转'],
+      ['MACD金叉', w.has_golden_cross, '多头动能转强'],
+      ['≥5笔走势', w.is_5plus_segs, '走势充分展开，关注转折'],
+      ['确认建仓', w.confirmed_accum, '底部异动+站稳+缩量=机构建仓迹象'],
+    ];
+    signals.forEach(([name, on, desc]) => {
+      const cls = on ? 'signal-on' : 'signal-off';
+      const icon = on ? '✅' : '⬜';
+      html += `<div class="signal-item"><span class="${cls}">${icon} ${name}</span>`;
+      if (on) html += `<span style="color:#8b949e"> — ${desc}</span>`;
+      html += '</div>';
+    });
+
+    // 交易评估
+    if (w.worth_trading) {
+      const upPct = ((w.resistance - s.price) / s.price * 100).toFixed(1);
+      const dnPct = ((w.support - s.price) / s.price * 100).toFixed(1);
+      html += `<div class="trading-box">
+        <strong style="color:#3fb950">结构支持做多</strong><br>
+        入场参考: ${s.price} 附近<br>
+        目标位: ${w.resistance} (${upPct>0?'+':''}${upPct}%)<br>
+        止损位: ${w.support} (${dnPct}%)<br>
+        盈亏比: ${w.risk_reward}:1<br>
+        均线位置: ${w.above_ma40 ? '站在40均线上方' : '在40均线下方，突破站稳才确认'}<br>
+        预测周期: 约10个交易日
+      </div>`;
+    } else {
+      html += `<div class="trading-box no-trade">
+        <strong style="color:#f85149">当前不建议入场</strong><br>`;
+      if (w.risk_reward < 1.5) html += `盈亏比不足 (${w.risk_reward}:1)<br>`;
+      if (w.phase === 'distribution') html += '高位出货迹象<br>';
+      if (w.phase === 'decline' && w.move_segs < 5) html += `下跌仅${w.move_segs}笔，未走完<br>`;
+      if (w.phase === 'sideways') html += '方向不明，等待选择<br>';
+      html += `支撑位: ${w.support} | 压力位: ${w.resistance}`;
+      html += '</div>';
+    }
+    html += '</div>';
+  } else {
+    html += '<div style="color:#484f58">该股票数据不足，无法进行世界模型分析</div>';
+  }
+  html += '</div>';
+
+  // 公司信息
+  if (s.intro || s.main_biz) {
+    html += '<div class="detail-section"><h3>公司信息</h3>';
+    if (s.intro) html += `<div style="font-size:13px;margin-bottom:6px">${s.intro}</div>`;
+    if (s.main_biz) html += `<div style="color:#f0883e;font-size:13px;font-weight:bold">主营: ${s.main_biz}</div>`;
+    if (s.is_hot && s.hot_match) {
+      html += `<div style="margin-top:6px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:12px">🔥 匹配今日热门板块: ${s.hot_match.join(', ')}</span></div>`;
+    }
+    html += '</div>';
+  }
+
+  // 基本面
+  html += '<div class="detail-section"><h3>基本面</h3>';
+  html += '<div class="detail-grid">';
+  html += `<div class="detail-metric"><div class="label">PE(TTM)</div><div class="val">${s.pe > 0 ? s.pe.toFixed(1) : '亏损'}</div></div>`;
+  html += `<div class="detail-metric"><div class="label">PB</div><div class="val">${s.pb.toFixed(2)}</div></div>`;
+  html += `<div class="detail-metric"><div class="label">市值</div><div class="val">${s.mv}亿</div></div>`;
+  html += `<div class="detail-metric"><div class="label">换手率</div><div class="val">${s.turnover.toFixed(2)}%</div></div>`;
+  html += '</div>';
+  if (s.assessment) {
+    html += `<div style="margin-top:8px;color:#f0883e;font-size:13px">${s.assessment.fundamental}</div>`;
+  }
+  html += '</div>';
+
+  // 完整分析链接
+  const detailFile = s.code + '.html';
+  html += `<div style="text-align:center;padding:10px">`;
+  html += `<a href="${detailFile}" class="full-link" style="color:#58a6ff">查看完整分析（公司画像·资金动向·AI评估）→</a>`;
+  html += '</div>';
+
+  return html;
+}
+</script>
+</body>
+</html>

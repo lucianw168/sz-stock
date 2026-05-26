@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方法论说明 - A股量化选股系统</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+<style>
+  body { background:#0d1117; color:#c9d1d9; font-family:-apple-system,'Inter','PingFang SC',sans-serif; }
+  .container { max-width:840px; margin:0 auto; padding:2em 1.4em; }
+  h1 { color:#4fc3f7; font-size:1.8em; margin-bottom:0.2em; }
+  h2 { color:#4fc3f7; margin-top:2em; padding-bottom:0.3em; border-bottom:1px solid #21262d; }
+  h3 { color:#9fb0c6; margin-top:1.6em; }
+  table { width:100%; border-collapse:collapse; margin:0.8em 0; font-size:0.92em; }
+  th, td { padding:0.5em 0.7em; border-bottom:1px solid #21262d; text-align:left; vertical-align:top; }
+  th { color:#9fb0c6; font-weight:500; }
+  code { background:#161b22; padding:0.1em 0.4em; border-radius:3px; color:#f0883e; font-size:0.9em; }
+  .lede { color:#8b949e; margin-bottom:1.6em; }
+  .top-back { display:inline-block; margin-bottom:1.4em; color:#4fc3f7; text-decoration:none; }
+  .note { background:#161b22; border-left:3px solid #f0883e; padding:0.7em 1em; margin:1em 0; font-size:0.92em; }
+  ul li { margin:0.3em 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="top-back" href="index.html">&larr; 返回首页</a>
+  <h1>方法论说明</h1>
+  <p class="lede">本页解释每个市场策略页上能看到的指标、窗口、执行口径、止损与目标价规则。让外部读者能在不读源码的情况下复核站点上展示的每一个数字。</p>
+
+  <h2>1. 回测窗口</h2>
+  <p>站点上能看到三个不同的"窗口"，刻意分开是因为它们回答的不是同一个问题：</p>
+  <table>
+    <thead><tr><th>窗口</th><th>长度</th><th>用途</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>backtest 窗口</b></td>
+        <td>近 250 个交易日（约 1 年）</td>
+        <td>策略页"回测指标"卡片（总交易、胜率、PF、累计、夏普、最大回撤）和收益曲线。1 年长度在 next_open 执行下能让 PF / 累计回报稳定，避免短窗噪声。</td>
+      </tr>
+      <tr>
+        <td><b>deep_stats 窗口</b></td>
+        <td>近 63 个交易日（约 3 个月）</td>
+        <td>"信号表现详析"段落里的 D+1..D+5 收益率分布、涨停率、5 日最大涨幅分布、PF@5%/@7%。这是<i>近期</i>信号质量的截面快照，不是长期回测。</td>
+      </tr>
+      <tr>
+        <td><b>target / 30 日窗口</b></td>
+        <td>近 30 个交易日</td>
+        <td>每日选股详情页（days/<code>YYYY-MM-DD</code>.html）和首页"近 30 日导航"覆盖的范围；同时也是 stock 详情页生成的范围。</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>每个策略页头上的"近 N 个交易日（start → end）"会显示该卡片实际使用的窗口起止，不再硬编码。</p>
+
+  <div class="note">
+    <b>为什么 backtest 用 250 而 deep_stats 用 63？</b><br>
+    250 日是为了让回测指标的统计稳定；63 日是为了反映<i>当前</i>信号在最近季度的表现。如果只看其中一个，要么会在长窗里把短期变化稀释，要么会在短窗里被噪声主导。两者并列展示，刻意让用户能分别审视长期 vs 近期。
+  </div>
+
+  <h2>2. 执行口径</h2>
+  <h3>买入</h3>
+  <p>所有回测使用 <code>entry_mode='next_open'</code>：信号日（D 日）收盘后产生信号，<b>D+1 开盘价</b>买入。策略页"交易明细"里的"买入价"列就是 D+1 开盘价，"信号日"列是 D 日。</p>
+
+  <h3>卖出 / 持有</h3>
+  <p><b>每个策略的目标价、止损、最大持仓天数都不同，且<i>同名策略在不同市场可能不同</i></b>（例如 SH 的妖股起涨不设止损、SZ 的跳空涨停基因 D+3 强卖等）。<b>不在本页给出列表</b>，避免和代码漂移。</p>
+  <p>各策略页顶部的「<b>交易方针</b>」卡片显示一段人工撰写的描述（来自 <code>TRADING_METHODS</code> 字典），<b>不是从代码常量自动渲染的</b>，理论上仍存在文字与配置漂移的风险。<i>权威口径以代码常量为准</i>：</p>
+  <ul style="font-size:0.92em">
+    <li><code>STRATEGY_TARGET_PCT</code>（{sz,sh,kc,cy}/web/data_prep.py）— 目标价 %</li>
+    <li><code>STRATEGY_HOLD_DAYS</code> — 最大持仓天数</li>
+    <li><code>STRATEGY_STOP_LOSS</code> — 止损 %（缺则不设止损）</li>
+    <li><code>STRATEGY_COOLDOWN</code> — 同股冷却天数</li>
+    <li><code>STRATEGY_EXIT_PROFILE</code> / <code>STRATEGY_EXIT_OVERRIDES</code>（config.py）— trailing stop、limit_up_extend 等</li>
+  </ul>
+  <p>策略页 KPI 卡片和交易明细的"净收益%"是用上述常量真值跑出来的；"交易方针"的描述只用来人类阅读理解。如发现两者不符，<b>以 KPI / 交易明细为准</b>。</p>
+
+  <h3>cooldown / 涨停延展</h3>
+  <ul>
+    <li><b>cooldown_days</b>：同一只股在多少个交易日内不重复买入（避免重复信号干扰）。</li>
+    <li><b>limit_up_extend</b>：若到期日仍涨停，强制延展持有 <code>limit_up_max_days</code> 天，防止涨停板上"被迫卖在最高点"。</li>
+  </ul>
+
+  <h3>same_bar_priority</h3>
+  <p><code>open_aware</code>：同一根 K 线既触发止损又触达目标价时，按开盘价相对二者距离判定优先级，避免乐观假设。</p>
+
+  <h3>手续费 / 印花税 / 滑点</h3>
+  <p>引擎默认扣除三项交易成本：</p>
+  <ul>
+    <li><b>万三佣金</b>（双边）— <code>config.COMMISSION_RATE = 0.0003</code></li>
+    <li><b>千一印花税</b>（卖出单边）— <code>config.STAMP_TAX_RATE = 0.001</code></li>
+    <li><b>千一滑点</b>（双边，买入价 × 1.001 / 卖出价 × 0.999）— <code>config.SLIPPAGE_RATE = 0.001</code></li>
+  </ul>
+  <p>所有策略页 KPI 卡片（PF / 累计 / 夏普 / 最大回撤）和交易明细的「净收益%」<i>已扣除以上三项</i>。<b>未建模</b>：停牌跳过、单笔仓位上限、分红/送股调整。</p>
+
+  <h2>3. 指标定义</h2>
+  <table>
+    <thead><tr><th>指标</th><th>定义</th></tr></thead>
+    <tbody>
+      <tr><td><b>胜率</b></td><td>盈利交易数 / 总交易数（按净收益判定）。</td></tr>
+      <tr><td><b>涨停率</b></td><td>持仓期内任一交易日触及涨停的交易数 / 总交易数。</td></tr>
+      <tr><td><b>盈亏比 (PF)</b></td><td>所有盈利交易盈利总和 / 所有亏损交易亏损绝对值总和（净额口径，已扣 万三佣金 + 千一印花税 + 千一滑点）。&gt;1 即整体盈利。</td></tr>
+      <tr><td><b>累计收益</b></td><td>将所有交易按出现顺序复利得到的等权净值变化（已扣 万三佣金 + 千一印花税 + 千一滑点）。</td></tr>
+      <tr><td><b>年化收益</b></td><td>累计收益按 252 个交易日年化。</td></tr>
+      <tr><td><b>夏普比率</b></td><td>(均值 - 0) / 标准差，按 252 年化，不扣除无风险利率。</td></tr>
+      <tr><td><b>索提诺</b></td><td>同夏普，但仅用下行波动作为分母。</td></tr>
+      <tr><td><b>最大回撤</b></td><td>等权净值序列从历史峰值到谷值的最大回撤百分比。</td></tr>
+      <tr><td><b>PF@5% (WR 8.3%)</b></td><td>"信号表现详析"专用指标：用 D+1 高点是否达 +5% 作为"是否触发目标价"的口径计算的 PF；WR 即 Win Rate（命中目标价的比例）。这是<i>信号研究口径</i>，<b>不含费</b>，与 KPI 卡片的 PF 不同。</td></tr>
+      <tr><td><b>D+1 vs 信号收盘 / D+2 vs 信号收盘 / D+5 max%</b></td><td>"近 30 日"日报里的列：以<i>信号日 close</i> 为基准的涨跌幅，仅供观察"信号后这只股走成什么样"。<b>不代表策略实际收益</b>（实际按 next_open 执行 + 含费，见各策略页 KPI 卡片）。</td></tr>
+      <tr><td><b>5日内涨停（日报列）</b></td><td>信号后 1~5 个交易日内任一收盘是否触及涨停 —— 市场事实，与策略止盈无关。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>三组数字的口径差异（专业读者请优先理解这一点）：</b><br>
+    1. <b>策略页 KPI 卡片（PF / 累计 / 夏普 / 最大回撤）+ 交易明细「净收益%」</b>：<i>实战口径</i>。next_open 执行 + 万三佣金 + 千一印花税 + 千一滑点 + 策略目标 / 止损 / 持仓到期。<br>
+    2. <b>"信号表现详析"段落的 D+N / PF@5%</b>：<i>信号研究口径</i>。从信号日 close 计的 D+1..D+5 价格分布；不含费、不含执行模型。回答"信号本身的截面质量"。<br>
+    3. <b>"近 30 日"日报里的 D+N 列</b>：<i>观察口径</i>。让用户复盘"那一天的推荐后来走成什么样"。同样不含费，是描述性的。<br>
+    三组都各有用，但<b>不要拿同一只股、同一信号在三处看到的数字直接互相加减</b> —— 它们计的不是同一个量。
+  </div>
+
+  <h2>4. 选股域 (universe)</h2>
+  <p>每个市场板块独立运行：</p>
+  <ul>
+    <li><b>SZ</b>：深圳主板（000xxx / 001-003），10% 涨停。</li>
+    <li><b>SH</b>：上海主板（600xxx / 605），10% 涨停。</li>
+    <li><b>KC</b>：科创板（688 / 689），30% 涨停。</li>
+    <li><b>CY</b>：创业板（300 / 301），20% 涨停。</li>
+    <li>每个板块的策略集合不同；首页卡片"X 个策略"反映的是该板块当前实际部署的子集。</li>
+  </ul>
+
+  <h2>5. 数据来源</h2>
+  <ul>
+    <li>日线：<b>Tushare Pro</b>（主），<b>yfinance</b>（备 / 盘中实时延迟约 15 分钟）。</li>
+    <li>新闻：财联社、新浪财经、证券时报、同花顺、东方财富。</li>
+    <li>个股分析：tushare 财务数据 + 公司画像 + 自研世界模型 (V6j Joy-JEPA)。</li>
+  </ul>
+
+  <h2>6. 不展示什么 / 已知局限</h2>
+  <ul>
+    <li><b>已扣</b>万三佣金 + 千一印花税 + 千一滑点。<b>未建模</b>：停牌跳过、单笔仓位上限、分红 / 送股调整。</li>
+    <li><b>不做多市场组合权重</b>，回测全部按"等权 1 信号 1 仓位"执行，不考虑资金分配。</li>
+    <li><b>失败明细的"买入次日缺口%"</b>是 D+1 开盘（即 <code>entry_date</code>，实际买入日）vs 信号日收盘的缺口百分比，无论策略持仓 1 日还是 5 日都按 <code>entry_date</code> 取。</li>
+    <li><b>近 30 日明细切换</b>仅是前端 hide/show，不是重新计算 PF。切到"仅近 30 日"后，KPI 卡上的 PF 仍是 250 日窗口的真值。</li>
+    <li><b>"信号表现详析"使用 63 日窗口</b>，"回测指标"卡使用 250 日窗口。同一策略两段的笔数、PF 不一定相同，正是因为窗口不同 —— 窗口标签会显式标注。</li>
+  </ul>
+
+  <h2>7. 复核入口</h2>
+  <p>每个市场策略页上的<b>交易明细</b>表给出全部交易（默认显示 250 日）：买入日期、卖出日期、代码、买入价、卖出价、实际收益、是否达标、是否涨停。结合页面顶部的窗口标签，外部读者可以独立验算 PF / 胜率 / 累计收益。</p>
+  <p>30 日窗口外的股票码以纯文本显示（无超链接），因为 stock 详情页只为最近 30 日内被选中的标的生成。</p>
+
+  <p style="margin-top:3em; font-size:0.85em; color:#8b949e">本页由 publisher 在每次发布时静态部署，与生成器代码同步迭代。如对具体数字有疑问，请在 issue 里标明 commit sha 与日期。</p>
+</div>
+</body>
+</html>
