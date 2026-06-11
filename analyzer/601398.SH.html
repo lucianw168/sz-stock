@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>601398.SH 工商银行</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 601398.SH 中国工商银行股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,58 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>601398.SH 工商银行 <span style="color:#3fb950;font-size:20px">7.69 (+1.99%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 银行 · 市值27408亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(-0.1:1) → 等回调</div>
-<div style="color:#8b949e;font-size:13px">低估值 · 横盘, 4笔下跌, 动能温和</div>
-<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 银行</span></div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="601398">
+    <button onclick="doSearch()">分析</button>
+  </div>
+
+  <div class="summary-box"><div class="summary-overall">★ **观望**（当前处于下跌加速期，盈亏比极差，建议等待回调至7.22附近或趋势反转信号出现后再行考虑）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 工商银行PE(TTM)为7.4倍，显著低于行业6.0倍的中位数，PB为0.70，处于破净状态，显示市场对其资产质量或增长潜力的极度悲观定价；ROE仅2.0%且净利润同比仅微增3.3%，显示盈利能力处于历史低位且缺乏爆发力。
+**成长性与健康度：** 营收增速8.3%尚可，但负债率高达92.2%是银行业常态，结合低ROE和微弱的成长性，表明该标的属于典型的“低估值、低增长、防御性”资产，缺乏作为进攻型标的的财务弹性。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型判断：** 世界模型判定当前处于“下跌趋势的第4笔”，且动能正在“加速”，这意味着价格并未见底，反而正在快速远离支撑区；空间评估显示下方风险（4.8 ATR）远大于上方空间（0.6 ATR），盈亏比仅为-0.1:1，属于极高风险区域。
+**资金验证：** 资金面数据完全验证了模型的看空信号：主力连续3日净流出累计1.4亿，融资余额也在减少，呈现典型的“主力出货、散户接盘”格局，这与模型判断的“动能加速下跌”高度一致，不存在背离。
+**关键发现：** 模型指出当前处于“没有明显的趋势方向”的混沌期，且位于40日均线下方，说明多头防线已失守，短期内缺乏向上驱动力，所谓的“超跌”并未形成，因为下跌结构（第4笔）尚未走完。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师建议：** **完全同意**世界模型的“不建议入场/等待”判断。
+**可行性分析：** 尽管工商银行是低估值蓝筹，但在世界模型结构中，价格处于加速下跌的“主跌段”而非“主升段”或“底部震荡区”。此时入场属于“接飞刀”，资金面的持续流出也证实了市场抛压并未衰竭。
+**具体方案（若强行做多）：**
+*   **入场价：** 建议等待回调至 **7.22** 附近（第一支撑位），此时盈亏比才具备正向价值。
+*   **目标价：** 短期反弹目标看至 **7.62**（第一压力位）。
+*   **止损价：** 跌破 **7.00** 必须无条件离场，防止趋势加速下行。
+*   **盈亏比：** 约 1:1.5（从7.22进，止盈7.62，止损7.00）。
+*   **建议仓位：** 0%（当前不做），仅当价格触及7.22且出现缩量企稳信号时，轻仓试错。
+**等待信号：** 等待日线级别出现“第5笔”的转折信号，或价格有效站稳40日均线（7.38）上方，确认下跌结构结束。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **趋势惯性风险：** 模型显示动能正在“加速”，一旦跌破7.22支撑，惯性可能导致价格迅速击穿7.00整数关口，引发连锁反应。
+2.  **宏观流动性风险：** 银行股对利率敏感，若市场流动性收紧或LPR下调不及预期，将直接压制估值修复空间。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 7.4 | PB 0.7 | ROE 2.0% | 利润+3% | 营收+8%</div></div><div class="card"><h2>601398.SH 中国工商银行股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">7.66 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">银行</span></h2><div class="intro">中国工商银行股份有限公司成立于1984年1月1日。2005年10月28日,本行整体改制为股份有限公司。2006年10月27日,本行成功在上交所和香港联交所同日挂牌上市。本行致力于建设中国特色世界一流现...</div><div class="main-biz">主营: 提供银行及相关金融服务。
+个人金融业务,资金业务,投资银行业务,资产管理,信托,金融租赁</div><div style="color:#8b949e;font-size:13px">北京北京市 · 员工409,758人 · 成立1985年 · www.icbc.com.cn,www.icbc-ltd.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出5753万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-1.4亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入2681万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额23.9亿(近5日-1.10亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日4笔大宗交易(合计0万)</div></div></div><div style="margin-top:8px"><span class="tag tag-bad">连续3日流出</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额减少，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>银行</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">银行</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">7.4 (行业中位6)</div></div><div class="metric"><div class="label">PB</div><div class="value ">0.70 (行业中位0.6)</div></div><div class="metric"><div class="label">市值</div><div class="value ">27301亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">2.0%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+3.3%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+8.3%</div></div><div class="metric"><div class="label">负债率</div><div class="value negative">92.2%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">0.11%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。下跌中（4笔），仍在主跌段。动能加速（最近一笔波动幅度较大，走势在加速）。量能温和，多空均衡。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 4笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能加速</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">加速</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">多空均衡</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">-0.3 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">3.1 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">⚠️ <b>下跌进行中（4笔）</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 仍在主跌段，不宜抄底</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.8ATR)明显大于上方空间(0.6ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-06-11 10:55 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">中国工商银行（全称：中国工商银行股份有限公司，Industrial and Commercial Bank of China）简称ICBC ，成立于1984年1月1日。成立于1984年，是中国五大银行之首，世界五百强企业之一，拥有中国最大的...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 商业银行业务。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">下跌 4笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">7.62</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">7.22</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">7.37</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">-0.1:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(-0.1:1)<br>方向不明<br>
-                支撑: 7.22 | 压力: 7.62</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">7.4 (行业中位6)</div></div>
-<div class="m"><div class="l">PB</div><div class="v">0.71 (行业中位0.6)</div></div>
-<div class="m"><div class="l">市值</div><div class="v">27408亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">0.15%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>

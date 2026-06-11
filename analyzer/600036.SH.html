@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>600036.SH 招商银行</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 600036.SH 招商银行股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,54 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>600036.SH 招商银行 <span style="color:#3fb950;font-size:20px">38.90 (+1.07%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 银行 · 市值9811亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.5:1) → 等回调</div>
-<div style="color:#8b949e;font-size:13px">低估值 · 突破, 2笔上涨, 动能转强</div>
-<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 银行</span></div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="600036">
+    <button onclick="doSearch()">分析</button>
+  </div>
+
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（等待回调至37.00附近改善盈亏比后再做决策）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司PE(TTM)为6.5倍，略高于行业6.0倍的中位数，但PB(0.86)显著高于行业0.6的中位数，显示出市场对招行零售业务及财富管理能力的溢价认可；ROE为3.0%在银行板块中表现稳健，净利润与营收均保持个位数增长（+1.5%/+3.8%），体现了抗周期韧性。
+**财务健康：** 作为头部银行，其90.4%的负债率符合行业特征，资产质量整体可控，但需关注宏观经济波动对零售信贷资产质量的影响。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型判断：** 世界模型判定当前处于“上涨趋势第2笔”的动能转强阶段，且检测到“建仓迹象”（底部异常放量后站稳），这通常意味着主力资金在低位完成了初步吸筹，短期存在二次加速的结构性机会。
+**资金验证：** 资金面数据与世界模型存在**明显背离**：虽然模型提示有“主力建仓”，但实际数据显示主力连续4日净流出（-7305万），且融资余额下降，说明当前的“建仓”更多是散户接盘或主力通过隐蔽渠道运作，而非显性的大资金抢筹，这削弱了模型信号的即时爆发力。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师建议：** **不同意立即入场。** 尽管世界模型提示“建仓迹象”，但资金面持续流出（主力卖、散户买）表明当前筹码交换并不健康，且模型给出的盈亏比仅为0.7:1，属于极高风险区域。
+**具体操作：**
+*   **策略：** 建议**观望**，等待回调确认。
+*   **关键价位：** 重点关注**37.00元**（第一支撑位）。若股价能缩量企稳于此位置，则符合模型中“缩量回调”的健康特征，届时盈亏比将大幅改善。
+*   **止损/离场：** 若有效跌破37.00，结构破坏，需离场观望，下一支撑在35.89。
+*   **目标：** 短期第一压力位39.91元，但鉴于资金流出，突破难度较大。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **资金背离风险：** 模型提示“主力建仓”但盘面显示“主力连续流出”，这种信号冲突极易导致诱多行情，散户资金入场接盘风险高。
+2.  **宏观利率风险：** 作为高息资产，若LPR下调或市场无风险利率进一步下行，银行净息差收窄将压制其估值修复空间。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 6.5 | PB 0.9 | ROE 3.0% | 利润+2% | 营收+4%</div></div><div class="card"><h2>600036.SH 招商银行股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">38.73 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">银行</span></h2><div class="intro">招商银行股份有限公司于1987年在深圳创建,是中国境内第一家完全由企业法人持股的股份制商业银行,成立38年来逐步发展成为沪港两地上市,拥有商业银行、金融租赁、基金管理、人寿保险、境外投行、消费金融、理...</div><div class="main-biz">主营: 主要业务分部包括零售金融业务和批发金融业务。零售金融业务主要有财富管理业务,私人银行业务,信用卡业务,零售贷款。批发金融业务主要有批发客户,公司客户存款,公司贷款,科技金融业务,普惠金融业务,养老金融业务,票据业务,交易银行业务,跨境金融业务,投资银行业务,同业业务,资产管理业务,资产托管业务,金融市场业务。
+贷款,存放中央银行,拆借,存放,债券投资,手续费及佣金收入</div><div style="color:#8b949e;font-size:13px">广东深圳市 · 员工121,585人 · 成立1987年 · www.cmbchina.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出2561万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-7305万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入3991万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额114.9亿(近5日-3.92亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-bad">连续4日流出</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额减少，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>银行</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">银行</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">6.5 (行业中位6)</div></div><div class="metric"><div class="label">PB</div><div class="value ">0.86 (行业中位0.6, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">9768亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">3.0%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+1.5%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+3.8%</div></div><div class="metric"><div class="label">负债率</div><div class="value negative">90.4%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">0.29%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">站稳关键均线上方，动能转强。短期反弹4.9%，处于中间位置，方向待确认。动能转强（MACD出现金叉，短期动能转向多方）。量能放量，买方明显主导。处于近60日中间位置。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-breakout phase-badge">突破拉升</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中间位置</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">2.2 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">3.2 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>MACD零轴上方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 多头趋势中的二次加速信号</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">💰 <b>检测到建仓迹象</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 近期底部出现异常放量后站稳且缩量回调——这种模式历史上后续上涨空间显著高于平均</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(3.6ATR)明显大于上方空间(0.7ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-06-11 10:50 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">招商银行股份有限公司、成立于1987年4月8日，是我国第一家完全由企业法人持股的股份制商业银行，总行设在深圳。自成立以来，招商银行先后进行了三次增资扩股，并于2002年3月成功地发行了15亿A股，4月9日在上交所挂牌（股票代码：600036...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 吸收社会公众存款、发放短期和中长期贷款、结算、办理票据贴现、发行金融债券、代理发行、代理兑付及承销政府债券、买卖政府债券、同业拆借等。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">突破拉升</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
-<div class="m"><div class="l">量能</div><div class="v">放量</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">39.91</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">37.0</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">38.38</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">0.5:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#3fb950">✅ 确认建仓 — <span style="color:#8b949e">机构建仓迹象</span></div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(0.5:1)<br>
-                支撑: 37.0 | 压力: 39.91</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">6.5 (行业中位6)</div></div>
-<div class="m"><div class="l">PB</div><div class="v">0.87 (行业中位0.6, 偏高)</div></div>
-<div class="m"><div class="l">市值</div><div class="v">9811亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">0.45%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
