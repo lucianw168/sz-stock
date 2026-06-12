@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 688981.SH 中芯国际集成电路制造有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>688981.SH 中芯国际</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,60 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>688981.SH 中芯国际 <span style="color:#f85149;font-size:20px">124.88 (-1.98%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 半导体 · 市值10007亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="688981">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 横盘, 动能转弱 → 观望</div>
+<div style="color:#8b949e;font-size:13px">高估值 · 横盘, 2笔下跌, 动能转弱</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：当前处于高估值叠加动能转弱的调整期，建议等待价格回踩108元附近企稳或出现右侧放量突破信号后再行介入。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司处于显著的高估值区间，PE(TTM)高达202.3倍（行业仅50倍），PB为6.81倍（行业5.0倍），这通常意味着市场对其未来高成长性有极高预期，但当前ROE仅为0.9%，显示短期盈利能力尚未释放以匹配高估值。
-**成长与财务**：营收同比增长8.1%但净利润几乎停滞（+0.4%），呈现“增收不增利”的剪刀差，且负债率34.9%在重资产行业属正常水平，但高估值掩盖了短期盈利波动的风险。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 1. **市场阶段与空间**：世界模型判定当前处于“下跌趋势中的第2笔走势”，动能转弱（MACD死叉），但空间评估显示上方阻力（2.7 ATR）大于下方支撑（2.0 ATR），意味着短期抛压较重，但下行空间相对有限，处于“上有顶、下有底”的震荡整理期。
-2. **关键信号与矛盾**：模型指出“回调仍在40日均线上方”，暗示中期趋势未坏，但这与“动能转弱”形成矛盾——即价格虽未破位，但买盘意愿不足；资金面验证了这一点，近5日主力净流出5.9亿，融资余额减少，说明聪明钱在借机调仓，并未形成合力推动上涨。
-3. **结论**：世界模型判断的“非趋势期”与资金面的“主力流出”高度共振，确认当前并非左侧抄底良机，而是右侧等待方向选择的关键节点。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：
-*   **同意世界模型的“等待”判断**。虽然模型给出的盈亏比（1.4:1）看似尚可，但结合资金面主力持续流出和MACD死叉，此时入场属于“接飞刀”风险大于机会。模型建议的“回调至107.96"是更优的博弈点，因为那里是强支撑位，且能大幅改善盈亏比。
-*   **可行性分析**：当前价格127.40距离第一支撑107.96仍有约15%的跌幅空间，在没有明确放量突破信号前，强行做多胜率较低。资金面的主力流出表明短期缺乏增量资金，需等待方向选择。
-*   **具体操作建议**：
-    *   **建议**：**观望/等待回调**。
-    *   **若坚持做多**：建议等待价格回落至 **108.00 - 110.00** 区间（接近第一支撑位）再考虑轻仓介入。
-    *   **目标价**：第一压力位 **153.70**。
-    *   **止损价**：有效跌破 **107.96** 后需立即离场，防止趋势加速。
-    *   **盈亏比**：在108元附近入场，盈亏比可提升至 **1.6:1** 以上。
-    *   **仓位**：建议不超过总资金的10%，作为波段配置。
-*   **若不做**：重点关注 **107.96** 附近的支撑有效性，若此处放量跌破，则确认下跌趋势延续，下一目标看 **104.72**。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **估值回归风险**：当前200倍PE远高于行业均值，一旦半导体行业景气度不及预期或公司业绩增速放缓，高估值将面临剧烈的“杀估值”回调。
-2.  **技术面破位风险**：若价格跌破107.96支撑位，世界模型结构将发生破坏，可能引发连锁抛盘，导致短期快速下跌至104.72附近。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 202.3 | PB 6.8 | ROE 0.9% | 利润+0% | 营收+8%</div></div><div class="card"><h2>688981.SH 中芯国际集成电路制造有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">127.40 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">半导体</span></h2><div class="intro">中芯国际集成电路制造有限公司(证券代码:00981.HK/688981.SH)是世界领先的集成电路晶圆代工企业之一,也是中国大陆集成电路制造业领导者,拥有领先的工艺制造能力、产能优势、服务配套,向全球...</div><div class="main-biz">主营: 主要从事基于多种技术节点和技术平台的集成电路晶圆代工业务,并提供设计服务与IP支持、光掩模制造等配套服务
-集成电路晶圆代工,设计服务与IP支持,光掩模制造等</div><div style="color:#8b949e;font-size:13px">境外境外 · 员工19,952人 · 成立2000年 · www.smics.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入1.7亿</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-5.9亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出5893万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额127.1亿(近5日-5.85亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日1笔大宗交易(合计0万)</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额减少，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>半导体</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">半导体</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">202.3 (行业中位50, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">6.81 (行业中位5.0)</div></div><div class="metric"><div class="label">市值</div><div class="value ">10209亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">0.9%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+0.4%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+8.1%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">34.9%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">3.13%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。短期回调20.7%。动能转弱（MACD出现死叉，短期动能转向空方）。量能温和，多空均衡。处于近60日中间位置。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转弱</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转弱</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期死叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">多空均衡</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中间位置</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">2.7 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">2.0 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔴 <b>MACD死叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 短期动能转空</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>回调但仍在40日均线上方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 中期趋势仍在，回调可能是上升途中的正常调整</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>上方空间(3.2ATR)明显大于下方风险(1.5ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比有利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-06-11 11:12 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">中芯国际集成电路制造有限公司是一家主要从事集成电路（IC）的电脑辅助设计、制造、测试、封装及买卖业务并提供他半导体服务的投资控股公司。该公司还设计和制造半导体掩膜。该公司的主要产品为多种种类晶圆。该公司的产品销往中国国内与海外市场，如美国和...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 全球领先的集成电路晶圆代工企业之一，也是中国大陆技术最先进、规模最大、配套服务最完善、跨国经营的专业晶圆代工企业，主要为客户提供0.35微米至14纳米多种技术节点、不同工艺平台的集成电路晶圆代工及配套服务。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">转弱</div></div>
+<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">153.7</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">107.96</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">123.73</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v pos">1.7:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                方向不明<br>
+                支撑: 107.96 | 压力: 153.7</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">198.3 (行业中位50, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">6.68 (行业中位5.0)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">10007亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">4.09%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>

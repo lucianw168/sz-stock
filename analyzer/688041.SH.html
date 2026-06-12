@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 688041.SH 海光信息技术股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>688041.SH 海光信息</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,51 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>688041.SH 海光信息 <span style="color:#f85149;font-size:20px">280.00 (-3.40%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 半导体 · 市值6508亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="688041">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 横盘, 动能温和 → 观望</div>
+<div style="color:#8b949e;font-size:13px">高估值 · 横盘, 4笔下跌, 动能温和</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（当前处于下跌趋势中的加速段，且估值过高，建议等待回调至217.54附近再考虑布局）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值严重溢价，成长性与估值错配。** 公司PE(TTM)高达247.1倍，是行业PE中位数（50倍）的近5倍，PB也高达28.67倍，显示市场对其“国产替代”和“算力”概念给予了极高的风险溢价。虽然营收增速（+68.1%）和净利润增速（+35.8%）非常亮眼，但ROE仅为3.0%，说明当前的利润规模尚不足以支撑如此高的估值，且高负债率（22.8%）在半导体行业属于中等偏高水平，财务健康度存在一定压力。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **世界模型判断处于“下跌趋势中的加速段”，与资金面形成微妙背离。** 模型显示股价处于第4笔下跌走势且动能加速，意味着短期抛压未减，上方空间（2.9 ATR）小于下方空间（3.5 ATR），处于相对低位但非绝对底部。关键发现是“卖方主导”且“无明确方向”，这通常对应震荡筑底前的混沌期。资金面显示主力近5日累计净流出1.5亿，而散户和融资盘在逆势买入，这种“主力流出、散户接盘”的结构往往验证了世界模型中“不宜抄底”的判断，因为主力尚未完成筹码交换或确认底部。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**不同意立即入场，建议严格执行“等待”策略。**
-*   **理由：** 世界模型明确指出“上方空间有限”且“盈亏比仅0.8:1"，在交易数学上这是负期望值的操作。资金面主力持续流出也佐证了短期缺乏向上驱动力。
-*   **如果做多：** 建议**观望**。若强行介入，建议等待股价回调至**217.54**（第一支撑位）附近，此时盈亏比将大幅改善，且能确认支撑有效性。
-*   **具体参数：** 目标价349.19，止损价211.01（跌破支撑位离场），建议仓位控制在**10%以下**或空仓。
-*   **如果不做：** 等待**217.54**附近的企稳信号，或等待股价有效突破**295.87**（40日均线）确认趋势反转。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **估值回调风险：** 极高的PE（247倍）意味着任何业绩不及预期或行业情绪降温，都会引发剧烈的估值回归（杀估值）。
-2.  **技术面破位风险：** 当前处于下跌加速段，若跌破217.54支撑位，将打开新的下跌空间，且融资盘的高位加仓可能引发踩踏。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 247.1 | PB 28.7 | ROE 3.0% | 利润+36% | 营收+68%</div></div><div class="card"><h2>688041.SH 海光信息技术股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">289.84 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">半导体</span></h2><div class="intro">海光信息技术股份有限公司成立于2014年,主要从事高端处理器、加速器等计算芯片产品和系统的研究、开发,目标成为世界一流的芯片企业,为数字中国提供核心计算引擎。作为国产先进微处理器产业的推动者,海光信息...</div><div class="main-biz">主营: 研发、设计和销售应用于服务器、工作站等计算、存储设备中的高端处理器
-高端通用处理器(CPU)和协处理器(DCU)</div><div style="color:#8b949e;font-size:13px">天津天津市 · 员工3,333人 · 成立2014年 · www.hygon.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入1749万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-1.5亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入5146万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额116.2亿(近5日+5.98亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">沪深港通十大成交股(净卖出0万)</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日4笔大宗交易(合计0万)</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续2日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额增加，外资关注(港通十大)</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>半导体</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">半导体</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">247.1 (行业中位50, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">28.67 (行业中位5.0, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">6737亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">3.0%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+35.8%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+68.1%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">22.8%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">1.75%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。下跌中（4笔），仍在主跌段。动能加速（最近一笔波动幅度较大，走势在加速）。量能温和，卖方明显主导。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 4笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能加速</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">加速</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">2.9 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">3.5 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">⚠️ <b>下跌进行中（4笔）</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 仍在主跌段，不宜抄底</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-06-11 11:13 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">海光信息技术股份有限公司办公室地址位于环渤海地区经济中心天津，天津 天津华苑产业区海泰西路18号北2204工业孵化38，于2014年10月24日在天津市滨海新区市场监督管理局注册成立，注册资本为202433.8091（万元），在公司发展壮大...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 研发、设计和销售应用于服务器、工作站等计算、存储设备中的高端处理器。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 4笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">349.19</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">217.54</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">296.65</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">1.1:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(1.1:1)<br>方向不明<br>
+                支撑: 217.54 | 压力: 349.19</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">238.7 (行业中位50, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">27.70 (行业中位5.0, 偏高)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">6508亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">2.12%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
