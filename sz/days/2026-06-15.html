@@ -55,32 +55,32 @@
 </div>
 
 
-<div style="background:var(--card-bg);border-left:4px solid #69f0ae;padding:0.8rem 1.2rem;margin:1rem 0;border-radius:4px">
+<div style="background:var(--card-bg);border-left:4px solid #00e676;padding:0.8rem 1.2rem;margin:1rem 0;border-radius:4px">
     <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">市场环境</span><br>
-            <span style="font-size:1.4rem;font-weight:bold;color:#69f0ae">偏强</span>
+            <span style="font-size:1.4rem;font-weight:bold;color:#00e676">强势</span>
         </div>
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">指数涨幅</span><br>
-            <span style="font-size:1.1rem;color:#00e676">+1.71%</span>
+            <span style="font-size:1.1rem;color:#00e676">+2.00%</span>
         </div>
         
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">涨跌比</span><br>
-            <span style="font-size:1.1rem">2449/406</span>
-            <span style="color:var(--text-secondary);font-size:0.8rem">(85%)</span>
+            <span style="font-size:1.1rem">2493/362</span>
+            <span style="color:var(--text-secondary);font-size:0.8rem">(87%)</span>
         </div>
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">涨停/跌停</span><br>
-            <span style="font-size:1.1rem;color:#00e676">22</span>
+            <span style="font-size:1.1rem;color:#00e676">62</span>
             /
-            <span style="font-size:1.1rem;color:#ff5252">4</span>
+            <span style="font-size:1.1rem;color:#ff5252">7</span>
         </div>
         
         <div style="margin-left:auto">
             <span style="color:var(--text-secondary);font-size:0.75rem">C1</span><br>
-            <span style="font-size:0.9rem">1.4</span>
+            <span style="font-size:0.9rem">2.17</span>
         </div>
     </div>
     
@@ -128,7 +128,122 @@
 <div class="trading-method">捕捉 OBV 突破 + 量能激增的资金加速介入信号，期望短期继续上冲。</div>
 
 
-<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>代码</th>
+            <th class="num">收盘价</th>
+            <th class="num">涨幅%</th>
+            <th class="num">CCI</th>
+            <th class="num">OBV</th>
+            <th class="num">量比7d</th>
+            <th class="num">ADX</th>
+            
+            <th>动机</th>
+            
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
+            <th>信号诊断</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td><a href="../stock/002064.html">002064</a></td>
+            <td class="num">11.0</td>
+            <td class="num text-green arrow-up">6.28%</td>
+            <td class="num">271.0</td>
+            <td class="num">27767152</td>
+            <td class="num">52.6</td>
+            <td class="num">16.0</td>
+            
+            <td><span class="badge motive-待确认">待确认</span></td>
+            
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td><span style="color:var(--text-secondary)">—</span></td>
+            <td>
+                
+                <details class="diag-detail">
+                    <summary>查看</summary>
+                    
+                    <div class="diag-signal">
+                        <strong>OBV突破</strong>
+                        
+                        <div class="diag-item">
+                            <span>OBV: <strong>27767152</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>30日最高OBV: <strong>27505167</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>突破量: <strong>261985</strong></span>
+                            
+                            <span class="diag-thresh">> > 0</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>成交量激增</strong>
+                        
+                        <div class="diag-item">
+                            <span>量比7d%: <strong>52.6</strong></span>
+                            
+                            <span class="diag-thresh">区间 52~60</span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>量比3d%: <strong>36.4</strong></span>
+                            
+                            <span class="diag-thresh">< 40</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>CCI动量底线</strong>
+                        
+                        <div class="diag-item">
+                            <span>CCI: <strong>271.0</strong></span>
+                            
+                            <span class="diag-thresh">> 50</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>日涨幅>2%</strong>
+                        
+                        <div class="diag-item">
+                            <span>日涨幅%: <strong>6.28%</strong></span>
+                            
+                            <span class="diag-thresh">> 2%</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </details>
+                
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
 
 
 
@@ -180,133 +295,13 @@
     <tbody>
         
         <tr>
-            <td><a href="../stock/000506.html">000506</a></td>
-            <td class="num">14.6</td>
-            <td class="num text-green arrow-up">6.34%</td>
-            <td class="num">68.6</td>
-            <td class="num">55073779</td>
-            <td class="num">40.8</td>
-            <td class="num">27.8</td>
-            
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td><span style="color:var(--text-secondary)">—</span></td>
-            <td>
-                
-                -
-                
-            </td>
-        </tr>
-        
-        <tr>
-            <td><a href="../stock/002088.html">002088</a></td>
-            <td class="num">9.21</td>
-            <td class="num text-green arrow-up">2.91%</td>
-            <td class="num">128.9</td>
-            <td class="num">2670185</td>
-            <td class="num">53.8</td>
-            <td class="num">60.3</td>
-            
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td><span style="color:var(--text-secondary)">—</span></td>
-            <td>
-                
-                -
-                
-            </td>
-        </tr>
-        
-        <tr>
-            <td><a href="../stock/000630.html">000630</a></td>
-            <td class="num">7.41</td>
-            <td class="num text-green arrow-up">4.37%</td>
-            <td class="num">157.3</td>
-            <td class="num">346715150</td>
-            <td class="num">41.3</td>
-            <td class="num">23.2</td>
-            
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td><span style="color:var(--text-secondary)">—</span></td>
-            <td>
-                
-                -
-                
-            </td>
-        </tr>
-        
-        <tr>
-            <td><a href="../stock/001233.html">001233</a></td>
-            <td class="num">52.7</td>
-            <td class="num text-green arrow-up">2.59%</td>
-            <td class="num">54.7</td>
-            <td class="num">-86493</td>
-            <td class="num">42.4</td>
-            <td class="num">50.8</td>
-            
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td><span style="color:var(--text-secondary)">—</span></td>
-            <td>
-                
-                -
-                
-            </td>
-        </tr>
-        
-        <tr>
-            <td><a href="../stock/000960.html">000960</a></td>
-            <td class="num">40.39</td>
-            <td class="num text-green arrow-up">7.28%</td>
-            <td class="num">34.5</td>
-            <td class="num">57751303</td>
-            <td class="num">45.0</td>
-            <td class="num">25.2</td>
-            
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td><span style="color:var(--text-secondary)">—</span></td>
-            <td>
-                
-                -
-                
-            </td>
-        </tr>
-        
-        <tr>
-            <td><a href="../stock/002235.html">002235</a></td>
-            <td class="num">10.15</td>
-            <td class="num text-green arrow-up">5.95%</td>
-            <td class="num">-21.3</td>
-            <td class="num">95289995</td>
-            <td class="num">45.3</td>
-            <td class="num">20.0</td>
-            
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td class="num" style="color:var(--text-secondary)">—</td>
-            <td><span style="color:var(--text-secondary)">—</span></td>
-            <td>
-                
-                -
-                
-            </td>
-        </tr>
-        
-        <tr>
-            <td><a href="../stock/001206.html">001206</a></td>
-            <td class="num">17.9</td>
-            <td class="num text-green arrow-up">3.89%</td>
-            <td class="num">162.3</td>
-            <td class="num">1289029</td>
-            <td class="num">46.2</td>
-            <td class="num">60.5</td>
+            <td><a href="../stock/001359.html">001359</a></td>
+            <td class="num">113.45</td>
+            <td class="num text-green arrow-up">5.89%</td>
+            <td class="num">209.9</td>
+            <td class="num">2261263</td>
+            <td class="num">52.0</td>
+            <td class="num">31.4</td>
             
             <td class="num" style="color:var(--text-secondary)">—</td>
             <td class="num" style="color:var(--text-secondary)">—</td>
@@ -321,12 +316,52 @@
         
         <tr>
             <td><a href="../stock/000737.html">000737</a></td>
-            <td class="num">14.55</td>
-            <td class="num text-green arrow-up">3.34%</td>
-            <td class="num">64.8</td>
-            <td class="num">57287958</td>
-            <td class="num">42.0</td>
+            <td class="num">14.58</td>
+            <td class="num text-green arrow-up">3.55%</td>
+            <td class="num">65.8</td>
+            <td class="num">57543484</td>
+            <td class="num">43.6</td>
             <td class="num">22.9</td>
+            
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td><span style="color:var(--text-secondary)">—</span></td>
+            <td>
+                
+                -
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td><a href="../stock/000751.html">000751</a></td>
+            <td class="num">5.24</td>
+            <td class="num text-green arrow-up">2.95%</td>
+            <td class="num">39.4</td>
+            <td class="num">72482751</td>
+            <td class="num">44.7</td>
+            <td class="num">28.7</td>
+            
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td><span style="color:var(--text-secondary)">—</span></td>
+            <td>
+                
+                -
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td><a href="../stock/002985.html">002985</a></td>
+            <td class="num">31.19</td>
+            <td class="num text-green arrow-up">4.0%</td>
+            <td class="num">77.5</td>
+            <td class="num">4591959</td>
+            <td class="num">49.2</td>
+            <td class="num">51.7</td>
             
             <td class="num" style="color:var(--text-secondary)">—</td>
             <td class="num" style="color:var(--text-secondary)">—</td>
@@ -379,7 +414,7 @@
     </main>
 
     <footer>
-        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-06-15 02:36 | 行情: Tushare 实时 | 仅供研究参考</p>
+        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-06-15 02:51 | 行情: Tushare 实时 | 仅供研究参考</p>
         <p style="font-size:0.75em;opacity:0.6">
             build 18a3d26921 · 
             data_as_of 2026-06-15 · 
