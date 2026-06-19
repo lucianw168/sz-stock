@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>000333.SZ 美的集团</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 000333.SZ 美的集团股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,51 +74,58 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>000333.SZ 美的集团 <span style="color:#f85149;font-size:20px">78.00 (-1.54%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 家用电器 · 市值5938亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 低估值+突破+盈亏比1.6:1 → 可关注</div>
-<div style="color:#8b949e;font-size:13px">低估值 · 突破, 6笔上涨, 动能转强, 盈亏比1.6:1</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="000333">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（等待回调至73.37附近企稳后再行轻仓布局）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司PE(TTM)为13.4倍，显著低于家电行业平均水平（通常20-25倍），PB为2.56倍，处于历史低位区间，具备极高的安全边际。ROE为5.6%虽看似不高，但考虑到家电行业成熟期特征及高负债率（60%），其现金流通常优于账面利润表现，财务结构稳健。
+**成长性与健康度**：营收与净利润双位数增长（+2.6%/+2.0%）显示业务处于温和复苏通道，但缺乏爆发式增长动力；高负债率是主要隐忧，限制了激进扩张能力，但考虑到其庞大的现金流生成能力，整体财务健康度尚可，属于典型的“低估值、低成长、高分红”防御型标的。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与空间**：世界模型判定当前处于“第6笔”上涨结构，意味着连续上涨动能已充分展开，接近衰竭临界点；虽然MACD金叉显示动能转强，但价格位于近60日高位区域，上方空间（3.6 ATR）大于下方风险（2.3 ATR），盈亏比理论值为1.5:1，结构上仍具吸引力。
+**关键信号与资金验证**：模型提示“上涨笔中买方力量强于卖方”且“量价配合健康”，这通常意味着主力在高位承接了抛压；然而，资金面数据出现明显背离——主力连续4日净流出累计4.0亿，而散户净买入3.1亿，这种“主力出货、散户接盘”的背离现象，验证了模型中“注意动能是否衰减”的警告，表明当前的上涨可能缺乏持续性的增量资金支持。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：
+**不同意**世界模型直接“半仓试探”的激进建议，但**同意**其设定的关键点位（支撑与压力）。
+**可行性分析**：由于主力资金连续流出且融资余额增加（杠杆资金入场往往伴随短期波动），在高位区域直接追高胜率较低。资金面的背离（主力卖、散户买）增加了短期回调的风险，因此不宜在78.00现价重仓。
+**具体操作建议**：
+*   **策略**：**等待回调确认**。
+*   **入场价**：建议等待价格回调至 **73.37**（第一支撑位）附近企稳，或跌破后反抽确认支撑有效时介入。
+*   **目标价**： **85.35**（前高压力位）。
+*   **止损价**： **73.37**（有效跌破即离场，防止结构破坏）。
+*   **盈亏比**：约 **1.6:1**。
+*   **建议仓位**： **轻仓（20%-30%）**。鉴于资金背离，不宜重仓博弈反弹。
+**如果不做**：建议观望，等待价格回踩 **71.17** 附近的强支撑，或等待日线级别出现明确的“第7笔”反转信号（即MACD再次金叉且伴随放量）后再行介入。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **资金背离风险**：主力连续4日净流出4亿，而散户在高位接盘，极易引发短期获利了结导致的快速回调，击穿73.37支撑位。
+2.  **高位动能衰竭**：世界模型提示已连续6笔上涨，且处于近60日高位，一旦市场情绪转弱，缺乏新资金承接，价格可能迅速回落。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 13.4 | PB 2.6 | ROE 5.6% | 利润+2% | 营收+3%</div></div><div class="card"><h2>000333.SZ 美的集团股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">78.00 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">家用电器</span></h2><div class="intro">美的集团股份有限公司是一家主要从事家用电器的制造和销售的中国公司。该公司主要产品分为消费电器、暖通空调（HAVC）和机器人及自动化系统三类。该公司的产品主要包括中央空调、供暖及通风系统、厨房家电、冰箱...</div><div class="main-biz">主营: 以家电产业为主,涉足电机、物流等领域,旗下分为四大业务板块,分别为大家电、小家电、电机及物流</div><div style="color:#8b949e;font-size:13px">广东佛山市 · 员工198,570人 · 成立2000年 · www.midea.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出1.7亿</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-4.0亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入3.1亿</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额40.9亿(近5日+2.84亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日2笔大宗交易(合计0万)</div></div></div><div style="margin-top:8px"><span class="tag tag-bad">连续4日流出</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额增加，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>家用电器</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">13.4</div></div><div class="metric"><div class="label">PB</div><div class="value ">2.56</div></div><div class="metric"><div class="label">市值</div><div class="value ">5938亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">5.6%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+2.0%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+2.6%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">60.0%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">0.53%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">站稳关键均线上方，动能转强。持续上涨中，已走出6笔，涨幅较大。动能转强（MACD出现金叉，短期动能转向多方）。量能温和，买方明显主导。处于近60日高位区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-breakout phase-badge">突破拉升</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 6笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日高位区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">3.6 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">2.3 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📈 <b>持续上涨6笔</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 涨幅已大，注意动能是否衰减</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔵 <b>MACD零轴下方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 空头趋势中的反弹信号，力度可能有限</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📍 <b>处于近期极高位置</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格在近60日顶部，追高风险大</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>上方空间(3.8ATR)明显大于下方风险(0.1ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比有利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-06-19 10:48 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">美的集团股份有限公司是一家主要从事家用电器的制造和销售的中国公司。该公司主要产品分为消费电器、暖通空调（HAVC）和机器人及自动化系统三类。该公司的产品主要包括中央空调、供暖及通风系统、厨房家电、冰箱、洗衣机和其他小家电，如饮水机、净水设备...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 以家电产业为主,涉足电机、物流等领域,旗下分为四大业务板块,分别为大家电、小家电、电机及物流</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">突破拉升</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">上涨 6笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">85.35</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">73.37</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">80.97</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v pos">1.6:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#3fb950">✅ ≥5笔走势 — <span style="color:#8b949e">走势充分展开</span></div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #3fb950;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#3fb950">结构支持做多</b><br>
-                入场参考: 78.00<br>
-                目标位: 85.35 (+9.4%)<br>
-                止损位: 73.37 (-5.9%)<br>
-                盈亏比: 1.6:1<br>
-                均线: 站在40均线上方<br>
-                预测周期: 约10个交易日</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">13.4</div></div>
-<div class="m"><div class="l">PB</div><div class="v">2.56</div></div>
-<div class="m"><div class="l">市值</div><div class="v">5938亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">0.53%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>

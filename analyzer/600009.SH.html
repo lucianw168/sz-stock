@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>600009.SH 上海机场</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 600009.SH 上海国际机场股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,51 +74,55 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>600009.SH 上海机场 <span style="color:#f85149;font-size:20px">23.16 (-1.86%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 机场 · 市值576亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 底部积累结构+盈亏比25.6:1 → 可关注</div>
-<div style="color:#8b949e;font-size:13px">估值中性 · 底部积累, 2笔上涨, 动能转强, 盈亏比25.6:1</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="600009">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（等待资金面与40日均线突破的共振信号，切勿盲目追涨）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司当前PE(TTM)为26.5倍，显著高于机场行业通常的10-15倍中位数，显示市场对其有较高预期；但ROE仅1.3%且净利润同比增速（11.3%）远超营收增速（0.8%），表明利润释放存在滞后或一次性因素，盈利质量需警惕。**财务健康度**：负债率36.5%处于合理区间，现金流通常较好，但高估值与低ROE的背离是主要基本面隐患。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 1. **市场阶段与空间**：模型判定处于“底部区域”且为“上涨趋势第2笔”，动能转强（MACD金叉），意味着空头力量衰竭，但尚未完成趋势反转，上方空间（4.4 ATR）远大于下方风险（0.4 ATR），盈亏比极佳。**关键发现**：MACD在零轴下金叉是典型的“空头陷阱”或“反弹中继”信号，配合股价未站上40日均线（25.52），说明中期趋势仍受制于均线压制，当前仅为反弹而非反转。**资金验证**：资金面呈现“背离”状态——主力连续净流出（-1047万）且散户也在卖出，这与世界模型判断的“买方力量增强”相矛盾，说明当前的“金叉”可能缺乏真金白银的支撑，属于技术面诱多或超跌后的被动修复。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师建议**：
+- **态度**：**部分同意**世界模型的技术点位，但**不同意**当前的入场时机。虽然盈亏比（25.6:1）诱人，但资金面的持续流出表明主力并未认可当前的反弹，此时进场容易遭遇“假突破”。
+- **可行性**：在主力持续流出的背景下，直接追高至23.16的风险收益比并不如模型显示的那么完美，更倾向于等待资金回流确认。
+- **具体操作**：
+    - **策略**：**观望等待确认**。不建议立即在23.16附近重仓。
+    - **入场价**：建议等待股价**回调至23.01支撑位**企稳，或者**放量突破并站稳40日均线（25.52）**。
+    - **目标价**：27.26（前高压力位）。
+    - **止损价**：23.01（跌破即离场，防止结构破坏）。
+    - **建议仓位**：若突破40日线，可建立3-4成仓位；若仅做反弹，建议轻仓（1成以下）。
+- **如果不做**：继续等待**40日均线（25.52）被有效突破**，这将是趋势转强、资金回补的明确信号。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1. **资金背离风险**：世界模型显示“买方增强”，但主力资金连续5日净流出超千万，这种“量价背离”极易导致反弹夭折，形成“假突破”。
+2. **估值消化风险**：26.5倍的PE对于机场股而言偏高，若后续业绩无法持续高增长，高估值将压制股价上行空间。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 26.5 | PB 1.3 | ROE 1.3% | 利润+11% | 营收+1%</div></div><div class="card"><h2>600009.SH 上海国际机场股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">23.16 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">机场</span></h2><div class="intro">上海国际机场股份有限公司是从事航空运输地面服务及其他相关业务的服务性企业,提供的产品即服务,包括以先进的机场基础设施,高效顺畅的运行保障系统为中外航空公司的飞机安全起降提供良好的航班地面保障服务;以安...</div><div class="main-biz">主营: 为国内外航空运输企业及旅客提供地面保障服务。</div><div style="color:#8b949e;font-size:13px">上海上海市 · 员工13,329人 · 成立1998年 · www.shairport.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出276万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-1047万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出389万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额16.8亿(近5日+0.15亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 融资余额增加</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>机场</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">26.5</div></div><div class="metric"><div class="label">PB</div><div class="value ">1.34</div></div><div class="metric"><div class="label">市值</div><div class="value ">576亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">1.3%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+11.3%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+0.8%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">36.5%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">0.41%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">底部区域出现买方力量增强的迹象。从底部反弹5.2%，力度尚可，尚未脱离低位。动能转强（MACD出现金叉，短期动能转向多方）。量能温和，买方略占优。处于近60日底部区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-accumulation phase-badge">底部积累</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日底部区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">6.7 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">0.2 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔵 <b>MACD零轴下方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 空头趋势中的反弹信号，力度可能有限</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>反弹但尚未站上40日均线</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 40均线是中期趋势分界线，突破并站稳才确认趋势转强</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>上方空间(4.4ATR)明显大于下方风险(0.4ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比有利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-06-19 10:35 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">上海国际机场股份有限公司是从事航空运输地面服务及其他相关业务的服务性企业,提供的产品即服务,包括以先进的机场基础设施,高效顺畅的运行保障系统为中外航空公司的飞机安全起降提供良好的航班地面保障服务;以安全、舒适、优美的候机环境,功能齐备的服务...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 为国内外航空运输企业及旅客提供地面保障服务。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">底部积累</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">27.26</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">23.01</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">25.52</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v pos">25.6:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #3fb950;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#3fb950">结构支持做多</b><br>
-                入场参考: 23.16<br>
-                目标位: 27.26 (+17.7%)<br>
-                止损位: 23.01 (-0.6%)<br>
-                盈亏比: 25.6:1<br>
-                均线: 在40均线下方，突破站稳才确认<br>
-                预测周期: 约10个交易日</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">26.5</div></div>
-<div class="m"><div class="l">PB</div><div class="v">1.34</div></div>
-<div class="m"><div class="l">市值</div><div class="v">576亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">0.41%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
