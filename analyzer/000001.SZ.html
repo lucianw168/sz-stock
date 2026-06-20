@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 000001.SZ 平安银行股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>000001.SZ 平安银行</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,61 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>000001.SZ 平安银行 <span style="color:#f85149;font-size:20px">10.52 (-2.41%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 银行 · 市值2042亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="000001">
-    <button onclick="doSearch()">分析</button>
-  </div>
-
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：尽管世界模型显示动能转强，但主力资金的持续流出和均线压制使得短期做多胜率极低，建议等待主力回流或股价站稳40日均线后再行介入。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：平安银行目前PE(TTM)为4.7倍，显著低于行业6倍的中位数，PB为0.44倍，处于深度低估区间；但ROE仅为2.7%，显示盈利能力偏弱。
-**成长性与健康度**：营收与净利润分别增长4.7%和3.0%，具备温和成长性；但91.0%的负债率是银行业常态，需警惕宏观经济波动对资产质量的影响。
-**总结**：公司处于“低估值、弱盈利、稳增长”的防御性配置区间，适合长线资金，但短期缺乏爆发力。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型判断**：世界模型判定股价处于“上涨趋势第2笔”的动能转强阶段，MACD在零轴下方金叉，暗示空头趋势中的反弹信号，但上方空间（3.9 ATR）大于下方风险（0.0 ATR）的结论存在逻辑矛盾（通常上方空间大意味着风险大，此处可能指代上方阻力小或下方支撑极强）。
-**关键发现**：MACD零轴下金叉通常意味着反弹力度有限，且当前价格位于40日均线（11.04）下方，属于“站稳关键均线上方”描述与“在40日均线上方”位置描述存在冲突（当前价10.52 < 11.04），说明模型对短期支撑位的判断可能存在偏差。
-**资金验证**：资金面与模型判断存在明显背离，主力连续3日净流出1.6亿，而散户在买入，这种“主力出逃、散户接盘”的背离通常意味着短期抛压沉重，难以支撑模型预测的“动能转强”。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：**不同意**世界模型的立即入场建议。虽然模型提示“动能转强”，但资金面显示主力持续流出，且股价受制于40日均线压制（当前价10.52 < 11.04），所谓的“动能转强”缺乏主力资金的实质性配合，极可能是诱多或反弹后的二次探底。
-**可行性分析**：在主力连续流出且价格位于重要均线（40日线）下方的情况下，强行做多盈亏比极差。模型建议的“等待回调至10.93"在逻辑上不通，因为10.93是40日均线位置，若跌破10.93则结构破坏，若未跌破则当前10.52已具备一定支撑，无需等待更高位置。
-**具体操作建议**：
-*   **建议**：**观望/等待右侧信号**。
-*   **不做多理由**：主力流出未止，均线压制未破。
-*   **关注信号**：等待股价放量站稳40日均线（11.04）上方，或主力净流入停止并转为流出减少。
-*   **若强行交易**（高风险）：
-    *   **入场价**：10.52（现价）
-    *   **目标价**：11.49（第一压力位）
-    *   **止损价**：10.60（模型提及的下一支撑，跌破即离场）
-    *   **盈亏比**：约 1:0.9（极差，不符合交易原则）
-    *   **仓位**：0%（建议空仓）
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **资金背离风险**：主力连续3日净流出1.6亿，而散户在买入，这种“主力卖、散户买”的背离是典型的短期见顶或洗盘信号，极易导致股价快速下杀。
-2.  **技术面破位风险**：当前价格（10.52）低于40日均线（11.04），若无法快速收复该均线，将确认弱势，模型预测的“上涨趋势”将失效。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 4.7 | PB 0.4 | ROE 2.7% | 利润+3% | 营收+5%</div></div><div class="card"><h2>000001.SZ 平安银行股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">10.52 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">银行</span></h2><div class="intro">公司是深圳发展银行股份有限公司以吸收合并原平安银行股份有限公司的方式完成两行整合并更名后的银行，是全国性股份制商业银行。公司自2016年开始全面向零售银行转型，全力打造智能化零售银行，大力推进精品公司...</div><div class="main-biz">主营: 人民币、外币存贷款;国际、国内结算;票据贴现;外汇买卖;提供担保及信用证服务;提供保管箱服务等。</div><div style="color:#8b949e;font-size:13px">广东深圳市 · 员工41,698人 · 成立1987年 · bank.pingan.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出1.6亿</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-3.2亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入1.1亿</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额52.4亿(近5日+0.24亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-bad">连续3日流出</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额增加，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>银行</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">银行</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">4.7 (行业中位6)</div></div><div class="metric"><div class="label">PB</div><div class="value ">0.44 (行业中位0.6)</div></div><div class="metric"><div class="label">市值</div><div class="value ">2042亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">2.7%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+3.0%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+4.7%</div></div><div class="metric"><div class="label">负债率</div><div class="value negative">91.0%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">0.74%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">站稳关键均线上方，动能转强。高位震荡后小幅上涨3.4%，追高风险较大。动能转强（MACD出现金叉，短期动能转向多方）。量能温和，买方明显主导。处于近60日中上方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-breakout phase-badge">突破拉升</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中上方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">4.4 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">-1.8 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔵 <b>MACD零轴下方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 空头趋势中的反弹信号，力度可能有限</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>上方空间(3.9ATR)明显大于下方风险(0.0ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比有利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-06-19 10:45 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">低估值 · 突破, 2笔上涨, 动能转强</div>
+<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 银行</span></div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">公司是深圳发展银行股份有限公司以吸收合并原平安银行股份有限公司的方式完成两行整合并更名后的银行，是全国性股份制商业银行。公司自2016年开始全面向零售银行转型，全力打造智能化零售银行，大力推进精品公司银行双轻化.综合金融是公司的特色优势，公...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 人民币、外币存贷款;国际、国内结算;票据贴现;外汇买卖;提供担保及信用证服务;提供保管箱服务等。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">突破拉升</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
+<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">11.49</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">10.93</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">11.04</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">0:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(0:1)<br>
+                支撑: 10.93 | 压力: 11.49</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">4.7 (行业中位6)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">0.44 (行业中位0.6)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">2042亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">0.74%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
