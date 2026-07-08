@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>002049.SZ 紫光国微</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 002049.SZ 紫光国芯微电子股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,69 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>002049.SZ 紫光国微 <span style="color:#f85149;font-size:20px">82.00 (-1.44%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 半导体 · 市值697亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.4:1) → 等回调</div>
-<div style="color:#8b949e;font-size:13px">估值中性 · 突破, 2笔上涨, 动能转强</div>
-<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 半导体</span></div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="002049">
+    <button onclick="doSearch()">分析</button>
+  </div>
+
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：建议耐心等待股价回调至69.98元附近，确认支撑有效后再行介入，切勿在当前加速下跌途中盲目抄底。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司当前PE(TTM)为42.9倍，略低于行业50倍的中位数，处于合理偏低区间；但ROE仅为2.4%，显示当前盈利质量尚未完全释放。
+**成长性与健康度**：营收与净利润呈现爆发式增长（分别+46.1%和+180.3%），显示出极强的业绩弹性；同时负债率仅25.5%，财务结构非常健康，抗风险能力强。
+**总结**：基本面呈现“高成长、低估值、强财务”的优异组合，具备长期配置价值，但需警惕高基数下的增速回落风险。
+
+---
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与空间**：世界模型判定当前处于“下跌趋势中的第2笔走势”，动能加速且空间不利（上方空间0.6 ATR vs 下方2.7 ATR），意味着短期抛压较重，下行风险大于上行空间。
+**关键发现与信号**：虽然模型提示“放量下跌”且卖方主导，但结合“仍在40日均线上方”的结构，这更倾向于上升途中的剧烈洗盘而非趋势反转，属于典型的“急跌慢涨”结构。
+**资金验证**：资金面出现明显的背离信号——世界模型显示“卖方主导”，但主力却连续2日大幅净流入（+4.2亿），且融资余额增加，说明主力资金正在利用急跌进行左侧吸筹，正在验证并修正世界模型的短期悲观预期。
+
+---
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：
+**不同意立即入场**。虽然资金面显示主力在吸筹，但世界模型明确指出“动能加速”且“盈亏比仅为0.2:1"，此时追高极易被随后的惯性抛压套牢。资金面的流入更多是“承接”而非“拉升”，市场情绪尚未企稳。
+
+**具体操作建议**：
+*   **策略**： **观望/等待回调**。
+*   **如果做多**：建议等待股价回调至 **69.98元** 附近（第一支撑位）再考虑介入。此时盈亏比将改善至1:1以上，且符合世界模型“等待方向选择”的指令。
+*   **目标价**：短期第一目标 **86.41元**（压力位），中期看至 **100元** 整数关口。
+*   **止损价**： **67.88元**（若跌破此位，结构破坏，需离场）。
+*   **建议仓位**：若回调至69.98元企稳，建议轻仓（<20%）试错，确认站稳后再加仓。
+
+**如果不做**：
+重点关注 **69.98元** 的支撑有效性。若股价在此位置缩量企稳，是极佳的买点；若放量跌破，则需警惕趋势加速下行。
+
+---
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **技术面破位风险**：当前处于加速下跌阶段，若无法在69.98元附近获得支撑，可能会引发连锁反应，击穿67.88元的关键防线。
+2.  **业绩兑现风险**：虽然净利润大增，但需关注后续季度增速是否维持，防止市场因“高增长预期落空”而进行估值杀跌。
+
+---
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 42.9 | PB 5.1 | ROE 2.4% | 利润+180% | 营收+46%</div></div><div class="card"><h2>002049.SZ 紫光国芯微电子股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">83.51 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">半导体</span></h2><div class="intro">紫光国芯微电子股份有限公司(简称“紫光国微”,SZ002049)是紫光集团有限公司旗下的半导体行业上市公司,专注于集成电路芯片设计开发业务,是领先的集成电路芯片产品和解决方案提供商,产品及应用遍及国内...</div><div class="main-biz">主营: 集成电路芯片设计与销售</div><div style="color:#8b949e;font-size:13px">河北唐山市 · 员工3,244人 · 成立2001年 · www.gosinoic.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入4.2亿</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+2.1亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出4.0亿</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额44.1亿(近5日+1.02亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续2日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，融资余额增加，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">42.9 (行业中位50)</div></div><div class="metric"><div class="label">PB</div><div class="value ">5.10 (行业中位5.0)</div></div><div class="metric"><div class="label">市值</div><div class="value ">710亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">2.4%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+180.3%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+46.1%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">25.5%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">6.49%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。短期回调3.7%。动能加速（最近一笔波动幅度较大，走势在加速）。量能放量，卖方明显主导。处于近60日中上方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能加速</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">加速</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中上方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">0.6 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">2.7 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔴 <b>放量下跌</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 有真实卖压，谨慎对待</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>回调但仍在40日均线上方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 中期趋势仍在，回调可能是上升途中的正常调整</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-07-08 12:06 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">紫光国芯微电子股份有限公司(简称“紫光国微”,SZ002049)是紫光集团有限公司旗下的半导体行业上市公司,专注于集成电路芯片设计开发业务,是领先的集成电路芯片产品和解决方案提供商,产品及应用遍及国内外,在智能安全芯片、高稳定存储器芯片、安...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 集成电路芯片设计与销售</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">突破拉升</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">86.41</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">69.98</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">79.95</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">0.4:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(0.4:1)<br>
-                支撑: 69.98 | 压力: 86.41</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">42.2 (行业中位50)</div></div>
-<div class="m"><div class="l">PB</div><div class="v">5.00 (行业中位5.0)</div></div>
-<div class="m"><div class="l">市值</div><div class="v">697亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">4.14%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
