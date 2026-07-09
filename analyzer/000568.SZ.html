@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 000568.SZ 泸州老窖股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>000568.SZ 泸州老窖</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,58 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>000568.SZ 泸州老窖 <span style="color:#f85149;font-size:20px">74.91 (-1.96%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 白酒 · 市值1103亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="000568">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">低估值 · 底部积累, 2笔上涨, 动能转强</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **可关注**（建议等待回踩76.21元支撑或突破84.77元均线后再行介入，切勿盲目追高）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司当前PE(TTM)为11.3倍，显著低于白酒行业28倍的中位数，PB为2.18倍，处于历史及行业低位，具备极高的安全边际；但ROE为7.3%且净利润、营收同比双降（-19.3%/-14.2%），显示短期业绩承压，盈利能力出现阶段性下滑。
-**财务健康：** 负债率仅21.8%，现金流充沛，财务结构极其稳健，抗风险能力强。
-**成长性：** 短期成长性暂时缺失，需等待业绩拐点确认。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段：** 世界模型判定股价处于“第2笔”上涨趋势中，动能转强（MACD金叉），且上方空间（3.6 ATR）远大于下方风险（1.1 ATR），盈亏比高达120.6:1，处于极佳的“底部区域”建仓点。
-**关键信号：** 模型捕捉到“零轴下方金叉”及“量价配合健康”信号，表明空头趋势结束，多头开始尝试组织反击，且当前价格位于近60日底部，具备超跌反弹的基础。
-**资金验证：** 资金面存在明显背离，主力连续2日净流出（近5日-1.2亿）且融资余额下降，而散户在买入，这表明主力仍在借反弹出货或尚未完成吸筹，资金面尚未完全验证世界模型的“反转”判断，需警惕主力诱多。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断：** 我**部分同意**世界模型的入场逻辑，但必须修正入场时机。世界模型给出的“突破40日均线”是右侧确认信号，非常稳健；但在当前主力持续流出的背景下，直接追高至76.41元风险较大。
-**可行性分析：** 由于资金面显示主力在卖出，直接做多容易接飞刀。建议等待股价回踩**76.21元**附近的强支撑位，或者等待股价放量突破**84.77元**（40日均线）后再行介入，以规避主力出货风险。
-**具体方案：**
-*   **建议策略：** 逢低吸纳或右侧突破。
-*   **入场价：** 优先关注 **76.21元** 附近的支撑位，若跌破则放弃；激进者可现价轻仓试错。
-*   **目标价：** 第一目标 **101.73元**（前高压力位），第二目标 **110元**（整数关口）。
-*   **止损价：** 严格设定在 **76.21元** 下方，一旦跌破说明底部结构破坏，立即离场。
-*   **盈亏比：** 约 **120:1**，风险收益比极佳。
-*   **建议仓位：** 鉴于资金背离，建议 **3-5成** 仓位，不宜满仓。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **资金背离风险：** 主力持续净流出而散户接盘，若主力利用“底部金叉”信号进行诱多出货，股价可能在短期内快速回落。
-2.  **业绩修复不及预期：** 公司营收和净利润大幅下滑，若后续季报无法证明业绩拐点，估值修复将缺乏内在动力。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 11.3 | PB 2.2 | ROE 7.3% | 利润-19% | 营收-14%</div></div><div class="card"><h2>000568.SZ 泸州老窖股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">76.41 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">白酒</span></h2><div class="intro">公司是具有400多年酿酒历史的国有控股上市公司。1959年，国家出版了新中国第一本酿酒教科书《泸州老窖大曲酒》，成为我国浓香型白酒酿造工艺标准的制定者，酒界泰斗周恒刚先生亲笔题写了“浓香正宗”。公司实...</div><div class="main-biz">主营: 泸州老窖系列酒的生产、销售。</div><div style="color:#8b949e;font-size:13px">四川泸州市 · 员工3,912人 · 成立1995年 · www.lzlj.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出6589万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-1.2亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入1661万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额25.0亿(近5日-0.63亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px"></div></div></div><div style="margin-top:8px"><span class="tag tag-bad">连续2日流出</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额减少，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>白酒</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">11.3 (行业中位28, 偏低)</div></div><div class="metric"><div class="label">PB</div><div class="value ">2.18 (行业中位8.0, 偏低)</div></div><div class="metric"><div class="label">市值</div><div class="value ">1125亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">7.3%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-19.3%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-14.2%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">21.8%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">0.62%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">底部区域出现买方力量增强的迹象。从底部反弹1.3%，力度偏弱，尚未脱离低位。动能转强（MACD出现金叉，短期动能转向多方）。量能放量，买方明显主导。处于近60日底部区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-accumulation phase-badge">底部积累</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日底部区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">9.0 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">0.1 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔵 <b>MACD零轴下方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 空头趋势中的反弹信号，力度可能有限</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📍 <b>处于近期极低位置</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格在近60日底部，如果有其他反转信号则关注</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>反弹但尚未站上40日均线</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 40均线是中期趋势分界线，突破并站稳才确认趋势转强</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>上方空间(3.6ATR)明显大于下方风险(1.1ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比有利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-07-08 11:46 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">公司是具有400多年酿酒历史的国有控股上市公司。1959年，国家出版了新中国第一本酿酒教科书《泸州老窖大曲酒》，成为我国浓香型白酒酿造工艺标准的制定者，酒界泰斗周恒刚先生亲笔题写了“浓香正宗”。公司实施“双品牌塑造，多品牌运作”的品牌战略，...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 泸州老窖系列酒的生产、销售。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">底部积累</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
+<div class="m"><div class="l">量能</div><div class="v">放量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">101.73</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">76.21</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">84.33</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">0:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(0:1)<br>
+                支撑: 76.21 | 压力: 101.73</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">11.1 (行业中位28, 偏低)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">2.14 (行业中位8.0, 偏低)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">1103亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">0.72%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>

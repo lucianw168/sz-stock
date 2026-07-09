@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 002415.SZ 杭州海康威视数字技术股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>002415.SZ 海康威视</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,50 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>002415.SZ 海康威视 <span style="color:#3fb950;font-size:20px">35.39 (+3.03%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: IT设备 · 市值3243亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="002415">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.1:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">估值中性 · 横盘, 2笔下跌, 动能背驰</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（等待回调至29.98附近再评估盈亏比）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：当前PE(TTM)为21.1倍，处于IT设备行业中枢水平，但ROE为0.0%且净利润/营收同比均为0.0%，显示公司正处于业绩真空期或基数调整阶段，缺乏明确的增长引擎。**财务健康度**：负债率为0.0%（数据异常或极低），现金流看似充裕，但结合“营收/净利零增长”来看，市场对其未来扩张能力存疑。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与动能**：模型判定当前处于**下跌趋势的第2笔走势**，且动能呈现**背驰**状态（价格创新低但动能未跟随），这意味着下跌力量正在衰竭，反弹概率上升，但空间评估显示下方风险（2.5 ATR）远大于上方空间（1.0 ATR），盈亏比仅为0.4:1，极不划算。**资金面验证**：今日“放量下跌”且“卖方明显主导”，这与模型判断的“动能衰竭”形成矛盾——虽然动能指标在修复，但真实的抛压（成交量）依然沉重，说明市场情绪尚未完全企稳，资金面尚未完全验证反转信号。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**建议**：**不同意立即入场**。世界模型给出的“等待回调”建议是正确的，因为当前盈亏比（0.4:1）严重低于交易标准（通常需>1:1）。结合资金面“融资余额减少”和“放量下跌”，市场缺乏做多意愿，强行做多风险收益比极差。
-**具体操作**：
-*   **不做多**：建议**观望**，等待价格回落至**29.98**（第一支撑位）附近，此时盈亏比将大幅改善。
-*   **关键信号**：若价格有效跌破**29.98**，则世界模型结构破坏，需离场观望，下一支撑看**29.08**。
-*   **若强行交易**（高风险）：仅在**29.98**附近轻仓试错，目标**36.04**，止损**29.08**，盈亏比约1:1.3。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **业绩真空风险**：连续两个报告期（净利润/营收同比0.0%）意味着公司缺乏新的增长点，一旦财报披露不及预期，可能引发新一轮估值杀跌。
-2.  **技术面破位风险**：当前处于下跌趋势的第2笔，若放量跌破29.98支撑，将确认第3笔下跌开启，下方空间将打开至29.08甚至更低。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 21.1 | PB 3.7 | ROE 0.0% | 利润+0% | 营收+0%</div></div><div class="card"><h2>002415.SZ 杭州海康威视数字技术股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">34.35 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">IT设备</span></h2><div class="intro">杭州海康威视数字技术股份有限公司是以视频为核心的物联网解决方案提供商,为全球提供安防、可视化管理和大数据服务。海康威视是全球视频监控数字化、网络化、高清智能化的见证者、践行者和重要推动者。连续六年(2...</div><div class="main-biz">主营: 许可项目：Ⅱ、Ⅲ类射线装置生产；Ⅱ、Ⅲ类射线装置销售；放射性同位素生产(除正电子发射计算机断层扫描用放射性药物)；Ⅱ、Ⅲ、Ⅳ、Ⅴ类放射源销售；建设工程施工；第二类增值电信业务；在线数据处理与交易处理业务（经营类电子商务）；互联网信息服务；通用航空服务。（依法须经批准的项目，经相关部门批准后方可开展经营活动，具体经营项目以相关部门批准文件或许可证件为准）一般项目：数字视频监控系统制造；数字视频监控系统销售；安防设备制造；安防设备销售；物联网设备制造；物联网设备销售；智能无人飞行器制造；智能无人飞行器销售；计算机软硬件及外围设备制造；计算机软硬件及辅助设备批发；通信设备制造；通信设备销售；网络设备制造；网络设备销售；显示器件制造；显示器件销售；智能车载设备制造；智能车载设备销售；汽车零部件及配件制造；汽车零配件批发；电气信号设备装置制造；电气信号设备装置销售；机械电气设备制造；机械电气设备销售；特种劳动防护用品生产；特种劳动防护用品销售；商用密码产品生产；电子产品销售；数字文化创意技术装备销售；技术服务、技术开发、技术咨询、技术交流、技术转让、技术推广；软件开发；网络与信息安全软件开发；信息系统集成服务；计算机系统服务；物联网技术研发；物联网技术服务；物联网应用服务；大数据服务；数据处理和存储支持服务；安全系统监控服务；安全技术防范系统设计施工服务；电子、机械设备维护（不含特种设备）；停车场服务；数字文化创意内容应用服务；环境保护监测；业务培训（不含教育培训、职业技能培训等需取得许可的培训）；货物进出口；技术进出口。（除依法须经批准的项目外，凭营业执照依法自主开展经营活动）</div><div style="color:#8b949e;font-size:13px">浙江杭州市 · 员工57,202人 · 成立2001年 · www.hikvision.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative"></div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">+0万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative"></div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额50.8亿(近5日-0.58亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px"></div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 融资余额减少</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>IT设备</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">21.1</div></div><div class="metric"><div class="label">PB</div><div class="value ">3.66</div></div><div class="metric"><div class="label">市值</div><div class="value ">3148亿</div></div><div class="metric"><div class="label">ROE</div><div class="value ">0.0%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value ">+0.0%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value ">+0.0%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">0.0%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">1.17%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。短期回调0.6%。动能背驰（价格创新高/低但动能指标未跟随，趋势动能在减弱）。量能放量，卖方明显主导。处于近60日中间位置。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能背驰</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">背驰</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中间位置</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">1.0 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">2.5 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔄 <b>MACD底背驰</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格创新低但动能未跟随，下跌力量在衰竭，反弹概率上升</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔴 <b>放量下跌</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 有真实卖压，谨慎对待</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>回调但仍在40日均线上方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 中期趋势仍在，回调可能是上升途中的正常调整</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(2.7ATR)明显大于上方空间(1.1ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-07-08 11:54 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">杭州海康威视数字技术股份有限公司是以视频为核心的物联网解决方案提供商,为全球提供安防、可视化管理和大数据服务。海康威视是全球视频监控数字化、网络化、高清智能化的见证者、践行者和重要推动者。连续六年(2011-2016)蝉联iHS全球视频监控...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 许可项目：Ⅱ、Ⅲ类射线装置生产；Ⅱ、Ⅲ类射线装置销售；放射性同位素生产(除正电子发射计算机断层扫描用放射性药物)；Ⅱ、Ⅲ、Ⅳ、Ⅴ类放射源销售；建设工程施工；第二类增值电信业务；在线数据处理与交易处理业务（经营类电子商务）；互联网信息服务；通用航空服务。（依法须经批准的项目，经相关部门批准后方可开展经营活动，具体经营项目以相关部门批准文件或许可证件为准）一般项目：数字视频监控系统制造；数字视频监控系统销售；安防设备制造；安防设备销售；物联网设备制造；物联网设备销售；智能无人飞行器制造；智能无人飞行器销售；计算机软硬件及外围设备制造；计算机软硬件及辅助设备批发；通信设备制造；通信设备销售；网络设备制造；网络设备销售；显示器件制造；显示器件销售；智能车载设备制造；智能车载设备销售；汽车零部件及配件制造；汽车零配件批发；电气信号设备装置制造；电气信号设备装置销售；机械电气设备制造；机械电气设备销售；特种劳动防护用品生产；特种劳动防护用品销售；商用密码产品生产；电子产品销售；数字文化创意技术装备销售；技术服务、技术开发、技术咨询、技术交流、技术转让、技术推广；软件开发；网络与信息安全软件开发；信息系统集成服务；计算机系统服务；物联网技术研发；物联网技术服务；物联网应用服务；大数据服务；数据处理和存储支持服务；安全系统监控服务；安全技术防范系统设计施工服务；电子、机械设备维护（不含特种设备）；停车场服务；数字文化创意内容应用服务；环境保护监测；业务培训（不含教育培训、职业技能培训等需取得许可的培训）；货物进出口；技术进出口。（除依法须经批准的项目外，凭营业执照依法自主开展经营活动）</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">背驰</div></div>
+<div class="m"><div class="l">量能</div><div class="v">放量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">36.04</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">29.98</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">32.27</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">0.1:1</div></div>
+</div>
+<div style="padding:3px 0;color:#3fb950">✅ MACD背驰 — <span style="color:#8b949e">动能衰竭，可能反转</span></div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(0.1:1)<br>方向不明<br>
+                支撑: 29.98 | 压力: 36.04</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">21.7</div></div>
+<div class="m"><div class="l">PB</div><div class="v">3.77</div></div>
+<div class="m"><div class="l">市值</div><div class="v">3243亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">1.21%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
