@@ -55,32 +55,32 @@
 </div>
 
 
-<div style="background:var(--card-bg);border-left:4px solid #ff9100;padding:0.8rem 1.2rem;margin:1rem 0;border-radius:4px">
+<div style="background:var(--card-bg);border-left:4px solid #ff5252;padding:0.8rem 1.2rem;margin:1rem 0;border-radius:4px">
     <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">市场环境</span><br>
-            <span style="font-size:1.4rem;font-weight:bold;color:#ff9100">偏弱</span>
+            <span style="font-size:1.4rem;font-weight:bold;color:#ff5252">弱势</span>
         </div>
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">指数涨幅</span><br>
-            <span style="font-size:1.1rem;color:#ff5252">-1.43%</span>
+            <span style="font-size:1.1rem;color:#ff5252">-1.45%</span>
         </div>
         
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">涨跌比</span><br>
-            <span style="font-size:1.1rem">183/304</span>
-            <span style="color:var(--text-secondary);font-size:0.8rem">(37%)</span>
+            <span style="font-size:1.1rem">121/252</span>
+            <span style="color:var(--text-secondary);font-size:0.8rem">(32%)</span>
         </div>
         <div>
             <span style="color:var(--text-secondary);font-size:0.75rem">涨停/跌停</span><br>
-            <span style="font-size:1.1rem;color:#00e676">10</span>
+            <span style="font-size:1.1rem;color:#00e676">3</span>
             /
-            <span style="font-size:1.1rem;color:#ff5252">27</span>
+            <span style="font-size:1.1rem;color:#ff5252">10</span>
         </div>
         
         <div style="margin-left:auto">
             <span style="color:var(--text-secondary);font-size:0.75rem">C1</span><br>
-            <span style="font-size:0.9rem">0.55</span>
+            <span style="font-size:0.9rem">0.35</span>
         </div>
     </div>
     
@@ -128,7 +128,122 @@
 <div class="trading-method">捕捉 OBV 突破 + 量能激增的资金加速介入信号，期望短期继续上冲。</div>
 
 
-<p style="color:var(--text-secondary)"><em>该策略今日无选股</em></p>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr>
+            <th>代码</th>
+            <th class="num">收盘价</th>
+            <th class="num">涨幅%</th>
+            <th class="num">CCI</th>
+            <th class="num">OBV</th>
+            <th class="num">量比7d</th>
+            <th class="num">ADX</th>
+            
+            <th>动机</th>
+            
+            <th class="num" title="信号日收盘 → D+1 收盘的涨跌幅（仅供观察，不代表策略实际收益；策略 PF 见上方 KPI 卡片，按 next_open 执行 + 含费）">D+1 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+2 收盘的涨跌幅（同上）">D+2 vs 信号收盘</th>
+            <th class="num" title="信号日收盘 → D+1~D+5 区间最高点的涨幅（同上）">D+5 max%</th>
+            <th title="买入后 1~5 日内任一收盘是否触及涨停（市场事实，不代表策略止盈触发）">5日内涨停</th>
+            <th>信号诊断</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td><a href="../stock/001337.html">001337</a></td>
+            <td class="num">39.84</td>
+            <td class="num text-green arrow-up">2.18%</td>
+            <td class="num">128.0</td>
+            <td class="num">11306561</td>
+            <td class="num">57.3</td>
+            <td class="num">29.1</td>
+            
+            <td><span class="badge motive-试盘">试盘</span></td>
+            
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td class="num" style="color:var(--text-secondary)">—</td>
+            <td><span style="color:var(--text-secondary)">—</span></td>
+            <td>
+                
+                <details class="diag-detail">
+                    <summary>查看</summary>
+                    
+                    <div class="diag-signal">
+                        <strong>OBV突破</strong>
+                        
+                        <div class="diag-item">
+                            <span>OBV: <strong>11306561</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>30日最高OBV: <strong>11128303</strong></span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>突破量: <strong>178258</strong></span>
+                            
+                            <span class="diag-thresh">> > 0</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>成交量激增</strong>
+                        
+                        <div class="diag-item">
+                            <span>量比7d%: <strong>57.3</strong></span>
+                            
+                            <span class="diag-thresh">区间 52~60</span>
+                            
+                        </div>
+                        
+                        <div class="diag-item">
+                            <span>量比3d%: <strong>35.4</strong></span>
+                            
+                            <span class="diag-thresh">< 40</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>CCI动量底线</strong>
+                        
+                        <div class="diag-item">
+                            <span>CCI: <strong>128.0</strong></span>
+                            
+                            <span class="diag-thresh">> 50</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="diag-signal">
+                        <strong>日涨幅>2%</strong>
+                        
+                        <div class="diag-item">
+                            <span>日涨幅%: <strong>2.18%</strong></span>
+                            
+                            <span class="diag-thresh">> 2%</span>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </details>
+                
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
 
 
 
@@ -196,10 +311,10 @@
     </main>
 
     <footer>
-        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-07-30 12:21 | 行情: yfinance (延迟约15分钟) | 仅供研究参考</p>
+        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-07-30 12:38 | 行情: yfinance (延迟约15分钟) | 仅供研究参考</p>
         <p style="font-size:0.75em;opacity:0.6">
             build 18a3d26921 · 
-            data_as_of 2026-07-29 · 
+            data_as_of 2026-07-30 · 
             backtest_window 250d · 
             <a href="../../methodology.html" style="color:inherit">方法论</a>
         </p>
