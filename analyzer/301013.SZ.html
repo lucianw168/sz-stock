@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 301013.SZ 深圳市利和兴股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>301013.SZ 利和兴</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,57 +26,51 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>301013.SZ 利和兴 <span style="color:#f85149;font-size:20px">46.42 (-1.32%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 专用机械 · 市值109亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="301013">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 底部积累结构+盈亏比1.8:1 → 可关注</div>
+<div style="color:#8b949e;font-size:13px">估值中性 · 底部积累, 8笔上涨, 动能转强, 盈亏比1.8:1</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **可关注**（建议利用回调至24.63或40日均线支撑位进行左侧布局，同时密切关注40日均线的突破信号）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司目前处于典型的“高估值、低盈利”困境。PE为亏损状态，PB高达16.43倍，远超行业PB中位数（2.0），且ROE仅为0.5%，显示当前股价严重透支了未来的业绩预期，缺乏安全边际。
-**成长性与财务：** 尽管营收和净利润同比分别暴涨117%和166%，显示出极强的短期爆发力，但高负债率（59.2%）和极低的EPS（0.01）表明这种增长可能伴随着巨大的财务风险或一次性收益，财务健康度堪忧。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型判断：** 世界模型显示股价处于“上涨趋势第8笔”的动能衰竭区，且MACD仅在零轴下方金叉，这通常意味着空头趋势中的反弹而非反转，上方空间（8.2 ATR）远大于下方支撑（4.8 ATR），盈亏比虽为1.7:1但胜率存疑。
-**资金验证：** 资金面数据与世界模型存在**显著背离**。世界模型提示“动能衰竭、未站稳40日线”，但资金面显示主力连续2日大幅净流入（累计+6800万）且融资余额激增，说明有主力资金在利用技术面的弱势进行左侧吸筹，这种“价弱量强”往往是变盘的前兆。
-**关键信号：** 当前处于“底部区域买方增强”但“结构未确认”的临界点，MACD零轴下金叉配合放量，暗示主力正在尝试构建新的多头结构，但尚未突破关键阻力位（40日均线）。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师建议：** **部分同意世界模型的入场逻辑，但需修正入场时机。** 世界模型建议的“等待站稳40日线”过于保守，因为资金面显示主力已在下方积极运作。
-**可行性分析：** 结合资金面，直接按世界模型在47.04附近追高风险较大（容易遭遇第8笔后的回调），但完全放弃也不对，因为主力已在下方护盘。
-**具体操作（做多）：**
-*   **策略：** 采用“左侧试探 + 右侧确认”的混合策略。
-*   **入场价：** 不建议现价追高，建议等待回调至 **24.63**（第一支撑位）或 **40日均线（53.82）** 附近的强支撑区介入；若急跌不破24.63，可在 **42-44元** 区间轻仓试错。
-*   **目标价：** 短期看 **53.82**（40日线），中期看 **84.91**（前高压力）。
-*   **止损价：** 严格设在 **24.63** 下方，一旦跌破说明主力诱多失败，立即离场。
-*   **盈亏比：** 维持 **1.7:1**，建议仓位控制在 **半仓以内**，防止高估值带来的回撤。
-**如果不做：** 等待股价放量突破并站稳 **53.82**（40日均线）后再行右侧追涨，此时趋势将得到资金面的双重确认。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **估值崩塌风险：** 16倍PB配合0.5% ROE，一旦业绩增速放缓或出现一次性收益兑现，股价将面临剧烈的“杀估值”回调。
-2.  **技术面假突破：** 世界模型提示“第8笔动能衰竭”，若主力在40日均线处无法放量突破，极易形成“多头陷阱”，导致短线被套。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 亏损 | PB 16.4 | ROE 0.5% | 利润+166% | 营收+117%</div></div><div class="card"><h2>301013.SZ 深圳市利和兴股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">47.04 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">专用机械</span></h2><div class="intro">深圳市利和兴股份有限公司成立于2006年1月9日，注册资本11,687.1528万元，公司自成立以来专注于自动化、智能化设备的研发、生产和销售，致力于成为新一代信息和通信技术领域领先的智能制造解决方案...</div><div class="main-biz">主营: 自动化、智能化设备的研发、生产和销售。</div><div style="color:#8b949e;font-size:13px">广东深圳市 · 员工993人 · 成立2006年 · www.lihexing.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入4193万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+6800万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出1399万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额5.7亿(近5日+1.07亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续2日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，融资余额增加，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>专用机械</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">亏损</div></div><div class="metric"><div class="label">PB</div><div class="value ">16.43 (行业中位2.0, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">110亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">0.5%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+166.1%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+117.0%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">59.2%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">22.66%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">底部区域出现买方力量增强的迹象。持续上涨中，已走出8笔，涨幅较大。动能转强（MACD出现金叉，短期动能转向多方）。量能放量，买方明显主导。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-accumulation phase-badge">底部积累</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 8笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">8.2 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">4.8 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📈 <b>持续上涨8笔</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 涨幅已大，注意动能是否衰减</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔵 <b>MACD零轴下方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 空头趋势中的反弹信号，力度可能有限</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>反弹但尚未站上40日均线</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 40均线是中期趋势分界线，突破并站稳才确认趋势转强</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-10 17:49 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">深圳市利和兴股份有限公司成立于2006年1月9日，注册资本11,687.1528万元，公司自成立以来专注于自动化、智能化设备的研发、生产和销售，致力于成为新一代信息和通信技术领域领先的智能制造解决方案提供商。公司作为设备制造厂商，主要服务于...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 自动化、智能化设备的研发、生产和销售。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">底部积累</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">上涨 8笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
+<div class="m"><div class="l">量能</div><div class="v">放量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">84.91</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">24.63</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">53.52</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v pos">1.8:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#3fb950">✅ ≥5笔走势 — <span style="color:#8b949e">走势充分展开</span></div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #3fb950;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#3fb950">结构支持做多</b><br>
+                入场参考: 46.42<br>
+                目标位: 84.91 (+82.9%)<br>
+                止损位: 24.63 (-46.9%)<br>
+                盈亏比: 1.8:1<br>
+                均线: 在40均线下方，突破站稳才确认<br>
+                预测周期: 约10个交易日</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">亏损</div></div>
+<div class="m"><div class="l">PB</div><div class="v">16.21 (行业中位2.0, 偏高)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">109亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">26.22%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>

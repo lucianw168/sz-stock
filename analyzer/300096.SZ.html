@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 300096.SZ 易联众信息技术股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>300096.SZ ST易联众</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,59 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>300096.SZ ST易联众 <span style="color:#f85149;font-size:20px">9.09 (-0.66%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 软件服务 · 市值39亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="300096">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.9:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">高估值 · 底部积累, 2笔上涨, 动能转强</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：建议等待股价回调至7.69元附近或放量突破40日均线后再做决策，当前盈亏比不佳且基本面支撑不足。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司当前PE(TTM)高达82.4倍，显著高于行业45倍的中位数，且ROE为-8.0%，EPS为负，显示公司目前处于亏损状态，盈利能力严重受损。
-**成长性与财务健康**：虽然营收实现了2.6%的正增长，但净利润同比下滑6.0%，呈现“增收不增利”的困境；同时55.3%的负债率处于较高水平，财务安全边际较低。
-**总结**：基本面处于“高估值、负盈利、高杠杆”的三重压力之下，缺乏支撑高估值的业绩改善逻辑。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场结构与动能**：世界模型判断市场处于“底部区域”的上涨趋势第2笔，MACD在零轴下方金叉，表明空头趋势中出现了反弹动能，但尚未形成反转。
-**关键信号解读**：MACD零轴下金叉通常意味着超跌后的技术性修复，而非趋势反转；且当前价格位于40日均线（8.86元）下方，说明中期趋势依然偏弱，上方空间（3.4 ATR）小于下方风险（4.1 ATR），盈亏比结构不利。
-**资金验证**：资金面部分验证了模型，主力净流入975万且散户卖出，显示机构在低位承接筹码；但“缩量”特征表明买盘并不坚决，缺乏放量突破的确认信号，与模型预测的“买方略占优”存在量价背离。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：
-*   **不同意立即入场**：世界模型给出的盈亏比为0.8:1，属于极差的交易结构。在基本面亏损且股价受制于40日均线的情况下，此时追高容易陷入“接飞刀”的被动局面。
-*   **可行性分析**：资金面显示主力虽在买入，但并未伴随大幅放量，说明主力也在等待方向选择。目前的缩量反弹更多是技术性反抽，而非趋势启动。
-*   **具体操作建议**：
-    *   **策略**：**观望/等待回调**。
-    *   **入场价**：暂不操作。若必须右侧交易，需等待股价放量突破**40日均线（8.86元）**。
-    *   **左侧博弈**：若激进博弈，建议等待回调至**7.69元**（第一支撑位）附近，此时盈亏比将大幅改善至1:2以上。
-    *   **目标价**：短期反弹目标**10.38元**（第一压力位），中期需站稳40日线后看高一线。
-    *   **止损价**：严格设置在**7.69元**下方，一旦跌破该位置，结构破坏，需立即离场。
-    *   **仓位**：当前阶段建议**0%**仓位，仅保留少量底仓观察。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **基本面恶化风险**：公司连续亏损且负债率超55%，若后续财报无法扭转亏损局面，高估值将面临戴维斯双杀。
-2.  **技术面破位风险**：当前处于缩量反弹中，若无法快速放量突破40日均线，反弹极易夭折，股价可能迅速回落至7.69元甚至更低。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 82.4 | PB 11.8 | ROE -8.0% | 利润-6% | 营收+3%</div></div><div class="card"><h2>300096.SZ 易联众信息技术股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">9.15 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">软件服务</span></h2><div class="intro">易联众信息技术股份有限公司围绕“医疗卫生、人力资源和社会保障”等民生重要领域,提供全方位的整体解决方案和综合运营服务,致力于成为国内领先的民生信息服务综合运营商。公司深度整合政府、企业和社会大众不同层...</div><div class="main-biz">主营: 公司长期专注于民生行业软件技术及服务的研究、开发、应用和推广工作,主营“以劳动和社会保障为核心”的民生行业应用解决方案与服务,主要产品和服务包括软件及嵌入式软件(IC 卡)、硬件及系统集成和技术服务外包、民生信息服务等。</div><div style="color:#8b949e;font-size:13px">福建厦门市 · 员工1,734人 · 成立2000年 · www.ylzinfo.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入975万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+964万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出307万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>软件服务</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">82.4 (行业中位45, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">11.80 (行业中位5.0, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">39亿</div></div><div class="metric"><div class="label">ROE</div><div class="value negative">-8.0%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-6.0%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+2.6%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">55.3%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">1.28%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">底部区域出现买方力量增强的迹象。短期反弹12.0%，处于中间位置，方向待确认。动能转强（MACD出现金叉，短期动能转向多方）。量能缩量，买方略占优。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-accumulation phase-badge">底部积累</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">缩量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">缩量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">3.4 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">4.1 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔵 <b>MACD零轴下方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 空头趋势中的反弹信号，力度可能有限</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>反弹但尚未站上40日均线</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 40均线是中期趋势分界线，突破并站稳才确认趋势转强</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.4ATR)明显大于上方空间(0.1ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-10 17:49 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">易联众信息技术股份有限公司围绕“医疗卫生、人力资源和社会保障”等民生重要领域,提供全方位的整体解决方案和综合运营服务,致力于成为国内领先的民生信息服务综合运营商。公司深度整合政府、企业和社会大众不同层面的民生信息服务需求,依托社保卡业务、民...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 公司长期专注于民生行业软件技术及服务的研究、开发、应用和推广工作,主营“以劳动和社会保障为核心”的民生行业应用解决方案与服务,主要产品和服务包括软件及嵌入式软件(IC 卡)、硬件及系统集成和技术服务外包、民生信息服务等。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">底部积累</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
+<div class="m"><div class="l">量能</div><div class="v">缩量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">10.38</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">7.69</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">8.86</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">0.9:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(0.9:1)<br>
+                支撑: 7.69 | 压力: 10.38</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">81.9 (行业中位45, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">11.72 (行业中位5.0, 偏高)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">39亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">0.94%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
