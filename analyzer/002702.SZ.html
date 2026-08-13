@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 002702.SZ 海欣食品股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>002702.SZ 海欣食品</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,53 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>002702.SZ 海欣食品 <span style="color:#3fb950;font-size:20px">5.16 (+0.00%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 食品 · 市值29亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="002702">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.5:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">估值中性 · 横盘, 2笔下跌, 动能背驰</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（当前处于超跌反弹后的震荡期，盈亏比不佳，建议等待4.12元附近的明确支撑信号或右侧突破40日均线后再行介入）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司处于深度亏损状态（PE亏损），但净利润同比激增830.3%，这通常意味着去年同期基数极低（可能受疫情或季节性因素影响），而非业务常态，因此高增长含金量存疑。估值方面，PB 2.77倍显著低于行业4.0倍中位数，且PE远低于行业25倍中位数，显示股价已被极度低估，但缺乏盈利支撑。
-**财务健康**：负债率41.5%处于中等水平，但ROE仅1.1%且EPS微利，说明公司造血能力极弱，主要依靠非经常性损益或资产处置维持账面微利，基本面缺乏长期持有的安全边际。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与动能**：世界模型判定当前处于“下跌趋势的第2笔走势”，虽然MACD出现底背驰（价格新低但动能未创新低），暗示下跌力量衰竭，但整体动能状态仍偏弱。空间评估显示下方风险（3.9 ATR）远大于上方空间（2.0 ATR），盈亏比仅为0.5:1，处于极不利的博弈区间。
-**关键信号与资金验证**：模型捕捉到了“异常放量”和“主力痕迹”，结合资金面数据（今日主力净流入929万但近5日累计净流出4195万），说明今日的量能更多是散户恐慌性抛售或主力试盘，而非大规模建仓。资金面与模型判断存在部分矛盾：模型提示“卖方略占优”，而今日主力显示“净流入”，这种背离通常意味着主力在利用反弹或震荡进行高抛低吸，并未形成趋势性反转。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：我**不同意**世界模型建议的“立即入场”或“等待4.12"，因为盈亏比（0.5:1）在A股短线交易中属于极高风险区，且近5日主力持续净流出，说明上方抛压并未完全释放。
-**可行性分析**：虽然今日有主力净流入，但考虑到近5日的累计流出和散户的大幅卖出（1171万），当前的上涨更多是超跌反弹而非趋势反转。
-**具体操作建议**：
-*   **不做多**：当前不具备高胜率入场条件。
-*   **观察信号**：建议等待股价有效站稳40日均线（4.58元）并伴随缩量回调，或者等待股价回踩至**4.12元**附近确认支撑有效后再考虑轻仓试错。
-*   **若必须交易**：仅在**4.12-4.20元**区间建立极小仓位（<10%），目标价**5.69元**，止损**4.00元**，盈亏比约1:1.5。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **业绩陷阱风险**：净利润830%的增长极大概率是去年同期基数过低导致的“虚假繁荣”，若后续季度无法回归正常盈利水平，股价将面临二次探底。
-2.  **资金背离风险**：今日主力净流入与近5日累计大幅流出形成背离，若今日流入无法转化为持续的买盘，股价极易在反弹后迅速回落，形成“诱多”形态。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 亏损 | PB 2.8 | ROE 1.1% | 利润+830% | 营收+44%</div></div><div class="card"><h2>002702.SZ 海欣食品股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">5.16 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">食品</span></h2><div class="intro">海欣食品股份有限公司是一家具有百年历史传承的国家农业产业化重点龙头企业。近年来,公司逐步形成了以速冻鱼糜制品系列产品为核心,兼顾速冻肉制品等其他速冻食品的整体业务体系,并完善了鱼糜及鱼糜制品深加工和销...</div><div class="main-biz">主营: 速冻鱼肉制品与速冻肉制品和常温鱼肉制品和肉制品的生产和销售。</div><div style="color:#8b949e;font-size:13px">福建福州市 · 员工1,897人 · 成立2005年 · www.haixinfoods.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入929万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-4195万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出1171万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>食品</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">亏损</div></div><div class="metric"><div class="label">PB</div><div class="value ">2.77 (行业中位4.0, 偏低)</div></div><div class="metric"><div class="label">市值</div><div class="value ">29亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">1.1%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+830.3%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+43.8%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">41.5%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">11.59%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。短期回调5.2%。动能背驰（价格创新高/低但动能指标未跟随，趋势动能在减弱）。量能异常放量，卖方略占优。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能背驰</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">异常放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">背驰</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">异常放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">2.0 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">3.9 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔄 <b>MACD底背驰</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格创新低但动能未跟随，下跌力量在衰竭，反弹概率上升</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔴 <b>放量下跌</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 有真实卖压，谨慎对待</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>回调但仍在40日均线上方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 中期趋势仍在，回调可能是上升途中的正常调整</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.5ATR)明显大于上方空间(0.1ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-12 17:38 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">海欣食品股份有限公司是一家具有百年历史传承的国家农业产业化重点龙头企业。近年来,公司逐步形成了以速冻鱼糜制品系列产品为核心,兼顾速冻肉制品等其他速冻食品的整体业务体系,并完善了鱼糜及鱼糜制品深加工和销售的产业格局。公司“海欣”品牌创立于1...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 速冻鱼肉制品与速冻肉制品和常温鱼肉制品和肉制品的生产和销售。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">背驰</div></div>
+<div class="m"><div class="l">量能</div><div class="v">异常放量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">5.69</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">4.12</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">4.59</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">0.5:1</div></div>
+</div>
+<div style="padding:3px 0;color:#3fb950">✅ MACD背驰 — <span style="color:#8b949e">动能衰竭，可能反转</span></div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(0.5:1)<br>方向不明<br>
+                支撑: 4.12 | 压力: 5.69</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">亏损</div></div>
+<div class="m"><div class="l">PB</div><div class="v">2.77 (行业中位4.0, 偏低)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">29亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">12.53%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>

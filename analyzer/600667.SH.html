@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 600667.SH 无锡市太极实业股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>600667.SH 太极实业</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,54 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>600667.SH 太极实业 <span style="color:#3fb950;font-size:20px">23.78 (+4.71%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 半导体 · 市值497亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="600667">
-    <button onclick="doSearch()">分析</button>
-  </div>
-
-  <div class="summary-box"><div class="summary-overall">★ **观望**
-当前处于下跌趋势的中继阶段，且主力资金持续流出，建议耐心等待股价在15.92附近企稳或突破24.00后再行介入。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值偏高，盈利承压，财务杠杆较高。**
-公司当前PE(TTM)为103.4倍，显著高于半导体行业50倍的中位数，且PB(5.43)略高于行业均值，显示市场对其半导体业务的高预期尚未完全兑现；ROE仅1.5%且净利润同比微增9.5%而营收微跌0.9%，表明核心主业增长乏力，主要依赖非经常性损益或业务结构调整；72.9%的负债率处于警戒线边缘，考虑到半导体行业的高资本开支特性，其财务健康度存在一定隐忧。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场处于下跌主段，资金背离加剧风险。**
-世界模型显示股价处于下跌趋势的第4笔走势，尚未走出主跌段，且下方风险空间（5.4 ATR）远大于上方空间（0.2 ATR），盈亏比仅为1.4:1，极不利于入场；虽然量能显示多空均衡，但资金面出现严重背离——主力连续5日净流出6351万，而散户大幅买入，这种“主力出货、散户接盘”的结构通常意味着短期顶部或中继调整，验证了世界模型“不宜抄底”的判断。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**不同意立即入场，建议严格等待右侧信号。**
-世界模型的“等待回调”判断完全正确，当前资金面不支持做多。
-*   **建议操作：** 目前**不做多**。
-*   **具体计划：** 建议等待股价回调至**15.92**附近（第一支撑位）再观察，此时盈亏比将大幅改善至3:1以上；或者等待股价放量突破**22.71**并站稳**24.00**（40日均线上方）确认反转。
-*   **止损与目标：** 若强行在当前位置博反弹，止损需设在**15.92**，目标看至**24.50**，但鉴于主力持续流出，胜率较低。
-*   **仓位：** 建议**0%**仓位，空仓观望。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **主力持续流出风险：** 近5日主力净流出超6000万，且融资余额增加，说明杠杆资金在高位接力，一旦市场情绪退潮，容易出现踩踏式下跌。
-2.  **行业周期与业绩兑现风险：** 半导体行业目前处于去库存周期尾声，若下游需求复苏不及预期，高估值将面临戴维斯双杀。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 103.4 | PB 5.4 | ROE 1.5% | 利润+9% | 营收-1%</div></div><div class="card"><h2>600667.SH 无锡市太极实业股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">22.71 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">半导体</span></h2><div class="intro">无锡市太极实业股份有限公司坐落于长三角经济开发区——美丽的太湖之滨,是无锡市国有控股企业。公司目前主营业务包括半导体业务、工程技术服务业务、光伏电站投资运营业务和材料业务。半导体业务主要涉及IC芯片封...</div><div class="main-biz">主营: 半导体业务、工程技术服务业务、光伏电站投资运营业务和涤纶化纤业务</div><div style="color:#8b949e;font-size:13px">江苏无锡市 · 员工9,684人 · 成立1993年 · www.wxtj.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出10.3亿</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-6351万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入8.7亿</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额17.2亿(近5日+0.57亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额增加，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>半导体</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">半导体</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">103.4 (行业中位50, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">5.43 (行业中位5.0)</div></div><div class="metric"><div class="label">市值</div><div class="value ">475亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">1.5%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+9.5%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-0.9%</div></div><div class="metric"><div class="label">负债率</div><div class="value negative">72.9%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">24.11%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。下跌中（4笔），仍在主跌段。动能温和（动能平稳，没有明显的加速或减速）。量能放量，多空均衡。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 4笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能温和</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">多空均衡</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">5.6 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">4.1 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">⚠️ <b>下跌进行中（4笔）</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 仍在主跌段，不宜抄底</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(5.4ATR)明显大于上方空间(0.2ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-12 17:40 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 横盘, 动能温和 → 观望</div>
+<div style="color:#8b949e;font-size:13px">高估值 · 横盘, 4笔下跌, 动能温和</div>
+<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 半导体</span></div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">无锡市太极实业股份有限公司坐落于长三角经济开发区——美丽的太湖之滨,是无锡市国有控股企业。公司目前主营业务包括半导体业务、工程技术服务业务、光伏电站投资运营业务和材料业务。半导体业务主要涉及IC芯片封装、封装测试、模组装配及测试等;工程技术...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 半导体业务、工程技术服务业务、光伏电站投资运营业务和涤纶化纤业务</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 4笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">量能</div><div class="v">放量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">32.1</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">15.92</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">21.62</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">1.1:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(1.1:1)<br>方向不明<br>
+                支撑: 15.92 | 压力: 32.1</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">108.3 (行业中位50, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">5.69 (行业中位5.0)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">497亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">24.52%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
