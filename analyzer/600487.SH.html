@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 600487.SH 江苏亨通光电股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>600487.SH 亨通光电</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,59 +26,51 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>600487.SH 亨通光电 <span style="color:#3fb950;font-size:20px">65.41 (+0.54%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 通信设备 · 市值1613亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="600487">
-    <button onclick="doSearch()">分析</button>
-  </div>
-
-  <div class="summary-box"><div class="summary-overall">★ **可关注**（建议等待回调至47.20附近企稳或突破71.78后再行介入，避免追高）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司当前PE(TTM)为49.7倍，显著高于行业30倍的中位数，PB为4.95倍也高于行业3.5倍，显示市场给予了较高的估值溢价。然而，ROE仅为3.4%，且负债率高达51.9%，说明高估值并非完全由当前的高盈利能力支撑，更多是透支了未来的高增长预期。
-**成长性与健康度**：业绩爆发式增长（净利润+98.5%，营收+34.1%）验证了高增长的逻辑，但高负债率限制了财务安全边际。整体来看，公司处于“高成长预期推升高估值，但财务杠杆较高”的状态，适合风险偏好较高的投资者。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型判断**：世界模型判定当前处于“底部区域”且为“上涨趋势第2笔”，动能转强但尚未站稳中期生命线（40日均线）。这意味着股价处于反弹初期，上方空间（13.1 ATR）远大于下方风险（4.5 ATR），盈亏比极佳（2.9:1）。
-**关键信号**：MACD在零轴下方金叉是典型的“空头趋势中的反弹信号”，通常力度有限，但配合“放量”和“买方主导”的笔级结构，表明主力资金正在尝试构建新的上涨笔。
-**资金验证**：资金面存在一定矛盾。虽然近5日主力累计净流入（+2.4亿）且融资余额增加，但今日主力大幅净流出（-9.1亿），且散户大幅买入。这表明今日上涨主要由散户接盘推动，主力在借机出货或进行高抛低吸，尚未形成合力，需警惕“主力卖、散户买”导致的诱多风险。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师建议**：
-**不同意**立即重仓入场，建议**等待确认**。
-**理由**：世界模型给出的“突破40日均线”是核心确认信号，而今日主力大幅净流出且散户接盘，说明当前上涨缺乏主力深度参与，直接追高盈亏比虽好但胜率存疑。
-**具体计划**：
-*   **最佳策略**： **回调低吸**。
-*   **入场价**：等待股价回调至 **47.20** 附近（第一支撑位）企稳，或等待股价放量突破站稳 **71.78**（40日均线）。
-*   **目标价**： **117.31**（前高压力位）。
-*   **止损价**： **47.20** 下方（跌破支撑即离场）。
-*   **盈亏比**：约 **2.9:1**。
-*   **建议仓位**：若回调至47.20企稳，可建立 **3-5成** 底仓；若突破71.78，可加仓至 **5-7成**。
-**如果不做**：若股价无法突破71.78且跌破47.20，则视为反弹结束，需观望下一轮底部。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **主力背离风险**：今日主力大幅净流出（-9.1亿）而股价上涨，若后续无法补量，极易形成“主力出货、散户接盘”的杀跌形态，导致世界模型判断的“上涨笔”提前终结。
-2.  **估值回调风险**：当前PE接近50倍且ROE仅3.4%，一旦业绩增速放缓或行业竞争加剧，高估值将面临剧烈的均值回归压力。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 49.7 | PB 5.0 | ROE 3.4% | 利润+99% | 营收+34%</div></div><div class="card"><h2>600487.SH 江苏亨通光电股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">65.06 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">通信设备</span></h2><div class="intro">江苏亨通光电股份有限公司亨通光电专注于光纤通信和电力传输领域,构筑形成光纤通信和量子通信全产业链及自主核心技术,进军海洋工程、量子保密通信、大数据等高端产品及新领域,拓展新的战略空间,形成“产品+运营...</div><div class="main-biz">主营: 光纤光缆的生产与销售。</div><div style="color:#8b949e;font-size:13px">江苏苏州市 · 员工17,124人 · 成立1993年 · www.htgd.com.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出9.1亿</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+2.4亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入6.1亿</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额77.3亿(近5日+2.53亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">沪深港通十大成交股(净卖出0万)</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日2笔大宗交易(合计0万)</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，融资余额增加，外资关注(港通十大)，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>通信设备</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">通信设备</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">49.7 (行业中位30, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">4.95 (行业中位3.5)</div></div><div class="metric"><div class="label">市值</div><div class="value ">1605亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">3.4%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+98.5%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+34.1%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">51.9%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">12.18%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">底部区域出现买方力量增强的迹象。从底部反弹26.3%，力度尚可，尚未脱离低位。动能转强（MACD出现金叉，短期动能转向多方）。量能放量，买方明显主导。处于近60日底部区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-accumulation phase-badge">底部积累</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">放量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">放量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日底部区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">13.1 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">4.5 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔵 <b>MACD零轴下方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 空头趋势中的反弹信号，力度可能有限</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>反弹但尚未站上40日均线</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 40均线是中期趋势分界线，突破并站稳才确认趋势转强</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.9ATR)明显大于上方空间(0.1ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-17 17:46 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 底部积累结构+盈亏比2.8:1 → 可关注</div>
+<div style="color:#8b949e;font-size:13px">估值中性 · 底部积累, 2笔上涨, 动能转强, 盈亏比2.8:1</div>
+<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 通信设备</span></div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">江苏亨通光电股份有限公司亨通光电专注于光纤通信和电力传输领域,构筑形成光纤通信和量子通信全产业链及自主核心技术,进军海洋工程、量子保密通信、大数据等高端产品及新领域,拓展新的战略空间,形成“产品+运营+服务”全价值链优势,致力于打造全价值链...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 光纤光缆的生产与销售。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">底部积累</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
+<div class="m"><div class="l">量能</div><div class="v">放量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">117.31</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">47.2</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">70.48</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v pos">2.8:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #3fb950;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#3fb950">结构支持做多</b><br>
+                入场参考: 65.41<br>
+                目标位: 117.31 (+79.3%)<br>
+                止损位: 47.2 (-27.8%)<br>
+                盈亏比: 2.8:1<br>
+                均线: 在40均线下方，突破站稳才确认<br>
+                预测周期: 约10个交易日</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">50.0 (行业中位30, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">4.98 (行业中位3.5)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">1613亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">10.58%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>

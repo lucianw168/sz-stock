@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>600206.SH 有研新材</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 600206.SH 有研新材料股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,56 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>600206.SH 有研新材 <span style="color:#3fb950;font-size:20px">55.86 (+10.00%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 半导体 · 市值473亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.2:1) → 等回调</div>
-<div style="color:#8b949e;font-size:13px">高估值 · 突破, 2笔上涨, 动能转强</div>
-<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 半导体</span></div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="600206">
+    <button onclick="doSearch()">分析</button>
+  </div>
+
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：当前处于“高盈亏比陷阱”与“主力出货”的共振区，建议等待回调至36.19附近再考虑介入。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司当前PE(TTM)高达153.7倍，显著高于半导体行业50倍的中位数，PB为11.21倍，显示市场对其“高纯金属靶材”及“先进稀土”等战略新材料属性的极高预期，但短期估值泡沫风险较大。
+**成长性与健康度**：营收与净利润分别增长50.4%和40.9%，显示出极强的业绩爆发力，且负债率仅32.7%，财务结构非常健康，具备抗风险能力。
+**结论**：基本面呈现“高估值、高成长、低负债”的剪刀差特征，适合风险偏好较高的成长型资金，但需警惕业绩增速回落带来的杀估值风险。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与空间**：世界模型判定股价处于“上涨趋势第2笔”的动能转强阶段，MACD在零轴上方金叉，意味着多头正在进行二次加速；然而，空间评估显示上方仅0.8 ATR（约4.6元）的空间，而下方风险高达6.4 ATR，导致盈亏比仅为0.1:1，处于极不利的博弈区间。
+**关键发现与矛盾**：模型捕捉到“上涨笔中买方力量强于卖方”的健康量价配合，但资金面数据（主力近5日净流出4.8亿，散户净买入3.6亿）揭示了典型的“主力出货、散户接盘”背离现象，这与模型判断的“动能转强”存在实质性矛盾。
+**结论**：虽然技术结构看似良好，但资金面的背离和极差的盈亏比表明当前处于诱多或短期见顶的高风险区域，模型建议的“等待回调”符合资金博弈逻辑。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：我**不同意**世界模型中关于“立即入场”的隐含假设，但**完全同意**其“不建议入场”及“等待回调”的判断。
+**可行性分析**：鉴于主力持续大幅流出且散户承接，此时追高极易成为主力筹码的牺牲品；虽然基本面强劲，但资金面不支持当前的上涨持续性。
+**具体操作建议**：
+*   **策略**：暂时观望，严禁追高。
+*   **关注价位**：若必须布局，需等待股价回调至**36.19**（第一支撑位）附近，此时盈亏比将大幅改善。
+*   **目标与止损**：若回调企稳，目标价看至**60.00**（第一压力位），止损设在**35.10**（跌破关键支撑）。
+*   **仓位**：建议轻仓（<10%）试错，等待右侧信号确认。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **资金背离风险**：主力连续5日净流出近5亿，而散户在买入，这种“主力卖、散户买”的结构极易引发短期快速杀跌。
+2.  **估值回调风险**：153倍的PE在半导体板块中属于高位，一旦业绩增速（40%+）出现任何不及预期的波动，股价将面临剧烈的估值回归。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 153.7 | PB 11.2 | ROE 4.3% | 利润+41% | 营收+50%</div></div><div class="card"><h2>600206.SH 有研新材料股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">57.72 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">半导体</span></h2><div class="intro">有研新材料股份有限公司,原名有研半导体材料股份有限公司,是由北京有色金属研究总院独家发起,以募集方式设立的股份有限公司,于1999年3月成立并在上海证券交易所挂牌上市。有研新材主要从事稀土材料、光电...</div><div class="main-biz">主营: 高纯金属靶材、先进稀土材料、特种红外光学及光电材料、生物医用材料等多个战略性新材料领域，将公司产业分为电磁光医四个板块</div><div style="color:#8b949e;font-size:13px">北京北京市 · 员工2,166人 · 成立1999年 · www.griam.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出5.8亿</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-4.8亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入3.6亿</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额10.7亿(近5日-0.59亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流出，融资余额减少，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>半导体</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">半导体</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">153.7 (行业中位50, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">11.21 (行业中位5.0, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">489亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">4.3%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+40.9%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+50.4%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">32.7%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">20.01%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">站稳关键均线上方，动能转强。短期反弹46.3%，处于中间位置，方向待确认。动能转强（MACD出现金叉，短期动能转向多方）。量能温和，买方明显主导。处于近60日中上方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-breakout phase-badge">突破拉升</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中上方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">0.6 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">5.5 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>MACD零轴上方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 多头趋势中的二次加速信号</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(6.4ATR)明显大于上方空间(0.8ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-08-18 17:52 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">有研新材料股份有限公司,原名有研半导体材料股份有限公司,是由北京有色金属研究总院独家发起,以募集方式设立的股份有限公司,于1999年3月成立并在上海证券交易所挂牌上市。有研新材主要从事稀土材料、光电子用薄膜材料、生物医用材料、稀有金属及贵...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 高纯金属靶材、先进稀土材料、特种红外光学及光电材料、生物医用材料等多个战略性新材料领域，将公司产业分为电磁光医四个板块</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">突破拉升</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">60.0</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">36.19</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">48.97</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">0.2:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(0.2:1)<br>
-                支撑: 36.19 | 压力: 60.0</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">148.7 (行业中位50, 偏高)</div></div>
-<div class="m"><div class="l">PB</div><div class="v">10.85 (行业中位5.0, 偏高)</div></div>
-<div class="m"><div class="l">市值</div><div class="v">473亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">8.13%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
