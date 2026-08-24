@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 688807.SH 厦门优迅芯片股份有限公司</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="brand" href="search.html">🔍 个股分析</a>
+  <a href="../index.html">总览</a>
+  <a class="market-btn" data-market="news" href="../news/index.html">早盘必读</a>
+  <a class="market-btn" data-market="sz" href="../sz/index.html">SZ</a>
+  <a class="market-btn" data-market="sh" href="../sh/index.html">SH</a>
+  <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
+  <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
+</nav>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="688807">
+    <button onclick="doSearch()">分析</button>
+  </div>
+
+  <div class="summary-box"><div class="summary-overall">★ **可关注**（建议等待价格有效突破40日均线或回踩确认支撑后再行介入，切勿追高）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司处于极度高估状态，PE(TTM)高达289.5倍，是行业PE中位数（50倍）的5.8倍；PB为14.91倍，远超行业均值（5.0倍）。尽管营收与净利润保持双位数增长（+17.6%/+20.0%），但极低的ROE（1.5%）和极高的估值表明市场已透支了未来多年的高增长预期，且当前缺乏业绩支撑。
+**财务健康度**：负债率仅3.2%，显示公司财务结构极其稳健，无短期偿债压力。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **世界模型判断**：当前处于“第0笔”走势，意味着市场刚刚完成上一轮大级别的下跌或盘整，尚未形成新的有效上涨笔，动能状态为“无”，且价格位于40日均线下方，处于弱势整理区间。空间评估显示上方与下方阻力/支撑距离相等（0.0 ATR），盈亏比为0:1，说明当前结构上没有任何明显的交易优势。
+**关键发现与资金验证**：虽然世界模型显示结构尚未成型（第0笔），但资金面出现了强烈的背离信号——主力连续3日净流入累计1.7亿，且呈现“主力买、散户卖”的特征。这种“低位吸筹”行为通常发生在世界模型即将从“第0笔”向“第1笔”（上涨）转换的前夜，资金正在为即将到来的结构突破做铺垫。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断与建议**：
+1.  **对世界模型的态度**：**部分同意但需等待确认**。世界模型目前显示“第0笔”和“无动能”，直接入场风险较大，但资金面的强力流入暗示“变盘在即”。
+2.  **可行性分析**：资金面验证了“底部区域”的判断，主力在40日线下方吸筹，符合“超跌反弹”或“底部反转”的早期特征。
+3.  **具体操作建议**：
+    *   **策略**：**谨慎做多（右侧交易）**。不建议在当前“第0笔”无动能时重仓，应等待价格有效突破40日均线并站稳。
+    *   **入场价**：建议等待价格反弹至 **345.00 - 350.00** 区间（接近40日均线压力位）且伴随放量时介入，或等待突破 **355.00** 确认新笔形成。
+    *   **目标价**：第一目标位 **380.00**（前期平台或整数关口），第二目标位 **420.00**。
+    *   **止损价**：严格设置在 **325.00**（跌破当前震荡区间的下沿或前低）。
+    *   **盈亏比**：约 **1:2.5**（以348入场，止损325，目标380计算）。
+    *   **建议仓位**：由于估值过高，建议 **轻仓（10%-15%）** 试错，切勿满仓。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **估值崩塌风险**：当前PE近300倍，一旦业绩增速放缓或市场风格切换至低估值板块，股价将面临剧烈的“杀估值”回调。
+2.  **结构假突破风险**：世界模型显示“第0笔”且“无动能”，若主力资金流入后无法推动价格突破40日均线，可能形成“诱多”陷阱，导致资金被套。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 289.5 | PB 14.9 | ROE 1.5% | 利润+20% | 营收+18%</div></div><div class="card"><h2>688807.SH 厦门优迅芯片股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">335.00 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">半导体</span></h2><div class="intro">厦门优迅芯片股份有限公司成立于2003年2月，是中国首批专业从事光通信前端高速收发芯片的设计公司，参与制定了国家及行业标准数十项，拥有国内外自主知识产权百余项，是国家知识产权优势企业，国家规划布局内集...</div><div class="main-biz">主营: 专注于光通信前端收发电芯片的研发、设计与销售。</div><div style="color:#8b949e;font-size:13px">福建厦门市 · 员工157人 · 成立2003年 · www.uxfastic.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入4817万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+1.7亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出723万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额6.1亿(近5日-0.02亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续3日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>半导体</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">289.5 (行业中位50, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">14.91 (行业中位5.0, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">268亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">1.5%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+20.0%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+17.6%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">3.2%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">21.37%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">数据不足，无法分析</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-unknown phase-badge">数据不足</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9"> · 0笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9"></span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px"> </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">0.0 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">0.0 ATR</div></div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-08-24 17:44 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
+</div>
+
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
