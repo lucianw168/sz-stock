@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 300670.SZ 江苏大烨智能电气股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>300670.SZ 大烨智能</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,53 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>300670.SZ 大烨智能 <span style="color:#3fb950;font-size:20px">6.67 (+0.30%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 电气设备 · 市值21亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="300670">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.5:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">估值中性 · 突破, 2笔上涨, 动能转强</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **观望**（等待回调至5.25元附近确认主力回补信号后再做决策）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司目前处于“高估值、低盈利”的困境中。PE为负（亏损），而PB高达4.78，显著高于行业PB中位数3.0，且ROE仅为1.6%，显示盈利能力极弱。
-**成长性与健康度：** 虽然净利润同比大幅增长116.3%，但营收却下滑11.1%，这种“增收不增利”的反向背离通常意味着毛利率受损或一次性收益干扰，且71.9%的负债率配合亏损状态，财务健康度堪忧，存在较大的经营不确定性。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与空间：** 世界模型判定股价处于“上涨趋势第2笔”的动能转强阶段，但空间评估显示上方阻力（2.7 ATR）远小于下方风险（5.2 ATR），盈亏比仅为0.5:1，属于典型的“高风险低回报”结构。
-**关键信号与资金验证：** 尽管MACD在零轴上方形成金叉（多头二次加速信号），但资金面呈现明显的背离：主力资金连续净流出（近5日-589万），而散户在买入接盘。这种“主力出货、散户接飞刀”的背离，极大地削弱了技术面看涨信号的可靠性，表明当前的上涨动能缺乏大资金支撑。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断：** 我**不同意**世界模型中“当前适合入场”的隐含逻辑，但**完全同意**其“不建议入场”及“等待回调”的结论。
-**可行性分析：** 资金面的流出直接验证了世界模型中“上方空间有限”的判断，主力在关键位置选择撤退，说明短期抛压沉重。
-**具体操作建议：**
-*   **建议：** 目前**坚决回避**。
-*   **理由：** 盈亏比0.5:1意味着每赚1元需承担2元风险，且主力流出确认了上方套牢盘压力。
-*   **关注信号：** 等待股价回调至**5.25元**（第一支撑位）附近，观察能否在此处企稳并伴随主力资金回流。若能在5.25元附近缩量止跌，盈亏比将改善至1:2以上，届时才是符合世界模型结构的买点。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **基本面恶化风险：** 营收下滑伴随高负债率，若行业去库存周期延长，公司业绩可能进一步恶化，导致股价跌破技术支撑。
-2.  **主力持续出货风险：** 资金面显示主力持续净流出，若股价反弹无力，可能引发“多杀多”的加速下跌，击穿5.25元支撑位。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 亏损 | PB 4.8 | ROE 1.6% | 利润+116% | 营收-11%</div></div><div class="card"><h2>300670.SZ 江苏大烨智能电气股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">6.65 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">电气设备</span></h2><div class="intro">江苏大烨智能电气股份有限公司是一家在配电网自动化领域里具有自主创新能力的高成长性高新技术企业。公司已被认定为“江苏省高新技术企业”、“南京市企业技术中心”、“公司银行信用等级AAA级”。</div><div class="main-biz">主营: 发行人始终致力于配电网的安全、稳定、自动化和信息化等方面的技术研究、产品开发和生产服务,公司产品包括配电自动化终端、智能中压开关设备、变电站自动化系统、低压电气成套设备等</div><div style="color:#8b949e;font-size:13px">江苏南京市 · 员工244人 · 成立2011年 · www.daybright.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出229万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-589万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入35万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>电气设备</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">亏损</div></div><div class="metric"><div class="label">PB</div><div class="value ">4.78 (行业中位3.0, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">21亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">1.6%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+116.3%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-11.1%</div></div><div class="metric"><div class="label">负债率</div><div class="value negative">71.9%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">4.09%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">站稳关键均线上方，动能转强。短期反弹24.2%，处于中间位置，方向待确认。动能转强（MACD出现金叉，短期动能转向多方）。量能缩量，买方略占优。处于近60日中上方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-breakout phase-badge">突破拉升</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">缩量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">缩量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中上方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">2.7 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">5.2 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>MACD零轴上方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 多头趋势中的二次加速信号</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(5.0ATR)明显大于上方空间(0.5ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-25 17:44 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">江苏大烨智能电气股份有限公司是一家在配电网自动化领域里具有自主创新能力的高成长性高新技术企业。公司已被认定为“江苏省高新技术企业”、“南京市企业技术中心”、“公司银行信用等级AAA级”。</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 发行人始终致力于配电网的安全、稳定、自动化和信息化等方面的技术研究、产品开发和生产服务,公司产品包括配电自动化终端、智能中压开关设备、变电站自动化系统、低压电气成套设备等</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">突破拉升</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
+<div class="m"><div class="l">量能</div><div class="v">缩量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">7.39</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">5.25</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">6.04</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">0.5:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(0.5:1)<br>
+                支撑: 5.25 | 压力: 7.39</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">亏损</div></div>
+<div class="m"><div class="l">PB</div><div class="v">4.80 (行业中位3.0, 偏高)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">21亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">3.29%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
