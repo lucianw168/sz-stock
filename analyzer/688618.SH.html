@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 688618.SH 深圳市三旺通信股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>688618.SH 三旺通信</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,50 +26,48 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>688618.SH 三旺通信 <span style="color:#f85149;font-size:20px">31.35 (-0.29%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 通信设备 · 市值34亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="688618">
-    <button onclick="doSearch()">分析</button>
-  </div>
-
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（等待回调至24.63附近或趋势明确后再行决策）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利严重错配，处于周期底部。** 公司PE高达127.5倍且ROE为负，显著高于行业30倍的中位数，反映出市场对其盈利能力的极度担忧；营收与净利润双降（-14.9%/-110.7%）表明主营业务面临实质性压力，而非单纯的季节性波动。虽然负债率仅20.7%显示财务结构尚稳，但负向的成长性和亏损状态使得当前的高估值缺乏基本面支撑，属于典型的“困境反转”预期阶段。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场处于下跌趋势中的动能衰竭期，资金面呈现“背离”特征。** 世界模型判定当前处于第2笔下跌走势，虽MACD出现底背驰（价格新低但动能未创新低），暗示下跌力量衰竭，但空间评估显示下方风险（3.2 ATR）远大于上方空间（1.2 ATR），盈亏比极差（-0.4:1）。资金面上，今日主力净流入607万与散户买入形成共振，但近5日累计仍为净流出，且融资余额增加显示杠杆资金在低位承接，这验证了世界模型中“卖方主导但动能减弱”的判断，即空头力量正在耗尽，但多头尚未完全确立主导权。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**不同意立即入场，建议严格执行“等待”策略。** 尽管世界模型提示反弹概率上升，但-0.4:1的盈亏比在量化交易中属于无效区间，且当前处于“没有明显趋势方向”的震荡期，胜率与赔率均不理想。结合资金面看，虽然今日有主力护盘，但缺乏持续的大规模增量资金配合，贸然做多容易遭遇“反弹即被套”的局面。
-*   **建议操作：** 暂时观望，不建立新仓。
-*   **关键价位：** 重点关注 **24.63** 一线。若股价回调至此，结合世界模型的低支撑位，盈亏比将大幅改善至正向区间。
-*   **信号确认：** 需等待日线级别突破40日均线（28.23）并站稳，或确认有效跌破24.63后反抽确认，方可介入。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **业绩持续恶化风险：** 营收与净利润的双降若无法在季报中扭转，高估值将面临“戴维斯双杀”，世界模型的底背驰可能只是下跌中继。
-2.  **技术面破位风险：** 当前处于40日均线上方但空间有限，一旦跌破24.63支撑位，世界模型结构将发生破坏，可能引发加速赶底行情。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 127.5 | PB 4.2 | ROE -0.1% | 利润-111% | 营收-15%</div></div><div class="card"><h2>688618.SH 深圳市三旺通信股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">31.44 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">通信设备</span></h2><div class="intro">深圳市三旺通信股份有限公司成立于2001年，是专注于工业互联网的高新技术企业，面向工业经济数字化、网络化、智能化的基础设施需求，致力于工业互联网通信产品的研发、生产和销售。
-公司深耕工业级市场近20年...</div><div class="main-biz">主营: 工业互联网通信产品的研发、生产和销售</div><div style="color:#8b949e;font-size:13px">广东深圳市 · 员工523人 · 成立2001年 · www.3onedata.com.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入607万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-147万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入4万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额1.1亿(近5日+0.08亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 资金面无明显异动</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>通信设备</b></div><div style="padding:8px;background:#f0883e22;border-radius:6px;margin-bottom:8px">🔥 匹配热门板块: <b style="color:#f0883e">通信设备</b></div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">127.5 (行业中位30, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">4.19 (行业中位3.5)</div></div><div class="metric"><div class="label">市值</div><div class="value ">35亿</div></div><div class="metric"><div class="label">ROE</div><div class="value negative">-0.1%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-110.7%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-14.9%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">20.7%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">2.79%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。短期回调0.5%。动能背驰（价格创新高/低但动能指标未跟随，趋势动能在减弱）。量能温和，卖方明显主导。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能背驰</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">背驰</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">-1.2 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">3.2 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔄 <b>MACD底背驰</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格创新低但动能未跟随，下跌力量在衰竭，反弹概率上升</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>回调但仍在40日均线上方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 中期趋势仍在，回调可能是上升途中的正常调整</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(3.1ATR)明显大于上方空间(1.2ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-26 17:47 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(-0.4:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">高估值 · 横盘, 2笔下跌, 动能背驰</div>
+<div style="margin-top:8px"><span style="background:#f0883e33;color:#f0883e;padding:2px 10px;border-radius:10px;font-size:13px">🔥 匹配今日热门板块: 通信设备</span></div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">深圳市三旺通信股份有限公司成立于2001年，是专注于工业互联网的高新技术企业，面向工业经济数字化、网络化、智能化的基础设施需求，致力于工业互联网通信产品的研发、生产和销售。
+公司深耕工业级市场近20年，是国内较早从事工业互联网通信产品的公司...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 工业互联网通信产品的研发、生产和销售</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">背驰</div></div>
+<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">28.93</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">24.63</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">28.23</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">-0.4:1</div></div>
+</div>
+<div style="padding:3px 0;color:#3fb950">✅ MACD背驰 — <span style="color:#8b949e">动能衰竭，可能反转</span></div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(-0.4:1)<br>方向不明<br>
+                支撑: 24.63 | 压力: 28.93</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">127.1 (行业中位30, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">4.18 (行业中位3.5)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">34亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">2.50%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
