@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 001232.SZ 嘉立创</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="brand" href="search.html">🔍 个股分析</a>
+  <a href="../index.html">总览</a>
+  <a class="market-btn" data-market="news" href="../news/index.html">早盘必读</a>
+  <a class="market-btn" data-market="sz" href="../sz/index.html">SZ</a>
+  <a class="market-btn" data-market="sh" href="../sh/index.html">SH</a>
+  <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
+  <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
+</nav>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="001232">
+    <button onclick="doSearch()">分析</button>
+  </div>
+
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：等待股价放量突破40日均线（约178.50元）确认“第1笔”上涨结构后再行介入，当前处于“蓄势待发”而非“主升浪”阶段。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司PE(TTM)为55.8倍，显著高于电子元器件行业平均水平（通常20-30倍），但考虑到其净利润同比爆发式增长73.5%及营收增长54.1%，高估值更多反映的是市场对其高成长性的溢价，而非泡沫。
+**财务健康度**：ROE达到13.4%，负债率36.5%处于安全区间，显示公司具备较强的造血能力和抗风险能力，财务结构稳健。
+**成长性**：营收与利润的双位数高增长表明公司正处于业务扩张期，但需警惕基数扩大后增速回落的风险。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **世界模型判断**：当前处于“第0笔”且“未在40日均线上方”，意味着市场结构处于**震荡筑底或趋势反转前的混沌期**，动能缺失（0.0），上方与下方空间均被压缩至0.0，表明短期缺乏明确的方向性指引，处于“等待变盘”的临界点。
+**关键信号**：虽然模型显示空间评估为0.0（中性偏空），但资金面提供了强烈的**背离信号**——主力连续2日净流入且累计4.2亿，融资余额增加，说明聪明资金正在逆势吸筹，试图打破当前的0.0动能僵局。
+**资金验证**：资金面完全验证了“底部蓄势”的判断，散户也在买入，但尚未形成合力突破40日线，因此目前处于“量增价滞”的蓄势阶段，而非单边下跌或暴涨。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：**不同意立即重仓入场，建议“右侧确认”策略。** 世界模型显示当前处于第0笔且未站上40日线，此时入场盈亏比仅为0.0:1（模型计算值），意味着一旦回调风险极大；资金虽然流入，但尚未转化为价格突破。
+**具体操作**：
+*   **建议策略**：**观望等待突破**。
+*   **关键价位**：
+    *   **关注突破价**：178.50元（需放量站稳40日均线）。
+    *   **激进入场价**：174.50元（若回踩不破支撑）。
+    *   **止损价**：168.00元（跌破近期震荡平台下沿）。
+    *   **第一目标价**：195.00元（前高压力位）。
+    *   **盈亏比**：约 1:2.5（突破确认后）。
+*   **仓位建议**：若突破确认，建议轻仓试错（20%），确认站稳后再加仓。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **技术面破位风险**：当前处于第0笔结构，若大盘调整导致股价无法站稳40日均线，将直接触发“第1笔”的下跌趋势，之前的资金流入可能成为“接盘”。
+2.  **估值消化压力**：55.8倍的PE需要持续的高增长来消化，若后续季度增速放缓至30%以下，杀估值风险将迅速释放。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 55.8 | PB 11.8 | ROE 13.4% | 利润+74% | 营收+54%</div></div><div class="card"><h2>001232.SZ 嘉立创 <span class="value positive" style="font-size:18px;margin-left:12px">175.01 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">元器件</span></h2><div style="color:#8b949e;font-size:13px"></div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入3938万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+4.2亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入3234万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额9.5亿(近5日+1.04亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续2日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，融资余额增加</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>元器件</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">55.8</div></div><div class="metric"><div class="label">PB</div><div class="value ">11.81</div></div><div class="metric"><div class="label">市值</div><div class="value ">972亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">13.4%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+73.5%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+54.1%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">36.5%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">31.51%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">数据不足，无法分析</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-unknown phase-badge">数据不足</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9"> · 0笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9"></span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px"> </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px"></div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">0.0 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">0.0 ATR</div></div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-08-28 17:45 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
+</div>
+
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>

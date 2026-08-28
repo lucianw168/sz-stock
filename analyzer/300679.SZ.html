@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 300679.SZ 电连技术股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>300679.SZ 电连技术</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,58 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>300679.SZ 电连技术 <span style="color:#f85149;font-size:20px">50.29 (-4.39%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 元器件 · 市值214亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="300679">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 横盘, 动能背驰 → 观望</div>
+<div style="color:#8b949e;font-size:13px">高估值 · 横盘, 6笔下跌, 动能背驰</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：当前盈亏比极差，建议耐心等待股价回调至40日均线（46.61元）或模型支撑位（35.15元）企稳后再行介入，切勿在动能转强的高位盲目追涨。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司当前PE(TTM)高达95.9倍，显著高于传统元器件行业平均水平，这主要源于其高成长性预期及在智能终端/车联网领域的稀缺性；但短期净利润同比下滑15.1%且ROE仅为4.1%，显示业绩兑现能力暂时弱于市场定价，存在估值与业绩的错配风险。
-**财务健康度**：负债率33.3%处于安全区间，现金流相对稳健，但营收增速（+3.8%）远低于股价隐含的成长预期，属于典型的“高估值、低增速”阶段。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 1. **市场阶段与空间**：模型判定当前处于“上涨趋势第2笔”的动能转强阶段，MACD零轴上方金叉确认了多头二次加速信号；然而，模型指出下方风险（4.2 ATR）远大于上方空间（0.7 ATR），意味着当前处于相对高位，盈亏比极不划算。
-2. **关键发现与信号**：虽然MACD金叉和量价配合显示买方主导，但“下方风险明显大于上方空间”是核心警示，表明当前价格已透支了短期反弹动能，缺乏足够的上行空间来覆盖潜在的回调风险。
-3. **资金面验证**：资金面呈现“主力净流入、散户卖出”的良性背离，验证了机构正在承接筹码；但融资余额微降且未进入北向前十，说明增量资金并未大规模进场，仅靠存量主力支撑，难以推动股价突破上方4.9 ATR的阻力位。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：
-**不同意**世界模型的“立即入场”建议，但**高度认同**其“等待回调改善盈亏比”的策略。
-**可行性分析**：资金面显示主力在持续买入，但股价并未大幅拉升（今日涨跌0%），说明上方抛压沉重，此时追高极易被套在短期高点。世界模型计算的盈亏比1.1:1在震荡市中属于无效区间，必须等待价格回归支撑位。
-**具体操作建议**：
-*   **策略**： **观望/右侧交易**。
-*   **建议入场价**： **35.15元**（模型第一支撑位）或 **46.61元**（40日均线强支撑）。
-*   **目标价**： **72.19元**（第一压力位）或 **58.00元**（短期心理关口）。
-*   **止损价**： **34.10元**（跌破支撑位离场）。
-*   **盈亏比**： 在35.15元入场时约为 **1.6:1**（风险3.9%，收益37.2%），远优于当前的1.1:1。
-*   **建议仓位**： 若回调至35-40元区间，可建立 **30%-50%** 底仓，剩余仓位待突破58元确认趋势后加仓。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1. **业绩兑现风险**：高估值（95倍PE）完全依赖未来高增长，若季报显示净利润继续下滑或增速不及预期，将面临剧烈的“杀估值”行情。
-2. **技术面回调风险**：世界模型明确提示下方风险（4.2 ATR）大于上方空间，当前处于上涨中继的疲劳期，极易出现“假突破”后的深幅回调。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 95.9 | PB 4.4 | ROE 4.1% | 利润-15% | 营收+4%</div></div><div class="card"><h2>300679.SZ 电连技术股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">52.60 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">元器件</span></h2><div class="intro">电连技术股份有限公司创办于2006年,拥有“ECTCONN”注册商标,是一家集开发设计、制造、营销为一体的专业电子连接器制造企业。通过了ISO9001:2008质量管理体系和ISO14001:2004...</div><div class="main-biz">主营: 发行人专业从事微型电连接器及互连系统相关产品的技术研究、设计、制造和销售服务,产品广泛应用在以智能手机为代表的智能移动终端产品以及车联网终端、智能家电等新兴产品中。</div><div style="color:#8b949e;font-size:13px">广东深圳市 · 员工11,882人 · 成立2006年 · www.ectsz.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入6256万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+3.1亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出6593万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额13.9亿(近5日-0.10亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>元器件</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">95.9</div></div><div class="metric"><div class="label">PB</div><div class="value ">4.44</div></div><div class="metric"><div class="label">市值</div><div class="value ">223亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">4.1%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-15.1%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+3.8%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">33.3%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">8.87%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">站稳关键均线上方，动能转强。短期反弹57.5%，处于中间位置，方向待确认。动能转强（MACD出现金叉，短期动能转向多方）。量能温和，买方明显主导。处于近60日中间位置。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-breakout phase-badge">突破拉升</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中间位置</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">4.9 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">4.4 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>MACD零轴上方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 多头趋势中的二次加速信号</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>上涨笔中买方力量明显强于卖方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 量价配合健康，趋势有支撑</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.2ATR)明显大于上方空间(0.7ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-27 17:52 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">电连技术股份有限公司创办于2006年,拥有“ECTCONN”注册商标,是一家集开发设计、制造、营销为一体的专业电子连接器制造企业。通过了ISO9001:2008质量管理体系和ISO14001:2004环境管理体系认证。</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 发行人专业从事微型电连接器及互连系统相关产品的技术研究、设计、制造和销售服务,产品广泛应用在以智能手机为代表的智能移动终端产品以及车联网终端、智能家电等新兴产品中。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 6笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">背驰</div></div>
+<div class="m"><div class="l">量能</div><div class="v">异常放量</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">72.19</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">35.15</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">46.26</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">1.4:1</div></div>
+</div>
+<div style="padding:3px 0;color:#3fb950">✅ MACD背驰 — <span style="color:#8b949e">动能衰竭，可能反转</span></div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#3fb950">✅ ≥5笔走势 — <span style="color:#8b949e">走势充分展开</span></div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(1.4:1)<br>方向不明<br>
+                支撑: 35.15 | 压力: 72.19</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">91.7</div></div>
+<div class="m"><div class="l">PB</div><div class="v">4.24</div></div>
+<div class="m"><div class="l">市值</div><div class="v">214亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">7.55%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
