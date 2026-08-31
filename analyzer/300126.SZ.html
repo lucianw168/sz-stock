@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>300126.SZ 锐奇股份</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 300126.SZ 锐奇控股股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,49 +74,61 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>300126.SZ 锐奇股份 <span style="color:#3fb950;font-size:20px">6.63 (+0.61%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 轻工机械 · 市值20亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 横盘, 动能背驰 → 观望</div>
-<div style="color:#8b949e;font-size:13px">估值中性 · 横盘, 2笔下跌, 动能背驰</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="300126">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
-</div>
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：当前盈亏比不足且缺乏机构资金合力，建议等待回调至5.66附近或右侧突破信号出现后再做决策。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司目前处于**亏损状态**（PE亏损，ROE -2.9%），且净利润同比暴跌101%，显示短期业绩出现严重恶化；但营收同比增长7.7%，说明业务规模仍在扩张，亏损主要源于成本或一次性因素。
+**财务健康度**：负债率仅为21.2%，处于极低水平，财务结构非常稳健，几乎没有债务风险。
+**成长性**：虽然营收增长，但高额的亏损和负向的ROE表明当前的增长质量较差，尚未转化为股东价值。
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">锐奇控股股份有限公司全球领先高等级专业电动工具运营商。
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与动能**：世界模型判定市场处于**下跌趋势的第2笔走势**，但出现了关键的**MACD底背驰**信号，意味着虽然价格创新低，但下跌动能正在衰竭，反弹概率正在上升。
+**空间与风险**：模型测算显示下方风险（4.0 ATR）明显大于上方空间（0.1 ATR），且当前处于“没有明显趋势方向”的混沌期，并非理想的单边行情。
+**资金验证**：资金面显示散户大幅买入（368万）而主力微幅流出（-58万），这种“散户接盘”现象通常发生在下跌末端或反弹初期，与模型判断的“动能衰竭”相吻合，但缺乏机构大资金主动进攻的意愿，验证了当前并非主升浪。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断**：**不同意立即入场**。世界模型给出的盈亏比为1.1:1，属于极低的盈亏比，且当前处于“没有明显趋势方向”的震荡期，胜率与赔率都不占优。
+**可行性分析**：结合资金面，散户的活跃可能是在博取短期的超跌反弹，而非趋势反转，此时介入容易遭遇“左右打脸”。
+**具体操作建议**：
+*   **建议**：**观望/等待**。
+*   **做多计划**（若必须参与）：
+    *   **入场价**：等待回调至 **5.66** 附近（第一支撑位），此时盈亏比将大幅改善。
+    *   **目标价**：第一压力位 **8.13**。
+    *   **止损价**：跌破 **5.49**（下一支撑）。
+    *   **建议仓位**：轻仓（<10%），仅作为短线博弈。
+*   **不做信号**：等待价格有效突破 **8.13** 确认反转，或跌破 **5.66** 确认趋势延续。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **业绩暴雷风险**：净利润同比下滑101%且处于亏损状态，若后续季报无法解释亏损原因，股价可能面临进一步杀估值。
+2.  **趋势破坏风险**：若股价有效跌破 **5.66** 支撑位，世界模型结构将发生破坏，届时需立即离场，下方空间将打开至5.49甚至更低。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 亏损 | PB 2.1 | ROE -2.9% | 利润-101% | 营收+8%</div></div><div class="card"><h2>300126.SZ 锐奇控股股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">6.83 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">轻工机械</span></h2><div class="intro">锐奇控股股份有限公司全球领先高等级专业电动工具运营商。
 公司创建于2000年,公司致力于高等级专业电动工具的研发、生产、销售及相关技术服务,全心全力助客户创造更高的工作价值。
-锐奇主要产品涉及20多个系列,100多个规格,广泛运用于工业...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 主要从事高等级专业电动工具的研发、生产和销售。</div>
+锐奇主要产品涉及20...</div><div class="main-biz">主营: 主要从事高等级专业电动工具的研发、生产和销售。</div><div style="color:#8b949e;font-size:13px">上海上海市 · 员工1,056人 · 成立2000年 · www.ken-tools.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入75万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-58万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入368万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 资金面无明显异动</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>轻工机械</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">亏损</div></div><div class="metric"><div class="label">PB</div><div class="value ">2.12 (行业中位2.0)</div></div><div class="metric"><div class="label">市值</div><div class="value ">21亿</div></div><div class="metric"><div class="label">ROE</div><div class="value negative">-2.9%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-101.0%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+7.7%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">21.2%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">2.50%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。短期回调0.8%。动能背驰（价格创新高/低但动能指标未跟随，趋势动能在减弱）。量能温和，多空均衡。处于近60日中间位置。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能背驰</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">背驰</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">多空均衡</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中间位置</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">5.7 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">5.1 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔄 <b>MACD底背驰</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格创新低但动能未跟随，下跌力量在衰竭，反弹概率上升</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>回调但仍在40日均线上方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 中期趋势仍在，回调可能是上升途中的正常调整</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.0ATR)明显大于上方空间(0.1ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-08-31 17:54 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">背驰</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">8.13</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">5.66</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">5.94</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v pos">1.5:1</div></div>
-</div>
-<div style="padding:3px 0;color:#3fb950">✅ MACD背驰 — <span style="color:#8b949e">动能衰竭，可能反转</span></div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                方向不明<br>
-                支撑: 5.66 | 压力: 8.13</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">亏损</div></div>
-<div class="m"><div class="l">PB</div><div class="v">2.05 (行业中位2.0)</div></div>
-<div class="m"><div class="l">市值</div><div class="v">20亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">2.04%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
