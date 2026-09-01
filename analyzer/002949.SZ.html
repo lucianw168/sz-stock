@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 002949.SZ 深圳市华阳国际工程设计股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>002949.SZ 华阳国际</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,49 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>002949.SZ 华阳国际 <span style="color:#f85149;font-size:20px">13.26 (-2.36%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 建筑工程 · 市值26亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="002949">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(-0.6:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">估值中性 · 上涨中, 4笔上涨, 动能温和</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（当前盈亏比不利，需等待9.20附近企稳信号）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利严重错配，成长性堪忧。** 公司PE(TTM)高达29.4倍，是行业PE中位数（8倍）的3.6倍，且PB(1.82)也显著高于行业（0.8），显示市场对其定价存在严重溢价，但基本面无法支撑。盈利能力极弱，ROE仅2.2%，且营收同比暴跌31.0%，净利润几乎停滞，财务健康度处于收缩状态，属于典型的“高估值、低业绩”困境股。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型发出“空间受限”警报，资金流入存在诱多嫌疑。** 世界模型判定当前处于“动能加速”但“空间有限”的矛盾阶段，上方空间仅1.4 ATR而下方风险高达4.9 ATR，盈亏比-0.6:1意味着做多即面临亏损概率大于盈利。资金面虽然显示主力连续3日净流入，但这与模型判断的“动能加速但缺乏向上驱动力”相矛盾，这种背离通常意味着主力在利用散户的追涨情绪进行阶段性出货或护盘，而非真正的趋势反转。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**不同意世界模型的“立即入场”逻辑，建议严格执行“等待”策略。** 尽管资金面显示主力买入，但世界模型给出的盈亏比（-0.6:1）在数学上是不成立的，任何理性的交易体系都不会在负盈亏比下开仓。结合资金面主力买散户卖的背离，当前极大概率是反弹末端的诱多。
-*   **建议操作：** 暂时不做多。
-*   **关注信号：** 等待股价回调至 **9.20** 附近（世界模型第一支撑位），此时上方空间打开，盈亏比将反转至正向，且能确认主力是否愿意在关键位置承接筹码。
-*   **如果必须交易（高风险）：** 仅在 **13.58** 附近轻仓试错，目标价 **10.73**，止损 **9.20**，但这属于左侧博弈，胜率极低。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **业绩暴雷风险：** 营收同比下滑31%且ROE极低，若后续季报继续恶化，高估值将瞬间崩塌。
-2.  **主力出货风险：** 资金面主力流入与模型判断的“动能衰竭”背离，极易发生主力借反弹派发筹码，导致股价快速回落至9.20支撑位。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 29.4 | PB 1.8 | ROE 2.2% | 利润+0% | 营收-31%</div></div><div class="card"><h2>002949.SZ 深圳市华阳国际工程设计股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">13.58 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">建筑工程</span></h2><div class="intro">公司是一家建筑设计公司，致力于建筑设计全过程服务，具有完整的团队配置和丰富的行业经验。主要业务涵盖城市规划、建筑设计(居住建筑、公共建筑、商业综合体)、建筑产业化设计与咨询、BIM设计与咨询、工程造价...</div><div class="main-biz">主营: 城市规划、建筑设计(居住建筑、公共建筑、商业综合体)、建筑产业化设计与咨询、BIM设计与咨询、工程造价与咨询。</div><div style="color:#8b949e;font-size:13px">广东深圳市 · 员工2,216人 · 成立1993年 · www.capol.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入854万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+1.3亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出1573万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续3日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>建筑工程</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">29.4 (行业中位8, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">1.82 (行业中位0.8, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">27亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">2.2%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+0.1%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-31.0%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">42.0%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">16.89%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">在上升趋势中运行。上涨趋势进行中（4笔）。动能加速（最近一笔波动幅度较大，走势在加速）。量能温和，买方略占优。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-markup phase-badge">主升段</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 4笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能加速</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">加速</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">-4.0 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">6.2 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.9ATR)明显大于上方空间(1.4ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-08-31 17:45 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">公司是一家建筑设计公司，致力于建筑设计全过程服务，具有完整的团队配置和丰富的行业经验。主要业务涵盖城市规划、建筑设计(居住建筑、公共建筑、商业综合体)、建筑产业化设计与咨询、BIM设计与咨询、工程造价与咨询。根据客户需求为其提供概念设计、方...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 城市规划、建筑设计(居住建筑、公共建筑、商业综合体)、建筑产业化设计与咨询、BIM设计与咨询、工程造价与咨询。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">主升段</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">上涨 4笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">10.73</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">9.2</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">10.62</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">-0.6:1</div></div>
+</div>
+<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(-0.6:1)<br>
+                支撑: 9.2 | 压力: 10.73</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">28.7 (行业中位8, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">1.78 (行业中位0.8, 偏高)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">26亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">11.31%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>

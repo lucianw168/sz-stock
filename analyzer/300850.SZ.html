@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>300850.SZ 新强联</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 300850.SZ 洛阳新强联回转支承股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,56 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>300850.SZ 新强联 <span style="color:#3fb950;font-size:20px">28.08 (+14.05%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 机械基件 · 市值116亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.4:1) → 等回调</div>
-<div style="color:#8b949e;font-size:13px">低估值 · 横盘, 2笔下跌, 动能转弱</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="300850">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **观望**（建议等待股价回踩22.54附近且主力资金企稳后再做进一步判断）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司当前PE(TTM)为13.7倍，显著低于行业18倍的中位数，PB为1.55倍也低于行业2.0倍的中位，具备明显的**低估值安全边际**。盈利能力方面，ROE为5.8%，处于中等水平，但营收同比下滑6.2%而净利润仅微增2.9%，显示公司正处于**以量换价或成本优化的调整期**，增长动能不足。财务健康度尚可，负债率39.2%处于合理区间，但需警惕营收萎缩带来的现金流压力。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型判断：** 世界模型判定市场处于“下跌趋势中的第2笔走势”，且动能转弱（MACD死叉），这意味着股价正在经历**主动性的抛压释放**，而非被动下跌。空间评估显示上方阻力（2.4 ATR）远小于下方支撑（4.1 ATR），盈亏比仅为0.6:1，表明**向上反弹的空间极其有限，向下调整的风险占优**。
+**资金验证：** 资金面数据**部分验证**了模型的悲观判断。虽然散户在买入，但主力资金连续净流出（近5日-3574万），且今日主力大幅流出4300万，说明**机构筹码正在向散户转移**，这种“主力卖、散户买”的结构通常意味着主力在借反弹或弱势派发，缺乏持续上涨的内生动力。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师建议：** **不同意**世界模型目前的“立即入场”建议，但**高度认同**其“等待回调”的策略。
+**可行性分析：** 鉴于主力持续流出且MACD死叉，此时做多属于“接飞刀”，资金面不支持股价快速反转。
+**具体操作（若坚持博弈）：**
+*   **策略：** 仅适合右侧交易者或极高风险偏好者，不建议左侧抄底。
+*   **入场价：** 暂不入场。若必须参与，需等待股价回踩**22.54**（第一支撑位）附近企稳。
+*   **目标价：** 30.20（第一压力位）。
+*   **止损价：** 22.50（跌破支撑位立即离场）。
+*   **盈亏比：** 约0.6:1（风险收益比极差，需配合大盘环境）。
+*   **仓位：** 0-5%（仅作为观察仓）。
+**等待信号：** 重点关注**22.54**附近的支撑有效性。若股价在此位置缩量止跌，且伴随主力资金停止流出或转为净流入，方可考虑轻仓试错。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **趋势延续风险：** 世界模型明确指出处于“下跌趋势”且MACD死叉，若大盘环境恶化，股价极易直接击穿22.54支撑位，导致“破位加速”。
+2.  **基本面恶化风险：** 营收同比下滑6.2%若持续，将导致市场重新定价，目前的低估值可能进一步压缩。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 13.7 | PB 1.6 | ROE 5.8% | 利润+3% | 营收-6%</div></div><div class="card"><h2>300850.SZ 洛阳新强联回转支承股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">27.38 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">机械基件</span></h2><div class="intro">洛阳新强联回转支承股份有限公司立足于打造优秀企业的战略高度,面向国内,走向世界,一直致力于为全球市场提供高品质的回转支承产品,广泛应用于风力发电、港口机械、船用起重机、漏天采矿设备（堆取料机）,工程机...</div><div class="main-biz">主营: 主要从事大型回转支承和工业锻件的研发、生产和销售。</div><div style="color:#8b949e;font-size:13px">河南洛阳市 · 员工2,379人 · 成立2005年 · www.lyxqlbearing.com.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出4300万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-3574万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入6710万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额4.9亿(近5日+0.03亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>机械基件</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">13.7 (行业中位18)</div></div><div class="metric"><div class="label">PB</div><div class="value ">1.55 (行业中位2.0)</div></div><div class="metric"><div class="label">市值</div><div class="value ">113亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">5.8%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+2.9%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-6.2%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">39.2%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">8.12%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。低位继续下探17.8%，弱势格局。动能转弱（MACD出现死叉，短期动能转向空方）。量能缩量，卖方明显主导。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转弱</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">缩量</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转弱</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 近期死叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">缩量</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">2.4 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">4.1 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔴 <b>MACD死叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 短期动能转空</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-09-01 17:52 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">洛阳新强联回转支承股份有限公司立足于打造优秀企业的战略高度,面向国内,走向世界,一直致力于为全球市场提供高品质的回转支承产品,广泛应用于风力发电、港口机械、船用起重机、漏天采矿设备（堆取料机）,工程机械等行业,并与国内外著名企业建立长期的战...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 主要从事大型回转支承和工业锻件的研发、生产和销售。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转弱</div></div>
-<div class="m"><div class="l">量能</div><div class="v">缩量</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">30.2</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">22.54</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">26.34</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">0.4:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(0.4:1)<br>方向不明<br>
-                支撑: 22.54 | 压力: 30.2</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">14.0 (行业中位18)</div></div>
-<div class="m"><div class="l">PB</div><div class="v">1.59 (行业中位2.0)</div></div>
-<div class="m"><div class="l">市值</div><div class="v">116亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">12.87%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
