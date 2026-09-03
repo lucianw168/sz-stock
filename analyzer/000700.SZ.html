@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>000700.SZ 模塑科技</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 000700.SZ 江南模塑科技股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,51 +74,54 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>000700.SZ 模塑科技 <span style="color:#3fb950;font-size:20px">11.42 (+0.18%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 汽车配件 · 市值105亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 下跌结构+盈亏比3.2:1 → 可关注</div>
-<div style="color:#8b949e;font-size:13px">估值中性 · 下跌, 2笔下跌, 动能温和, 盈亏比3.2:1</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="000700">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（当前处于下跌加速段，需等待9.49支撑确认及资金回流信号后再行介入）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司PE(TTM)为21.4倍，略高于行业18倍的中位数，PB为2.60倍，与行业2.5倍持平，显示估值处于合理偏高水平，并未出现显著低估。盈利能力方面，ROE为7.9%，处于中等水平；虽然净利润同比增长7.4%，但营收同比下滑10.3%，呈现典型的“增收不增利”或“量跌价升”的剪刀差特征，需警惕主业萎缩风险。财务健康度尚可，负债率42.6%在制造业中属于安全区间，但需关注现金流对营收下滑的支撑能力。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与结构：** 世界模型判定当前处于“下跌段”的第2笔走势，且动能处于“加速”状态，这意味着价格正在快速远离均线，且下方空间（3.9 ATR）远小于上方压力（10.3 ATR），短期下行惯性较强。关键发现指出“下方风险大于上方空间”，这通常对应于下跌中继或加速赶底阶段，而非底部的“背驰”或“建仓”信号，此时市场情绪脆弱，缺乏向上驱动力。资金面验证了模型的判断：主力资金净流出1393万，而散户逆势买入2414万，典型的“主力出货、散户接盘”背离结构，进一步确认了短期抛压未尽。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断：** 我**同意**世界模型的“不建议入场”及“等待”判断。当前动能加速下跌，且资金面显示主力在撤退，此时盲目抄底极易成为“接飞刀”。
+**具体操作建议：**
+*   **当前策略：** **观望/空仓**。
+*   **如果做多（右侧交易）：** 建议等待价格回落至**9.49**（第一支撑位）附近企稳，且出现缩量止跌信号后再考虑轻仓试错。
+*   **目标价：** 若突破9.49支撑，第一目标看**11.60**（40日均线），强阻力看**12.50**。
+*   **止损价：** 严格设在**9.21**（跌破则结构破坏，离场）。
+*   **盈亏比：** 约 1:2.5。
+*   **仓位：** 建议不超过总资金的10%，作为防御性配置。
+**如果不做：** 等待价格有效跌破**9.49**并确认第3笔下跌结束，或者等待价格重新站上**11.60**确认反转结构。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **营收持续下滑风险：** 营收同比-10.3%若持续，将直接压制估值修复空间，基本面恶化可能引发新一轮杀跌。
+2.  **资金面背离风险：** 散户大幅买入而主力持续流出，若散户资金无法承接住抛压，极易引发流动性枯竭导致的急跌。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 21.4 | PB 2.6 | ROE 7.9% | 利润+7% | 营收-10%</div></div><div class="card"><h2>000700.SZ 江南模塑科技股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">11.74 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">汽车配件</span></h2><div class="intro">江南模塑科技股份有限公司地处江南水秀之乡——江苏省江阴市周庄镇。公司占地面积约50万平方米，建筑面积约20万平方米，共有员工2387余人。公司成立于1988年6月，1997年2月28日在深圳证券交易所...</div><div class="main-biz">主营: 汽车零部件、塑料制品、模具、塑钢门窗。</div><div style="color:#8b949e;font-size:13px">江苏无锡市 · 员工5,109人 · 成立1988年 · www.000700.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出1393万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-555万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入2414万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额6.0亿(近5日+0.37亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 融资余额增加，主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>汽车配件</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">21.4 (行业中位18)</div></div><div class="metric"><div class="label">PB</div><div class="value ">2.60 (行业中位2.5)</div></div><div class="metric"><div class="label">市值</div><div class="value ">108亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">7.9%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+7.4%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-10.3%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">42.6%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">5.94%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">下跌段，价格处于近期低位。低位继续下探11.0%，弱势格局。动能加速（最近一笔波动幅度较大，走势在加速）。量能温和，卖方略占优。处于近60日底部区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-decline phase-badge">下跌段</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能加速</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">加速</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴下方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日底部区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">10.3 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">3.9 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(2.2ATR)明显大于上方空间(0.9ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-09-03 17:46 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">江南模塑科技股份有限公司地处江南水秀之乡——江苏省江阴市周庄镇。公司占地面积约50万平方米，建筑面积约20万平方米，共有员工2387余人。公司成立于1988年6月，1997年2月28日在深圳证券交易所挂牌交易，股票代码“000700”，主要...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 汽车零部件、塑料制品、模具、塑钢门窗。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">下跌段</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">17.6</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">9.49</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">11.68</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v pos">3.2:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #3fb950;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#3fb950">结构支持做多</b><br>
-                入场参考: 11.42<br>
-                目标位: 17.6 (+54.1%)<br>
-                止损位: 9.49 (-16.9%)<br>
-                盈亏比: 3.2:1<br>
-                均线: 在40均线下方，突破站稳才确认<br>
-                预测周期: 约10个交易日</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">20.8 (行业中位18)</div></div>
-<div class="m"><div class="l">PB</div><div class="v">2.53 (行业中位2.5)</div></div>
-<div class="m"><div class="l">市值</div><div class="v">105亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">3.86%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
