@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>603150.SH 万朗磁塑</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 603150.SH 安徽万朗磁塑股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,71 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>603150.SH 万朗磁塑 <span style="color:#3fb950;font-size:20px">62.15 (+10.00%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 塑料 · 市值53亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 超跌, 动能背驰 → 观望</div>
-<div style="color:#8b949e;font-size:13px">高估值 · 超跌, 6笔下跌, 动能背驰</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="603150">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（当前价格不具备入场价值，建议等待回调至50.39附近或右侧趋势确立后再做决策）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司目前PE(TTM)高达59.0倍，显著高于传统制造业行业中位数（通常在15-25倍），且ROE仅为2.9%，显示当前估值严重透支了未来的盈利预期。
+**成长性与财务健康：** 营收同比暴涨124.8%主要源于基数效应或一次性因素，但净利润同比暴跌23.1%且负债率高达74.3%，表明公司正处于“增收不增利”的困境，财务杠杆极高，抗风险能力较弱。
+**结论：** 基本面处于“高估值、低盈利、高负债”的三重压力下，缺乏安全边际。
+
+---
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 1. **市场阶段与动能：** 世界模型判定股价处于“超跌区域”的第6笔下跌末端，MACD出现底背驰（价格新低但动能未新低），这意味着下跌动能正在衰竭，技术面上存在强烈的反弹需求。
+2. **关键信号与空间：** 模型指出下方风险（4.8 ATR）远大于上方空间（0.3 ATR），且当前位于40日均线下方，说明短期趋势尚未扭转，所谓的“超跌”更多是左侧交易信号而非右侧确认。
+3. **资金验证：** 资金面显示主力连续2日净流入1.1亿，呈现“主力买、散户卖”的分化特征，这在一定程度上验证了世界模型关于“底部区域有承接盘”的判断，但资金流入并未完全覆盖巨大的套牢盘压力。
+4. **综合判断：** 世界模型与资金面存在部分共振（都指向底部有支撑），但资金流入的持续性尚待观察，且当前的盈亏比（0.7:1）极差，单纯依靠技术反弹获利难度极大。
+
+---
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断：**
+*   **同意世界模型的“等待”判断，不同意立即入场。** 虽然MACD背驰暗示反弹，但当前盈亏比仅为0.7:1，意味着做多需要承担巨大的下行风险才能博取有限的反弹空间，不符合专业交易的风险收益原则。
+*   **可行性分析：** 资金面的持续流入提供了短期支撑，但考虑到公司基本面恶化（净利润下滑、高负债），任何反弹都可能只是超跌后的修复，而非趋势反转。
+
+**具体操作建议：**
+*   **当前策略：** **观望/空仓**。
+*   **如果必须做多（激进策略）：**
+    *   **入场价：** 等待回调至 **50.39** 附近（第一支撑位），此时盈亏比将大幅改善。
+    *   **目标价：** 第一压力位 **78.12**（短线反弹目标）。
+    *   **止损价：** 跌破 **50.39** 立即离场，防止结构破坏。
+    *   **盈亏比：** 约 1:2.5（在50.39入场时）。
+    *   **建议仓位：** 0%（当前价格无仓位）。
+*   **如果不做：** 等待股价站稳 **40日均线（52.60）** 且伴随成交量放大，确认右侧趋势反转后再行介入。
+
+---
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **基本面暴雷风险：** 营收激增伴随利润暴跌，需警惕是否存在存货积压、成本失控或大客户订单取消等隐藏风险，高负债率（74.3%）在行业下行周期中极易引发流动性危机。
+2.  **技术面假突破风险：** 世界模型显示的“底背驰”在弱势市场中常出现“钝化”现象，即价格反弹后迅速再次创出新低，导致抄底资金被套。
+
+---
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 59.0 | PB 3.3 | ROE 2.9% | 利润-23% | 营收+125%</div></div><div class="card"><h2>603150.SH 安徽万朗磁塑股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">66.51 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">塑料</span></h2><div class="intro">安徽万朗磁塑股份有限公司始建于1999年，历经多年的稳步发展，万朗已成长为国内规模品质、产业链布局、研发实力等方面具有领先优势的冰箱磁性门封生产企业之一。公司在国内冰箱磁性门封细分市场有较高的份额，业...</div><div class="main-biz">主营: 以冰箱门封为核心的各类冰箱塑料部件产品的研发、生产、加工和销售。</div><div style="color:#8b949e;font-size:13px">安徽合肥市 · 员工10,931人 · 成立1999年 · www.higasket.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入4924万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+1.1亿</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出4401万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日1笔大宗交易(合计0万)</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续2日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>塑料</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">59.0</div></div><div class="metric"><div class="label">PB</div><div class="value ">3.27</div></div><div class="metric"><div class="label">市值</div><div class="value ">57亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">2.9%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-23.1%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+124.8%</div></div><div class="metric"><div class="label">负债率</div><div class="value negative">74.3%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">8.18%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">处于超跌区域，多笔下跌后位于近期底部。持续下跌6笔，下跌动能可能接近衰竭。动能背驰（价格创新高/低但动能指标未跟随，趋势动能在减弱）。量能温和，卖方略占优。处于近60日底部区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-oversold phase-badge">超跌区</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 6笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能背驰</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">背驰</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日底部区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">3.3 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">4.6 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📉 <b>已连续下跌6笔</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 下跌动能充分释放，关注是否出现反转信号</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔄 <b>MACD底背驰</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格创新低但动能未跟随，下跌力量在衰竭，反弹概率上升</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.8ATR)明显大于上方空间(0.3ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-09-04 17:48 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">安徽万朗磁塑股份有限公司始建于1999年，历经多年的稳步发展，万朗已成长为国内规模品质、产业链布局、研发实力等方面具有领先优势的冰箱磁性门封生产企业之一。公司在国内冰箱磁性门封细分市场有较高的份额，业务范围涵盖磁性材料、高分子材料、模具、设...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 以冰箱门封为核心的各类冰箱塑料部件产品的研发、生产、加工和销售。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">超跌区</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">下跌 6笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">背驰</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">78.12</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">50.39</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">52.58</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">1.4:1</div></div>
-</div>
-<div style="padding:3px 0;color:#3fb950">✅ MACD背驰 — <span style="color:#8b949e">动能衰竭，可能反转</span></div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#3fb950">✅ ≥5笔走势 — <span style="color:#8b949e">走势充分展开</span></div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(1.4:1)<br>
-                支撑: 50.39 | 压力: 78.12</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">55.2</div></div>
-<div class="m"><div class="l">PB</div><div class="v">3.06</div></div>
-<div class="m"><div class="l">市值</div><div class="v">53亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">5.46%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>

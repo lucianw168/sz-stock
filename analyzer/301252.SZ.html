@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个股分析 - 301252.SZ 浙江同星科技股份有限公司</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>301252.SZ 同星科技</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-h1 { color: #58a6ff; margin-bottom: 5px; }
-.subtitle { color: #8b949e; margin-bottom: 20px; }
-.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
-.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
-.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
-.search-box button:hover { background: #2ea043; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
-.intro { color: #c9d1d9; font-size: 14px; }
-.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
-.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
-.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
-.metric .label { color: #8b949e; font-size: 12px; }
-.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
-.metric .value.positive { color: #3fb950; }
-.metric .value.negative { color: #f85149; }
-.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-.signal .icon { font-size: 16px; }
-.signal .name { color: #c9d1d9; font-weight: bold; }
-.signal .desc { color: #8b949e; font-size: 13px; }
-.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
-.phase-oversold { background: #1f6feb33; color: #58a6ff; }
-.phase-decline { background: #f8514933; color: #f85149; }
-.phase-accumulation { background: #3fb95033; color: #3fb950; }
-.phase-breakout { background: #3fb95033; color: #3fb950; }
-.phase-markup { background: #3fb95033; color: #3fb950; }
-.phase-distribution { background: #f8514933; color: #f85149; }
-.phase-sideways { background: #8b949e33; color: #8b949e; }
-.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
-.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
-.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
-.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
-.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
-.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
-.tag-good { background: #3fb95022; color: #3fb950; }
-.tag-bad { background: #f8514922; color: #f85149; }
-.tag-neutral { background: #8b949e22; color: #c9d1d9; }
-.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
-.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
-.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
-.stock-link:hover { border-color: #58a6ff; }
-.stock-link .code { font-weight: bold; }
-.stock-link .name { color: #8b949e; font-size: 13px; }
-.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
-.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
-.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
-.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
-.top-nav a:hover { background: #161b22; color: #c9d1d9; }
-.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
-.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
-.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
-.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
-</style>
-</head>
-<body>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
+h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
+.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
+.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
+.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
+.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
+.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
+.top-nav a:hover{background:#161b22;color:#c9d1d9}
+.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
+.top-nav .market-btn[data-market="news"]{background:#9c27b0}
+.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
+.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
+</style></head><body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -74,52 +26,47 @@ h1 { color: #58a6ff; margin-bottom: 5px; }
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="container">
-  <h1>个股综合分析</h1>
-  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
+<div class="c">
+<a href="search.html" class="back">← 返回搜索</a>
+<h1>301252.SZ 同星科技 <span style="color:#f85149;font-size:20px">36.50 (-2.67%)</span></h1>
+<p style="color:#8b949e;margin-bottom:15px">行业: 机械基件 · 市值62亿</p>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="301252">
-    <button onclick="doSearch()">分析</button>
-  </div>
+<div class="card" style="border:2px solid #f0883e">
+<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(0.9:1) → 等回调</div>
+<div style="color:#8b949e;font-size:13px">高估值 · 横盘, 4笔下跌, 动能背驰</div>
 
-  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：当前处于“高估值 + 下跌趋势 + 动能衰竭”的复杂区间，虽有主力护盘迹象，但缺乏明确的右侧反转信号，建议等待回调至27.31元附近再考虑介入。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利严重错配**：公司PE(TTM)高达69.7倍，远超行业18倍的中位数，且ROE仅3.8%，显示当前市值并未反映其实际盈利能力，存在明显的估值泡沫或市场炒作预期。虽然营收同比增长26.3%展现了极强的成长性，但净利润同比下滑25.5%揭示了严重的“增收不增利”困境，毛利率可能大幅受损。财务健康度尚可（负债率32.7%），但高估值叠加盈利下滑，使得安全边际极低。
-
-###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场处于下跌中继的动能衰竭期**：世界模型判定当前处于下跌趋势的第4笔（主跌段），但MACD出现底背驰，意味着虽然价格仍在创新低，但抛压正在枯竭，下跌动能即将耗尽。空间评估显示下方风险（4.3 ATR）大于上方空间（0.2 ATR），目前并非理想的右侧交易点。资金面验证了这一判断：尽管主力连续2日净流入，但散户在大规模卖出，且融资余额减少，说明机构在护盘或调仓，而非发动大级别行情，资金并未形成合力推动反转。
-
-###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**不同意立即入场，建议严格执行等待策略**。世界模型给出的盈亏比0.7:1在A股交易中属于极差水平，强行做多胜率极低。结合资金面主力虽买但散户抛压大的特征，当前是典型的“诱多”或“抵抗式下跌”阶段。
-*   **建议操作**：**观望**。
-*   **具体计划**：
-    *   **不做多**：当前价格37.50元上方空间不足（仅0.2 ATR），不建议追高。
-    *   **关注点位**：耐心等待股价回调至**27.31元**（第一支撑位）附近。此时若出现缩量企稳，盈亏比将大幅改善至1:2以上。
-    *   **止损/离场**：若有效跌破**27.31元**，世界模型提示结构破坏，应果断离场，下一支撑看26.49元。
-    *   **目标**：反弹第一压力位在**45.00元**。
-
-###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **业绩兑现风险**：公司营收增长无法转化为利润，若后续季度财报继续显示毛利率恶化，高估值将面临戴维斯双杀。
-2.  **技术面破位风险**：当前处于下跌趋势的第4笔，若跌破27.31元支撑，将开启新的下跌笔级，上方套牢盘将形成巨大阻力。
-
-###</div><div class="financial-bar" style="margin-top:10px">PE 69.7 | PB 4.7 | ROE 3.8% | 利润-25% | 营收+26%</div></div><div class="card"><h2>301252.SZ 浙江同星科技股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">37.50 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">机械基件</span></h2><div class="intro">浙江同星科技股份有限公司位于风景秀丽的浙江省新昌县，始建于1993年，是一家集研发、生产、销售为一体的现代化技术企业，产品涉及家用空调、商用空调、汽车空调、冷冻冷藏、饮品饮料、制冷设施等多个领域。公司...</div><div class="main-biz">主营: 公司的主营业务为制冷设备相关产品的研发、生产和销售，主要产品包括换热器、制冷系统管组件、汽车空调管路和制冷单元模块等。</div><div style="color:#8b949e;font-size:13px">浙江绍兴市 · 员工1,285人 · 成立2001年 · www.zjtx.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入1103万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+1317万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出1041万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额1.4亿(近5日-0.15亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-good">连续2日流入</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 融资余额减少，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>机械基件</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">69.7 (行业中位18, 偏高)</div></div><div class="metric"><div class="label">PB</div><div class="value ">4.66 (行业中位2.0, 偏高)</div></div><div class="metric"><div class="label">市值</div><div class="value ">63亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">3.8%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-25.5%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+26.3%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">32.7%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">3.30%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。下跌中（4笔），仍在主跌段。动能背驰（价格创新高/低但动能指标未跟随，趋势动能在减弱）。量能温和，卖方明显主导。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 4笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能背驰</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">背驰</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 </div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">4.3 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">5.8 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">⚠️ <b>下跌进行中（4笔）</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 仍在主跌段，不宜抄底</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔄 <b>MACD底背驰</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 价格创新低但动能未跟随，下跌力量在衰竭，反弹概率上升</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(4.3ATR)明显大于上方空间(0.2ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
-
-  <div class="footer">
-    生成时间: 2026-09-03 17:51 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
-    信息仅供参考，请结合自身判断做出投资决策
-  </div>
 </div>
 
-<script>
-function doSearch() {
-  var code = document.getElementById('search').value.trim();
-  if (!code) return;
-  // 去掉点和后缀，只保留数字
-  code = code.replace(/[^0-9]/g, '');
-  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
-  // 判断市场
-  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
-  window.location.href = code + suffix + '.html';
-}
-document.getElementById('search').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') doSearch();
-});
-</script>
-</body>
-</html>
+<div class="card"><h2>公司信息</h2>
+<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">浙江同星科技股份有限公司位于风景秀丽的浙江省新昌县，始建于1993年，是一家集研发、生产、销售为一体的现代化技术企业，产品涉及家用空调、商用空调、汽车空调、冷冻冷藏、饮品饮料、制冷设施等多个领域。公司拥有员工1000余人，年产值3亿元左右，...</div>
+<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 公司的主营业务为制冷设备相关产品的研发、生产和销售，主要产品包括换热器、制冷系统管组件、汽车空调管路和制冷单元模块等。</div>
+</div>
+
+<div class="card"><h2>走势结构分析</h2>
+<div class="grid">
+<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
+<div class="m"><div class="l">趋势</div><div class="v">下跌 4笔</div></div>
+<div class="m"><div class="l">动能</div><div class="v">背驰</div></div>
+<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
+<div class="m"><div class="l">压力位</div><div class="v">45.0</div></div>
+<div class="m"><div class="l">支撑位</div><div class="v">27.31</div></div>
+<div class="m"><div class="l">40均线</div><div class="v">31.9</div></div>
+<div class="m"><div class="l">盈亏比</div><div class="v neg">0.9:1</div></div>
+</div>
+<div style="padding:3px 0;color:#3fb950">✅ MACD背驰 — <span style="color:#8b949e">动能衰竭，可能反转</span></div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
+<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
+                <b style="color:#f85149">当前不建议入场</b><br>
+                盈亏比不足(0.9:1)<br>方向不明<br>
+                支撑: 27.31 | 压力: 45.0</div>
+</div>
+
+<div class="card"><h2>基本面</h2>
+<div class="grid">
+<div class="m"><div class="l">PE(TTM)</div><div class="v">67.8 (行业中位18, 偏高)</div></div>
+<div class="m"><div class="l">PB</div><div class="v">4.54 (行业中位2.0, 偏高)</div></div>
+<div class="m"><div class="l">市值</div><div class="v">62亿</div></div>
+<div class="m"><div class="l">换手率</div><div class="v">3.11%</div></div>
+</div></div>
+
+<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
+</div></body></html>
