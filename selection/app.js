@@ -87,7 +87,7 @@
   }
   function renderOverview() {
     const panel=document.getElementById('cn-panel');
-    panel.innerHTML=`<div class="cn-overview-tools"><label>市场 <select id="cn-overview-market"><option value="all">全市场</option><option value="sz">深圳主板</option><option value="sh">上海主板</option><option value="cy">创业板</option><option value="kc">科创板</option></select></label><span class="cn-muted">最近已记录名单 · 历史与当日分开标注</span></div>
+    panel.innerHTML=`<div class="cn-overview-tools"><label>市场 <select id="cn-overview-market"><option value="all">全市场</option><option value="sz">深圳主板</option><option value="sh">上海主板</option><option value="cy">创业板</option><option value="kc">科创板</option></select></label><span class="cn-muted">回测每只50%仓位 · 历史与当日名单分开标注</span></div>
       <div class="cn-card-grid">${data.cards.map(c=>{
         const s=view.snapshot(c,market,data.expected_session);
         return `<article class="cn-product-card" style="--cn-line:${c.color}" data-card="${c.key}">
@@ -113,7 +113,7 @@
       <div class="cn-notice">${esc(c.signal_message)}${c.key==='manual'?`<br>${esc(c.reference_label)}`:''}</div>
       ${c.daily_run?`<div class="cn-toolbar"><span>最近筛选 ${esc(c.daily_run.date)}</span><span>候选 ${c.daily_run.pool_rows??'未完成'} 只 · 精选 ${c.daily_run.selected_rows} 只</span><span class="cn-muted">记录于 ${esc(c.daily_run.captured_at.replace('T',' ').slice(0,19))}</span></div>`:''}
       <div class="cn-chart-head"><h2>${c.key==='manual'?'精选确认 · 开发期模拟':'历史模拟表现'}</h2><span class="cn-muted">信号截至 ${esc(c.signal_asof)} · 账户截至 ${esc(c.account_asof)}</span></div>
-      ${kpis(c.full)}<small>单批总权益 10% · 全市场账户 · 不是满仓或实盘收益</small>
+      ${kpis(c.full)}<small>每只股票 ${num(c.allocation_pct,0)}% 仓位 · ${c.key==='bottom'?'同批最多两只，不加杠杆':'同一时间一批'} · 历史模拟，非实盘收益</small>
       <canvas id="cn-equity" class="cn-chart" role="img" aria-label="${esc(c.name)}历史模拟账户净值曲线"></canvas>
       <p class="cn-muted">${esc(c.reference_note)}</p>
       ${c.upgrade_study?manualComparison(c):''}
@@ -157,7 +157,7 @@
   }
   function manualComparison(c) {
     const rows=c.upgrade_study.rows.filter(r=>r.period==='full');
-    return `<section class="cn-section"><h2>精选确认方案对比</h2><p class="cn-muted">2024-08-01 至 2026-04-29 的信号，账户结算至 2026-05-11；同样10%预算与交易费用。以下为开发期比较，不是独立留出集或实盘。</p><div class="cn-table-wrap"><table><thead><tr><th>方案</th><th class="cn-num">笔数</th><th class="cn-num">盈利胜率</th><th class="cn-num">PF</th><th class="cn-num">账户收益</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.arm==='consensus'?'规则共识参照':'共识 + 承接确认'}</td><td class="cn-num">${r.trades}</td><td class="cn-num">${pct(r.win_pct)}</td><td class="cn-num">${num(r.pf)}</td><td class="cn-num">${signed(r.return_pct)}</td><td class="cn-num">${pct(r.dd_pct)}</td></tr>`).join('')}</tbody></table></div><p class="cn-muted">确认方案的精度和回撤有所改善，但交易减少，累计收益也降低。当前规则代码的前向验证仍在建立，不能将29笔开发样本外推为稳定收益。</p></section>`;
+    return `<section class="cn-section"><h2>精选确认方案对比</h2><p class="cn-muted">2024-08-01 至 2026-04-29 的信号，账户结算至 2026-05-11；两种方案均按每次买入50%仓位、相同交易费用逐笔重算。以下为开发期比较，不是独立留出集或实盘。</p><div class="cn-table-wrap"><table><thead><tr><th>方案</th><th class="cn-num">笔数</th><th class="cn-num">盈利胜率</th><th class="cn-num">PF</th><th class="cn-num">账户收益</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.arm==='consensus'?'规则共识参照':'共识 + 承接确认'}</td><td class="cn-num">${r.trades}</td><td class="cn-num">${pct(r.win_pct)}</td><td class="cn-num">${num(r.pf)}</td><td class="cn-num">${signed(r.return_pct)}</td><td class="cn-num">${pct(r.dd_pct)}</td></tr>`).join('')}</tbody></table></div><p class="cn-muted">确认方案的精度和回撤有所改善，但交易减少，累计收益也降低。当前规则代码的前向验证仍在建立，不能将29笔开发样本外推为稳定收益。</p></section>`;
   }
   function rulesSection(c) {
     return `<section class="cn-section"><h2>规则来源与独立表现</h2><p class="cn-muted">单一来源不再单独发出精选信号；它们作为不同机制的组合证据，接受统一承接确认。以下为各来源独立运行的历史审计，不是当前组合绩效。</p><div class="cn-table-wrap"><table><thead><tr><th>市场 / 规则</th><th>机制</th><th>处理</th><th class="cn-num">样本</th><th class="cn-num">胜率</th><th class="cn-num">PF / 压力PF</th></tr></thead><tbody>${c.rules.map(r=>`<tr><td><a href="${esc(root+r.market+'/strategy/'+encodeURIComponent(r.strategy)+'.html')}">${esc(r.source)}</a></td><td>${esc(r.family)}</td><td>${esc(r.stage)}</td><td class="cn-num">${r.trades}</td><td class="cn-num">${pct(r.win_rate)}</td><td class="cn-num">${num(r.profit_factor)} / ${num(r.stress_pf)}</td></tr>`).join('')}</tbody></table></div></section>`;
@@ -193,8 +193,8 @@
   }
   function exportRows() {
     const cell=v=>{let s=String(v==null?'':v);if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
-    const header=['研究观察，非交易指令','信号日','股票代码','名称','版本','来源','参与状态','买入日','退出日','净收益%'];
-    const lines=[header,...shownRows.map(r=>['历史/观察记录',r.date,r.ts_code,r.name,cardMap[active].version,r.sources,r.account_status,r.entry_date,r.exit_date,r.pnl_pct])];
+    const header=['研究观察，非交易指令','信号日','股票代码','名称','模型版本','账户版本','入场仓位%','来源','参与状态','买入日','退出日','单笔净收益%'];
+    const lines=[header,...shownRows.map(r=>['历史/观察记录',r.date,r.ts_code,r.name,cardMap[active].version,cardMap[active].account_version,r.allocation_pct,r.sources,r.account_status,r.entry_date,r.exit_date,r.pnl_pct])];
     const url=URL.createObjectURL(new Blob(['\uFEFF'+lines.map(r=>r.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download=`CN_research_${active}_${date}.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
