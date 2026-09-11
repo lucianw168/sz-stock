@@ -2,6 +2,14 @@
 (function (scope) {
   'use strict';
   function snapshot(card, market, expected) {
+    if(card.daily_run && card.daily_run.date<=expected) {
+      const run=card.daily_run;
+      const rows=card.candidates.filter(r=>r.date===run.date &&
+        ['daily_observation','late_reconstruction'].includes(r.kind) &&
+        (market==='all'||r.market===market));
+      return {date:run.date,rows,archived:false,stale:run.date!==expected,
+        state:run.state,timely:run.timely,message:run.message};
+    }
     const rows = card.candidates.filter(r => (market === 'all' || r.market === market) &&
       (card.key !== 'manual' || r.kind === 'manual_observation'));
     const dates = rows.map(r => r.date).filter(d => d <= expected).sort();
