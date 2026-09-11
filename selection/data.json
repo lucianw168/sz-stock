@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-09-11T12:11:00+08:00",
+  "built_at": "2026-09-11T12:30:47+08:00",
   "expected_session": "2026-09-10",
   "cards": [
     {
@@ -9,12 +9,12 @@
       "version": "second-matched-incumbent-20260911",
       "k": 1,
       "color": "#4C8DFF",
-      "model": "LightGBM 同日匹配偏好排序 · 较强旧版",
+      "model": "LightGBM 同日全池配对排序 · 双种子平均 · 较强旧版",
       "thesis": "前一轮上涨后的短周期整理，再次出现需求恢复。核心是区分供给消化后的再启动，与首次上涨结束后的出货反弹。",
       "process": [
         "沿用已验证旧版的形态资格和候选路径，不用最新失败模型替换旧评分。",
         "读取价格量能、前段涨幅、峰谷年龄、回调深度、恢复程度及既有市场、题材、资金和筹码证据。",
-        "同日候选中学习相似风险条件下的相对优劣，并保留点式损失锚；分数不是盈利概率。",
+        "实际保留 global_pairs_bag：同日按代码确定循环比较对象，双种子分数平均；保留点式损失锚，不是近邻风险匹配版，分数也不是盈利概率。",
         "盘后按旧分数取 Top1，同分按股票代码排序；不成交不事后补票。"
       ],
       "operation": [
@@ -9589,7 +9589,17 @@
           "source_count": null
         }
       ],
-      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。"
+      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。",
+      "inference_audit": {
+        "features": 83,
+        "scored_rows": 2030,
+        "selected_rows": 19,
+        "first_date": "20260803",
+        "last_date": "20260827",
+        "score_max_error": 0.0,
+        "blocker": "当前候选资格与特征接收时间尚未独立重建；评分回放通过不等于今日选股已运行。",
+        "checked_at": "2026-09-11T12:26:05+08:00"
+      }
     },
     {
       "key": "bottom",
@@ -33757,7 +33767,17 @@
           "source_count": null
         }
       ],
-      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。"
+      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。",
+      "inference_audit": {
+        "features": 17,
+        "scored_rows": 39036,
+        "selected_rows": 126,
+        "first_date": "20260701",
+        "last_date": "20260827",
+        "score_max_error": 0.0,
+        "blocker": "当前候选资格与特征接收时间尚未独立重建；评分回放通过不等于今日选股已运行。",
+        "checked_at": "2026-09-11T12:26:05+08:00"
+      }
     },
     {
       "key": "first_open",
@@ -40390,7 +40410,17 @@
           "source_count": null
         }
       ],
-      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。"
+      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。",
+      "inference_audit": {
+        "features": 80,
+        "scored_rows": 36,
+        "selected_rows": 11,
+        "first_date": "20260803",
+        "last_date": "20260827",
+        "score_max_error": 0.0,
+        "blocker": "当前候选资格与特征接收时间尚未独立重建；评分回放通过不等于今日选股已运行。",
+        "checked_at": "2026-09-11T12:26:05+08:00"
+      }
     },
     {
       "key": "abc",
@@ -49078,7 +49108,17 @@
           "source_count": null
         }
       ],
-      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。"
+      "signal_message": "未接入该冻结版本的最新预测收据；历史名单不会作为今日选股。",
+      "inference_audit": {
+        "features": 4,
+        "scored_rows": 3583,
+        "selected_rows": 370,
+        "first_date": "20250102",
+        "last_date": "20260806",
+        "score_max_error": 0.0,
+        "blocker": "当前候选资格与特征接收时间尚未独立重建；评分回放通过不等于今日选股已运行。",
+        "checked_at": "2026-09-11T12:26:05+08:00"
+      }
     },
     {
       "key": "manual",

@@ -72,13 +72,34 @@
 .cn-selection .cn-health-table td:first-child { min-width:150px; }
 .cn-selection .cn-picks { min-width:650px; }
 .cn-selection .cn-model { overflow-wrap:anywhere; }
+.cn-selection .cn-back { display:inline-flex; align-items:center; gap:8px; font-size:14px; margin-bottom:16px; }
+.cn-selection .cn-back svg, .cn-selection .cn-chart-head a svg { width:16px; height:16px; vertical-align:middle; }
+.cn-selection .cn-overview-tools { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
+.cn-selection .cn-card-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.cn-selection .cn-product-card { margin:0; padding:18px; border:1px solid var(--cn-border); border-top:2px solid var(--cn-line); border-radius:6px; background:var(--cn-card); box-shadow:none; min-width:0; display:flex; flex-direction:column; cursor:pointer; }
+.cn-selection .cn-product-card:hover { border-color:var(--cn-line); }
+.cn-selection .cn-product-card header { display:flex; gap:8px; align-items:center; justify-content:space-between; margin:0; padding:0; background:none; border:0; }
+.cn-selection .cn-product-card h2 { font-size:18px; margin:0; }
+.cn-selection .cn-product-card h2 a { color:var(--cn-text); }
+.cn-selection .cn-card-arrow { display:grid; place-items:center; width:28px; height:28px; flex:0 0 28px; color:var(--cn-muted); }
+.cn-selection .cn-card-arrow svg { width:18px; height:18px; }
+.cn-selection .cn-card-date { font-size:12px; color:var(--cn-muted); margin:6px 0 14px; }
+.cn-selection .cn-stock-list { display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; min-height:68px; padding-bottom:14px; }
+.cn-selection .cn-stock { display:inline-flex; flex-direction:column; padding:5px 9px; border-radius:3px; background:#1A2940; max-width:100%; }
+.cn-selection .cn-stock strong { font-size:14px; font-weight:600; font-variant-numeric:tabular-nums; }
+.cn-selection .cn-stock span { font-size:12px; color:var(--cn-muted); overflow-wrap:anywhere; }
+.cn-selection .cn-product-card footer { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin:auto 0 0; padding:10px 0 0; border-top:1px solid var(--cn-border); background:none; font-size:13px; }
+.cn-selection .cn-product-card footer .cn-muted { font-size:12px; }
 @media(max-width:900px) {
+  .cn-selection .cn-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .cn-selection .cn-financial-grid { grid-template-columns:1fr; gap:8px; }
   .cn-selection .cn-kpis { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px 0; }
   .cn-selection .cn-kpi:nth-child(3) { border:0; }
   .cn-selection .cn-kpi:nth-child(4) { padding-left:0; }
 }
 @media(max-width:520px) {
+  .cn-selection .cn-card-grid { grid-template-columns:minmax(0,1fr); }
+  .cn-selection .cn-product-card { padding:16px; }
   .cn-topbar { padding:12px 16px; }
   .cn-topbar nav { gap:14px; }
   .cn-selection { padding:18px 14px 30px; }

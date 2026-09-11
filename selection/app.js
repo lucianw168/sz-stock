@@ -4,7 +4,7 @@
   const app = document.getElementById('cn-selection');
   if (!app) return;
   const data = window.CN_SELECTION_DATA;
-  if (!data || data.schema_version !== 1 || data.cards.length !== 5) {
+  if (!data || !window.CN_SELECTION_VIEW || data.schema_version !== 1 || data.cards.length !== 5) {
     app.textContent = '研究记录暂不可用，请稍后刷新。没有发布新的交易信号。';
     app.setAttribute('role', 'alert');
     return;
@@ -19,8 +19,10 @@
   const icon = name => `<i data-lucide="${name}" aria-hidden="true"></i>`;
   const pf = m => m.no_losses ? '无亏损样本' : num(m.profit_factor);
   const cardMap = Object.fromEntries(data.cards.map(c => [c.key, c]));
+  const view = window.CN_SELECTION_VIEW;
+  let currentView = view.route(location.hash, Object.keys(cardMap));
   let active = cardMap[location.hash.slice(1)] ? location.hash.slice(1) : 'second';
-  let monitor = location.hash === '#monitor';
+  let monitor = currentView === 'monitor';
   let date = data.expected_session;
   let market = app.dataset.market || 'all';
   let fundedOnly = false;
@@ -44,11 +46,14 @@
     }).join('');
   }
   function renderShell() {
-    app.innerHTML = `<div class="cn-page-head"><div><h1>选股研究</h1><p class="cn-muted">${esc(data.expected_session)} 收盘口径 · 研究观察</p></div><div class="cn-header-actions"><button id="cn-monitor" aria-pressed="${monitor}">运行监测</button><button class="cn-icon" id="cn-refresh" title="刷新发布记录" aria-label="刷新发布记录">${icon('refresh-cw')}</button></div></div>
-      <div class="cn-product-tabs" role="tablist" aria-label="选股产品线">${data.cards.map(c=>`<button role="tab" id="cn-tab-${c.key}" data-product="${c.key}" aria-controls="cn-panel" aria-selected="${!monitor&&c.key===active}" tabindex="${c.key===active?0:-1}" style="--cn-line:${c.color}">${esc(c.name)}</button>`).join('')}</div>
-      <div id="cn-panel" role="tabpanel" aria-labelledby="cn-tab-${active}"></div>
+    const overview = currentView === 'overview';
+    app.innerHTML = `${!overview?`<a class="cn-back" href="#overview" id="cn-back">${icon('arrow-left')}全部产品线</a>`:''}<div class="cn-page-head"><div><h1>${overview?'每日选股':'选股研究'}</h1><p class="cn-muted">${esc(data.expected_session)} 收盘口径 · 研究观察</p></div><div class="cn-header-actions"><button id="cn-monitor" aria-pressed="${monitor}">运行监测</button><button class="cn-icon" id="cn-refresh" title="刷新发布记录" aria-label="刷新发布记录">${icon('refresh-cw')}</button></div></div>
+      ${!overview&&!monitor?`<div class="cn-product-tabs" role="tablist" aria-label="选股产品线">${data.cards.map(c=>`<button role="tab" id="cn-tab-${c.key}" data-product="${c.key}" aria-controls="cn-panel" aria-selected="${c.key===active}" tabindex="${c.key===active?0:-1}" style="--cn-line:${c.color}">${esc(c.name)}</button>`).join('')}</div>`:''}
+      <div id="cn-panel" ${!overview&&!monitor?`role="tabpanel" aria-labelledby="cn-tab-${active}"`:''}></div>
       <footer class="cn-footer"><p class="cn-muted">研究参考，非投资建议。历史模拟不保证未来收益，页面不发送交易订单。</p><small>页面生成 ${esc(data.built_at.replace('T',' ').slice(0,19))}（北京时间） · 各版本数据截至日单列 · <a href="${esc(asset)}data.json">研究数据</a> · <a href="${esc(asset)}build.json">发布版本</a> · <a href="${esc(root)}methodology.html">统计口径</a></small></footer>`;
     document.getElementById('cn-monitor').onclick=()=>navigate('monitor');
+    const back=document.getElementById('cn-back');
+    if(back) back.onclick=e=>{e.preventDefault();navigate('overview');};
     document.getElementById('cn-refresh').onclick=()=>location.reload();
     app.querySelectorAll('[data-product]').forEach(button=>{
       button.onclick=()=>navigate(button.dataset.product);
@@ -62,20 +67,43 @@
         if(target){e.preventDefault();navigate(target);document.getElementById('cn-tab-'+target).focus();}
       };
     });
-    if(monitor) renderMonitor(); else renderProduct();
+    if(overview) renderOverview(); else if(monitor) renderMonitor(); else renderProduct();
     if(window.lucide) window.lucide.createIcons();
   }
-  function navigate(key) {
+  function navigate(key, writeHistory=true) {
+    currentView=view.route('#'+key,Object.keys(cardMap));
     monitor=key==='monitor';
-    if(!monitor) active=key;
-    history.replaceState(null,'','#'+key);
+    if(cardMap[key]) active=key;
+    if(writeHistory && location.hash!=='#'+currentView) history.pushState(null,'','#'+currentView);
     renderShell();
+  }
+  function renderOverview() {
+    const panel=document.getElementById('cn-panel');
+    panel.innerHTML=`<div class="cn-overview-tools"><label>市场 <select id="cn-overview-market"><option value="all">全市场</option><option value="sz">深圳主板</option><option value="sh">上海主板</option><option value="cy">创业板</option><option value="kc">科创板</option></select></label><span class="cn-muted">最近已记录名单 · 历史与当日分开标注</span></div>
+      <div class="cn-card-grid">${data.cards.map(c=>{
+        const s=view.snapshot(c,market,data.expected_session);
+        return `<article class="cn-product-card" style="--cn-line:${c.color}" data-card="${c.key}">
+          <header><h2><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a></h2><a class="cn-card-arrow" href="#${c.key}" data-detail="${c.key}" aria-label="${esc(c.name)}详情" title="${esc(c.name)}详情">${icon('arrow-up-right')}</a></header>
+          <p class="cn-card-date">${s.archived?'历史归档':'规则观察'} · ${esc(s.date||'暂无记录')}${s.stale?' <span class="cn-warn">非今日名单</span>':''}</p>
+          <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<a class="cn-stock" href="${esc(root+'analyzer/search.html?q='+r.ts_code.slice(0,6))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>`).join(''):'<p class="cn-muted">此市场暂无该版本记录</p>'}</div>
+          ${s.rows.length>8?`<small>另有 ${s.rows.length-8} 只，详情中查看</small>`:''}
+          <footer><span class="cn-muted">${c.key==='manual'?'整合观察 · 绩效待验证':`历史胜率 ${pct(c.full.win_rate)} · PF ${pf(c.full)}`}</span><a href="#${c.key}" data-detail="${c.key}">逻辑与回测</a></footer>
+        </article>`;
+      }).join('')}</div>
+      <section class="cn-section"><div class="cn-chart-head"><h2>运行监测</h2><a href="#monitor" id="cn-overview-monitor">全部窗口 ${icon('arrow-right')}</a></div><div class="cn-table-wrap"><table><thead><tr><th>产品线</th><th>数据状态</th><th class="cn-num">近三个月收益</th><th class="cn-num">盈利胜率</th><th class="cn-num">退出笔数</th></tr></thead><tbody>${data.cards.map(c=>{const m=c.windows['3m'];return `<tr><td><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a>${c.key==='manual'?'<small>旧全规则参照</small>':''}</td><td>${status(c)}<small>账户至 ${esc(c.account_asof)}</small></td><td class="cn-num ${tone(m?.return_pct)}">${signed(m?.return_pct)}</td><td class="cn-num">${pct(m?.win_rate)}</td><td class="cn-num">${m?.trades??'无记录'}</td></tr>`;}).join('')}</tbody></table></div></section>`;
+    document.getElementById('cn-overview-market').value=market;
+    document.getElementById('cn-overview-market').onchange=e=>{market=e.target.value;renderOverview();if(window.lucide)window.lucide.createIcons();};
+    const open=key=>{const s=view.snapshot(cardMap[key],market,data.expected_session);date=s.date||data.expected_session;navigate(key);window.scrollTo({top:0});};
+    panel.querySelectorAll('[data-detail]').forEach(a=>a.onclick=e=>{e.preventDefault();open(a.dataset.detail);});
+    panel.querySelectorAll('[data-card]').forEach(card=>card.onclick=e=>{if(!e.target.closest('a,button'))open(card.dataset.card);});
+    document.getElementById('cn-overview-monitor').onclick=e=>{e.preventDefault();navigate('monitor');};
   }
   function renderProduct() {
     const c=cardMap[active], panel=document.getElementById('cn-panel');
     panel.innerHTML=`<div class="cn-title-line"><h2>${esc(c.name)}</h2>${status(c)}</div><p class="cn-muted cn-model">${esc(c.model)}<small>${esc(c.version)}</small></p>
       <p>${esc(c.thesis)}</p>
       <div class="cn-notice">${esc(c.signal_message)}${c.key==='manual'?`<br>${esc(c.reference_label)}`:''}</div>
+      ${c.inference_audit?`<details><summary>每日预测接入进度</summary><p>原评分器已复验：${c.inference_audit.scored_rows} 条候选，${c.inference_audit.selected_rows} 条选股记录与旧版一致。${c.inference_audit.features} 个原始输入字段。</p><p class="cn-muted">${esc(c.inference_audit.blocker)} 复验区间：${esc(c.inference_audit.first_date)} 至 ${esc(c.inference_audit.last_date)}。</p></details>`:''}
       <div class="cn-chart-head"><h2>${c.key==='manual'?'原全规则合并参照':'保留版本 · 历史模拟'}</h2><span class="cn-muted">信号截至 ${esc(c.signal_asof)} · 账户截至 ${esc(c.account_asof)}</span></div>
       ${kpis(c.full)}<small>单批总权益 10% · 全市场账户 · 不是满仓或实盘收益</small>
       <canvas id="cn-equity" class="cn-chart" role="img" aria-label="${esc(c.name)}历史模拟账户净值曲线"></canvas>
@@ -154,7 +182,7 @@
     const url=URL.createObjectURL(new Blob(['\uFEFF'+lines.map(r=>r.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
     const link=document.createElement('a');link.href=url;link.download=`CN_research_${active}_${date}.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
-  window.addEventListener('hashchange',()=>{const k=location.hash.slice(1);if(cardMap[k]||k==='monitor')navigate(k);});
+  window.addEventListener('hashchange',()=>navigate(view.route(location.hash,Object.keys(cardMap)),false));
   window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(!monitor)drawChart(cardMap[active]);},100);});
   renderShell();
 })();
