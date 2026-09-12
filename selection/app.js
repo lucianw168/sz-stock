@@ -122,6 +122,7 @@
       <section class="cn-section cn-financial-grid"><div><h2>金融逻辑与筛选过程</h2><ol>${c.process.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div><div><h2>操作思路与执行边界</h2><ol>${c.operation.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div></section><p class="cn-notice">${esc(c.limitation)}</p>
       ${c.key==='manual'?rulesSection(c):''}<details><summary>统计定义与风险说明</summary>${Object.entries(data.methodology).map(([,v])=>`<p class="cn-muted">${esc(v)}</p>`).join('')}</details>`;
     document.getElementById('cn-open-monitor').onclick=()=>navigate('monitor');
+    document.querySelector('.cn-picks thead th:nth-child(2)').textContent='池内排名 / 来源';
     document.getElementById('cn-date').onchange=e=>{date=e.target.value;renderPicks(c);};
     document.getElementById('cn-market').value=market;
     document.getElementById('cn-market').onchange=e=>{market=e.target.value;renderPicks(c);};
@@ -143,7 +144,8 @@
     body.innerHTML=shownRows.length?shownRows.slice(0,500).map(r=>{
       const link=stockLink(r);
       const kind=r.kind==='daily_observation'?'每日观察':r.kind==='late_reconstruction'?'开盘后补生成':'历史研究记录';
-      return `<tr><td class="cn-code"><a href="${esc(link)}">${esc(r.ts_code)}</a><small>${esc(r.name)}</small></td><td>${r.score==null?esc(r.sources):num(r.score,4)}${r.score==null?'':'<small>排序分，非盈利概率</small>'}${r.sources?`<small>${esc(r.sources)}</small>`:''}</td><td>${esc(r.account_status)}<small>${kind}</small></td><td>${esc(r.entry_date||'—')}<small>${esc(r.exit_date||'—')}</small></td><td class="cn-num ${tone(r.pnl_pct)}">${signed(r.pnl_pct)}</td></tr>`;
+      const rating=view.scoreDisplay(r,c.key);
+      return `<tr><td class="cn-code"><a href="${esc(link)}">${esc(r.ts_code)}</a><small>${esc(r.name)}</small></td><td title="${esc(rating.tooltip)}">${esc(rating.main)}<small>${esc(rating.detail)}</small>${r.sources?`<small>${esc(r.sources)}</small>`:''}</td><td>${esc(r.account_status)}<small>${kind}</small></td><td>${esc(r.entry_date||'—')}<small>${esc(r.exit_date||'—')}</small></td><td class="cn-num ${tone(r.pnl_pct)}">${signed(r.pnl_pct)}</td></tr>`;
     }).join(''):`<tr><td colspan="5" class="cn-empty">${esc(empty)}</td></tr>`;
     document.getElementById('cn-export').disabled=!shownRows.length;
     let note=`${date||'未选日期'} · ${shownRows.length} 条${shownRows.length>500?'（页面显示前500条，导出包含全部）':''}。市场筛选仅影响名单，不改变上方全市场回测。`;
