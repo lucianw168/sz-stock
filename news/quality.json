@@ -1,8 +1,17 @@
 {
   "version": 1,
-  "date": "2026-09-13",
-  "snapshot_id": "20260913T044146_1f77ae1c",
+  "date": "2026-09-14",
+  "snapshot_id": "20260914T180748_8e1bb7c6",
   "data_quality": {
+    "trading_calendar": {
+      "status": "current",
+      "asof": "20260914",
+      "report_date": "20260914",
+      "expected_session": "20260914",
+      "cutoff": "20260914",
+      "sha256": "50412d69a5835f7829a7a325b22b609e047abd2c9e0f7a622144c2b8cfa3b358",
+      "label": "A股交易日历"
+    },
     "index_daily_core": {
       "dataset": "index_daily_core",
       "status": "lagged",
@@ -10,6 +19,8 @@
       "rejected": [],
       "rows": 8,
       "sha256": "63a2a47930c02af8848281a2cd9da29583aefb069d5b5140d1d4116b6a90465c",
+      "expected_session": "20260914",
+      "report_date": "20260914",
       "label": "A股指数"
     },
     "moneyflow_ind_dc": {
@@ -19,6 +30,8 @@
       "rejected": [],
       "rows": 1031,
       "sha256": "51798566109177c8e95b54dc2141e7732051a7392d7fd1a80e5d6488828900d5",
+      "expected_session": "20260914",
+      "report_date": "20260914",
       "label": "东财行业与概念"
     },
     "moneyflow_ind_ths": {
@@ -28,6 +41,8 @@
       "rejected": [],
       "rows": 90,
       "sha256": "fba9afb1a7df1d3df5da1fb7cd5d330e5f79de5dc5db0b4ee818c20be25fbd8c",
+      "expected_session": "20260914",
+      "report_date": "20260914",
       "label": "同花顺行业"
     },
     "sw_daily": {
@@ -37,6 +52,8 @@
       "rejected": [],
       "rows": 439,
       "sha256": "917dea789808feff632f63fb977e1c0b42b428cfa4c44a643367ce4a9243d571",
+      "expected_session": "20260914",
+      "report_date": "20260914",
       "label": "申万行业指数"
     },
     "limit_list_d": {
@@ -46,6 +63,8 @@
       "rejected": [],
       "rows": 79,
       "sha256": "d8318de07889780c8e539b8c7f7980a597a6e6f375e0d140724248fc1f54cfdd",
+      "expected_session": "20260914",
+      "report_date": "20260914",
       "label": "涨跌停与炸板"
     },
     "northbound": {
@@ -54,45 +73,38 @@
       "note": "披露口径变化后，不把成交活跃度当作每日净流入；暂停方向性判断。",
       "label": "北向资金"
     },
+    "news": {
+      "status": "failed",
+      "note": "采集失败，使用当期缓存；scrape_all: timeout after 100s",
+      "rejected_titles": 0,
+      "label": "新闻来源"
+    },
     "futures": {
-      "status": "missing",
-      "asof": "2026-09-13T04:41:46.026846+08:00",
-      "note": "行情未取得，传导判断暂停。",
+      "status": "snapshot",
+      "asof": "2026-09-14T18:07:48.747314+08:00",
+      "note": "抓取时点报价；不同市场交易时段不同，不作为当日收盘共振证据。",
       "error": null,
       "label": "国内期货"
     },
     "global": {
       "status": "snapshot",
-      "asof": "2026-09-13T04:41:46.026846+08:00",
+      "asof": "2026-09-14T18:07:48.747314+08:00",
       "note": "抓取时点报价；不同市场交易时段不同，不作为当日收盘共振证据。",
       "error": null,
       "label": "海外市场"
-    },
-    "news": {
-      "status": "cached",
-      "asof": "2026-09-13 04:41:50",
-      "note": "来源报道未逐条独立核实；发布时间以原文为准。",
-      "rejected_titles": 0,
-      "label": "新闻来源"
     }
   },
   "report_quality": {
     "version": "evidence-first-v1",
     "market_text": "deterministic",
     "news_focus": {
-      "status": "ai_source_selection",
-      "ids": [
-        1,
-        3,
-        23,
-        25,
-        29
-      ]
+      "status": "source_order",
+      "reason": "AI disabled or no news"
     }
   },
   "files": {
-    "index.html": "974d6a78c895800d8e84a09e1bec491aa62c761ed7167469ac38bea1221fded4",
-    "days/2026-09-13.html": "22805db16911b657822749e38dba4ba1455463669a8b0971c0ead4cb1f5bbafb",
+    "index.html": "87ba76becd3d3eb655cd0e43fe236b21e2b8361bded4e24aacc0f76639c73ad2",
+    "days/2026-09-14.html": "af68f286ba5d614892c675deb609a6e40f026b85ff894db921ff93b5a2fb093a",
     "static/style.css": "a4704202d7123c710ba62fc46491095171cf792b04a1c9150caa310bc5e517b3",
     "static/pico-2.1.1.min.css": "fbc9a63fc9fc9f72d12fd7fc9806e11fa9f77ae4f9cad146b27003a1119ba3db"
   }

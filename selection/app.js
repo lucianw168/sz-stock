@@ -21,6 +21,7 @@
   const cardMap = Object.fromEntries(data.cards.map(c => [c.key, c]));
   const view = window.CN_SELECTION_VIEW;
   const stockLink = r => root+r.market+'/stock/'+encodeURIComponent(r.ts_code.slice(0,6))+'.html?signal='+encodeURIComponent(r.date)+'&product='+encodeURIComponent(currentView==='overview'?(data.cards.find(c=>c.candidates.includes(r))?.key||''):active);
+  const evidenceButton = r => window.CN_CONTEXT_DATA?.stocks?.[r.ts_code] ? `<button class="cn-icon cn-evidence-open" data-evidence="${esc(r.ts_code)}" title="${esc(r.name||r.ts_code)}公司与市场证据" aria-label="${esc(r.ts_code)}公司与市场证据">${icon('notebook-text')}</button>` : '';
   let currentView = view.route(location.hash, Object.keys(cardMap));
   let active = cardMap[location.hash.slice(1)] ? location.hash.slice(1) : 'second';
   let monitor = currentView === 'monitor';
@@ -93,7 +94,7 @@
         return `<article class="cn-product-card" style="--cn-line:${c.color}" data-card="${c.key}">
           <header><h2><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a></h2><a class="cn-card-arrow" href="#${c.key}" data-detail="${c.key}" aria-label="${esc(c.name)}详情" title="${esc(c.name)}详情">${icon('arrow-up-right')}</a></header>
           <p class="cn-card-date">${s.archived?'历史归档':s.state==='blocked'?'待数据更新':s.timely?'盘后观察':'补生成记录'} · ${esc(s.date||'暂无记录')}${s.stale?' <span class="cn-warn">非今日名单</span>':''}</p>
-          <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>`).join(''):`<p class="cn-muted">${esc(s.state==='blocked'?'数据未齐，本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
+          <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<span class="cn-stock-entry"><a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>${evidenceButton(r)}</span>`).join(''):`<p class="cn-muted">${esc(s.state==='blocked'?'数据未齐，本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
           ${s.rows.length>8?`<small>另有 ${s.rows.length-8} 只，详情中查看</small>`:''}
           <footer><span class="cn-muted">${c.key==='manual'?`开发期胜率 ${pct(c.full.win_rate)} · ${c.full.trades} 笔`:`历史胜率 ${pct(c.full.win_rate)} · PF ${pf(c.full)}`}</span><a href="#${c.key}" data-detail="${c.key}">逻辑与回测</a></footer>
         </article>`;
@@ -145,7 +146,7 @@
       const link=stockLink(r);
       const kind=r.kind==='daily_observation'?'每日观察':r.kind==='late_reconstruction'?'开盘后补生成':'历史研究记录';
       const rating=view.scoreDisplay(r,c.key);
-      return `<tr><td class="cn-code"><a href="${esc(link)}">${esc(r.ts_code)}</a><small>${esc(r.name)}</small></td><td title="${esc(rating.tooltip)}">${esc(rating.main)}<small>${esc(rating.detail)}</small>${r.sources?`<small>${esc(r.sources)}</small>`:''}</td><td>${esc(r.account_status)}<small>${kind}</small></td><td>${esc(r.entry_date||'—')}<small>${esc(r.exit_date||'—')}</small></td><td class="cn-num ${tone(r.pnl_pct)}">${signed(r.pnl_pct)}</td></tr>`;
+      return `<tr><td class="cn-code"><a href="${esc(link)}">${esc(r.ts_code)}</a><small>${esc(r.name)}</small>${evidenceButton(r)}</td><td title="${esc(rating.tooltip)}">${esc(rating.main)}<small>${esc(rating.detail)}</small>${r.sources?`<small>${esc(r.sources)}</small>`:''}</td><td>${esc(r.account_status)}<small>${kind}</small></td><td>${esc(r.entry_date||'—')}<small>${esc(r.exit_date||'—')}</small></td><td class="cn-num ${tone(r.pnl_pct)}">${signed(r.pnl_pct)}</td></tr>`;
     }).join(''):`<tr><td colspan="5" class="cn-empty">${esc(empty)}</td></tr>`;
     document.getElementById('cn-export').disabled=!shownRows.length;
     let note=`${date||'未选日期'} · ${shownRows.length} 条${shownRows.length>500?'（页面显示前500条，导出包含全部）':''}。市场筛选仅影响名单，不改变上方全市场回测。`;
