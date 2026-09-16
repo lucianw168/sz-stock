@@ -117,6 +117,7 @@
       ${kpis(c.full)}<small>每只股票 ${num(c.allocation_pct,0)}% 仓位 · ${c.key==='bottom'?'同批最多两只，不加杠杆':'同一时间一批'} · 历史模拟，非实盘收益</small>
       <canvas id="cn-equity" class="cn-chart" role="img" aria-label="${esc(c.name)}历史模拟账户净值曲线"></canvas>
       <p class="cn-muted">${esc(c.reference_note)}</p>
+      ${c.version_comparison?releaseComparison(c):''}
       ${c.upgrade_study?manualComparison(c):''}
       <section class="cn-section"><div class="cn-chart-head"><h2>滚动表现</h2><button id="cn-open-monitor">查看五线监测</button></div><div class="cn-table-wrap"><table><thead><tr><th>窗口</th><th>实际覆盖</th><th class="cn-num">账户收益</th><th class="cn-num">盈利胜率</th><th class="cn-num">PF</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${periodRows(c)}</tbody></table></div><p class="cn-muted">截至各账户最近数据日回看，不以今天冒充最新回测。胜率按窗口内退出计，收益包含跨窗持仓的净值变化。</p></section>
       <section class="cn-section"><h2>观察名单与历史记录</h2><div class="cn-toolbar"><label>信号日 <input id="cn-date" type="date" value="${esc(date)}" max="${esc(data.expected_session)}"></label><label>市场 <select id="cn-market"><option value="all">全市场</option><option value="sz">深圳主板</option><option value="sh">上海主板</option><option value="cy">创业板</option><option value="kc">科创板</option></select></label><button id="cn-last-date">最近已有名单</button><label><input id="cn-funded" type="checkbox" ${fundedOnly?'checked':''}>仅已结算</label><span class="cn-spacer"></span><button class="cn-icon" id="cn-export" title="导出当前研究记录 CSV" aria-label="导出当前研究记录 CSV">${icon('download')}</button></div><p id="cn-date-note" class="cn-muted" aria-live="polite"></p><div class="cn-table-wrap"><table class="cn-picks"><thead><tr><th>股票</th><th>研究分 / 来源</th><th>参与记录</th><th>买入 / 退出日</th><th class="cn-num">已兑现净收益</th></tr></thead><tbody id="cn-picks-body"></tbody></table></div></section>
@@ -157,6 +158,10 @@
       const message=c.daily_run.state==='blocked'?c.daily_run.message:'本次筛选已完成；该市场没有满足精选条件的股票。';
       body.innerHTML=`<tr><td colspan="5" class="cn-empty">${esc(message)}</td></tr>`;
     }
+  }
+  function releaseComparison(c) {
+    const study=c.version_comparison;
+    return `<section class="cn-section"><h2>本次升级对比</h2><p class="cn-muted">同一历史区间、相同候选资格与交易规则，每次买入50%仓位；仅升级联合排序输入。以下是开发期对照，不是独立留出测试。</p><div class="cn-table-wrap"><table class="cn-release-table"><thead><tr><th>版本</th><th class="cn-num">已结算</th><th class="cn-num">盈利胜率</th><th class="cn-num">PF</th><th class="cn-num">账户收益</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${[['升级前',study.previous],['趋势结构与板块联动',study.current]].map(([label,m])=>`<tr><td>${label}</td><td class="cn-num">${m.trades}</td><td class="cn-num">${pct(m.win_rate)}</td><td class="cn-num">${pf(m)}</td><td class="cn-num">${signed(m.return_pct)}</td><td class="cn-num">${pct(m.drawdown_pct)}</td></tr>`).join('')}</tbody></table></div><p class="cn-muted">${study.planned_days} 次盘后观察，${study.confirmed_plans} 次通过开盘确认。忽略资金占用的全部确认机会胜率为 ${pct(study.confirmed_win_rate)}，不能与实际入账胜率混用。</p></section>`;
   }
   function manualComparison(c) {
     const rows=c.upgrade_study.rows.filter(r=>r.period==='full');
