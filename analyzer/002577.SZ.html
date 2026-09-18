@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>002577.SZ 雷柏科技</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 002577.SZ 深圳雷柏科技股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,60 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>002577.SZ 雷柏科技 <span style="color:#3fb950;font-size:20px">20.83 (+4.73%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: IT设备 · 市值58亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 盈亏比不利(-0.4:1) → 等回调</div>
-<div style="color:#8b949e;font-size:13px">估值中性 · 横盘, 3笔下跌, 动能转弱</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="002577">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**（当前处于下跌结构中段，盈亏比极差，建议等待回调至18.41附近确认企稳后再行决策）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利：** 公司目前处于亏损状态（PE为负），且ROE仅为1.3%，显示盈利能力极弱，但PB高达5.24倍，存在明显的“高估值、低业绩”错配现象。
+**成长性与健康度：** 营收同比增长10.1%显示业务规模在扩张，但净利润同比下滑2.5%，说明增长质量不高；负债率仅11.7%表明财务结构非常安全，无流动性危机风险。
+**总结：** 典型的“增收不增利”困境，基本面缺乏支撑高估值的逻辑，属于困境反转预期较强的标的，但当前缺乏催化剂。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场阶段与动能：** 世界模型判定公司处于“下跌趋势的第3笔”且“动能转弱”，这意味着股价尚未探明底部，且MACD死叉确认了短期空头力量占优。
+**关键发现：** 模型指出下方风险空间（5.1 ATR）远大于上方空间（0.2 ATR），盈亏比仅为-0.6:1，这是一个极不利的交易结构，意味着潜在亏损远大于潜在收益。
+**资金验证：** 资金面显示主力近5日累计净流入6343万，融资余额增加，这看似是利好，但在世界模型判定的“下跌主段”中，这往往代表主力在“被动承接”或“诱多”，并未改变空头主导的结构性趋势，资金面未能有效扭转模型判断的弱势。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师判断：** **不同意世界模型的立即入场建议，但高度认同其“等待”策略。**
+**可行性分析：** 尽管资金面有主力流入，但世界模型显示的“盈亏比-0.6:1"是硬伤。在下跌趋势的第3笔中，盲目抄底极易遭遇“接飞刀”，资金流入可能是为了维持股价不崩盘，而非反转信号。
+**具体操作建议：**
+*   **当前策略：** **观望（Hold Cash）。** 不要在此位置建立多头仓位。
+*   **如果强行做多（仅限激进型）：**
+    *   **入场价：** 等待回调至 **18.41** 附近（第一支撑位），此时盈亏比才可能转正。
+    *   **目标价：** 短期反弹至 **19.78** 附近。
+    *   **止损价：** 跌破 **18.30**（支撑位下方）。
+    *   **盈亏比：** 约 1:1.5（在18.41入场）。
+    *   **建议仓位：** 0%（当前），仅在触及18.41且出现放量阳线时考虑轻仓试错。
+*   **关注信号：** 密切关注 **18.41** 的支撑有效性。若股价放量跌破18.41，则确认下跌趋势延续，下一目标看至 **17.86**。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **趋势惯性风险：** 世界模型明确指出处于“下跌趋势第3笔”，A股科技硬件板块波动大，一旦跌破关键支撑位，惯性下跌可能加速，导致短期被套。
+2.  **业绩兑现风险：** 公司连续亏损且ROE极低，若后续季报无法扭转“增收不增利”的局面，高估值将面临戴维斯双杀。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 亏损 | PB 5.2 | ROE 1.3% | 利润-3% | 营收+10%</div></div><div class="card"><h2>002577.SZ 深圳雷柏科技股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">21.90 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">IT设备</span></h2><div class="intro">深圳雷柏科技股份有限公司致力于向全球用户提供高性能、高品质的无线外设产品。凭借人性化的工业设计、国际化的品质、本土化的价格,雷柏已连续两年蝉联中国无线键鼠市场占有率榜首位(来自:ZDC调研统计和《微型...</div><div class="main-biz">主营: 从事鼠标、键盘等电脑外设设备的研发、生产和销售业务。</div><div style="color:#8b949e;font-size:13px">广东深圳市 · 员工265人 · 成立2002年 · www.rapoo.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入2516万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+6343万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出1200万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额1.9亿(近5日+0.20亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力近5日持续流入，融资余额增加，主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>IT设备</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">亏损</div></div><div class="metric"><div class="label">PB</div><div class="value ">5.24</div></div><div class="metric"><div class="label">市值</div><div class="value ">61亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">1.3%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-2.5%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+10.1%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">11.7%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">7.35%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">没有明显的趋势方向。下跌中（3笔），仍在主跌段。动能转弱（MACD出现死叉，短期动能转向空方）。量能温和，卖方明显主导。处于近60日中间位置。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-sideways phase-badge">震荡</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 3笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转弱</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转弱</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期死叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">卖方明显主导</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中间位置</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">-2.6 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">4.3 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">⚠️ <b>下跌进行中（3笔）</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 仍在主跌段，不宜抄底</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔴 <b>MACD死叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 短期动能转空</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(5.1ATR)明显大于上方空间(0.2ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-09-18 18:16 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">深圳雷柏科技股份有限公司致力于向全球用户提供高性能、高品质的无线外设产品。凭借人性化的工业设计、国际化的品质、本土化的价格,雷柏已连续两年蝉联中国无线键鼠市场占有率榜首位(来自:ZDC调研统计和《微型计算机》调研统计),成为知名的无线外设供...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 从事鼠标、键盘等电脑外设设备的研发、生产和销售业务。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">横盘震荡</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">下跌 3笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转弱</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">19.78</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">18.41</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">18.75</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">-0.4:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(-0.4:1)<br>方向不明<br>
-                支撑: 18.41 | 压力: 19.78</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">亏损</div></div>
-<div class="m"><div class="l">PB</div><div class="v">4.98</div></div>
-<div class="m"><div class="l">市值</div><div class="v">58亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">9.05%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
