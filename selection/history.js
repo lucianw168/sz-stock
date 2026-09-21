@@ -53,6 +53,10 @@
       if(cell.run)return cell.run.timely?'盘后留存':'补生成';
       return cell.historical?'历史回测':'观察留存';
     }
+    function totalLabel(day){
+      const known=day.cells.some(c=>c.state==='ready'||c.state==='recorded');
+      return known||day.count?String(day.count):'—';
+    }
     function stockRows(day){
       return day.cells.filter(c=>state.focus==='all'||state.focus===c.key).map(cell=>{
         const card=config.cards.find(c=>c.key===cell.key);
@@ -93,7 +97,7 @@
         <div class="cn-table-wrap cn-record-scroll" tabindex="0" role="region" aria-label="按日期排列的产品线选股数量">
         <table class="cn-record-matrix ${result.cards.length===1?'cn-record-single':''}"><thead><tr><th>信号日</th>${result.cards.map(c=>`<th class="cn-num"><span style="border-color:${c.color}" class="cn-record-line">${esc(c.name)}</span></th>`).join('')}<th class="cn-num">合计条目</th></tr></thead><tbody>${result.days.length?result.days.map(day=>{
           const open=state.date===day.date;
-          return `<tr class="cn-record-day ${open?'cn-record-active':''}"><td><button class="cn-record-date" data-day="${day.date}" data-focus="all" aria-expanded="${open&&state.focus==='all'}" aria-controls="cn-record-details" title="${day.date}全部选股">${icon(open?'chevron-down':'chevron-right')}<time>${day.date}</time></button></td>${day.cells.map(cell=>`<td class="cn-num"><button class="cn-record-count ${cell.state==='blocked'?'cn-warn':''}" data-day="${day.date}" data-focus="${cell.key}" aria-label="${day.date} ${esc(cell.name)} ${label(cell)}${cell.state==='ready'||cell.state==='recorded'?'条':''}" aria-expanded="${open&&state.focus===cell.key}" aria-controls="cn-record-details" ${cell.state==='unknown'?'disabled':''}>${label(cell)}</button>${cell.state!=='unknown'?`<small>${provenance(cell)}</small>`:''}</td>`).join('')}<td class="cn-num"><strong>${day.count}</strong><small>${day.unique} 只股票${day.recorded<day.cells.length?' · 部分缺记录':''}</small></td></tr>${open?details(day):''}`;
+          return `<tr class="cn-record-day ${open?'cn-record-active':''}"><td><button class="cn-record-date" data-day="${day.date}" data-focus="all" aria-expanded="${open&&state.focus==='all'}" aria-controls="cn-record-details" title="${day.date}全部选股">${icon(open?'chevron-down':'chevron-right')}<time>${day.date}</time></button></td>${day.cells.map(cell=>`<td class="cn-num"><button class="cn-record-count ${cell.state==='blocked'?'cn-warn':''}" data-day="${day.date}" data-focus="${cell.key}" aria-label="${day.date} ${esc(cell.name)} ${label(cell)}${cell.state==='ready'||cell.state==='recorded'?'条':''}" aria-expanded="${open&&state.focus===cell.key}" aria-controls="cn-record-details" ${cell.state==='unknown'?'disabled':''}>${label(cell)}</button>${cell.state!=='unknown'?`<small>${provenance(cell)}</small>`:''}</td>`).join('')}<td class="cn-num"><strong>${totalLabel(day)}</strong><small>${totalLabel(day)==='—'?'无有效留存':day.unique+' 只股票'}${day.cells.some(c=>['blocked','unknown'].includes(c.state))?' · 记录不全':''}</small></td></tr>${open?details(day):''}`;
         }).join(''):`<tr><td colspan="${result.cards.length+2}" class="cn-empty">该筛选范围没有匹配记录。</td></tr>`}</tbody></table></div>
         <div class="cn-record-pagination"><span class="cn-muted">第 ${result.page+1} / ${result.pages} 页</span><button class="cn-icon" data-action="previous" title="上一页" aria-label="上一页" ${result.page?'':'disabled'}>${icon('chevron-left')}</button><button class="cn-icon" data-action="next" title="下一页" aria-label="下一页" ${result.page+1<result.pages?'':'disabled'}>${icon('chevron-right')}</button></div>`;
       const expanded=host.querySelector('.cn-record-expanded');
@@ -122,9 +126,11 @@
     function page(delta){state.page+=delta;state.date='';commit();render();host.scrollIntoView({block:'start'});}
     function exportRows(){
       const cell=v=>{let s=String(v??'');if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
-      const rows=[['信号日','产品线','股票代码','名称','记录类型','账户状态','已兑现净收益%','模型版本']];
+      const rows=[['信号日','产品线','股票代码','名称','记录类型','账户状态','已兑现净收益%','模型版本','账户版本','实际仓位%','买入日','退出日','规则来源','池内名次','候选数量','原分']];
       for(const day of result.allDays)for(const group of day.cells)for(const r of group.rows){
-        rows.push([day.date,group.name,r.ts_code,r.name,r.kind,r.account_status,r.pnl_pct,config.cards.find(c=>c.key===group.key).version]);
+        const card=config.cards.find(c=>c.key===group.key);
+        rows.push([day.date,group.name,r.ts_code,r.name,r.kind,r.account_status,r.pnl_pct,card.version,
+          card.account_version,r.allocation_pct,r.entry_date,r.exit_date,r.sources,r.pool_rank,r.pool_size,r.score]);
       }
       const url=URL.createObjectURL(new Blob(['\uFEFF'+rows.map(r=>r.map(cell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
       const a=document.createElement('a');a.href=url;a.download=`CN_history_${state.product}_${state.end}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);

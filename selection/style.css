@@ -102,8 +102,10 @@
 .cn-selection .cn-record-summary { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin:12px 0; color:var(--cn-muted); font-size:13px; }
 .cn-selection .cn-record-search { flex:1 1 220px; }
 .cn-selection .cn-record-search input { width:180px; flex:1; min-width:0; }
-.cn-selection .cn-record-matrix { min-width:800px; }
-.cn-selection .cn-record-matrix.cn-record-single { min-width:420px; }
+.cn-selection .cn-record-matrix { min-width:800px; table-layout:fixed; }
+.cn-selection .cn-record-matrix>thead>tr>th:first-child { width:150px; }
+.cn-selection .cn-record-matrix.cn-record-single { min-width:0; }
+.cn-selection .cn-record-single>thead>tr>th:first-child { width:132px; }
 .cn-selection .cn-record-matrix>thead>tr>th { vertical-align:middle; }
 .cn-selection .cn-record-matrix>thead>tr>th:first-child,.cn-selection .cn-record-day>td:first-child { position:sticky; left:0; background:var(--cn-bg); z-index:1; }
 .cn-selection .cn-record-matrix>thead>tr>th:first-child { background:var(--cn-card); }
@@ -134,6 +136,7 @@
   .cn-selection .cn-workspace-nav { gap:18px; }
   .cn-selection .cn-record-toolbar label { flex:1 1 140px; justify-content:space-between; }
   .cn-selection .cn-record-toolbar .cn-record-search { flex-basis:100%; }
+  .cn-selection .cn-record-toolbar label:has(input[type=checkbox]) { flex:0 0 auto; justify-content:flex-start; margin-left:auto; }
   .cn-selection .cn-record-toolbar select,.cn-selection .cn-record-toolbar input[type=date] { min-width:0; max-width:calc(100% - 40px); }
   .cn-selection .cn-record-summary { align-items:flex-start; }
   .cn-selection .cn-card-grid { grid-template-columns:minmax(0,1fr); }
