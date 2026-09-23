@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>600630.SH 龙头股份</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 600630.SH 上海龙头(集团)股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,47 +74,52 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>600630.SH 龙头股份 <span style="color:#3fb950;font-size:20px">9.48 (+3.95%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 服饰 · 市值40亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 下跌2笔未走完 → 观望</div>
-<div style="color:#8b949e;font-size:13px">高估值 · 下跌, 2笔下跌, 动能转弱</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="600630">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **观望**（当前处于下跌中继阶段，盈亏比不佳，建议等待回调至6.15元附近再行评估）。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值偏高，盈利质量存疑。** 公司PE(TTM)高达64.5倍，远超服饰行业平均水平，且ROE仅3.9%，显示高估值缺乏高盈利支撑；虽然净利润同比大幅增长41.1%，但营收增速（9.6%）显著低于利润增速，存在“增收不增利”或利润确认激进的风险。财务健康度中等，45.7%的负债率配合连续2日主力净流出，显示机构资金对公司短期前景持谨慎态度。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **模型判断“下跌段”与资金面“主力流出”高度共振，验证了短期调整逻辑。** 世界模型指出当前处于“下跌段第2笔”且MACD死叉，意味着短期动能已转空，上方空间（ATR 4.9）小于下方空间（ATR 5.5），下行风险大于上行机会；资金面显示主力连续2日净流出4268万，而散户接盘，这种“主力卖、散户买”的背离结构通常发生在下跌中继，进一步印证了模型关于“缺乏向上驱动力”的判断。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**不同意立即入场，建议严格执行“等待”策略。**
+*   **理由：** 世界模型给出的盈亏比仅为0.9:1，属于负期望值交易，且资金面显示抛压未减。主力连续流出说明当前价位缺乏承接盘，强行做多极易被套在短期高点。
+*   **具体方案：**
+    *   **当前操作：** **空仓观望**。
+    *   **关注信号：** 等待股价回调至 **6.15元**（第一支撑位）附近，观察是否有缩量企稳信号。
+    *   **预期数据：** 若届时企稳，目标价看至 **10.69元**，止损设在 **5.97元**，此时盈亏比将大幅改善至1.7:1以上。
+    *   **仓位建议：** 即使未来入场，初期仓位也不宜超过总资金的10%，因为上方4.9 ATR的空间有限，且行业非热门。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **主力持续流出风险：** 资金面显示主力已连续2日净流出，若跌破6.15元支撑，可能引发恐慌性抛售，导致价格快速下探至5.97元甚至更低。
+2.  **业绩兑现不及预期：** 虽然净利润大增，但营收增速滞后，若后续季报显示营收无法跟上利润增速，高估值将面临大幅杀跌。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 64.5 | PB 4.4 | ROE 3.9% | 利润+41% | 营收+10%</div></div><div class="card"><h2>600630.SH 上海龙头(集团)股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">8.53 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">服饰</span></h2><div class="intro">上海龙头(集团)股份有限公司是中国首批股份制上市公司(证券代码600630),以纺织品品牌经营和国际贸易为核心业务,由针织、家纺、服饰、国际贸易、电子商务、高级定制与职业服六大事业部构成核心业务发展。...</div><div class="main-biz">主营: 品牌经营和国际贸易</div><div style="color:#8b949e;font-size:13px">上海上海市 · 员工1,362人 · 成立1991年 · www.shanghaidragon.com.cn</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value negative">净流出4268万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value negative">-4406万</div></div><div class="metric"><div class="label">今日散户</div><div class="value positive">散户净买入4187万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px">融资余额1.6亿(近5日-0.03亿)</div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px"><span class="tag tag-bad">连续2日流出</span></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力卖散户买</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>服饰</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">64.5</div></div><div class="metric"><div class="label">PB</div><div class="value ">4.42</div></div><div class="metric"><div class="label">市值</div><div class="value ">36亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">3.9%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value positive">+41.1%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value positive">+9.6%</div></div><div class="metric"><div class="label">负债率</div><div class="value ">45.7%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">14.20%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">下跌段，价格处于近期低位。低位继续下探5.6%，弱势格局。动能转弱（MACD出现死叉，短期动能转向空方）。量能温和，多空均衡。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-decline phase-badge">下跌段</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">下跌趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转弱</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">下跌趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转弱</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期死叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">多空均衡</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value " style="font-size:14px">4.9 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value negative" style="font-size:14px">5.5 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🔴 <b>MACD死叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 短期动能转空</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">🎯 <b>回调但仍在40日均线上方</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 中期趋势仍在，回调可能是上升途中的正常调整</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-09-23 18:09 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">上海龙头(集团)股份有限公司是中国首批股份制上市公司(证券代码600630),以纺织品品牌经营和国际贸易为核心业务,由针织、家纺、服饰、国际贸易、电子商务、高级定制与职业服六大事业部构成核心业务发展。公司拥有在国内市场享有盛誉的“三枪”、“...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 品牌经营和国际贸易</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">下跌段</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">下跌 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转弱</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">10.69</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">6.15</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">6.99</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v neg">0.4:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#484f58">⬜ MACD金叉</div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #f85149;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#f85149">当前不建议入场</b><br>
-                盈亏比不足(0.4:1)<br>下跌2笔未走完<br>
-                支撑: 6.15 | 压力: 10.69</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">71.7</div></div>
-<div class="m"><div class="l">PB</div><div class="v">4.91</div></div>
-<div class="m"><div class="l">市值</div><div class="v">40亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">33.91%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
