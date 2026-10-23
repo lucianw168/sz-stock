@@ -8,7 +8,8 @@
         ['daily_observation','late_reconstruction'].includes(r.kind) &&
         (market==='all'||r.market===market));
       return {date:run.date,rows,archived:false,stale:run.date!==expected,
-        state:run.state,timely:run.timely,message:run.message};
+        state:run.state,timely:run.timely,message:run.message,
+        reason_code:run.reason_code,status_label:run.status_label};
     }
     const rows = card.candidates.filter(r => (market === 'all' || r.market === market) &&
       (card.key !== 'manual' || r.kind === 'manual_observation'));
@@ -22,6 +23,14 @@
     return keys.includes(value) || ['monitor','history'].includes(value) ? value : 'overview';
   }
   const dailyKinds = ['daily_observation','late_reconstruction','manual_observation'];
+  function runLabel(run) {
+    if(run?.state!=='blocked')return '';
+    const labels={model_review_expired:'模型待复核',data_missing:'数据待补齐',
+      validation_failed:'校验未通过',build_failed:'生成失败',unknown_block:'筛选暂停'};
+    if(labels[run.reason_code])return labels[run.reason_code];
+    if(/模型超过90天复核期限|模型复核已到期/.test(run.message||''))return labels.model_review_expired;
+    return '筛选暂停';
+  }
   function historyCell(card, date, options={}) {
     const market=options.market||'all', kind=options.kind||'all';
     const query=String(options.query||'').trim().toLowerCase();
@@ -72,7 +81,7 @@
     }
     return {main:raw||row.sources||'未记录',detail:raw?(names[key]||'模型原分')+' · 非胜率':'',tooltip};
   }
-  const api = {snapshot, route, scoreDisplay, historyCell, historyPage};
+  const api = {snapshot, route, scoreDisplay, historyCell, historyPage, runLabel};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else scope.CN_SELECTION_VIEW = api;
 })(typeof window === 'undefined' ? globalThis : window);

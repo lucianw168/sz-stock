@@ -32,7 +32,7 @@
   function status(c) {
     if(c.daily_run) {
       const r=c.daily_run;
-      const label=r.state==='blocked'?'数据待补齐':r.date!==data.expected_session?'等待最新行情':r.timely?'日更正常':'补生成记录';
+      const label=r.state==='blocked'?view.runLabel(r):r.date!==data.expected_session?'等待最新行情':r.timely?'日更正常':'补生成记录';
       return `<span class="cn-status ${r.state==='ready'&&r.timely&&r.date===data.expected_session?'cn-good':'cn-warn'}" title="每日筛选状态；历史回测截至日另列">${label}</span>`;
     }
     return `<span class="cn-status cn-${esc(c.health.tone)}">${esc(c.health.status)}</span>`;
@@ -93,8 +93,8 @@
         const s=view.snapshot(c,market,data.expected_session);
         return `<article class="cn-product-card" style="--cn-line:${c.color}" data-card="${c.key}">
           <header><h2><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a></h2><a class="cn-card-arrow" href="#${c.key}" data-detail="${c.key}" aria-label="${esc(c.name)}详情" title="${esc(c.name)}详情">${icon('arrow-up-right')}</a></header>
-          <p class="cn-card-date">${s.archived?'历史归档':s.state==='blocked'?'待数据更新':s.timely?'盘后观察':'补生成记录'} · ${esc(s.date||'暂无记录')}${s.stale?' <span class="cn-warn">非今日名单</span>':''}</p>
-          <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<span class="cn-stock-entry"><a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>${evidenceButton(r)}</span>`).join(''):`<p class="cn-muted">${esc(s.state==='blocked'?'数据未齐，本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
+          <p class="cn-card-date">${s.archived?'历史归档':s.state==='blocked'?view.runLabel(s):s.timely?'盘后观察':'补生成记录'} · ${esc(s.date||'暂无记录')}${s.stale?' <span class="cn-warn">非今日名单</span>':''}</p>
+          <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<span class="cn-stock-entry"><a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>${evidenceButton(r)}</span>`).join(''):`<p class="cn-muted">${esc(s.state==='blocked'?s.message||'本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
           ${s.rows.length>8?`<small>另有 ${s.rows.length-8} 只，详情中查看</small>`:''}
           <footer><span class="cn-muted">${c.key==='manual'?`开发期胜率 ${pct(c.full.win_rate)} · ${c.full.trades} 笔`:`历史胜率 ${pct(c.full.win_rate)} · PF ${pf(c.full)}`}</span><a href="#${c.key}" data-detail="${c.key}">逻辑与回测</a></footer>
         </article>`;

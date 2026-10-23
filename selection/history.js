@@ -45,7 +45,7 @@
       if(config.onMarket)config.onMarket(state.market);
     }
     function label(cell){
-      if(cell.state==='blocked')return '待数据';
+      if(cell.state==='blocked')return view.runLabel(cell.run);
       if(cell.state==='unknown')return '—';
       return String(cell.count);
     }
