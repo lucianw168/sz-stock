@@ -44,6 +44,23 @@
       ['账户最大回撤',pct(m.drawdown_pct),'cn-bad'],['已结算交易',String(m.trades),'']
     ].map(([label,value,cls]) => `<div class="cn-kpi"><label>${label}</label><strong class="${cls}">${value}</strong></div>`).join('')}</div>`;
   }
+  function reviewNotice(c) {
+    const r=c.model_review;
+    if(!r||!['expired','due_soon'].includes(r.state))return '';
+    return `<p class="cn-notice">${r.state==='expired'?'模型复核已到期，暂停精选':'模型即将到期，需完成复核'} · 截止 ${esc(r.review_due)}。重跑数据或重新发布不会延长期限。</p>`;
+  }
+  function forwardSection(c) {
+    const f=c.forward;
+    if(!f)return '';
+    if(!f.account)return `<section class="cn-section"><h2>留存名单后续表现</h2><p class="cn-muted">${esc(f.evidence)}。当前版本暂无可核算的盘前留存股票名单。</p></section>`;
+    const a=f.account, p=f.opportunities;
+    return `<section class="cn-section cn-forward"><h2>留存名单后续表现</h2><p class="cn-muted">${esc(f.evidence)}。名单起于 ${esc(f.start)}，行情截至 ${esc(f.asof)}，账户截至 ${esc(f.account_asof)}。</p>
+      <div class="cn-table-wrap"><table><thead><tr><th>核算集合</th><th class="cn-num">已结算</th><th class="cn-num">盈利胜率</th><th class="cn-num">PF</th><th class="cn-num">账户收益</th><th class="cn-num">回撤</th></tr></thead><tbody>
+      <tr><td>全部留存机会</td><td class="cn-num">${p.trades}</td><td class="cn-num">${pct(p.win_rate)}</td><td class="cn-num">${pf(p)}</td><td colspan="2">重叠机会，不计算累计收益</td></tr>
+      <tr><td>每票50%资金账户</td><td class="cn-num">${a.trades}</td><td class="cn-num">${pct(a.win_rate)}</td><td class="cn-num">${pf(a)}</td><td class="cn-num ${tone(a.return_pct)}">${signed(a.return_pct)}</td><td class="cn-num cn-bad">${pct(a.drawdown_pct)}</td></tr></tbody></table></div>
+      <p class="cn-muted">留存 ${f.observations} 条 · 待入场 ${f.pending} 条 · 证据缺失 ${f.unknown} 条。${a.trades<20?'样本不足20笔，不能据此认证胜率或实盘能力。':''}${f.legacy_risk_snapshots?' 部分旧名单的ATR来自原特征快照，其哈希在本次结算时补核。':''}${a.stale_marks?' 存在缺失盯市报价，账户收益需谨慎解读。':''}${f.state==='entry_evidence_missing'?' 入场证据缺失，账户时钟已停止，未按空仓继续计算。':''}</p>
+      <details><summary>逐条留存机会核算</summary><div class="cn-table-wrap"><table><thead><tr><th>信号日</th><th>股票</th><th>状态</th><th>退出日</th><th class="cn-num">机会净收益</th></tr></thead><tbody>${[...f.rows].reverse().map(r=>`<tr><td>${esc(r.date)}</td><td><a href="${esc(stockLink(r,c.key))}">${esc(r.ts_code.slice(0,6))} ${esc(r.name)}</a></td><td>${esc(r.status)}</td><td>${esc(r.exit_date||'—')}</td><td class="cn-num ${tone(r.pnl_pct)}">${signed(r.pnl_pct)}</td></tr>`).join('')}</tbody></table></div></details></section>`;
+  }
   function periodRows(c) {
     return periods.map(([key,label]) => {
       const m=c.windows[key];
@@ -100,7 +117,7 @@
         </article>`;
       }).join('')}</div>
       <section class="cn-section"><div class="cn-chart-head"><h2>近期选股记录</h2><a href="#history" data-records>全部日期 ${icon('arrow-right')}</a></div>${recentRecords()}</section>
-      <section class="cn-section"><div class="cn-chart-head"><h2>运行监测</h2><a href="#monitor" id="cn-overview-monitor">全部窗口 ${icon('arrow-right')}</a></div><div class="cn-table-wrap"><table><thead><tr><th>产品线</th><th>数据状态</th><th class="cn-num">近三个月收益</th><th class="cn-num">盈利胜率</th><th class="cn-num">退出笔数</th></tr></thead><tbody>${data.cards.map(c=>{const m=c.windows['3m'];return `<tr><td><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a>${c.key==='manual'?'<small>精选开发测试</small>':''}</td><td>${status(c)}<small>账户至 ${esc(c.account_asof)}</small></td><td class="cn-num ${tone(m?.return_pct)}">${signed(m?.return_pct)}</td><td class="cn-num">${pct(m?.win_rate)}</td><td class="cn-num">${m?.trades??'无记录'}</td></tr>`;}).join('')}</tbody></table></div></section>`;
+      <section class="cn-section"><div class="cn-chart-head"><h2>运行监测</h2><a href="#monitor" id="cn-overview-monitor">全部窗口 ${icon('arrow-right')}</a></div><div class="cn-table-wrap"><table><thead><tr><th>产品线</th><th>数据状态</th><th class="cn-num">历史末三个月收益</th><th class="cn-num">盈利胜率</th><th class="cn-num">退出笔数</th></tr></thead><tbody>${data.cards.map(c=>{const m=c.windows['3m'];return `<tr><td><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a>${c.key==='manual'?'<small>精选开发测试</small>':''}</td><td>${status(c)}<small>账户至 ${esc(c.account_asof)}</small></td><td class="cn-num ${tone(m?.return_pct)}">${signed(m?.return_pct)}</td><td class="cn-num">${pct(m?.win_rate)}</td><td class="cn-num">${m?.trades??'无记录'}</td></tr>`;}).join('')}</tbody></table></div></section>`;
     document.getElementById('cn-overview-market').value=market;
     document.getElementById('cn-overview-market').onchange=e=>{market=e.target.value;renderOverview();if(window.lucide)window.lucide.createIcons();};
     const open=key=>{navigate(key);window.scrollTo({top:0});};
@@ -111,7 +128,7 @@
   }
   function recentRecords(){
     const page=view.historyPage(data.cards,data.history_sessions||[],{expected:data.expected_session,market,range:20,pageSize:5});
-    return `<div class="cn-table-wrap"><table class="cn-record-matrix"><thead><tr><th>信号日</th>${data.cards.map(c=>`<th class="cn-num">${esc(c.name)}</th>`).join('')}</tr></thead><tbody>${page.days.map(day=>`<tr><td><a href="#history?date=${day.date}&market=${market}&range=20" data-records>${day.date}</a></td>${day.cells.map(cell=>`<td class="cn-num">${cell.state==='unknown'?'<span class="cn-muted" title="该日没有留存记录">—</span>':`<a href="#history?date=${day.date}&focus=${cell.key}&market=${market}&range=20" data-records>${cell.state==='blocked'?'待数据':cell.count+' 只'}</a>`}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    return `<div class="cn-table-wrap"><table class="cn-record-matrix"><thead><tr><th>信号日</th>${data.cards.map(c=>`<th class="cn-num">${esc(c.name)}</th>`).join('')}</tr></thead><tbody>${page.days.map(day=>`<tr><td><a href="#history?date=${day.date}&market=${market}&range=20" data-records>${day.date}</a></td>${day.cells.map(cell=>`<td class="cn-num">${cell.state==='unknown'?'<span class="cn-muted" title="该日没有留存记录">—</span>':`<a href="#history?date=${day.date}&focus=${cell.key}&market=${market}&range=20" data-records>${cell.state==='blocked'?view.runLabel(cell.run):cell.count+' 只'}</a>`}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   }
   function mountRecords(product){
     if(!window.CN_SELECTION_HISTORY){document.getElementById('cn-records').textContent='历史记录暂不可用，请刷新页面。';return;}
@@ -129,9 +146,11 @@
     panel.innerHTML=`<div class="cn-title-line"><h2>${esc(c.name)}</h2>${status(c)}</div><p class="cn-muted cn-model">${esc(c.model)}<small>${esc(c.version)}</small></p>
       <p>${esc(c.thesis)}</p>
       <div class="cn-notice">${esc(c.signal_message)}${c.key==='manual'?`<br>${esc(c.reference_label)}`:''}</div>
+      ${reviewNotice(c)}
       ${c.daily_run?`<div class="cn-toolbar"><span>最近筛选 ${esc(c.daily_run.date)}</span><span>候选 ${c.daily_run.pool_rows??'未完成'} 只 · 精选 ${c.daily_run.selected_rows} 只</span><span class="cn-muted">记录于 ${esc(c.daily_run.captured_at.replace('T',' ').slice(0,19))}</span></div>`:''}
       <nav class="cn-section-links" aria-label="产品详情章节"><a href="#${active}" data-section="cn-records">${icon('list')}观察记录</a><a href="#${active}" data-section="cn-performance">${icon('chart-no-axes-combined')}回测表现</a><a href="#${active}" data-section="cn-logic">${icon('book-open')}逻辑与执行</a></nav>
       <section class="cn-section"><div class="cn-chart-head"><h2>观察名单与历史记录</h2><a href="#history?product=${active}" data-all-history>五线历史总览 ${icon('arrow-right')}</a></div><div id="cn-records"></div></section>
+      ${forwardSection(c)}
       <section id="cn-performance" class="cn-section">
       <div class="cn-chart-head"><h2>${c.key==='manual'?'精选确认 · 开发期模拟':'历史模拟表现'}</h2><span class="cn-muted">信号截至 ${esc(c.signal_asof)} · 账户截至 ${esc(c.account_asof)}</span></div>
       ${kpis(c.full)}<small>每只股票 ${num(c.allocation_pct,0)}% 仓位 · ${c.key==='bottom'?'同批最多两只，不加杠杆':'同一时间一批'} · 历史模拟，非实盘收益</small>
@@ -159,12 +178,17 @@
   function rulesSection(c) {
     return `<section class="cn-section"><h2>规则来源与独立表现</h2><p class="cn-muted">单一来源不再单独发出精选信号；它们作为不同机制的组合证据，接受统一承接确认。以下为各来源独立运行的历史审计，不是当前组合绩效。</p><div class="cn-table-wrap"><table><thead><tr><th>市场 / 规则</th><th>机制</th><th>处理</th><th class="cn-num">样本</th><th class="cn-num">胜率</th><th class="cn-num">PF / 压力PF</th></tr></thead><tbody>${c.rules.map(r=>`<tr><td><a href="${esc(root+r.market+'/strategy/'+encodeURIComponent(r.strategy)+'.html')}">${esc(r.source)}</a></td><td>${esc(r.family)}</td><td>${esc(r.stage)}</td><td class="cn-num">${r.trades}</td><td class="cn-num">${pct(r.win_rate)}</td><td class="cn-num">${num(r.profit_factor)} / ${num(r.stress_pf)}</td></tr>`).join('')}</tbody></table></div></section>`;
   }
+  function forwardMonitor() {
+    return `<section class="cn-section"><h2>盘前留存名单账户</h2><p class="cn-muted">每只股票50%仓位，按既定规则作日线模拟核算；不与开发期回测拼接，不等于实际成交。各行采用独立账户，小样本不认证实盘能力。</p><div class="cn-table-wrap"><table><thead><tr><th>产品线</th><th>核算截至</th><th class="cn-num">已结算</th><th class="cn-num">盈利胜率</th><th class="cn-num">收益</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${data.cards.map(c=>{const f=c.forward,a=f?.account;return `<tr><td><a href="#${c.key}" data-open="${c.key}">${esc(c.name)}</a></td><td>${esc(f?.account_asof||'暂无名单')}</td><td class="cn-num">${a?.trades??'—'}${a&&a.trades<20?'<small>小样本</small>':''}</td><td class="cn-num">${pct(a?.win_rate)}</td><td class="cn-num ${tone(a?.return_pct)}">${signed(a?.return_pct)}</td><td class="cn-num">${pct(a?.drawdown_pct)}</td></tr>`;}).join('')}</tbody></table></div></section>`;
+  }
   function renderMonitor() {
     const panel=document.getElementById('cn-panel');
     panel.removeAttribute('aria-labelledby');
     panel.setAttribute('aria-label','五条产品线运行监测');
-    panel.innerHTML=`<h2>运行监测</h2><p class="cn-muted">每日筛选状态与历史账户表现分别展示</p><div class="cn-notice">数据中断、样本不足与策略承压分开处理。目前没有任何一条线被认证为可直接实盘。每日筛选已有独立记录，但历史模拟账户尚未接续为前向账户；以下窗口指标以各账户截止日计算，不冒充当前实时收益。</div><div class="cn-table-wrap"><table class="cn-health-table"><thead><tr><th>产品线 / 版本</th><th>监测状态</th>${periods.map(([,label])=>`<th class="cn-num">${label}<small>收益 / 胜率</small></th>`).join('')}</tr></thead><tbody>${data.cards.map(c=>`<tr><td><a href="#${c.key}" data-open="${c.key}">${esc(c.name)}</a><small>账户至 ${esc(c.account_asof)}</small>${c.key==='manual'?'<small>精选开发测试</small>':''}</td><td>${status(c)}<small>截止当时：${esc(c.health.performance)}</small><small>历史回测信号距今 ${c.health.lag_sessions} 个交易日</small></td>${periods.map(([key])=>{const m=c.windows[key];return m?`<td class="cn-num"><strong class="${tone(m.return_pct)}">${signed(m.return_pct)}</strong><br>${pct(m.win_rate)}<small>${m.trades} 笔${m.trades<20?' · 小样本':''}</small>${!m.coverage_complete?'<small class="cn-warn">窗口未满</small>':''}</td>`:'<td>无记录</td>';}).join('')}</tr>`).join('')}</tbody></table></div>
+    panel.innerHTML=`<h2>历史账户窗口</h2><p class="cn-muted">每日筛选状态与历史账户表现分别展示</p><div class="cn-notice">数据中断、样本不足与策略承压分开处理。目前没有任何一条线被认证为可直接实盘。盘前留存名单单独核算；以下历史窗口仍以各账户截止日计算。</div><div class="cn-table-wrap"><table class="cn-health-table"><thead><tr><th>产品线 / 版本</th><th>监测状态</th>${periods.map(([,label])=>`<th class="cn-num">${label}<small>收益 / 胜率</small></th>`).join('')}</tr></thead><tbody>${data.cards.map(c=>`<tr><td><a href="#${c.key}" data-open="${c.key}">${esc(c.name)}</a><small>账户至 ${esc(c.account_asof)}</small>${c.key==='manual'?'<small>精选开发测试</small>':''}</td><td>${status(c)}<small>截止当时：${esc(c.health.performance)}</small><small>历史回测信号距今 ${c.health.lag_sessions} 个交易日</small></td>${periods.map(([key])=>{const m=c.windows[key];return m?`<td class="cn-num"><strong class="${tone(m.return_pct)}">${signed(m.return_pct)}</strong><br>${pct(m.win_rate)}<small>${m.trades} 笔${m.trades<20?' · 小样本':''}</small>${!m.coverage_complete?'<small class="cn-warn">窗口未满</small>':''}</td>`:'<td>无记录</td>';}).join('')}</tr>`).join('')}</tbody></table></div>
       <section class="cn-section"><h2>近三个月窗口的历史变化</h2><div class="cn-toolbar"><label>产品线 <select id="cn-monitor-product">${data.cards.map(c=>`<option value="${c.key}" ${active===c.key?'selected':''}>${esc(c.name)}</option>`).join('')}</select></label></div><p class="cn-muted">沿同一连续账户，每5个交易日观察一次当时近三个月表现；这是历史回看，不是前向影子盘。</p><div class="cn-table-wrap"><table class="cn-history"><thead><tr><th>统计截至</th><th>实际窗口起点</th><th class="cn-num">收益</th><th class="cn-num">胜率</th><th class="cn-num">退出数</th><th class="cn-num">PF</th><th class="cn-num">回撤</th></tr></thead><tbody id="cn-health-history"></tbody></table></div></section><details open><summary>怎样解读状态</summary>${['status','windows','returns','wins','forward'].map(k=>`<p class="cn-muted">${esc(data.methodology[k])}</p>`).join('')}</details>`;
+    panel.querySelector('.cn-notice').textContent='数据中断、模型待复核与策略承压分开处理。盘前留存名单已单独核算，不与开发期回测拼接；历史窗口仍以各账户截止日计算。目前没有任何一条线被认证为可直接实盘。';
+    panel.insertAdjacentHTML('afterbegin', forwardMonitor());
     panel.querySelectorAll('[data-open]').forEach(a=>a.onclick=e=>{e.preventDefault();navigate(a.dataset.open);});
     document.getElementById('cn-monitor-product').onchange=e=>{active=e.target.value;renderHistory();};
     renderHistory();
