@@ -1,70 +1,70 @@
 {
   "version": 1,
-  "date": "2026-10-29",
-  "snapshot_id": "20261030T083148_afd90f60",
+  "date": "2026-10-30",
+  "snapshot_id": "20261030T182717_4fdcb647",
   "data_quality": {
     "trading_calendar": {
       "status": "current",
-      "asof": "20261029",
-      "report_date": "20261029",
-      "expected_session": "20261029",
-      "cutoff": "20261029",
+      "asof": "20261030",
+      "report_date": "20261030",
+      "expected_session": "20261030",
+      "cutoff": "20261030",
       "sha256": "a2a566648dcb452fbbb03bdf0b00123bc94f65e910d3756df722a93bfa4a62ba",
       "label": "A股交易日历"
     },
     "index_daily_core": {
       "dataset": "index_daily_core",
       "status": "current",
-      "asof": "20261029",
+      "asof": "20261030",
       "rejected": [],
       "rows": 8,
-      "sha256": "d9c8159e5cc410d528b5defa81fae9098c2c426a02eb154c63c020436d464ec1",
-      "expected_session": "20261029",
-      "report_date": "20261029",
+      "sha256": "271e726c420b3836a2c990eee57d4d12e21be57db74e14beb80aabd5a71ec188",
+      "expected_session": "20261030",
+      "report_date": "20261030",
       "label": "A股指数"
     },
     "moneyflow_ind_dc": {
       "dataset": "moneyflow_ind_dc",
       "status": "current",
-      "asof": "20261029",
+      "asof": "20261030",
       "rejected": [],
       "rows": 1043,
-      "sha256": "195b4f1a4e174e3b3e3c1ddc29b63357758f78a617c9416922dad4a92344bc59",
-      "expected_session": "20261029",
-      "report_date": "20261029",
+      "sha256": "956cfda2688b96453bcab31acf81cd27a773500d913abc02a2b8dd7997de60a5",
+      "expected_session": "20261030",
+      "report_date": "20261030",
       "label": "东财行业与概念"
     },
     "moneyflow_ind_ths": {
       "dataset": "moneyflow_ind_ths",
       "status": "current",
-      "asof": "20261029",
+      "asof": "20261030",
       "rejected": [],
       "rows": 90,
-      "sha256": "635b864194aa19267af07b64a92c348ecefa049bd9379879dee07619fc761794",
-      "expected_session": "20261029",
-      "report_date": "20261029",
+      "sha256": "a2cb85c22e1f3884283aa65b090de55b6e05475184afe378f4c4002b769e99f3",
+      "expected_session": "20261030",
+      "report_date": "20261030",
       "label": "同花顺行业"
     },
     "sw_daily": {
       "dataset": "sw_daily",
       "status": "current",
-      "asof": "20261029",
+      "asof": "20261030",
       "rejected": [],
       "rows": 439,
-      "sha256": "d4700fd0e215a658df518472d8fc52681411a427969b5ba3e3f18f921f413674",
-      "expected_session": "20261029",
-      "report_date": "20261029",
+      "sha256": "d67f859cdcbe21aaf04166c862854d85ae29f8a7d19cabc6ed8e0e54cfd1931c",
+      "expected_session": "20261030",
+      "report_date": "20261030",
       "label": "申万行业指数"
     },
     "limit_list_d": {
       "dataset": "limit_list_d",
       "status": "current",
-      "asof": "20261029",
+      "asof": "20261030",
       "rejected": [],
-      "rows": 105,
-      "sha256": "248cba544c12ece5a2bc306e5828253f7a6ab019cdbc438c9e5767e4d24b1a50",
-      "expected_session": "20261029",
-      "report_date": "20261029",
+      "rows": 160,
+      "sha256": "c9086431b17379b85cf65e60634b057df4796dc87a41862cb535f46daf7d534a",
+      "expected_session": "20261030",
+      "report_date": "20261030",
       "label": "涨跌停与炸板"
     },
     "northbound": {
@@ -73,21 +73,23 @@
       "note": "披露口径变化后，不把成交活跃度当作每日净流入；暂停方向性判断。",
       "label": "北向资金"
     },
-    "global": {
-      "status": "missing",
-      "asof": null,
-      "note": "本次没有可验证时点的行情快照，传导判断暂停。",
-      "label": "海外市场"
-    },
     "futures": {
-      "status": "missing",
-      "asof": null,
-      "note": "本次没有可验证时点的行情快照，传导判断暂停。",
+      "status": "snapshot",
+      "asof": "2026-10-30T18:27:17.389319+08:00",
+      "note": "抓取时点报价；不同市场交易时段不同，不作为当日收盘共振证据。",
+      "error": null,
       "label": "国内期货"
     },
+    "global": {
+      "status": "snapshot",
+      "asof": "2026-10-30T18:27:17.389319+08:00",
+      "note": "抓取时点报价；不同市场交易时段不同，不作为当日收盘共振证据。",
+      "error": null,
+      "label": "海外市场"
+    },
     "news": {
-      "status": "missing",
-      "asof": null,
+      "status": "cached",
+      "asof": "2026-10-30 18:27:21",
       "note": "来源报道未逐条独立核实；发布时间以原文为准。",
       "rejected_titles": 0,
       "label": "新闻来源"
@@ -97,13 +99,19 @@
     "version": "evidence-first-v1",
     "market_text": "deterministic",
     "news_focus": {
-      "status": "source_order",
-      "reason": "AI disabled or no news"
+      "status": "ai_source_selection",
+      "ids": [
+        6,
+        8,
+        9,
+        17,
+        24
+      ]
     }
   },
   "files": {
-    "index.html": "c8057d58a8df541cfccfa0b2e6ea7cc37f1b5bd9776844eb92d72a8ccdbd0de7",
-    "days/2026-10-29.html": "db6273dc1f6819497a19ee7523af7c8ebad6ca776bad432a797106b26b974925",
+    "index.html": "2749c7004e2964857025c6432238d63fa0774fd8b404902ec5c82a239633df6a",
+    "days/2026-10-30.html": "7834e700c909236a7133bae4ccaedb9cc974728d6ac272fa159512c59bb97850",
     "static/style.css": "a4704202d7123c710ba62fc46491095171cf792b04a1c9150caa310bc5e517b3",
     "static/pico-2.1.1.min.css": "fbc9a63fc9fc9f72d12fd7fc9806e11fa9f77ae4f9cad146b27003a1119ba3db"
   }
