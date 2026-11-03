@@ -45,14 +45,15 @@
     const market=options.market||'all', kind=options.kind||'all';
     const query=String(options.query||'').trim().toLowerCase();
     const accepts=r=>kind==='all'||(kind==='daily')===dailyKinds.includes(r.kind);
-    const records=card.candidates.filter(r=>r.date===date&&accepts(r));
+    const allRecords=card.candidates.filter(r=>r.date===date);
+    const records=allRecords.filter(accepts);
     const run=kind==='historical'?null:[...(card.daily_runs||[]),card.daily_run].filter(Boolean).find(r=>r.date===date);
     const rows=records.filter(r=>(market==='all'||r.market===market)&&
       (!query||[r.ts_code,r.name].some(v=>String(v||'').toLowerCase().includes(query)))&&
       (!options.settled||r.pnl_pct!=null));
     const state=run?.state==='blocked'?'blocked':run?.state==='ready'?'ready':records.length?'recorded':'unknown';
-    return {key:card.key,name:card.name,rows,count:rows.length,total:records.length,state,run,
-      filtered:rows.length!==records.length,
+    return {key:card.key,name:card.name,rows,count:rows.length,total:records.length,unfilteredTotal:allRecords.length,state,run,
+      filtered:rows.length!==allRecords.length,
       historical:records.some(r=>!dailyKinds.includes(r.kind)),
       late:records.some(r=>r.kind==='late_reconstruction')||Boolean(run&&!run.timely)};
   }
