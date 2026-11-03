@@ -31,6 +31,16 @@
     if(/模型超过90天复核期限|模型复核已到期/.test(run.message||''))return labels.model_review_expired;
     return '筛选暂停';
   }
+  function reviewText(card) {
+    const r=card.model_review, run=card.daily_run;
+    if(!r||!['expired','due_soon'].includes(r.state))return '';
+    if(r.state==='due_soon')return `原定复核日 ${r.review_due}。研究观察名单继续更新，复核结论另行记录。`;
+    if(run?.state==='blocked'&&run.reason_code==='model_review_expired')
+      return `该日名单因旧版复核规则暂停。原定复核日 ${r.review_due}，历史暂停记录保留。`;
+    if(run?.state==='ready'&&run.observation_policy==='review-warning-observations-v1-20261103')
+      return `模型复核待完成（原定 ${r.review_due}）。观察名单按原版本生成，尚无新的复核批准，不是自动交易许可。`;
+    return `模型复核待完成（原定 ${r.review_due}）。当前筛选状态另列，不代表策略已被证明失效。`;
+  }
   function historyCell(card, date, options={}) {
     const market=options.market||'all', kind=options.kind||'all';
     const query=String(options.query||'').trim().toLowerCase();
@@ -81,7 +91,7 @@
     }
     return {main:raw||row.sources||'未记录',detail:raw?(names[key]||'模型原分')+' · 非胜率':'',tooltip};
   }
-  const api = {snapshot, route, scoreDisplay, historyCell, historyPage, runLabel};
+  const api = {snapshot, route, scoreDisplay, historyCell, historyPage, runLabel, reviewText};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else scope.CN_SELECTION_VIEW = api;
 })(typeof window === 'undefined' ? globalThis : window);

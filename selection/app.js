@@ -45,9 +45,8 @@
     ].map(([label,value,cls]) => `<div class="cn-kpi"><label>${label}</label><strong class="${cls}">${value}</strong></div>`).join('')}</div>`;
   }
   function reviewNotice(c) {
-    const r=c.model_review;
-    if(!r||!['expired','due_soon'].includes(r.state))return '';
-    return `<p class="cn-notice">${r.state==='expired'?'模型复核已到期，暂停精选':'模型即将到期，需完成复核'} · 截止 ${esc(r.review_due)}。重跑数据或重新发布不会延长期限。</p>`;
+    const text=view.reviewText(c);
+    return text?`<p class="cn-notice cn-model-review">${esc(text)}</p>`:'';
   }
   function forwardSection(c) {
     const f=c.forward;
@@ -111,6 +110,7 @@
         return `<article class="cn-product-card" style="--cn-line:${c.color}" data-card="${c.key}">
           <header><h2><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a></h2><a class="cn-card-arrow" href="#${c.key}" data-detail="${c.key}" aria-label="${esc(c.name)}详情" title="${esc(c.name)}详情">${icon('arrow-up-right')}</a></header>
           <p class="cn-card-date">${s.archived?'历史归档':s.state==='blocked'?view.runLabel(s):s.timely?'盘后观察':'补生成记录'} · ${esc(s.date||'暂无记录')}${s.stale?' <span class="cn-warn">非今日名单</span>':''}</p>
+          ${c.model_review?.state==='expired'&&s.state==='ready'?`<p class="cn-card-date cn-warn" title="${esc(view.reviewText(c))}">研究观察 · 复核待完成</p>`:''}
           <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<span class="cn-stock-entry"><a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>${evidenceButton(r)}</span>`).join(''):`<p class="cn-muted">${esc(s.state==='blocked'?s.message||'本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
           ${s.rows.length>8?`<small>另有 ${s.rows.length-8} 只，详情中查看</small>`:''}
           <footer><span class="cn-muted">${c.key==='manual'?`开发期胜率 ${pct(c.full.win_rate)} · ${c.full.trades} 笔`:`历史胜率 ${pct(c.full.win_rate)} · PF ${pf(c.full)}`}</span><a href="#${c.key}" data-detail="${c.key}">逻辑与回测</a></footer>
