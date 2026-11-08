@@ -19,9 +19,23 @@
   const icon = name => `<i data-lucide="${name}" aria-hidden="true"></i>`;
   const pf = m => m.no_losses ? '无亏损样本' : num(m.profit_factor);
   const cardMap = Object.fromEntries(data.cards.map(c => [c.key, c]));
-  const view = window.CN_SELECTION_VIEW;
+  const originalView = window.CN_SELECTION_VIEW;
+  const view = {...originalView, scoreDisplay(row,key) {
+    const result=originalView.scoreDisplay(row,key), label=cardMap[key]?.score_label;
+    if(!label)return result;
+    const raw=row.score==null?'':Number(row.score).toFixed(4);
+    return {...result,detail:result.detail.endsWith('原分 · 非胜率')?label+' · 非胜率':result.detail,
+      tooltip:`${label} ${raw}；不是盈利概率，不跨产品比较。`};
+  }};
+  window.CN_SELECTION_VIEW = view;
   const stockLink = (r,product,back) => root+r.market+'/stock/'+encodeURIComponent(r.ts_code.slice(0,6))+'.html?'+new URLSearchParams({signal:r.date,product:product||data.cards.find(c=>c.candidates.includes(r))?.key||active,return:back||location.hash}).toString();
   const evidenceButton = r => window.CN_CONTEXT_DATA?.stocks?.[r.ts_code] ? `<button class="cn-icon cn-evidence-open" data-evidence="${esc(r.ts_code)}" title="${esc(r.name||r.ts_code)}公司与市场证据" aria-label="${esc(r.ts_code)}公司与市场证据">${icon('notebook-text')}</button>` : '';
+  function abcPoints(row) {
+    const e=row.evidence||{}, points=['a','b','c','x','e','f'];
+    if(!points.some(p=>e[p+'_date']))return '';
+    const date=value=>/^\d{8}$/.test(String(value||''))?String(value).replace(/^(\d{4})(\d{2})(\d{2})$/,'$1-$2-$3'):'—';
+    return `<details class="cn-abc-points" style="white-space:normal;min-width:210px;max-width:280px"><summary>ABC / XEF 点位</summary>${points.map(p=>`<small><strong>${p.toUpperCase()}</strong> ${date(e[p+'_date'])} · 价格 ${num(e[p+'_price'],3)}<br>确认 ${date(e[p+'_known'])}</small>`).join('')}<small>宏观冻结 ${date(e.macro_frozen_date)} · 回看 ${num(e.macro_lookback,0)} 日</small></details>`;
+  }
   let currentView = view.route(location.hash, Object.keys(cardMap));
   let active = cardMap[currentView] ? currentView : 'second';
   let monitor = currentView === 'monitor';
@@ -113,7 +127,7 @@
           ${c.model_review?.state==='expired'&&s.state==='ready'?`<p class="cn-card-date cn-warn" title="${esc(view.reviewText(c))}">研究观察 · 复核待完成</p>`:''}
           <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<span class="cn-stock-entry"><a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>${evidenceButton(r)}</span>`).join(''):`<p class="cn-muted">${esc(s.state==='blocked'?s.message||'本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
           ${s.rows.length>8?`<small>另有 ${s.rows.length-8} 只，详情中查看</small>`:''}
-          <footer><span class="cn-muted">${c.key==='manual'?`开发期胜率 ${pct(c.full.win_rate)} · ${c.full.trades} 笔`:`历史胜率 ${pct(c.full.win_rate)} · PF ${pf(c.full)}`}</span><a href="#${c.key}" data-detail="${c.key}">逻辑与回测</a></footer>
+          <footer><span class="cn-muted">${c.opportunity_stats?`历史机会胜率 ${pct(c.opportunity_stats.win_rate)} · ${c.opportunity_stats.trades} 笔`:c.key==='manual'?`开发期胜率 ${pct(c.full.win_rate)} · ${c.full.trades} 笔`:`历史胜率 ${pct(c.full.win_rate)} · PF ${pf(c.full)}`}</span><a href="#${c.key}" data-detail="${c.key}">逻辑与回测</a></footer>
         </article>`;
       }).join('')}</div>
       <section class="cn-section"><div class="cn-chart-head"><h2>近期选股记录</h2><a href="#history" data-records>全部日期 ${icon('arrow-right')}</a></div>${recentRecords()}</section>
@@ -135,7 +149,7 @@
     window.CN_SELECTION_HISTORY.mount(document.getElementById('cn-records'),{cards:data.cards,
       sessions:data.history_sessions||[],expected:data.expected_session,market,product,
       defaultDate:product?view.snapshot(cardMap[product],market,data.expected_session).date:'',
-      stockLink,evidenceButton,root,onMarket:value=>{market=value;}});
+      stockLink,evidenceButton:r=>evidenceButton(r)+abcPoints(r),root,onMarket:value=>{market=value;}});
   }
   function renderRecords(){
     document.getElementById('cn-panel').innerHTML=`<div class="cn-chart-head"><h2>每日产品线记录</h2><details class="cn-legacy-links"><summary>旧市场档案</summary><nav aria-label="旧市场策略历史">${[['sz','深圳主板'],['sh','上海主板'],['cy','创业板'],['kc','科创板']].map(([m,n])=>`<a href="${esc(root+m+'/history.html')}">${n}</a>`).join('')}</nav></details></div><div id="cn-records"></div>`;
@@ -153,6 +167,7 @@
       ${forwardSection(c)}
       <section id="cn-performance" class="cn-section">
       <div class="cn-chart-head"><h2>${c.key==='manual'?'精选确认 · 开发期模拟':'历史模拟表现'}</h2><span class="cn-muted">信号截至 ${esc(c.signal_asof)} · 账户截至 ${esc(c.account_asof)}</span></div>
+      ${c.opportunity_stats?`<p class="cn-notice">全部历史精选机会：${c.opportunity_stats.trades} 笔，扣费盈利 ${c.opportunity_stats.wins} 笔，胜率 ${pct(c.opportunity_stats.win_rate)}，PF ${pf(c.opportunity_stats)}。下列资金账户仅统计实际分配模拟仓位的 ${c.full.trades} 笔，账户胜率 ${pct(c.full.win_rate)}，不是全部选股胜率。</p>`:''}
       ${kpis(c.full)}<small>每只股票 ${num(c.allocation_pct,0)}% 仓位 · ${c.key==='bottom'?'同批最多两只，不加杠杆':'同一时间一批'} · 历史模拟，非实盘收益</small>
       <canvas id="cn-equity" class="cn-chart" role="img" aria-label="${esc(c.name)}历史模拟账户净值曲线"></canvas>
       <p class="cn-muted">${esc(c.reference_note)}</p>
