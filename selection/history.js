@@ -52,7 +52,7 @@
       return String(cell.count);
     }
     function provenance(cell){
-      if(!cell.count&&cell.unfilteredTotal)return '筛选隐藏';
+      if(view.hiddenSummary(cell))return view.hiddenSummary(cell);
       if(cell.run)return cell.run.timely?'盘后留存':'补生成';
       return cell.historical?'历史回测':'观察留存';
     }
@@ -69,7 +69,7 @@
         const card=config.cards.find(c=>c.key===cell.key);
         if(!cell.rows.length){
           if(cell.state!=='blocked'&&cell.unfilteredTotal)
-            return `<tr><td colspan="5"><p class="cn-muted">${esc(card.name)}：当前筛选隐藏了该日 ${cell.unfilteredTotal} 条记录，并非没有选股。</p><button data-action="unfilter">${icon('filter-x')}显示该日全部记录</button></td></tr>`;
+            return `<tr><td colspan="5"><p class="cn-muted">${esc(card.name)}：该日原有 ${cell.unfilteredTotal} 条记录，当前显示 0 条。排除条件：${cell.exclusions.map(x=>esc(x.label)).join('；')}。</p><button data-action="unfilter">${icon('filter-x')}显示该日全部记录</button></td></tr>`;
           let text=cell.state==='blocked'?cell.run.message:cell.state==='unknown'?'该日没有可核验记录':
             cell.total?'当前筛选无匹配记录':'已完成筛选，未产生精选名单';
           return `<tr><td colspan="5" class="cn-muted">${esc(card.name)}：${esc(text)}</td></tr>`;
@@ -80,7 +80,7 @@
             row.kind==='manual_observation'?'规则观察':'历史回测';
           const pnl=row.pnl_pct==null?'未结算':`${row.pnl_pct>0?'+':''}${Number(row.pnl_pct).toFixed(2)}%`;
           return `<tr><td class="cn-code"><a href="${esc(config.stockLink(row,card.key,hash()))}"><strong>${esc(row.ts_code.slice(0,6))}</strong> ${esc(row.name)}</a><small>${esc(row.ts_code)} · <a href="${esc(config.root+'analyzer/search.html?q='+encodeURIComponent(row.ts_code.slice(0,6)))}">公司分析</a></small>${config.evidenceButton?.(row)||''}</td>
-            <td><a href="#${esc(card.key)}?date=${esc(day.date)}&range=all">${esc(card.name)}</a></td>
+            <td><a href="#${esc(card.key)}?date=${esc(day.date)}&range=all&market=${esc(state.market)}">${esc(card.name)}</a></td>
             <td title="${esc(score.tooltip)}">${esc(score.main)}<small>${esc(score.detail)}</small>${row.sources?`<small>${esc(row.sources)}</small>`:''}</td>
             <td>${esc(kind)}<small>${esc(row.account_status)}</small></td>
             <td class="cn-num ${row.pnl_pct>0?'cn-good':row.pnl_pct<0?'cn-bad':'cn-muted'}">${pnl}<small>${row.entry_date?esc(row.entry_date)+' 买入':''}</small><small>${row.exit_date?esc(row.exit_date)+' 退出':''}</small></td></tr>`;
@@ -92,6 +92,9 @@
     }
     function render(){
       result=view.historyPage(config.cards,config.sessions||[],options());state.page=result.page;
+      const activeFilters=[state.market!=='all'?'市场：'+markets.find(([m])=>m===state.market)[1]:'',
+        state.kind!=='all'?'记录：'+(state.kind==='daily'?'每日观察':'历史回测'):'',
+        state.query.trim()?'股票：'+state.query.trim():'',state.settled?'仅已结算':''].filter(Boolean);
       host.innerHTML=`<div class="cn-record-toolbar cn-toolbar">
         ${key==='all'?`<label>产品线<select data-filter="product"><option value="all">全部产品线</option>${config.cards.map(c=>`<option value="${c.key}">${esc(c.name)}</option>`).join('')}</select></label>`:''}
         <label>市场<select data-filter="market">${markets.map(([m,n])=>`<option value="${m}">${n}</option>`).join('')}</select></label>
@@ -102,7 +105,8 @@
         <label><input type="checkbox" data-filter="settled">仅已结算</label>
         <button class="cn-icon" data-action="reset" title="恢复最近记录" aria-label="恢复最近记录">${icon('rotate-ccw')}</button>
         <button class="cn-icon" data-action="export" title="导出筛选范围内全部记录" aria-label="导出筛选范围内全部记录" ${result.totalRecords?'':'disabled'}>${icon('download')}</button></div>
-        <div class="cn-record-summary"><span role="status">${result.totalDays} 个交易日 · ${result.totalRecords} 条匹配记录</span><small>0 已运行无匹配 · — 无留存 · 待数据 运行受阻</small></div>
+        <div class="cn-record-summary"><span role="status">${result.totalDays} 个交易日 · ${result.totalRecords} 条匹配记录</span><small>0 无精选 · 0 / N 有记录但不匹配 · — 无留存</small></div>
+        ${activeFilters.length?`<div class="cn-record-filter-state"><span>当前筛选：${activeFilters.map(esc).join(' · ')}</span><button data-action="unfilter">${icon('filter-x')}清除记录筛选</button></div>`:''}
         <div class="cn-table-wrap cn-record-scroll" tabindex="0" role="region" aria-label="按日期排列的产品线选股数量">
         <table class="cn-record-matrix ${result.cards.length===1?'cn-record-single':''}"><thead><tr><th>信号日</th>${result.cards.map(c=>`<th class="cn-num"><span style="border-color:${c.color}" class="cn-record-line">${esc(c.name)}</span></th>`).join('')}<th class="cn-num">合计条目</th></tr></thead><tbody>${result.days.length?result.days.map(day=>{
           const open=state.date===day.date;
@@ -152,6 +156,8 @@
       const index=all.allDays.findIndex(d=>d.date===state.date);
       if(index>=0)state.page=Math.floor(index/10);
     }
+    // Persist inherited market and deep-link pagination before a reload or share.
+    commit(true);
     render();
   }
   scope.CN_SELECTION_HISTORY={mount};

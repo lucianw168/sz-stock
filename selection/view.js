@@ -22,6 +22,17 @@
     const value = hash.replace(/^#/, '').split('?')[0];
     return keys.includes(value) || ['monitor','history'].includes(value) ? value : 'overview';
   }
+  const marketNames={all:'全市场',sz:'深圳主板',sh:'上海主板',cy:'创业板',kc:'科创板'};
+  function routeMarket(hash, fallback='all') {
+    const value=new URLSearchParams(hash.split('?')[1]||'').get('market');
+    return Object.hasOwn(marketNames,value)?value:Object.hasOwn(marketNames,fallback)?fallback:'all';
+  }
+  function marketRoute(key, market='all') {
+    const [page,query='']=key.replace(/^#/,'').split('?');
+    const params=new URLSearchParams(query);
+    params.set('market',routeMarket('#'+key,market));
+    return '#'+page+'?'+params.toString();
+  }
   const dailyKinds = ['daily_observation','late_reconstruction','manual_observation'];
   function runLabel(run) {
     if(run?.state!=='blocked')return '';
@@ -51,11 +62,26 @@
     const rows=records.filter(r=>(market==='all'||r.market===market)&&
       (!query||[r.ts_code,r.name].some(v=>String(v||'').toLowerCase().includes(query)))&&
       (!options.settled||r.pnl_pct!=null));
+    // Counts overlap: one record may fail more than one display filter.
+    const exclusions=[
+      ['market','市场：'+(marketNames[market]||market),r=>market!=='all'&&r.market!==market],
+      ['kind','记录：'+(kind==='daily'?'每日观察':'历史回测'),r=>!accepts(r)],
+      ['query','股票：'+String(options.query||'').trim(),r=>query&&![r.ts_code,r.name].some(v=>String(v||'').toLowerCase().includes(query))],
+      ['settled','仅已结算',r=>options.settled&&r.pnl_pct==null]
+    ].map(([key,label,reject])=>({key,label,count:allRecords.filter(reject).length})).filter(x=>x.count>0);
     const state=run?.state==='blocked'?'blocked':run?.state==='ready'?'ready':records.length?'recorded':'unknown';
-    return {key:card.key,name:card.name,rows,count:rows.length,total:records.length,unfilteredTotal:allRecords.length,state,run,
+    return {key:card.key,name:card.name,rows,count:rows.length,total:records.length,unfilteredTotal:allRecords.length,state,run,exclusions,
       filtered:rows.length!==allRecords.length,
       historical:records.some(r=>!dailyKinds.includes(r.kind)),
       late:records.some(r=>r.kind==='late_reconstruction')||Boolean(run&&!run.timely)};
+  }
+  function hiddenSummary(cell) {
+    if(cell.count||!cell.unfilteredTotal||cell.state==='blocked')return '';
+    if(cell.exclusions?.length===1){
+      const labels={market:'其他市场有记录',kind:'记录来源不匹配',query:'股票搜索不匹配',settled:'记录尚未结算'};
+      return labels[cell.exclusions[0].key];
+    }
+    return '不符合当前筛选';
   }
   function historyPage(cards, sessions, options={}) {
     const expected=options.expected||'9999-12-31', end=options.end&&options.end<expected?options.end:expected;
@@ -92,7 +118,7 @@
     }
     return {main:raw||row.sources||'未记录',detail:raw?(names[key]||'模型原分')+' · 非胜率':'',tooltip};
   }
-  const api = {snapshot, route, scoreDisplay, historyCell, historyPage, runLabel, reviewText};
+  const api = {snapshot, route, routeMarket, marketRoute, scoreDisplay, historyCell, historyPage, hiddenSummary, runLabel, reviewText};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else scope.CN_SELECTION_VIEW = api;
 })(typeof window === 'undefined' ? globalThis : window);

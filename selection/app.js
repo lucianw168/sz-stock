@@ -39,7 +39,7 @@
   let currentView = view.route(location.hash, Object.keys(cardMap));
   let active = cardMap[currentView] ? currentView : 'second';
   let monitor = currentView === 'monitor';
-  let market = app.dataset.market || 'all';
+  let market = view.routeMarket(location.hash,app.dataset.market||'all');
   let resizeTimer;
   const periods = [['2y','2年'],['1y','1年'],['6m','半年'],['3m','三个月']];
 
@@ -110,10 +110,12 @@
     if(window.lucide) window.lucide.createIcons();
   }
   function navigate(key, writeHistory=true) {
-    currentView=view.route('#'+key,Object.keys(cardMap));
+    const next=writeHistory?view.marketRoute(key,market):'#'+key;
+    market=view.routeMarket(next,app.dataset.market||'all');
+    currentView=view.route(next,Object.keys(cardMap));
     monitor=currentView==='monitor';
     if(cardMap[currentView]) active=currentView;
-    if(writeHistory && location.hash!=='#'+key) history.pushState(null,'','#'+key);
+    if(writeHistory && location.hash!==next) history.pushState(null,'',next);
     renderShell();
   }
   function renderOverview() {
@@ -133,7 +135,7 @@
       <section class="cn-section"><div class="cn-chart-head"><h2>近期选股记录</h2><a href="#history" data-records>全部日期 ${icon('arrow-right')}</a></div>${recentRecords()}</section>
       <section class="cn-section"><div class="cn-chart-head"><h2>运行监测</h2><a href="#monitor" id="cn-overview-monitor">全部窗口 ${icon('arrow-right')}</a></div><div class="cn-table-wrap"><table><thead><tr><th>产品线</th><th>数据状态</th><th class="cn-num">历史末三个月收益</th><th class="cn-num">盈利胜率</th><th class="cn-num">退出笔数</th></tr></thead><tbody>${data.cards.map(c=>{const m=c.windows['3m'];return `<tr><td><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a>${c.key==='manual'?'<small>精选开发测试</small>':''}</td><td>${status(c)}<small>账户至 ${esc(c.account_asof)}</small></td><td class="cn-num ${tone(m?.return_pct)}">${signed(m?.return_pct)}</td><td class="cn-num">${pct(m?.win_rate)}</td><td class="cn-num">${m?.trades??'无记录'}</td></tr>`;}).join('')}</tbody></table></div></section>`;
     document.getElementById('cn-overview-market').value=market;
-    document.getElementById('cn-overview-market').onchange=e=>{market=e.target.value;renderOverview();if(window.lucide)window.lucide.createIcons();};
+    document.getElementById('cn-overview-market').onchange=e=>{market=e.target.value;history.pushState(null,'',view.marketRoute('overview',market));renderOverview();if(window.lucide)window.lucide.createIcons();};
     const open=key=>{navigate(key);window.scrollTo({top:0});};
     panel.querySelectorAll('[data-detail]').forEach(a=>a.onclick=e=>{e.preventDefault();open(a.dataset.detail);});
     panel.querySelectorAll('[data-card]').forEach(card=>card.onclick=e=>{if(!e.target.closest('a,button'))open(card.dataset.card);});
@@ -142,7 +144,15 @@
   }
   function recentRecords(){
     const page=view.historyPage(data.cards,data.history_sessions||[],{expected:data.expected_session,market,range:20,pageSize:5});
-    return `<div class="cn-table-wrap"><table class="cn-record-matrix"><thead><tr><th>信号日</th>${data.cards.map(c=>`<th class="cn-num">${esc(c.name)}</th>`).join('')}</tr></thead><tbody>${page.days.map(day=>`<tr><td><a href="#history?date=${day.date}&market=${market}&range=20" data-records>${day.date}</a></td>${day.cells.map(cell=>`<td class="cn-num">${cell.state==='unknown'?'<span class="cn-muted" title="该日没有留存记录">—</span>':`<a href="#history?date=${day.date}&focus=${cell.key}&market=${market}&range=20" data-records>${cell.state==='blocked'?view.runLabel(cell.run):cell.count+' 只'}</a>${cell.rows.length?`<div class="cn-record-codes">${cell.rows.slice(0,3).map(r=>`<a href="${esc(stockLink(r,cell.key))}" title="${esc(r.ts_code+' '+r.name)}">${esc(r.ts_code.slice(0,6))}</a>`).join('')}</div>`:cell.unfilteredTotal?'<small>筛选隐藏</small>':''}${cell.late?'<small>补生成</small>':''}`}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    const cellHtml=(cell,date)=>{
+      if(cell.state==='unknown'&&!cell.unfilteredTotal)return '<span class="cn-muted" title="该日没有留存记录">—</span>';
+      const hidden=view.hiddenSummary(cell);
+      const label=cell.state==='blocked'?view.runLabel(cell.run):hidden?'0 / '+cell.unfilteredTotal:cell.count+' 只';
+      return `<a href="#history?date=${date}&focus=${cell.key}&market=${market}&range=20" data-records>${label}</a>
+        ${cell.rows.length?`<div class="cn-record-codes">${cell.rows.slice(0,3).map(r=>`<a href="${esc(stockLink(r,cell.key))}" title="${esc(r.ts_code+' '+r.name)}">${esc(r.ts_code.slice(0,6))}</a>`).join('')}</div>`:''}
+        ${hidden?`<small>${esc(hidden)}</small><a href="#history?date=${date}&focus=${cell.key}&market=all&range=20" data-records title="显示该日全市场记录">查看全部</a>`:''}${cell.late?'<small>补生成</small>':''}`;
+    };
+    return `<div class="cn-table-wrap"><table class="cn-record-matrix"><thead><tr><th>信号日</th>${data.cards.map(c=>`<th class="cn-num">${esc(c.name)}</th>`).join('')}</tr></thead><tbody>${page.days.map(day=>`<tr><td><a href="#history?date=${day.date}&market=${market}&range=20" data-records>${day.date}</a></td>${day.cells.map(cell=>`<td class="cn-num">${cellHtml(cell,day.date)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   }
   function mountRecords(product){
     if(!window.CN_SELECTION_HISTORY){document.getElementById('cn-records').textContent='历史记录暂不可用，请刷新页面。';return;}
