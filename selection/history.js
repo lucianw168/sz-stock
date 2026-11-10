@@ -95,7 +95,8 @@
       const activeFilters=[state.market!=='all'?'市场：'+markets.find(([m])=>m===state.market)[1]:'',
         state.kind!=='all'?'记录：'+(state.kind==='daily'?'每日观察':'历史回测'):'',
         state.query.trim()?'股票：'+state.query.trim():'',state.settled?'仅已结算':''].filter(Boolean);
-      host.innerHTML=`<div class="cn-record-toolbar cn-toolbar">
+      const historic=(state.date&&state.date<config.expected)||state.end<config.expected;
+      host.innerHTML=`${historic?`<div class="cn-notice cn-history-date"><span>正在查看历史记录 ${esc(state.date||state.end)} · 最新收盘记录 ${esc(config.expected)}</span><button data-action="latest">${icon('calendar-check')}查看最新名单</button></div>`:''}<div class="cn-record-toolbar cn-toolbar">
         ${key==='all'?`<label>产品线<select data-filter="product"><option value="all">全部产品线</option>${config.cards.map(c=>`<option value="${c.key}">${esc(c.name)}</option>`).join('')}</select></label>`:''}
         <label>市场<select data-filter="market">${markets.map(([m,n])=>`<option value="${m}">${n}</option>`).join('')}</select></label>
         <label>区间<select data-filter="range"><option value="20">近20个交易日</option><option value="60">近60个交易日</option><option value="120">近120个交易日</option><option value="all">全部记录</option></select></label>
@@ -132,6 +133,10 @@
       host.querySelector('[data-action="next"]').onclick=()=>page(1);
       host.querySelector('[data-action="reset"]').onclick=()=>{
         Object.assign(state,{product:key,market:config.market||'all',range:'20',kind:'all',query:'',settled:false,end:config.expected,page:0,date:'',focus:'all'});commit();render();
+      };
+      if(historic)host.querySelector('[data-action="latest"]').onclick=()=>{
+        Object.assign(state,{range:'20',kind:'all',query:'',settled:false,
+          end:config.expected,page:0,date:config.expected,focus:'all'});commit();render();
       };
       host.querySelector('[data-action="export"]').onclick=exportRows;
       host.querySelectorAll('[data-action="unfilter"]').forEach(el=>el.onclick=()=>{
