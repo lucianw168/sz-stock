@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>002248.SZ 华东数控</title>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个股分析 - 002248.SZ 威海华东数控股份有限公司</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px}
-h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom:10px;border-bottom:1px solid #21262d;padding-bottom:5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}.m{background:#0d1117;border-radius:6px;padding:8px}
-.m .l{color:#8b949e;font-size:11px}.m .v{font-size:16px;font-weight:bold}.pos{color:#3fb950}.neg{color:#f85149}
-.back{color:#58a6ff;text-decoration:none;font-size:14px}.ft{text-align:center;color:#484f58;font-size:12px;margin-top:30px;padding:20px}
-.top-nav{background:#0d1117;border-bottom:1px solid #21262d;padding:0.5em 1em;display:flex;gap:0.6em;flex-wrap:wrap;align-items:center}
-.top-nav .brand{color:#f0883e;font-weight:700;margin-right:0.4em;text-decoration:none}
-.top-nav a{color:#9fb0c6;font-size:13px;text-decoration:none;padding:0.2em 0.6em;border-radius:4px}
-.top-nav a:hover{background:#161b22;color:#c9d1d9}
-.top-nav .market-btn{color:#fff;padding:0.2em 0.7em}
-.top-nav .market-btn[data-market="news"]{background:#9c27b0}
-.top-nav .market-btn[data-market="sz"],.top-nav .market-btn[data-market="sh"]{background:#1f6feb}
-.top-nav .market-btn[data-market="kc"],.top-nav .market-btn[data-market="cy"]{background:#3fb950}
-</style></head><body>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #58a6ff; margin-bottom: 5px; }
+.subtitle { color: #8b949e; margin-bottom: 20px; }
+.search-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; display: flex; gap: 10px; }
+.search-box input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #c9d1d9; font-size: 16px; }
+.search-box button { background: #238636; color: white; border: none; border-radius: 6px; padding: 8px 20px; cursor: pointer; font-size: 14px; }
+.search-box button:hover { background: #2ea043; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+.intro { color: #c9d1d9; font-size: 14px; }
+.main-biz { color: #f0883e; font-weight: bold; margin: 10px 0; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.metric { background: #0d1117; border-radius: 6px; padding: 10px; }
+.metric .label { color: #8b949e; font-size: 12px; }
+.metric .value { color: #c9d1d9; font-size: 18px; font-weight: bold; }
+.metric .value.positive { color: #3fb950; }
+.metric .value.negative { color: #f85149; }
+.signal { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.signal .icon { font-size: 16px; }
+.signal .name { color: #c9d1d9; font-weight: bold; }
+.signal .desc { color: #8b949e; font-size: 13px; }
+.phase-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+.phase-oversold { background: #1f6feb33; color: #58a6ff; }
+.phase-decline { background: #f8514933; color: #f85149; }
+.phase-accumulation { background: #3fb95033; color: #3fb950; }
+.phase-breakout { background: #3fb95033; color: #3fb950; }
+.phase-markup { background: #3fb95033; color: #3fb950; }
+.phase-distribution { background: #f8514933; color: #f85149; }
+.phase-sideways { background: #8b949e33; color: #8b949e; }
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept-tag { background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+.concept-tag.hot { background: #f0883e33; color: #f0883e; border: 1px solid #f0883e55; }
+.summary-box { background: #161b22; border: 2px solid #f0883e; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+.summary-overall { font-size: 17px; font-weight: bold; color: #f0883e; margin-bottom: 8px; }
+.summary-row { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8b949e; }
+.summary-row .tag { padding: 2px 10px; border-radius: 8px; font-size: 13px; }
+.tag-good { background: #3fb95022; color: #3fb950; }
+.tag-bad { background: #f8514922; color: #f85149; }
+.tag-neutral { background: #8b949e22; color: #c9d1d9; }
+.financial-bar { display: flex; gap: 12px; flex-wrap: wrap; padding: 8px 14px; background: #0d1117; border-radius: 6px; font-size: 14px; font-family: monospace; color: #c9d1d9; margin-bottom: 15px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 30px; padding: 20px; }
+.stock-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-top: 10px; }
+.stock-link { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; text-decoration: none; color: #58a6ff; display: block; }
+.stock-link:hover { border-color: #58a6ff; }
+.stock-link .code { font-weight: bold; }
+.stock-link .name { color: #8b949e; font-size: 13px; }
+.stock-link .mini-summary { color: #c9d1d9; font-size: 12px; margin-top: 4px; display: block; }
+.top-nav { background: #0d1117; border-bottom: 1px solid #21262d; padding: 0.6em 1em; display: flex; gap: 0.6em; flex-wrap: wrap; align-items: center; }
+.top-nav .brand { color: #f0883e; font-weight: 700; margin-right: 0.6em; text-decoration: none; }
+.top-nav a { color: #9fb0c6; font-size: 13px; text-decoration: none; padding: 0.2em 0.6em; border-radius: 4px; }
+.top-nav a:hover { background: #161b22; color: #c9d1d9; }
+.top-nav .market-btn { color: #fff; padding: 0.25em 0.7em; }
+.top-nav .market-btn[data-market="news"] { background: #9c27b0; }
+.top-nav .market-btn[data-market="sz"], .top-nav .market-btn[data-market="sh"] { background: #1f6feb; }
+.top-nav .market-btn[data-market="kc"], .top-nav .market-btn[data-market="cy"] { background: #3fb950; }
+</style>
+</head>
+<body>
 <nav class="top-nav">
   <a class="brand" href="search.html">🔍 个股分析</a>
   <a href="../index.html">总览</a>
@@ -26,51 +74,57 @@ h1{color:#58a6ff;margin-bottom:3px}h2{color:#58a6ff;font-size:15px;margin-bottom
   <a class="market-btn" data-market="kc" href="../kc/index.html">KC</a>
   <a class="market-btn" data-market="cy" href="../cy/index.html">CY</a>
 </nav>
-<div class="c">
-<a href="search.html" class="back">← 返回搜索</a>
-<h1>002248.SZ 华东数控 <span style="color:#f85149;font-size:20px">8.91 (-2.62%)</span></h1>
-<p style="color:#8b949e;margin-bottom:15px">行业: 机床制造 · 市值27亿</p>
+<div class="container">
+  <h1>个股综合分析</h1>
+  <p class="subtitle">公司画像 / 财务数据 / 世界模型 / 信息仅供参考</p>
 
-<div class="card" style="border:2px solid #f0883e">
-<div style="color:#f0883e;font-size:16px;font-weight:bold;margin-bottom:8px">★ 底部积累结构+盈亏比7.8:1 → 可关注</div>
-<div style="color:#8b949e;font-size:13px">高估值 · 底部积累, 2笔上涨, 动能转强, 盈亏比7.8:1</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="输入股票代码 (如 000001 或 600519)" value="002248">
+    <button onclick="doSearch()">分析</button>
+  </div>
 
+  <div class="summary-box"><div class="summary-overall">★ **谨慎观望**：当前盈亏比不佳且基本面承压，建议等待回调至8.76元附近确认支撑后再行介入。</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📊 **估值与盈利**：公司当前PE(TTM)高达108.4倍，显著高于传统机床制造行业中位数（通常20-30倍），且净利润同比下滑30.8%，显示基本面处于“高估值、低增长”的错配状态。
+**财务健康度**：尽管ROE维持在13.9%的合理水平，但75.7%的负债率构成了明显的财务隐患，在营收负增长的背景下，高杠杆放大了经营风险。
+**结论**：基本面不支持高估值，属于典型的“困境反转”预期炒作，缺乏扎实的业绩支撑。
+
+###</div><div style="margin:8px 0;color:#c9d1d9;font-size:14px">📈 **市场结构与动能**：世界模型判定公司处于“上涨趋势的第2笔”且动能“转强”，MACD在零轴上方金叉，这通常意味着多头趋势中的二次加速信号，而非底部反转。
+**关键发现与矛盾**：虽然模型提示“下方风险大于上方空间”（盈亏比1.2:1），但这与资金面数据存在明显矛盾——主力净流入4460万而散户卖出4760万，说明当前的上涨主要由机构资金主导，而非散户跟风。
+**综合判断**：资金面验证了“买方力量增强”的模型判断，但由于上方空间仅0.2 ATR，这种资金流入更像是为了消化上方的套牢盘，而非开启新一轮主升浪。
+
+###</div><div style="margin:10px 0;padding:12px;background:#0d1117;border-radius:6px;border-left:3px solid #58a6ff"><div style="color:#58a6ff;font-weight:bold;margin-bottom:6px">📋 交易计划</div><div style="color:#c9d1d9;font-size:14px;white-space:pre-line">**分析师建议**：
+**不同意**世界模型的“立即入场”建议，**强烈建议执行“等待”策略**。
+**理由**：世界模型给出的盈亏比仅为1.2:1，且上方空间极小（0.2 ATR），这意味着入场后极易遭遇短线回调被套。资金面虽然显示主力买入，但结合基本面亏损和30%的业绩下滑，这更像是一次“超跌反弹”而非趋势确立。
+**具体操作**：
+*   **建议动作**： **观望/等待回调**。
+*   **关注价位**：等待股价回调至 **8.76元**（第一支撑位）附近。
+*   **逻辑**：在该位置，下方的止损空间将扩大，盈亏比有望改善至1:2以上，且此时主力资金的承接意愿若依然存在，才是安全的买点。
+*   **若强行做多**：仅在8.76-8.95区间轻仓试错，目标价 **10.16元**，止损 **8.50元**。
+
+###</div></div><div style="margin:8px 0;color:#f85149;font-size:14px">⚠️ 1.  **业绩暴雷风险**：净利润同比下滑30.8%且营收负增长，若后续季度无法改善，高估值将迅速回归。
+2.  **技术面假突破**：MACD零轴上方金叉后若无法突破10.16元压力位，极易形成“顶背离”导致快速杀跌。
+
+###</div><div class="financial-bar" style="margin-top:10px">PE 108.4 | PB 23.4 | ROE 13.9% | 利润-31% | 营收-4%</div></div><div class="card"><h2>002248.SZ 威海华东数控股份有限公司 <span class="value positive" style="font-size:18px;margin-left:12px">9.39 (+0.00%)</span> <span style="color:#8b949e;font-size:13px;margin-left:8px">机床制造</span></h2><div class="intro">威海华东数控股份有限公司是以研发和生产经营数控机床、普通机床及其关键功能部件为主营业务的高新技术企业,自设立以来主营业务未发生重大变化。公司主营业务产品有数控龙门镗铣床(龙门加工中心)、数控龙门磨床、...</div><div class="main-biz">主营: 研发、生产经营数控机床、数控机床关键功能部件(数控系统、编码器、高速精密机床主轴、刀库等)及普通铣床、普通磨床等。</div><div style="color:#8b949e;font-size:13px">山东威海市 · 员工341人 · 成立2002年 · www.huadongcnc.com</div></div><div class="card"><h2>💰 资金动向</h2><div class="metric-grid"><div class="metric"><div class="label">今日主力</div><div class="value positive">净流入4287万</div></div><div class="metric"><div class="label">近5日主力</div><div class="value positive">+4460万</div></div><div class="metric"><div class="label">今日散户</div><div class="value negative">散户净卖出4760万</div></div><div class="metric"><div class="label">融资融券</div><div class="value" style="font-size:13px"></div></div><div class="metric"><div class="label">北向资金</div><div class="value" style="font-size:13px">未进入沪深港通十大成交</div></div><div class="metric"><div class="label">大宗交易</div><div class="value" style="font-size:13px">近30日无大宗交易</div></div></div><div style="margin-top:8px;color:#8b949e;font-size:13px">📊 主力买散户卖</div></div><div class="card"><h2>📰 新闻与板块</h2><div style="margin-bottom:8px">行业: <b>机床制造</b></div><div style="color:#8b949e;margin-bottom:8px">未匹配当前热门板块</div><div style="color:#8b949e;font-size:13px">近期无重大相关新闻</div></div><div class="card"><h2>财务数据</h2><div class="metric-grid"><div class="metric"><div class="label">PE(TTM)</div><div class="value ">108.4</div></div><div class="metric"><div class="label">PB</div><div class="value ">23.41</div></div><div class="metric"><div class="label">市值</div><div class="value ">29亿</div></div><div class="metric"><div class="label">ROE</div><div class="value positive">13.9%</div></div><div class="metric"><div class="label">净利润YoY</div><div class="value negative">-30.8%</div></div><div class="metric"><div class="label">营收YoY</div><div class="value negative">-3.8%</div></div><div class="metric"><div class="label">负债率</div><div class="value negative">75.7%</div></div><div class="metric"><div class="label">换手率</div><div class="value ">10.11%</div></div></div></div><div class="card"><h2>走势结构分析</h2><div class="intro" style="margin-bottom:15px">底部区域出现买方力量增强的迹象。从底部反弹4.7%，力度尚可，尚未脱离低位。动能转强（MACD出现金叉，短期动能转向多方）。量能温和，买方略占优。处于近60日中下方区域。</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px"><span class="phase-accumulation phase-badge">底部积累</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">上涨趋势 · 2笔</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">动能转强</span><span class="phase-badge" style="background:#21262d;color:#c9d1d9">温和</span></div><div class="metric-grid"><div class="metric"><div class="label">趋势</div><div class="value " style="font-size:14px">上涨趋势</div></div><div class="metric"><div class="label">动能</div><div class="value " style="font-size:14px">转强</div></div><div class="metric"><div class="label">MACD</div><div class="value " style="font-size:14px">零轴上方 近期金叉</div></div><div class="metric"><div class="label">量能</div><div class="value " style="font-size:14px">温和</div></div><div class="metric"><div class="label">买卖力量</div><div class="value " style="font-size:14px">买方略占优</div></div><div class="metric"><div class="label">位置</div><div class="value " style="font-size:14px">处于近60日中下方区域</div></div><div class="metric"><div class="label">上方空间</div><div class="value positive" style="font-size:14px">1.8 ATR</div></div><div class="metric"><div class="label">下方风险</div><div class="value " style="font-size:14px">1.5 ATR</div></div></div><div style="margin-top:15px"><b style="color:#f0883e">关键发现</b></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">✅ <b>MACD零轴上方金叉</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 多头趋势中的二次加速信号</div></div><div style="margin:8px 0;padding:10px;background:#0d1117;border-radius:6px;border-left:3px solid #30363d"><div style="font-size:15px">📊 <b>下方风险(3.4ATR)明显大于上方空间(0.2ATR)</b></div><div style="color:#8b949e;font-size:13px;margin-top:4px">-> 盈亏比不利</div></div></div>
+
+  <div class="footer">
+    生成时间: 2026-11-17 18:31 · 数据来源: Tushare · 世界模型: V6j Joy-JEPA<br>
+    信息仅供参考，请结合自身判断做出投资决策
+  </div>
 </div>
 
-<div class="card"><h2>公司信息</h2>
-<div style="color:#c9d1d9;font-size:14px;margin-bottom:8px">威海华东数控股份有限公司是以研发和生产经营数控机床、普通机床及其关键功能部件为主营业务的高新技术企业,自设立以来主营业务未发生重大变化。公司主营业务产品有数控龙门镗铣床(龙门加工中心)、数控龙门磨床、立式车床、落地镗铣床、立卧式加工中心、数...</div>
-<div style="color:#f0883e;font-weight:bold;font-size:13px">主营: 研发、生产经营数控机床、数控机床关键功能部件(数控系统、编码器、高速精密机床主轴、刀库等)及普通铣床、普通磨床等。</div>
-</div>
-
-<div class="card"><h2>走势结构分析</h2>
-<div class="grid">
-<div class="m"><div class="l">阶段</div><div class="v">底部积累</div></div>
-<div class="m"><div class="l">趋势</div><div class="v">上涨 2笔</div></div>
-<div class="m"><div class="l">动能</div><div class="v">转强</div></div>
-<div class="m"><div class="l">量能</div><div class="v">温和</div></div>
-<div class="m"><div class="l">压力位</div><div class="v">10.16</div></div>
-<div class="m"><div class="l">支撑位</div><div class="v">8.76</div></div>
-<div class="m"><div class="l">40均线</div><div class="v">8.94</div></div>
-<div class="m"><div class="l">盈亏比</div><div class="v pos">7.8:1</div></div>
-</div>
-<div style="padding:3px 0;color:#484f58">⬜ MACD背驰</div><div style="padding:3px 0;color:#3fb950">✅ MACD金叉 — <span style="color:#8b949e">多头动能转强</span></div><div style="padding:3px 0;color:#484f58">⬜ ≥5笔走势</div><div style="padding:3px 0;color:#484f58">⬜ 确认建仓</div>
-<div style="background:#0d1117;border-left:3px solid #3fb950;border-radius:6px;padding:12px;margin:10px 0">
-                <b style="color:#3fb950">结构支持做多</b><br>
-                入场参考: 8.91<br>
-                目标位: 10.16 (+14.0%)<br>
-                止损位: 8.76 (-1.7%)<br>
-                盈亏比: 7.8:1<br>
-                均线: 站在40均线上方<br>
-                预测周期: 约10个交易日</div>
-</div>
-
-<div class="card"><h2>基本面</h2>
-<div class="grid">
-<div class="m"><div class="l">PE(TTM)</div><div class="v">102.8</div></div>
-<div class="m"><div class="l">PB</div><div class="v">22.21</div></div>
-<div class="m"><div class="l">市值</div><div class="v">27亿</div></div>
-<div class="m"><div class="l">换手率</div><div class="v">2.83%</div></div>
-</div></div>
-
-<div class="ft">信息仅供参考 · 世界模型V6j · 请结合自身判断</div>
-</div></body></html>
+<script>
+function doSearch() {
+  var code = document.getElementById('search').value.trim();
+  if (!code) return;
+  // 去掉点和后缀，只保留数字
+  code = code.replace(/[^0-9]/g, '');
+  if (code.length !== 6) { alert('请输入6位股票代码'); return; }
+  // 判断市场
+  var suffix = code.startsWith('6') ? '.SH' : '.SZ';
+  window.location.href = code + suffix + '.html';
+}
+document.getElementById('search').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
