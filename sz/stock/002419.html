@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>002419 K线图</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+    
+<script src="../static/echarts.min.js"></script>
+<style>
+@media (max-width: 600px) {
+  nav { flex-wrap:wrap; overflow:visible; gap:8px; padding:12px 16px; }
+  nav ul { flex-wrap:wrap; gap:8px 16px; white-space:normal; }
+  nav .market-links { padding:8px 0 0; border-left:0; border-top:1px solid #1E2A3A; width:100%; }
+  #kline-chart { height:800px!important; }
+}
+</style>
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="brand" href="../index.html">SZ</a></li>
+            <li><a href="../index.html">今日选股</a></li>
+            <li><a href="../history.html">历史记录</a></li>
+            <li><a href="../index.html#second">二次启动</a></li>
+            <li><a href="../index.html#bottom">底部异动</a></li>
+            <li><a href="../index.html#first_open">一字首开</a></li>
+            <li><a href="../index.html#abc">ABC调整浪</a></li>
+            <li><a href="../index.html#manual">手工精选</a></li>
+            <li><a href="../index.html#monitor">运行监测</a></li>
+        </ul>
+        <ul class="market-links">
+            <li><a class="market-btn" href="../../index.html" style="background:#30363d;color:#fff">🏠首页</a></li>
+            <li><a class="market-btn" href="../../news/index.html" style="background:#9c27b0;color:#fff">早盘必读</a></li>
+            <li><a class="market-btn" href="../../analyzer/search.html" style="background:#f0883e;color:#fff">🔍个股分析</a></li>
+            <li><a class="market-btn" href="../../sh/index.html">SH</a></li>
+            <li><a class="market-btn" href="../../kc/index.html">KC</a></li>
+            <li><a class="market-btn" href="../../cy/index.html">CY</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        
+        
+<div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem">
+    <a id="product-return" href="../../index.html#overview">返回选股</a>
+    <a href="../../analyzer/search.html?q=002419">公司与资金分析</a>
+    <a href="../../news/index.html">市场简报</a>
+</div>
+<h1 style="font-size:1.6rem;overflow-wrap:anywhere"> 002419</h1>
+
+<p id="chart-period" style="font-size:0.85rem;color:var(--text-secondary)">复权价格 · 成交量（手） · ADX / RSI / OBV</p>
+<div id="kline-chart" style="width:100%;height:860px;min-width:0;margin:1rem 0"></div>
+<p id="chart-unavailable" role="status" hidden>该股票行情暂不可用，历史选股记录仍保留。</p>
+
+
+<h2 class="section-title">策略选股记录</h2>
+<div class="overflow-auto">
+<table>
+    <thead>
+        <tr><th>日期</th><th>策略</th></tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            
+            <td><a href="../days/2026-11-17.html">2026-11-17</a></td>
+            <td><a href="../strategy/群龙夺宝.html">群龙夺宝</a></td>
+            
+        </tr>
+        
+    </tbody>
+</table>
+</div>
+
+
+    </main>
+
+    <footer>
+        <p>SZ 量化选股系统 v2.0 | 数据来源: 深交所 | 生成于 2026-11-17 11:11 | 仅供研究参考</p>
+        <p style="font-size:0.75em;opacity:0.6">
+            build 18a3d269215 · 
+            data_as_of 2026-11-17 · 
+            backtest_window 250d · 
+            <a href="../../methodology.html" style="color:inherit">方法论</a>
+        </p>
+    </footer>
+
+    
+<script>
+(function() {
+    var data = {"adx": [26.8, 26.57, 26.36, 24.7, 23.25, 24.13, 24.32, 24.85, 26.06, 27.5, 31.06, 34.6, 38.29, 37.18, 37.43, 39.12, 41.37, 43.35, 38.03, 33.37, 33.13, 34.29, 34.42, 31.41, 28.09, 25.01, 23.43, 22.65, 22.86, 20.49, 24.98, 28.9, 32.01, 35.05, 38.94, 42.34, 40.08, 38.26, 33.82, 30.78, 29.86, 28.2, 28.56, 28.87, 30.47, 35.45, 39.81, 37.77, 34.18, 33.77, 33.41, 33.1, 31.38, 31.67, 31.92, 34.58, 37.78, 39.43, 42.39, 46.72], "adxr": [26.64, 25.94, 25.49, 24.68, 25.04, 25.65, 24.91, 25.82, 26.31, 26.93, 27.88, 28.92, 31.21, 30.75, 31.14, 32.59, 34.44, 37.2, 36.31, 35.83, 35.16, 35.86, 36.77, 36.39, 35.72, 31.52, 28.4, 27.89, 28.58, 27.45, 28.19, 28.49, 28.51, 29.24, 30.79, 32.6, 30.28, 31.62, 31.36, 31.4, 32.45, 33.57, 35.45, 34.48, 34.37, 34.63, 35.29, 33.81, 31.19, 31.16, 31.14, 31.78, 33.42, 35.74, 34.85, 34.38, 35.77, 36.42, 37.74, 39.05], "crsi": [76.61, 59.92, 58.82, 51.0, 44.06, 60.51, 50.24, 41.91, 53.93, 46.59, 67.21, 58.19, 56.21, 49.42, 72.04, 72.42, 60.52, 57.47, 48.51, 32.57, 43.97, 24.23, 29.83, 43.31, 57.68, 53.05, 48.56, 34.33, 27.74, 49.63, 78.09, 69.26, 55.56, 57.9, 62.96, 53.81, 48.29, 39.05, 45.13, 41.95, 51.79, 42.4, 49.02, 58.59, 63.9, 70.87, 59.65, 47.55, 46.25, 54.46, 44.34, 45.66, 54.26, 63.21, 45.56, 60.14, 70.24, 60.82, 75.7, null], "dates": ["2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-08", "2026-10-09", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29", "2026-10-30", "2026-11-02", "2026-11-03", "2026-11-04", "2026-11-05", "2026-11-06", "2026-11-09", "2026-11-10", "2026-11-11", "2026-11-12", "2026-11-13", "2026-11-16", "2026-11-17"], "minus_dm": [0.13, 0.14, 0.12, 0.14, 0.12, 0.11, 0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.05, 0.1, 0.09, 0.08, 0.07, 0.06, 0.19, 0.17, 0.28, 0.31, 0.27, 0.24, 0.21, 0.18, 0.22, 0.21, 0.22, 0.19, 0.17, 0.14, 0.14, 0.12, 0.1, 0.09, 0.24, 0.21, 0.29, 0.26, 0.22, 0.23, 0.2, 0.17, 0.15, 0.13, 0.12, 0.36, 0.43, 0.37, 0.33, 0.29, 0.32, 0.28, 0.25, 0.21, 0.19, 0.21, 0.19, 0.16], "obv": [11378225, 11225516, 11354476, 11262123, 11338943, 11421512, 11285771, 11285771, 11425080, 11316862, 11517335, 11683859, 11519727, 11688454, 11867159, 12065237, 11890705, 11766490, 11607656, 11740330, 11588004, 11465604, 11583541, 11706064, 11851554, 11724291, 11617067, 11549162, 11663823, 11757434, 12271720, 11535592, 12023268, 11707411, 12170727, 11882635, 11650272, 11899580, 11704757, 11969521, 12187656, 11966079, 12434666, 12821379, 13287471, 14019026, 13582284, 13165888, 13480143, 13826532, 14158966, 14411870, 14205719, 14570490, 14294929, 14828792, 15501238, 15016877, 15702439, 17646151], "ohlc": [[4.63, 4.76, 4.58, 4.76], [4.73, 4.57, 4.55, 4.73], [4.59, 4.67, 4.56, 4.67], [4.65, 4.58, 4.53, 4.66], [4.58, 4.61, 4.58, 4.65], [4.59, 4.69, 4.59, 4.71], [4.65, 4.65, 4.58, 4.69], [4.64, 4.65, 4.58, 4.7], [4.63, 4.7, 4.6, 4.72], [4.66, 4.66, 4.64, 4.73], [4.67, 4.78, 4.65, 4.81], [4.75, 4.81, 4.72, 4.83], [4.83, 4.76, 4.74, 4.86], [4.79, 4.78, 4.68, 4.85], [4.75, 4.88, 4.75, 4.89], [4.86, 4.94, 4.86, 4.95], [4.9, 4.92, 4.83, 4.99], [4.9, 4.84, 4.84, 4.94], [4.82, 4.75, 4.7, 4.91], [4.72, 4.76, 4.7, 4.84], [4.75, 4.58, 4.57, 4.76], [4.55, 4.57, 4.5, 4.6], [4.55, 4.59, 4.5, 4.62], [4.59, 4.63, 4.58, 4.7], [4.62, 4.71, 4.6, 4.72], [4.71, 4.66, 4.63, 4.75], [4.65, 4.57, 4.57, 4.68], [4.56, 4.55, 4.55, 4.6], [4.57, 4.56, 4.52, 4.59], [4.54, 4.63, 4.54, 4.65], [4.63, 5.09, 4.59, 5.09], [5.02, 4.9, 4.82, 5.02], [4.86, 4.94, 4.81, 4.96], [4.96, 4.84, 4.82, 4.99], [4.82, 4.94, 4.78, 5.13], [4.93, 4.85, 4.85, 4.96], [4.76, 4.72, 4.69, 4.86], [4.75, 4.75, 4.72, 4.87], [4.72, 4.66, 4.61, 4.75], [4.63, 4.7, 4.58, 4.79], [4.68, 4.75, 4.67, 4.88], [4.75, 4.73, 4.64, 4.79], [4.7, 4.78, 4.57, 4.89], [4.78, 4.84, 4.73, 4.86], [4.8, 4.9, 4.77, 4.94], [4.86, 4.98, 4.7, 5.38], [4.83, 4.74, 4.72, 4.95], [4.65, 4.46, 4.46, 4.74], [4.46, 4.61, 4.35, 4.62], [4.56, 4.74, 4.56, 4.88], [4.75, 4.76, 4.67, 4.87], [4.74, 4.78, 4.7, 4.82], [4.65, 4.69, 4.63, 4.78], [4.75, 4.87, 4.72, 4.93], [4.85, 4.86, 4.81, 4.88], [4.84, 4.94, 4.83, 5.15], [4.91, 5.04, 4.9, 5.29], [5.13, 4.91, 4.85, 5.15], [4.89, 5.4, 4.89, 5.4], [5.64, 5.69, 5.54, 5.94]], "plus_dm": [0.27, 0.23, 0.2, 0.18, 0.16, 0.2, 0.17, 0.16, 0.16, 0.15, 0.21, 0.21, 0.21, 0.18, 0.2, 0.24, 0.25, 0.22, 0.19, 0.16, 0.14, 0.13, 0.13, 0.19, 0.19, 0.2, 0.17, 0.15, 0.13, 0.17, 0.59, 0.52, 0.45, 0.43, 0.51, 0.45, 0.39, 0.35, 0.31, 0.31, 0.36, 0.32, 0.38, 0.33, 0.37, 0.76, 0.67, 0.58, 0.51, 0.71, 0.62, 0.54, 0.47, 0.56, 0.49, 0.7, 0.75, 0.66, 0.83, 1.26], "rsi12": [64.89, 50.76, 56.24, 50.7, 52.41, 56.75, 54.06, 54.06, 57.09, 53.98, 60.94, 62.48, 58.29, 59.47, 64.92, 67.76, 65.82, 58.53, 51.52, 52.21, 40.76, 40.23, 41.89, 45.22, 51.3, 47.69, 41.9, 40.7, 41.61, 47.74, 70.18, 58.8, 60.28, 54.91, 58.9, 54.19, 48.12, 49.54, 45.46, 47.55, 50.16, 49.1, 51.89, 55.11, 58.16, 61.93, 47.83, 37.09, 44.39, 49.89, 50.7, 51.57, 47.49, 55.22, 54.73, 57.97, 61.71, 54.8, 69.05, 74.29], "rsi6": [73.8, 45.97, 56.36, 46.67, 50.1, 58.62, 53.18, 53.18, 59.89, 52.64, 67.01, 69.76, 59.79, 62.37, 72.84, 77.37, 72.53, 55.78, 42.52, 44.29, 26.62, 25.93, 30.27, 38.86, 52.81, 45.09, 34.27, 32.21, 34.57, 49.38, 81.82, 62.1, 64.27, 54.83, 61.6, 53.02, 42.7, 45.63, 38.54, 43.25, 49.09, 46.78, 53.37, 60.42, 66.51, 73.12, 42.75, 27.03, 40.98, 50.77, 52.23, 53.88, 45.43, 60.35, 59.27, 65.24, 71.51, 55.81, 77.83, 83.62], "volume": [185479, 152708, 128960, 92353, 76820, 82568, 135741, 128417, 139308, 108217, 200473, 166524, 164132, 168726, 178705, 198078, 174532, 124215, 158834, 132674, 152325, 122400, 117937, 122523, 145490, 127263, 107223, 67904, 114660, 93611, 514285, 736128, 487676, 315857, 463315, 288092, 232362, 249307, 194822, 264764, 218135, 221577, 468586, 386713, 466092, 731554, 436741, 416396, 314255, 346389, 332434, 252904, 206151, 364771, 275560, 533862, 672445, 484361, 685562, 1943712]};
+    var query = new URLSearchParams(location.search);
+    var product = query.get('product');
+    var back = query.get('return');
+    if (back && /^#(overview|history|second|bottom|first_open|abc|manual)(\?|$)/.test(back)) {
+        document.getElementById('product-return').href = '../../index.html' + back;
+    } else if (['second','bottom','first_open','abc','manual'].includes(product)) {
+        var chosen = query.get('signal');
+        document.getElementById('product-return').href = '../../index.html#' + product +
+            (/^\d{4}-\d{2}-\d{2}$/.test(chosen || '') ? '?date=' + chosen + '&range=all' : '');
+    }
+    if (!data.dates || !data.dates.length || !window.echarts) {
+        document.getElementById('kline-chart').hidden = true;
+        document.getElementById('chart-unavailable').hidden = false;
+        return;
+    }
+    document.getElementById('chart-period').textContent = data.dates[0]+' 至 '+data.dates[data.dates.length-1]+' · 复权价格 · 成交量（手） · ADX / RSI / OBV';
+    var chart = echarts.init(document.getElementById('kline-chart'));
+
+    var gridColor = '#1E2A3A';
+    var textColor = '#9FB0C6';
+    var upColor = '#ec0000', downColor = '#00da3c';
+
+    // Determine volume colors based on OHLC close vs open
+    var volumeColor = data.volume.map(function(v, i) {
+        var c = data.ohlc[i];
+        return c[1] >= c[0] ? upColor : downColor;  // close >= open
+    });
+
+    chart.setOption({
+        backgroundColor: 'transparent',
+        animation: false,
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'cross', crossStyle: { color: textColor } },
+            backgroundColor: '#101A2E',
+            borderColor: gridColor,
+            textStyle: { color: '#E6EDF7', fontSize: 12 }
+        },
+        axisPointer: { link: [{ xAxisIndex: 'all' }] },
+        legend: {
+            data: ['ADX', 'ADXR', '+DM', '-DM', 'CRSI', 'RSI-6', 'RSI-12', 'OBV'],
+            top: 0, type: 'scroll',
+            textStyle: { fontSize: 10, color: textColor }
+        },
+        dataZoom: [
+            { type: 'inside', xAxisIndex: [0,1,2,3,4], start: 0, end: 100 },
+            { type: 'slider', xAxisIndex: [0,1,2,3,4], bottom: 5, height: 20, borderColor: gridColor, backgroundColor: '#0B1220', dataBackground: { lineStyle: { color: gridColor }, areaStyle: { color: 'rgba(76,141,255,0.1)' } }, fillerColor: 'rgba(76,141,255,0.15)', handleStyle: { color: '#4C8DFF' }, textStyle: { color: textColor } }
+        ],
+        grid: [
+            { left: 60, right: 20, top: '5%',  height: '28%' },
+            { left: 60, right: 20, top: '35%', height: '10%' },
+            { left: 60, right: 20, top: '48%', height: '13%' },
+            { left: 60, right: 20, top: '64%', height: '13%' },
+            { left: 60, right: 20, top: '80%', height: '13%' }
+        ],
+        xAxis: [
+            { type: 'category', data: data.dates, gridIndex: 0, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 1, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 2, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 3, axisLabel: { show: false }, axisTick: { show: false }, axisLine: { lineStyle: { color: gridColor } } },
+            { type: 'category', data: data.dates, gridIndex: 4, axisLabel: { color: textColor, fontSize: 10 }, axisLine: { lineStyle: { color: gridColor } } }
+        ],
+        yAxis: [
+            { gridIndex: 0, scale: true, splitArea: { show: false }, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor }, name: '价格', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 1, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, formatter: function(v) { return v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v; } }, name: '成交量', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 2, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor }, name: 'ADX', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 3, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor }, name: 'RSI/CRSI', nameTextStyle: { fontSize: 10, color: textColor } },
+            { gridIndex: 4, scale: true, splitLine: { lineStyle: { color: gridColor } }, axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: textColor, fontSize: 10, formatter: function(v) { var a = Math.abs(v); return a >= 1e9 ? (v/1e9).toFixed(1)+'B' : a >= 1e6 ? (v/1e6).toFixed(1)+'M' : a >= 1e3 ? (v/1e3).toFixed(0)+'K' : v; } }, name: 'OBV', nameTextStyle: { fontSize: 10, color: textColor } }
+        ],
+        series: [
+            // Grid 0: Candlestick
+            {
+                type: 'candlestick',
+                data: data.ohlc,
+                xAxisIndex: 0, yAxisIndex: 0,
+                itemStyle: { color: upColor, color0: downColor, borderColor: upColor, borderColor0: downColor }
+            },
+            // Grid 1: Volume bars
+            {
+                type: 'bar',
+                data: data.volume,
+                xAxisIndex: 1, yAxisIndex: 1,
+                name: '成交量',
+                barWidth: '60%',
+                itemStyle: {
+                    color: function(params) { return volumeColor[params.dataIndex]; }
+                }
+            },
+            // Grid 2: ADX / ADXR / +DM / -DM
+            { type: 'line', data: data.adx, xAxisIndex: 2, yAxisIndex: 2, name: 'ADX', symbol: 'none', lineStyle: { width: 1, color: '#4caf50' } },
+            { type: 'line', data: data.adxr, xAxisIndex: 2, yAxisIndex: 2, name: 'ADXR', symbol: 'none', lineStyle: { width: 1, color: '#ff9800' } },
+            { type: 'line', data: data.plus_dm, xAxisIndex: 2, yAxisIndex: 2, name: '+DM', symbol: 'none', lineStyle: { width: 1, color: '#f44336' } },
+            { type: 'line', data: data.minus_dm, xAxisIndex: 2, yAxisIndex: 2, name: '-DM', symbol: 'none', lineStyle: { width: 1, color: '#2196f3' } },
+            // Grid 3: CRSI / RSI-6 / RSI-12
+            { type: 'line', data: data.crsi, xAxisIndex: 3, yAxisIndex: 3, name: 'CRSI', symbol: 'none', lineStyle: { width: 1.5, color: '#9c27b0' } },
+            { type: 'line', data: data.rsi6, xAxisIndex: 3, yAxisIndex: 3, name: 'RSI-6', symbol: 'none', lineStyle: { width: 1, color: '#ff9800' } },
+            { type: 'line', data: data.rsi12, xAxisIndex: 3, yAxisIndex: 3, name: 'RSI-12', symbol: 'none', lineStyle: { width: 1, color: '#2196f3' } },
+            // Grid 4: OBV
+            { type: 'line', data: data.obv, xAxisIndex: 4, yAxisIndex: 4, name: 'OBV', symbol: 'none', lineStyle: { width: 1.5, color: '#f44336' }, areaStyle: { opacity: 0.1, color: '#f44336' } }
+        ]
+    });
+
+    var signal = query.get('signal');
+    var at = data.dates.indexOf(signal);
+    var start = at >= 0 ? Math.max(0, at-30) : Math.max(0, data.dates.length-60);
+    var end = at >= 0 ? Math.min(data.dates.length-1, at+30) : data.dates.length-1;
+    chart.dispatchAction({type:'dataZoom',startValue:data.dates[start],endValue:data.dates[end]});
+    if (at >= 0) {
+        chart.setOption({series:[{markLine:{symbol:['none','none'],label:{formatter:'选股日'},data:[{xAxis:signal}]}}]});
+    }
+    window.addEventListener('resize', function() { chart.resize(); });
+})();
+</script>
+
+</body>
+</html>
