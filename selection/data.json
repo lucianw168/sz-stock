@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-18T14:56:59+08:00",
-  "expected_session": "2026-11-17",
+  "built_at": "2026-11-18T18:25:12+08:00",
+  "expected_session": "2026-11-18",
   "cards": [
     {
       "key": "second",
@@ -105,7 +105,7 @@
         "status": "监测待补数据",
         "tone": "warn",
         "performance": "证据不足",
-        "lag_sessions": 52,
+        "lag_sessions": 53,
         "reference_end": "2026-09-03",
         "certified_valid": false,
         "certified_failed": false
@@ -2157,31 +2157,7 @@
       "account_asof": "2026-09-03",
       "signal_asof": "2026-08-27",
       "evidence_type": "历史样本外模拟账户",
-      "current_signals": [
-        {
-          "date": "2026-11-17",
-          "ts_code": "002982.SZ",
-          "name": "湘佳股份",
-          "market": "sz",
-          "score": -0.011638328648777424,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
-          "pnl_pct": null,
-          "entry_date": null,
-          "exit_date": null,
-          "sources": "",
-          "evidence": {
-            "phase_leg_gain": 0.2123745819397993,
-            "phase_peak_age": 16,
-            "phase_pullback_depth": -0.10551724137931029,
-            "phase_recovery_fraction": 0.5555555555555556
-          },
-          "pool_rank": 1,
-          "pool_size": 86,
-          "score_percentile": 99.4186046511628,
-          "score_tie_count": 1
-        }
-      ],
+      "current_signals": [],
       "live_orders_enabled": false,
       "source_verified": true,
       "candidates": [
@@ -14339,8 +14315,8 @@
           "name": "湘佳股份",
           "market": "sz",
           "score": -0.011638328648777424,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
+          "kind": "late_reconstruction",
+          "account_status": "补生成记录 · 不计前向成绩",
           "pnl_pct": null,
           "entry_date": null,
           "exit_date": null,
@@ -16991,7 +16967,7 @@
           "source_count": null
         }
       ],
-      "signal_message": "已完成盘后筛选。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "inference_audit": {
         "features": 83,
         "scored_rows": 2030,
@@ -17762,9 +17738,9 @@
         {
           "date": "2026-11-17",
           "state": "ready",
-          "message": "已完成盘后筛选",
-          "captured_at": "2026-11-18T08:38:12.396099+08:00",
-          "timely": true,
+          "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
+          "captured_at": "2026-11-18T17:52:33.978806+08:00",
+          "timely": false,
           "pool_rows": 86,
           "selected_rows": 1,
           "sources": {
@@ -17781,9 +17757,9 @@
       "daily_run": {
         "date": "2026-11-17",
         "state": "ready",
-        "message": "已完成盘后筛选",
-        "captured_at": "2026-11-18T08:38:12.396099+08:00",
-        "timely": true,
+        "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
+        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "timely": false,
         "pool_rows": 86,
         "selected_rows": 1,
         "sources": {
@@ -17799,12 +17775,12 @@
       "forward": {
         "state": "active",
         "evidence": "盘前留存名单的日线模拟核算；非实盘成交，不与历史回测拼接",
-        "asof": "20261117",
-        "account_asof": "20261117",
+        "asof": "20261118",
+        "account_asof": "20261118",
         "start": "20260911",
         "observations": 39,
-        "pending": 1,
-        "unknown": 0,
+        "pending": 0,
+        "unknown": 5,
         "legacy_risk_snapshots": 23,
         "opportunities": {
           "trades": 34,
@@ -18228,7 +18204,7 @@
             "ts_code": "002982.SZ",
             "name": "湘佳股份",
             "market": "sz",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18240,7 +18216,7 @@
             "ts_code": "002946.SZ",
             "name": "新乳业",
             "market": "sz",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18252,7 +18228,7 @@
             "ts_code": "603006.SH",
             "name": "联明股份",
             "market": "sh",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18264,7 +18240,7 @@
             "ts_code": "002982.SZ",
             "name": "湘佳股份",
             "market": "sz",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18276,7 +18252,7 @@
             "ts_code": "002982.SZ",
             "name": "湘佳股份",
             "market": "sz",
-            "status": "等待入场日",
+            "status": "入场证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18422,7 +18398,7 @@
             "ts_code": "603006.SH",
             "name": "联明股份",
             "market": "sh",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18439,7 +18415,7 @@
           "mean_pnl": -4.874974060348085,
           "return_pct": -24.629486910344124,
           "drawdown_pct": 24.629486910344124,
-          "stale_marks": 0
+          "stale_marks": 1
         },
         "windows": {
           "2y": {
@@ -18452,10 +18428,10 @@
             "return_pct": -24.629486910344124,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2024-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2024-11-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           },
           "1y": {
             "trades": 11,
@@ -18467,10 +18443,10 @@
             "return_pct": -24.629486910344124,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2025-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2025-11-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           },
           "6m": {
             "trades": 11,
@@ -18482,10 +18458,10 @@
             "return_pct": -24.629486910344124,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2026-05-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-05-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           },
           "3m": {
             "trades": 11,
@@ -18497,10 +18473,10 @@
             "return_pct": -24.629486910344124,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2026-08-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-08-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           }
         },
         "recorded_runs": 42,
@@ -18515,7 +18491,7 @@
         "training_labels_through": null,
         "review_due": "2026-11-01",
         "state": "expired",
-        "days_remaining": -16,
+        "days_remaining": -17,
         "last_reviewed_at": null,
         "automatic_renewal": false,
         "review_basis": "legacy_deadline_preserved"
@@ -18623,7 +18599,7 @@
         "status": "监测待补数据",
         "tone": "warn",
         "performance": "近期正收益",
-        "lag_sessions": 52,
+        "lag_sessions": 53,
         "reference_end": "2026-09-03",
         "certified_valid": false,
         "certified_failed": false
@@ -20675,74 +20651,7 @@
       "account_asof": "2026-09-03",
       "signal_asof": "2026-08-27",
       "evidence_type": "历史样本外模拟账户",
-      "current_signals": [
-        {
-          "date": "2026-11-17",
-          "ts_code": "301049.SZ",
-          "name": "超越科技",
-          "market": "cy",
-          "score": 0.26591297808290437,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
-          "pnl_pct": null,
-          "entry_date": null,
-          "exit_date": null,
-          "sources": "",
-          "evidence": {
-            "st_pos60": 0.6493955094991363,
-            "st_amount_shock": 0.9909143748092879,
-            "ret5": 0.15513126491646756
-          },
-          "pool_rank": 1,
-          "pool_size": 393,
-          "score_percentile": 99.87277353689568,
-          "score_tie_count": 1
-        },
-        {
-          "date": "2026-11-17",
-          "ts_code": "605166.SH",
-          "name": "聚合顺",
-          "market": "sh",
-          "score": 0.19645165074802654,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
-          "pnl_pct": null,
-          "entry_date": null,
-          "exit_date": null,
-          "sources": "",
-          "evidence": {
-            "st_pos60": 0.2974358974358976,
-            "st_amount_shock": 1.0668100441541994,
-            "ret5": 0.03480589022757696
-          },
-          "pool_rank": 2,
-          "pool_size": 393,
-          "score_percentile": 99.61832061068702,
-          "score_tie_count": 1
-        },
-        {
-          "date": "2026-11-17",
-          "ts_code": "603167.SH",
-          "name": "渤海轮渡",
-          "market": "sh",
-          "score": 0.17497824716867533,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
-          "pnl_pct": null,
-          "entry_date": null,
-          "exit_date": null,
-          "sources": "",
-          "evidence": {
-            "st_pos60": 0.537190082644628,
-            "st_amount_shock": 1.4959575905995366,
-            "ret5": 0.012269938650306678
-          },
-          "pool_rank": 3,
-          "pool_size": 393,
-          "score_percentile": 99.36386768447836,
-          "score_tie_count": 1
-        }
-      ],
+      "current_signals": [],
       "live_orders_enabled": false,
       "source_verified": true,
       "candidates": [
@@ -56020,8 +55929,8 @@
           "name": "超越科技",
           "market": "cy",
           "score": 0.26591297808290437,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
+          "kind": "late_reconstruction",
+          "account_status": "补生成记录 · 不计前向成绩",
           "pnl_pct": null,
           "entry_date": null,
           "exit_date": null,
@@ -56042,8 +55951,8 @@
           "name": "聚合顺",
           "market": "sh",
           "score": 0.19645165074802654,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
+          "kind": "late_reconstruction",
+          "account_status": "补生成记录 · 不计前向成绩",
           "pnl_pct": null,
           "entry_date": null,
           "exit_date": null,
@@ -56064,8 +55973,8 @@
           "name": "渤海轮渡",
           "market": "sh",
           "score": 0.17497824716867533,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
+          "kind": "late_reconstruction",
+          "account_status": "补生成记录 · 不计前向成绩",
           "pnl_pct": null,
           "entry_date": null,
           "exit_date": null,
@@ -61291,7 +61200,7 @@
           "source_count": null
         }
       ],
-      "signal_message": "已完成盘后筛选。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "inference_audit": {
         "features": 17,
         "scored_rows": 39036,
@@ -62098,9 +62007,9 @@
         {
           "date": "2026-11-17",
           "state": "ready",
-          "message": "已完成盘后筛选",
-          "captured_at": "2026-11-18T08:38:12.396099+08:00",
-          "timely": true,
+          "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
+          "captured_at": "2026-11-18T17:52:33.978806+08:00",
+          "timely": false,
           "pool_rows": 393,
           "selected_rows": 3,
           "sources": {
@@ -62117,9 +62026,9 @@
       "daily_run": {
         "date": "2026-11-17",
         "state": "ready",
-        "message": "已完成盘后筛选",
-        "captured_at": "2026-11-18T08:38:12.396099+08:00",
-        "timely": true,
+        "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
+        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "timely": false,
         "pool_rows": 393,
         "selected_rows": 3,
         "sources": {
@@ -62135,12 +62044,12 @@
       "forward": {
         "state": "active",
         "evidence": "盘前留存名单的日线模拟核算；非实盘成交，不与历史回测拼接",
-        "asof": "20261117",
-        "account_asof": "20261117",
+        "asof": "20261118",
+        "account_asof": "20261118",
         "start": "20260911",
         "observations": 69,
-        "pending": 3,
-        "unknown": 0,
+        "pending": 0,
+        "unknown": 7,
         "legacy_risk_snapshots": 0,
         "opportunities": {
           "trades": 62,
@@ -62828,7 +62737,7 @@
             "ts_code": "301097.SZ",
             "name": "天益医疗",
             "market": "cy",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62912,7 +62821,7 @@
             "ts_code": "002431.SZ",
             "name": "ST棕榈",
             "market": "sz",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62924,7 +62833,7 @@
             "ts_code": "301049.SZ",
             "name": "超越科技",
             "market": "cy",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62936,7 +62845,7 @@
             "ts_code": "600238.SH",
             "name": "ST椰岛",
             "market": "sh",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62948,7 +62857,7 @@
             "ts_code": "301049.SZ",
             "name": "超越科技",
             "market": "cy",
-            "status": "等待入场日",
+            "status": "入场证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62960,7 +62869,7 @@
             "ts_code": "605166.SH",
             "name": "聚合顺",
             "market": "sh",
-            "status": "等待入场日",
+            "status": "入场证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62972,7 +62881,7 @@
             "ts_code": "603167.SH",
             "name": "渤海轮渡",
             "market": "sh",
-            "status": "等待入场日",
+            "status": "入场证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -63106,7 +63015,7 @@
             "ts_code": "002431.SZ",
             "name": "ST棕榈",
             "market": "sz",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -63118,7 +63027,7 @@
             "ts_code": "301049.SZ",
             "name": "超越科技",
             "market": "cy",
-            "status": "持有中",
+            "status": "退出证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -63135,7 +63044,7 @@
           "mean_pnl": -1.1122061539974704,
           "return_pct": -7.737907472303274,
           "drawdown_pct": 8.264872039449045,
-          "stale_marks": 0
+          "stale_marks": 2
         },
         "windows": {
           "2y": {
@@ -63148,10 +63057,10 @@
             "return_pct": -7.737907472303274,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2024-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2024-11-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           },
           "1y": {
             "trades": 10,
@@ -63163,10 +63072,10 @@
             "return_pct": -7.737907472303274,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2025-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2025-11-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           },
           "6m": {
             "trades": 10,
@@ -63178,10 +63087,10 @@
             "return_pct": -7.737907472303274,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2026-05-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-05-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           },
           "3m": {
             "trades": 10,
@@ -63193,10 +63102,10 @@
             "return_pct": -7.737907472303274,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
-            "end": "2026-11-17",
-            "requested_start": "2026-08-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-08-18",
             "coverage_complete": false,
-            "sessions": 42
+            "sessions": 43
           }
         },
         "recorded_runs": 42,
@@ -63211,7 +63120,7 @@
         "training_labels_through": "2026-06-18",
         "review_due": "2026-09-29",
         "state": "expired",
-        "days_remaining": -49,
+        "days_remaining": -50,
         "last_reviewed_at": null,
         "automatic_renewal": false,
         "review_basis": "legacy_deadline_preserved"
@@ -63321,7 +63230,7 @@
         "status": "监测待补数据",
         "tone": "warn",
         "performance": "证据不足",
-        "lag_sessions": 52,
+        "lag_sessions": 53,
         "reference_end": "2026-09-03",
         "certified_valid": false,
         "certified_failed": false
@@ -65373,34 +65282,7 @@
       "account_asof": "2026-09-03",
       "signal_asof": "2026-08-27",
       "evidence_type": "历史滚动开发回测 · 非独立留出测试",
-      "current_signals": [
-        {
-          "date": "2026-11-17",
-          "ts_code": "002685.SZ",
-          "name": "华东重机",
-          "market": "sz",
-          "score": 0.37194811021123997,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
-          "pnl_pct": null,
-          "entry_date": null,
-          "exit_date": null,
-          "sources": "",
-          "evidence": {
-            "st_streak": 3.0,
-            "st_oneword": 1.0,
-            "mr_board_turnover_today": 0.0338,
-            "ks_fast_high_progress": -1.9183673469387743,
-            "ks_slow_low_progress": -3.1020408163265296,
-            "br_peer_excess5": -0.023319242777717894,
-            "br_breadth_change": -0.8125577252935744
-          },
-          "pool_rank": 1,
-          "pool_size": 1,
-          "score_percentile": null,
-          "score_tie_count": 1
-        }
-      ],
+      "current_signals": [],
       "live_orders_enabled": false,
       "source_verified": true,
       "version_comparison": {
@@ -70329,8 +70211,8 @@
           "name": "华东重机",
           "market": "sz",
           "score": 0.37194811021123997,
-          "kind": "daily_observation",
-          "account_status": "待下一交易日观察",
+          "kind": "late_reconstruction",
+          "account_status": "补生成记录 · 不计前向成绩",
           "pnl_pct": null,
           "entry_date": null,
           "exit_date": null,
@@ -71304,7 +71186,7 @@
           "source_count": null
         }
       ],
-      "signal_message": "已完成盘后筛选。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "inference_audit": {
         "features": 112,
         "scored_rows": 16,
@@ -72003,9 +71885,9 @@
         {
           "date": "2026-11-17",
           "state": "ready",
-          "message": "已完成盘后筛选",
-          "captured_at": "2026-11-18T08:38:12.396099+08:00",
-          "timely": true,
+          "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
+          "captured_at": "2026-11-18T17:52:33.978806+08:00",
+          "timely": false,
           "pool_rows": 1,
           "selected_rows": 1,
           "sources": {
@@ -72022,9 +71904,9 @@
       "daily_run": {
         "date": "2026-11-17",
         "state": "ready",
-        "message": "已完成盘后筛选",
-        "captured_at": "2026-11-18T08:38:12.396099+08:00",
-        "timely": true,
+        "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
+        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "timely": false,
         "pool_rows": 1,
         "selected_rows": 1,
         "sources": {
@@ -72038,14 +71920,14 @@
         "review_state": "expired"
       },
       "forward": {
-        "state": "active",
+        "state": "entry_evidence_missing",
         "evidence": "盘前留存名单的日线模拟核算；非实盘成交，不与历史回测拼接",
-        "asof": "20261117",
+        "asof": "20261118",
         "account_asof": "20261117",
         "start": "20260921",
         "observations": 25,
-        "pending": 1,
-        "unknown": 0,
+        "pending": 0,
+        "unknown": 1,
         "legacy_risk_snapshots": 0,
         "opportunities": {
           "trades": 5,
@@ -72349,7 +72231,7 @@
             "ts_code": "002685.SZ",
             "name": "华东重机",
             "market": "sz",
-            "status": "等待入场日",
+            "status": "入场证据缺失",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "time_exit",
@@ -72696,7 +72578,7 @@
         "training_labels_through": "2026-07-22",
         "review_due": "2026-11-01",
         "state": "expired",
-        "days_remaining": -16,
+        "days_remaining": -17,
         "last_reviewed_at": null,
         "automatic_renewal": false,
         "review_basis": "legacy_deadline_preserved"
@@ -72805,7 +72687,7 @@
         "status": "监测待补数据",
         "tone": "warn",
         "performance": "证据不足",
-        "lag_sessions": 69,
+        "lag_sessions": 70,
         "reference_end": "2026-09-03",
         "certified_valid": false,
         "certified_failed": false
@@ -78724,8 +78606,8 @@
           "date": "2026-11-17",
           "state": "ready",
           "message": "筛选已完成，没有满足全部条件的股票",
-          "captured_at": "2026-11-18T08:38:12.396099+08:00",
-          "timely": true,
+          "captured_at": "2026-11-18T17:52:33.978806+08:00",
+          "timely": false,
           "pool_rows": 0,
           "selected_rows": 0,
           "sources": {
@@ -78743,8 +78625,8 @@
         "date": "2026-11-17",
         "state": "ready",
         "message": "筛选已完成，没有满足全部条件的股票",
-        "captured_at": "2026-11-18T08:38:12.396099+08:00",
-        "timely": true,
+        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "timely": false,
         "pool_rows": 0,
         "selected_rows": 0,
         "sources": {
@@ -78760,8 +78642,8 @@
       "forward": {
         "state": "active",
         "evidence": "盘前留存名单的日线模拟核算；非实盘成交，不与历史回测拼接",
-        "asof": "20261117",
-        "account_asof": "20261117",
+        "asof": "20261118",
+        "account_asof": "20261118",
         "start": "20261111",
         "observations": 1,
         "pending": 0,
@@ -78825,10 +78707,10 @@
             "return_pct": -4.0999999999999925,
             "drawdown_pct": 4.0999999999999925,
             "start": "2026-11-11",
-            "end": "2026-11-17",
-            "requested_start": "2024-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2024-11-18",
             "coverage_complete": false,
-            "sessions": 5
+            "sessions": 6
           },
           "1y": {
             "trades": 1,
@@ -78840,10 +78722,10 @@
             "return_pct": -4.0999999999999925,
             "drawdown_pct": 4.0999999999999925,
             "start": "2026-11-11",
-            "end": "2026-11-17",
-            "requested_start": "2025-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2025-11-18",
             "coverage_complete": false,
-            "sessions": 5
+            "sessions": 6
           },
           "6m": {
             "trades": 1,
@@ -78855,10 +78737,10 @@
             "return_pct": -4.0999999999999925,
             "drawdown_pct": 4.0999999999999925,
             "start": "2026-11-11",
-            "end": "2026-11-17",
-            "requested_start": "2026-05-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-05-18",
             "coverage_complete": false,
-            "sessions": 5
+            "sessions": 6
           },
           "3m": {
             "trades": 1,
@@ -78870,10 +78752,10 @@
             "return_pct": -4.0999999999999925,
             "drawdown_pct": 4.0999999999999925,
             "start": "2026-11-11",
-            "end": "2026-11-17",
-            "requested_start": "2026-08-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-08-18",
             "coverage_complete": false,
-            "sessions": 5
+            "sessions": 6
           }
         },
         "recorded_runs": 8,
@@ -78889,7 +78771,7 @@
         "review_due": "2026-12-08",
         "review_basis": "customer_shape_replacement_research_release_20261108",
         "state": "current",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "last_reviewed_at": null,
         "automatic_renewal": false
       }
@@ -78996,7 +78878,7 @@
         "status": "当前版本待验证",
         "tone": "warn",
         "performance": "证据不足",
-        "lag_sessions": 134,
+        "lag_sessions": 135,
         "reference_end": "2026-05-11",
         "certified_valid": false,
         "certified_failed": false
@@ -83431,8 +83313,8 @@
           "date": "2026-11-17",
           "state": "ready",
           "message": "筛选已完成，没有满足全部条件的股票",
-          "captured_at": "2026-11-18T08:38:12.396099+08:00",
-          "timely": true,
+          "captured_at": "2026-11-18T17:52:33.978806+08:00",
+          "timely": false,
           "pool_rows": 3,
           "selected_rows": 0,
           "sources": {
@@ -83450,8 +83332,8 @@
         "date": "2026-11-17",
         "state": "ready",
         "message": "筛选已完成，没有满足全部条件的股票",
-        "captured_at": "2026-11-18T08:38:12.396099+08:00",
-        "timely": true,
+        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "timely": false,
         "pool_rows": 3,
         "selected_rows": 0,
         "sources": {
@@ -83582,7 +83464,7 @@
       "forward": {
         "state": "no_timely_observations",
         "evidence": "盘前留存名单的日线模拟核算；非实盘成交，不与历史回测拼接",
-        "asof": "20261117",
+        "asof": "20261118",
         "observations": 0,
         "recorded_runs": 42,
         "blocked_runs": 0
@@ -84150,7 +84032,8 @@
     "2026-11-12",
     "2026-11-13",
     "2026-11-16",
-    "2026-11-17"
+    "2026-11-17",
+    "2026-11-18"
   ],
   "account_version": "per-stock-50pct-20260911",
   "publication": "公开研究展示，不是自动交易许可",
