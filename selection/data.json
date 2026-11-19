@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-18T18:25:12+08:00",
+  "built_at": "2026-11-19T08:35:08+08:00",
   "expected_session": "2026-11-18",
   "cards": [
     {
@@ -16967,7 +16967,7 @@
           "source_count": null
         }
       ],
-      "signal_message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "数据构建失败，未产生名单。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "inference_audit": {
         "features": 83,
         "scored_rows": 2030,
@@ -17752,25 +17752,35 @@
           },
           "observation_policy": "review-warning-observations-v1-20261103",
           "review_state": "expired"
+        },
+        {
+          "date": "2026-11-18",
+          "state": "blocked",
+          "message": "数据构建失败，未产生名单",
+          "captured_at": "2026-11-19T08:34:12.197713+08:00",
+          "timely": false,
+          "pool_rows": null,
+          "selected_rows": 0,
+          "sources": {},
+          "observation_policy": "review-warning-observations-v1-20261103",
+          "review_state": null,
+          "reason_code": "build_failed",
+          "status_label": "生成失败"
         }
       ],
       "daily_run": {
-        "date": "2026-11-17",
-        "state": "ready",
-        "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
-        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "date": "2026-11-18",
+        "state": "blocked",
+        "message": "数据构建失败，未产生名单",
+        "captured_at": "2026-11-19T08:34:12.197713+08:00",
         "timely": false,
-        "pool_rows": 86,
-        "selected_rows": 1,
-        "sources": {
-          "prices": "20261117",
-          "daily_basic": "20261117",
-          "moneyflow": "20261117",
-          "cyq_perf": "20261117",
-          "limit_ths_up": "20261117"
-        },
+        "pool_rows": null,
+        "selected_rows": 0,
+        "sources": {},
         "observation_policy": "review-warning-observations-v1-20261103",
-        "review_state": "expired"
+        "review_state": null,
+        "reason_code": "build_failed",
+        "status_label": "生成失败"
       },
       "forward": {
         "state": "active",
@@ -17780,15 +17790,15 @@
         "start": "20260911",
         "observations": 39,
         "pending": 0,
-        "unknown": 5,
+        "unknown": 0,
         "legacy_risk_snapshots": 23,
         "opportunities": {
-          "trades": 34,
+          "trades": 35,
           "wins": 12,
-          "win_rate": 35.294117647058826,
-          "profit_factor": 0.4465419829788658,
+          "win_rate": 34.285714285714285,
+          "profit_factor": 0.43072975247225176,
           "no_losses": false,
-          "mean_pnl": -2.022119653410325
+          "mean_pnl": -2.094637872646084
         },
         "rows": [
           {
@@ -18204,9 +18214,9 @@
             "ts_code": "002982.SZ",
             "name": "湘佳股份",
             "market": "sz",
-            "status": "退出证据缺失",
-            "pnl_pct": null,
-            "exit_date": null,
+            "status": "已结算",
+            "pnl_pct": -4.560257326661898,
+            "exit_date": "2026-11-18",
             "risk_evidence": "snapshot_hash_verified",
             "receipt_sha256": "097d84da6679612d6bbb30ef2e8ac95ca16f6e1070729da3492f9087fa185539",
             "funded": false
@@ -18216,7 +18226,7 @@
             "ts_code": "002946.SZ",
             "name": "新乳业",
             "market": "sz",
-            "status": "退出证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18228,7 +18238,7 @@
             "ts_code": "603006.SH",
             "name": "联明股份",
             "market": "sh",
-            "status": "退出证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18240,7 +18250,7 @@
             "ts_code": "002982.SZ",
             "name": "湘佳股份",
             "market": "sz",
-            "status": "退出证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18252,7 +18262,7 @@
             "ts_code": "002982.SZ",
             "name": "湘佳股份",
             "market": "sz",
-            "status": "入场证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18398,7 +18408,7 @@
             "ts_code": "603006.SH",
             "name": "联明股份",
             "market": "sh",
-            "status": "退出证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "snapshot_hash_verified",
@@ -18413,9 +18423,9 @@
           "profit_factor": 0.08493832819075406,
           "no_losses": false,
           "mean_pnl": -4.874974060348085,
-          "return_pct": -24.629486910344124,
+          "return_pct": -23.319233271949035,
           "drawdown_pct": 24.629486910344124,
-          "stale_marks": 1
+          "stale_marks": 0
         },
         "windows": {
           "2y": {
@@ -18425,7 +18435,7 @@
             "profit_factor": 0.08493832819075406,
             "no_losses": false,
             "mean_pnl": -4.874974060348085,
-            "return_pct": -24.629486910344124,
+            "return_pct": -23.319233271949035,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -18440,7 +18450,7 @@
             "profit_factor": 0.08493832819075406,
             "no_losses": false,
             "mean_pnl": -4.874974060348085,
-            "return_pct": -24.629486910344124,
+            "return_pct": -23.319233271949035,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -18455,7 +18465,7 @@
             "profit_factor": 0.08493832819075406,
             "no_losses": false,
             "mean_pnl": -4.874974060348085,
-            "return_pct": -24.629486910344124,
+            "return_pct": -23.319233271949035,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -18470,7 +18480,7 @@
             "profit_factor": 0.08493832819075406,
             "no_losses": false,
             "mean_pnl": -4.874974060348085,
-            "return_pct": -24.629486910344124,
+            "return_pct": -23.319233271949035,
             "drawdown_pct": 24.629486910344124,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -61200,7 +61210,7 @@
           "source_count": null
         }
       ],
-      "signal_message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "数据构建失败，未产生名单。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "inference_audit": {
         "features": 17,
         "scored_rows": 39036,
@@ -62021,25 +62031,35 @@
           },
           "observation_policy": "review-warning-observations-v1-20261103",
           "review_state": "expired"
+        },
+        {
+          "date": "2026-11-18",
+          "state": "blocked",
+          "message": "数据构建失败，未产生名单",
+          "captured_at": "2026-11-19T08:34:12.197713+08:00",
+          "timely": false,
+          "pool_rows": null,
+          "selected_rows": 0,
+          "sources": {},
+          "observation_policy": "review-warning-observations-v1-20261103",
+          "review_state": null,
+          "reason_code": "build_failed",
+          "status_label": "生成失败"
         }
       ],
       "daily_run": {
-        "date": "2026-11-17",
-        "state": "ready",
-        "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
-        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "date": "2026-11-18",
+        "state": "blocked",
+        "message": "数据构建失败，未产生名单",
+        "captured_at": "2026-11-19T08:34:12.197713+08:00",
         "timely": false,
-        "pool_rows": 393,
-        "selected_rows": 3,
-        "sources": {
-          "prices": "20261117",
-          "daily_basic": "20261117",
-          "moneyflow": "20261117",
-          "cyq_perf": "20261117",
-          "limit_ths_up": "20261117"
-        },
+        "pool_rows": null,
+        "selected_rows": 0,
+        "sources": {},
         "observation_policy": "review-warning-observations-v1-20261103",
-        "review_state": "expired"
+        "review_state": null,
+        "reason_code": "build_failed",
+        "status_label": "生成失败"
       },
       "forward": {
         "state": "active",
@@ -62049,15 +62069,15 @@
         "start": "20260911",
         "observations": 69,
         "pending": 0,
-        "unknown": 7,
+        "unknown": 0,
         "legacy_risk_snapshots": 0,
         "opportunities": {
-          "trades": 62,
-          "wins": 28,
-          "win_rate": 45.16129032258064,
-          "profit_factor": 1.0731046766035983,
+          "trades": 66,
+          "wins": 29,
+          "win_rate": 43.93939393939394,
+          "profit_factor": 1.0022485174901037,
           "no_losses": false,
-          "mean_pnl": 0.15809203138348502
+          "mean_pnl": 0.005155888226385171
         },
         "rows": [
           {
@@ -62737,9 +62757,9 @@
             "ts_code": "301097.SZ",
             "name": "天益医疗",
             "market": "cy",
-            "status": "退出证据缺失",
-            "pnl_pct": null,
-            "exit_date": null,
+            "status": "已结算",
+            "pnl_pct": -4.200000000000004,
+            "exit_date": "2026-11-18",
             "risk_evidence": "fixed_policy",
             "receipt_sha256": "097d84da6679612d6bbb30ef2e8ac95ca16f6e1070729da3492f9087fa185539",
             "funded": false
@@ -62821,9 +62841,9 @@
             "ts_code": "002431.SZ",
             "name": "ST棕榈",
             "market": "sz",
-            "status": "退出证据缺失",
-            "pnl_pct": null,
-            "exit_date": null,
+            "status": "已结算",
+            "pnl_pct": -8.861417322834651,
+            "exit_date": "2026-11-18",
             "risk_evidence": "fixed_policy",
             "receipt_sha256": "8d2f2fff41488942a284cc4b9c9fe36d4aa772aa078d59c367260d86f690d373",
             "funded": false
@@ -62833,9 +62853,9 @@
             "ts_code": "301049.SZ",
             "name": "超越科技",
             "market": "cy",
-            "status": "退出证据缺失",
-            "pnl_pct": null,
-            "exit_date": null,
+            "status": "已结算",
+            "pnl_pct": 7.800000000000007,
+            "exit_date": "2026-11-18",
             "risk_evidence": "fixed_policy",
             "receipt_sha256": "8d2f2fff41488942a284cc4b9c9fe36d4aa772aa078d59c367260d86f690d373",
             "funded": false
@@ -62845,9 +62865,9 @@
             "ts_code": "600238.SH",
             "name": "ST椰岛",
             "market": "sh",
-            "status": "退出证据缺失",
-            "pnl_pct": null,
-            "exit_date": null,
+            "status": "已结算",
+            "pnl_pct": -4.200000000000004,
+            "exit_date": "2026-11-18",
             "risk_evidence": "fixed_policy",
             "receipt_sha256": "8d2f2fff41488942a284cc4b9c9fe36d4aa772aa078d59c367260d86f690d373",
             "funded": false
@@ -62857,7 +62877,7 @@
             "ts_code": "301049.SZ",
             "name": "超越科技",
             "market": "cy",
-            "status": "入场证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62869,7 +62889,7 @@
             "ts_code": "605166.SH",
             "name": "聚合顺",
             "market": "sh",
-            "status": "入场证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -62881,7 +62901,7 @@
             "ts_code": "603167.SH",
             "name": "渤海轮渡",
             "market": "sh",
-            "status": "入场证据缺失",
+            "status": "持有中",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "fixed_policy",
@@ -63015,9 +63035,9 @@
             "ts_code": "002431.SZ",
             "name": "ST棕榈",
             "market": "sz",
-            "status": "退出证据缺失",
-            "pnl_pct": null,
-            "exit_date": null,
+            "status": "已结算",
+            "pnl_pct": -8.861417322834651,
+            "exit_date": "2026-11-18",
             "risk_evidence": "fixed_policy",
             "receipt_sha256": "8d2f2fff41488942a284cc4b9c9fe36d4aa772aa078d59c367260d86f690d373",
             "funded": true
@@ -63027,34 +63047,34 @@
             "ts_code": "301049.SZ",
             "name": "超越科技",
             "market": "cy",
-            "status": "退出证据缺失",
-            "pnl_pct": null,
-            "exit_date": null,
+            "status": "已结算",
+            "pnl_pct": 7.800000000000007,
+            "exit_date": "2026-11-18",
             "risk_evidence": "fixed_policy",
             "receipt_sha256": "8d2f2fff41488942a284cc4b9c9fe36d4aa772aa078d59c367260d86f690d373",
             "funded": true
           }
         ],
         "account": {
-          "trades": 10,
-          "wins": 4,
-          "win_rate": 40.0,
-          "profit_factor": 0.5220070083573832,
+          "trades": 12,
+          "wins": 5,
+          "win_rate": 41.66666666666667,
+          "profit_factor": 0.6208028592988039,
           "no_losses": false,
-          "mean_pnl": -1.1122061539974704,
-          "return_pct": -7.737907472303274,
+          "mean_pnl": -1.0152899052341124,
+          "return_pct": -6.14694126856028,
           "drawdown_pct": 8.264872039449045,
-          "stale_marks": 2
+          "stale_marks": 0
         },
         "windows": {
           "2y": {
-            "trades": 10,
-            "wins": 4,
-            "win_rate": 40.0,
-            "profit_factor": 0.5220070083573832,
+            "trades": 12,
+            "wins": 5,
+            "win_rate": 41.66666666666667,
+            "profit_factor": 0.6208028592988039,
             "no_losses": false,
-            "mean_pnl": -1.1122061539974704,
-            "return_pct": -7.737907472303274,
+            "mean_pnl": -1.0152899052341124,
+            "return_pct": -6.14694126856028,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -63063,13 +63083,13 @@
             "sessions": 43
           },
           "1y": {
-            "trades": 10,
-            "wins": 4,
-            "win_rate": 40.0,
-            "profit_factor": 0.5220070083573832,
+            "trades": 12,
+            "wins": 5,
+            "win_rate": 41.66666666666667,
+            "profit_factor": 0.6208028592988039,
             "no_losses": false,
-            "mean_pnl": -1.1122061539974704,
-            "return_pct": -7.737907472303274,
+            "mean_pnl": -1.0152899052341124,
+            "return_pct": -6.14694126856028,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -63078,13 +63098,13 @@
             "sessions": 43
           },
           "6m": {
-            "trades": 10,
-            "wins": 4,
-            "win_rate": 40.0,
-            "profit_factor": 0.5220070083573832,
+            "trades": 12,
+            "wins": 5,
+            "win_rate": 41.66666666666667,
+            "profit_factor": 0.6208028592988039,
             "no_losses": false,
-            "mean_pnl": -1.1122061539974704,
-            "return_pct": -7.737907472303274,
+            "mean_pnl": -1.0152899052341124,
+            "return_pct": -6.14694126856028,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -63093,13 +63113,13 @@
             "sessions": 43
           },
           "3m": {
-            "trades": 10,
-            "wins": 4,
-            "win_rate": 40.0,
-            "profit_factor": 0.5220070083573832,
+            "trades": 12,
+            "wins": 5,
+            "win_rate": 41.66666666666667,
+            "profit_factor": 0.6208028592988039,
             "no_losses": false,
-            "mean_pnl": -1.1122061539974704,
-            "return_pct": -7.737907472303274,
+            "mean_pnl": -1.0152899052341124,
+            "return_pct": -6.14694126856028,
             "drawdown_pct": 8.264872039449045,
             "start": "2026-09-11",
             "end": "2026-11-18",
@@ -71186,7 +71206,7 @@
           "source_count": null
         }
       ],
-      "signal_message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "数据构建失败，未产生名单。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "inference_audit": {
         "features": 112,
         "scored_rows": 16,
@@ -71899,35 +71919,45 @@
           },
           "observation_policy": "review-warning-observations-v1-20261103",
           "review_state": "expired"
+        },
+        {
+          "date": "2026-11-18",
+          "state": "blocked",
+          "message": "数据构建失败，未产生名单",
+          "captured_at": "2026-11-19T08:34:12.197713+08:00",
+          "timely": false,
+          "pool_rows": null,
+          "selected_rows": 0,
+          "sources": {},
+          "observation_policy": "review-warning-observations-v1-20261103",
+          "review_state": null,
+          "reason_code": "build_failed",
+          "status_label": "生成失败"
         }
       ],
       "daily_run": {
-        "date": "2026-11-17",
-        "state": "ready",
-        "message": "已按该日数据重建，生成时间晚于次日开盘，不计前向成绩",
-        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "date": "2026-11-18",
+        "state": "blocked",
+        "message": "数据构建失败，未产生名单",
+        "captured_at": "2026-11-19T08:34:12.197713+08:00",
         "timely": false,
-        "pool_rows": 1,
-        "selected_rows": 1,
-        "sources": {
-          "prices": "20261117",
-          "daily_basic": "20261117",
-          "moneyflow": "20261117",
-          "cyq_perf": "20261117",
-          "limit_ths_up": "20261117"
-        },
+        "pool_rows": null,
+        "selected_rows": 0,
+        "sources": {},
         "observation_policy": "review-warning-observations-v1-20261103",
-        "review_state": "expired"
+        "review_state": null,
+        "reason_code": "build_failed",
+        "status_label": "生成失败"
       },
       "forward": {
-        "state": "entry_evidence_missing",
+        "state": "active",
         "evidence": "盘前留存名单的日线模拟核算；非实盘成交，不与历史回测拼接",
         "asof": "20261118",
-        "account_asof": "20261117",
+        "account_asof": "20261118",
         "start": "20260921",
         "observations": 25,
         "pending": 0,
-        "unknown": 1,
+        "unknown": 0,
         "legacy_risk_snapshots": 0,
         "opportunities": {
           "trades": 5,
@@ -72231,7 +72261,7 @@
             "ts_code": "002685.SZ",
             "name": "华东重机",
             "market": "sz",
-            "status": "入场证据缺失",
+            "status": "未成交",
             "pnl_pct": null,
             "exit_date": null,
             "risk_evidence": "time_exit",
@@ -72491,6 +72521,18 @@
             "risk_evidence": "time_exit",
             "receipt_sha256": "097d84da6679612d6bbb30ef2e8ac95ca16f6e1070729da3492f9087fa185539",
             "funded": true
+          },
+          {
+            "date": "2026-11-17",
+            "ts_code": "002685.SZ",
+            "name": "华东重机",
+            "market": "sz",
+            "status": "未成交",
+            "pnl_pct": null,
+            "exit_date": null,
+            "risk_evidence": "time_exit",
+            "receipt_sha256": "a1980482a08c8992bcde71dc798d73e64567e37f044f10b21bf68f7cc64cf657",
+            "funded": true
           }
         ],
         "account": {
@@ -72515,10 +72557,10 @@
             "return_pct": 27.00811013344464,
             "drawdown_pct": -0.0,
             "start": "2026-09-21",
-            "end": "2026-11-17",
-            "requested_start": "2024-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2024-11-18",
             "coverage_complete": false,
-            "sessions": 36
+            "sessions": 37
           },
           "1y": {
             "trades": 4,
@@ -72530,10 +72572,10 @@
             "return_pct": 27.00811013344464,
             "drawdown_pct": -0.0,
             "start": "2026-09-21",
-            "end": "2026-11-17",
-            "requested_start": "2025-11-17",
+            "end": "2026-11-18",
+            "requested_start": "2025-11-18",
             "coverage_complete": false,
-            "sessions": 36
+            "sessions": 37
           },
           "6m": {
             "trades": 4,
@@ -72545,10 +72587,10 @@
             "return_pct": 27.00811013344464,
             "drawdown_pct": -0.0,
             "start": "2026-09-21",
-            "end": "2026-11-17",
-            "requested_start": "2026-05-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-05-18",
             "coverage_complete": false,
-            "sessions": 36
+            "sessions": 37
           },
           "3m": {
             "trades": 4,
@@ -72560,10 +72602,10 @@
             "return_pct": 27.00811013344464,
             "drawdown_pct": -0.0,
             "start": "2026-09-21",
-            "end": "2026-11-17",
-            "requested_start": "2026-08-17",
+            "end": "2026-11-18",
+            "requested_start": "2026-08-18",
             "coverage_complete": false,
-            "sessions": 36
+            "sessions": 37
           }
         },
         "recorded_runs": 39,
@@ -78464,7 +78506,7 @@
           "source_count": null
         }
       ],
-      "signal_message": "筛选已完成，没有满足全部条件的股票。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "数据构建失败，未产生名单。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "score_provenance": "monthly_walk_forward",
       "score_label": "Ridge排序原分",
       "opportunity_stats": {
@@ -78619,25 +78661,35 @@
           },
           "observation_policy": "review-warning-observations-v1-20261103",
           "review_state": "current"
+        },
+        {
+          "date": "2026-11-18",
+          "state": "blocked",
+          "message": "数据构建失败，未产生名单",
+          "captured_at": "2026-11-19T08:34:12.197713+08:00",
+          "timely": false,
+          "pool_rows": null,
+          "selected_rows": 0,
+          "sources": {},
+          "observation_policy": "review-warning-observations-v1-20261103",
+          "review_state": null,
+          "reason_code": "build_failed",
+          "status_label": "生成失败"
         }
       ],
       "daily_run": {
-        "date": "2026-11-17",
-        "state": "ready",
-        "message": "筛选已完成，没有满足全部条件的股票",
-        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "date": "2026-11-18",
+        "state": "blocked",
+        "message": "数据构建失败，未产生名单",
+        "captured_at": "2026-11-19T08:34:12.197713+08:00",
         "timely": false,
-        "pool_rows": 0,
+        "pool_rows": null,
         "selected_rows": 0,
-        "sources": {
-          "prices": "20261117",
-          "daily_basic": "20261117",
-          "moneyflow": "20261117",
-          "cyq_perf": "20261117",
-          "limit_ths_up": "20261117"
-        },
+        "sources": {},
         "observation_policy": "review-warning-observations-v1-20261103",
-        "review_state": "current"
+        "review_state": null,
+        "reason_code": "build_failed",
+        "status_label": "生成失败"
       },
       "forward": {
         "state": "active",
@@ -81998,7 +82050,7 @@
       },
       "observation_asof": null,
       "reference_label": "精选确认方案 · 历史归档候选开发测试，非当前代码完整历史重跑",
-      "signal_message": "筛选已完成，没有满足全部条件的股票。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
+      "signal_message": "数据构建失败，未产生名单。每日观察与下方历史模拟账户分别记录，尚未产生实盘成绩。",
       "ledger": [
         {
           "date": "2024-08-07",
@@ -83326,25 +83378,35 @@
           },
           "observation_policy": "review-warning-observations-v1-20261103",
           "review_state": "not_applicable"
+        },
+        {
+          "date": "2026-11-18",
+          "state": "blocked",
+          "message": "数据构建失败，未产生名单",
+          "captured_at": "2026-11-19T08:34:12.197713+08:00",
+          "timely": false,
+          "pool_rows": null,
+          "selected_rows": 0,
+          "sources": {},
+          "observation_policy": "review-warning-observations-v1-20261103",
+          "review_state": null,
+          "reason_code": "build_failed",
+          "status_label": "生成失败"
         }
       ],
       "daily_run": {
-        "date": "2026-11-17",
-        "state": "ready",
-        "message": "筛选已完成，没有满足全部条件的股票",
-        "captured_at": "2026-11-18T17:52:33.978806+08:00",
+        "date": "2026-11-18",
+        "state": "blocked",
+        "message": "数据构建失败，未产生名单",
+        "captured_at": "2026-11-19T08:34:12.197713+08:00",
         "timely": false,
-        "pool_rows": 3,
+        "pool_rows": null,
         "selected_rows": 0,
-        "sources": {
-          "prices": "20261117",
-          "daily_basic": "20261117",
-          "moneyflow": "20261117",
-          "cyq_perf": "20261117",
-          "limit_ths_up": "20261117"
-        },
+        "sources": {},
         "observation_policy": "review-warning-observations-v1-20261103",
-        "review_state": "not_applicable"
+        "review_state": null,
+        "reason_code": "build_failed",
+        "status_label": "生成失败"
       },
       "upgrade_study": {
         "rows": [
