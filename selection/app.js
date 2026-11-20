@@ -73,6 +73,7 @@
       <tr><td>全部留存机会</td><td class="cn-num">${p.trades}</td><td class="cn-num">${pct(p.win_rate)}</td><td class="cn-num">${pf(p)}</td><td colspan="2">重叠机会，不计算累计收益</td></tr>
       <tr><td>每票${num(c.allocation_pct,0)}%资金账户</td><td class="cn-num">${a.trades}</td><td class="cn-num">${pct(a.win_rate)}</td><td class="cn-num">${pf(a)}</td><td class="cn-num ${tone(a.return_pct)}">${signed(a.return_pct)}</td><td class="cn-num cn-bad">${pct(a.drawdown_pct)}</td></tr></tbody></table></div>
       <p class="cn-muted">留存 ${f.observations} 条 · 待入场 ${f.pending} 条 · 证据缺失 ${f.unknown} 条。${a.trades<20?'样本不足20笔，不能据此认证胜率或实盘能力。':''}${f.legacy_risk_snapshots?' 部分旧名单的ATR来自原特征快照，其哈希在本次结算时补核。':''}${a.stale_marks?' 存在缺失盯市报价，账户收益需谨慎解读。':''}${f.state==='entry_evidence_missing'?' 入场证据缺失，账户时钟已停止，未按空仓继续计算。':''}</p>
+      ${f.state==='exit_evidence_missing'?'<p class="cn-notice">持仓退出或盯市证据缺失，账户停在最后可核算日期；没有假定卖出，也没有把未知资金继续用于买入。</p>':''}
       <details><summary>逐条留存机会核算</summary><div class="cn-table-wrap"><table><thead><tr><th>信号日</th><th>股票</th><th>状态</th><th>退出日</th><th class="cn-num">机会净收益</th></tr></thead><tbody>${[...f.rows].reverse().map(r=>`<tr><td>${esc(r.date)}</td><td><a href="${esc(stockLink(r,c.key))}">${esc(r.ts_code.slice(0,6))} ${esc(r.name)}</a></td><td>${esc(r.status)}</td><td>${esc(r.exit_date||'—')}</td><td class="cn-num ${tone(r.pnl_pct)}">${signed(r.pnl_pct)}</td></tr>`).join('')}</tbody></table></div></details></section>`;
   }
   function periodRows(c) {
