@@ -71,7 +71,8 @@
       ['query','股票：'+String(options.query||'').trim(),r=>query&&![r.ts_code,r.name].some(v=>String(v||'').toLowerCase().includes(query))],
       ['settled','仅已结算',r=>options.settled&&r.pnl_pct==null]
     ].map(([key,label,reject])=>({key,label,count:allRecords.filter(reject).length})).filter(x=>x.count>0);
-    const state=run?.state==='blocked'?'blocked':run?.state==='ready'?'ready':records.length?'recorded':'unknown';
+    const inactive=!run&&!allRecords.length&&kind!=='historical'&&card.activation_date&&date<card.activation_date;
+    const state=run?.state==='blocked'?'blocked':run?.state==='ready'?'ready':records.length?'recorded':inactive?'inactive':'unknown';
     return {key:card.key,name:card.name,rows,count:rows.length,total:records.length,unfilteredTotal:allRecords.length,state,run,exclusions,
       filtered:rows.length!==allRecords.length,
       historical:records.some(r=>!dailyKinds.includes(r.kind)),

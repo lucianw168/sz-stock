@@ -147,6 +147,7 @@
   function recentRecords(){
     const page=view.historyPage(data.cards,data.history_sessions||[],{expected:data.expected_session,market,range:20,pageSize:5});
     const cellHtml=(cell,date)=>{
+      if(cell.state==='inactive')return '<span class="cn-muted" title="当前版本在该日尚未启用，未倒填历史名单">未启用</span>';
       if(cell.state==='unknown'&&!cell.unfilteredTotal)return '<span class="cn-muted" title="该日没有留存记录">—</span>';
       const hidden=view.hiddenSummary(cell);
       const label=cell.state==='blocked'?view.runLabel(cell.run):hidden?'0 / '+cell.unfilteredTotal:cell.count+' 只';

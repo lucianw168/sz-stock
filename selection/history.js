@@ -47,12 +47,14 @@
     }
     function label(cell){
       if(cell.state==='blocked')return view.runLabel(cell.run);
+      if(cell.state==='inactive')return '未启用';
       if(!cell.count&&cell.unfilteredTotal)return '0 / '+cell.unfilteredTotal;
       if(cell.state==='unknown')return '—';
       return String(cell.count);
     }
     function provenance(cell){
       if(view.hiddenSummary(cell))return view.hiddenSummary(cell);
+      if(cell.state==='inactive')return '该版本尚未启用';
       if(cell.run)return cell.run.timely?'盘后留存':'补生成';
       return cell.historical?'历史回测':'观察留存';
     }
@@ -70,7 +72,7 @@
         if(!cell.rows.length){
           if(cell.state!=='blocked'&&cell.unfilteredTotal)
             return `<tr><td colspan="5"><p class="cn-muted">${esc(card.name)}：该日原有 ${cell.unfilteredTotal} 条记录，当前显示 0 条。排除条件：${cell.exclusions.map(x=>esc(x.label)).join('；')}。</p><button data-action="unfilter">${icon('filter-x')}显示该日全部记录</button></td></tr>`;
-          let text=cell.state==='blocked'?cell.run.message:cell.state==='unknown'?'该日没有可核验记录':
+          let text=cell.state==='blocked'?cell.run.message:cell.state==='inactive'?`当前版本自 ${card.activation_date} 启用，未倒填历史名单`:cell.state==='unknown'?'该日没有可核验记录':
             cell.total?'当前筛选无匹配记录':'已完成筛选，未产生精选名单';
           return `<tr><td colspan="5" class="cn-muted">${esc(card.name)}：${esc(text)}</td></tr>`;
         }
