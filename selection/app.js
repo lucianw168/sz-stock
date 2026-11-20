@@ -44,6 +44,7 @@
   const periods = [['2y','2年'],['1y','1年'],['6m','半年'],['3m','三个月']];
 
   function status(c) {
+    if(c.activation_pending)return '<span class="cn-status cn-muted">待首次收盘筛选</span>';
     if(c.daily_run) {
       const r=c.daily_run;
       const label=r.state==='blocked'?view.runLabel(r):r.date!==data.expected_session?'等待最新行情':r.timely?'日更正常':'补生成记录';
@@ -70,7 +71,7 @@
     return `<section class="cn-section cn-forward"><h2>留存名单后续表现</h2><p class="cn-muted">${esc(f.evidence)}。名单起于 ${esc(f.start)}，行情截至 ${esc(f.asof)}，账户截至 ${esc(f.account_asof)}。</p>
       <div class="cn-table-wrap"><table><thead><tr><th>核算集合</th><th class="cn-num">已结算</th><th class="cn-num">盈利胜率</th><th class="cn-num">PF</th><th class="cn-num">账户收益</th><th class="cn-num">回撤</th></tr></thead><tbody>
       <tr><td>全部留存机会</td><td class="cn-num">${p.trades}</td><td class="cn-num">${pct(p.win_rate)}</td><td class="cn-num">${pf(p)}</td><td colspan="2">重叠机会，不计算累计收益</td></tr>
-      <tr><td>每票50%资金账户</td><td class="cn-num">${a.trades}</td><td class="cn-num">${pct(a.win_rate)}</td><td class="cn-num">${pf(a)}</td><td class="cn-num ${tone(a.return_pct)}">${signed(a.return_pct)}</td><td class="cn-num cn-bad">${pct(a.drawdown_pct)}</td></tr></tbody></table></div>
+      <tr><td>每票${num(c.allocation_pct,0)}%资金账户</td><td class="cn-num">${a.trades}</td><td class="cn-num">${pct(a.win_rate)}</td><td class="cn-num">${pf(a)}</td><td class="cn-num ${tone(a.return_pct)}">${signed(a.return_pct)}</td><td class="cn-num cn-bad">${pct(a.drawdown_pct)}</td></tr></tbody></table></div>
       <p class="cn-muted">留存 ${f.observations} 条 · 待入场 ${f.pending} 条 · 证据缺失 ${f.unknown} 条。${a.trades<20?'样本不足20笔，不能据此认证胜率或实盘能力。':''}${f.legacy_risk_snapshots?' 部分旧名单的ATR来自原特征快照，其哈希在本次结算时补核。':''}${a.stale_marks?' 存在缺失盯市报价，账户收益需谨慎解读。':''}${f.state==='entry_evidence_missing'?' 入场证据缺失，账户时钟已停止，未按空仓继续计算。':''}</p>
       <details><summary>逐条留存机会核算</summary><div class="cn-table-wrap"><table><thead><tr><th>信号日</th><th>股票</th><th>状态</th><th>退出日</th><th class="cn-num">机会净收益</th></tr></thead><tbody>${[...f.rows].reverse().map(r=>`<tr><td>${esc(r.date)}</td><td><a href="${esc(stockLink(r,c.key))}">${esc(r.ts_code.slice(0,6))} ${esc(r.name)}</a></td><td>${esc(r.status)}</td><td>${esc(r.exit_date||'—')}</td><td class="cn-num ${tone(r.pnl_pct)}">${signed(r.pnl_pct)}</td></tr>`).join('')}</tbody></table></div></details></section>`;
   }
@@ -120,14 +121,14 @@
   }
   function renderOverview() {
     const panel=document.getElementById('cn-panel');
-    panel.innerHTML=`<div class="cn-overview-tools"><label>市场 <select id="cn-overview-market"><option value="all">全市场</option><option value="sz">深圳主板</option><option value="sh">上海主板</option><option value="cy">创业板</option><option value="kc">科创板</option></select></label><span class="cn-muted">回测每只50%仓位 · 历史与当日名单分开标注</span></div>
+    panel.innerHTML=`<div class="cn-overview-tools"><label>市场 <select id="cn-overview-market"><option value="all">全市场</option><option value="sz">深圳主板</option><option value="sh">上海主板</option><option value="cy">创业板</option><option value="kc">科创板</option></select></label><span class="cn-muted">仓位与统计区间按产品单列 · 历史与当日名单分开标注</span></div>
       <div class="cn-card-grid">${data.cards.map(c=>{
         const s=view.snapshot(c,market,data.expected_session);
         return `<article class="cn-product-card" style="--cn-line:${c.color}" data-card="${c.key}">
           <header><h2><a href="#${c.key}" data-detail="${c.key}">${esc(c.name)}</a></h2><a class="cn-card-arrow" href="#${c.key}" data-detail="${c.key}" aria-label="${esc(c.name)}详情" title="${esc(c.name)}详情">${icon('arrow-up-right')}</a></header>
-          <p class="cn-card-date">${s.archived?'历史归档':s.state==='blocked'?view.runLabel(s):s.timely?'盘后观察':'补生成记录'} · ${esc(s.date||'暂无记录')}${s.stale?' <span class="cn-warn">非今日名单</span>':''}</p>
+          <p class="cn-card-date">${s.state==='pending_activation'?'待首次收盘筛选':s.archived?'历史归档':s.state==='blocked'?view.runLabel(s):s.timely?'盘后观察':'补生成记录'} · ${esc(s.date||(c.activation_pending?c.activation_date:'暂无记录'))}${s.stale?' <span class="cn-warn">非今日名单</span>':''}</p>
           ${c.model_review?.state==='expired'&&s.state==='ready'?`<p class="cn-card-date cn-warn" title="${esc(view.reviewText(c))}">研究观察 · 复核待完成</p>`:''}
-          <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<span class="cn-stock-entry"><a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>${evidenceButton(r)}</span>`).join(''):`<p class="cn-muted">${esc(s.state==='blocked'?s.message||'本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
+          <div class="cn-stock-list">${s.rows.length?s.rows.slice(0,8).map(r=>`<span class="cn-stock-entry"><a class="cn-stock" href="${esc(stockLink(r))}"><strong>${esc(r.ts_code.slice(0,6))}</strong><span>${esc(r.name||r.ts_code.slice(-2))}</span></a>${evidenceButton(r)}</span>`).join(''):`<p class="cn-muted">${esc(s.state==='pending_activation'?s.message:s.state==='blocked'?s.message||'本次暂停选股':s.state==='ready'?'本次此市场无精选股票':'此市场暂无该版本记录')}</p>`}</div>
           ${s.rows.length>8?`<small>另有 ${s.rows.length-8} 只，详情中查看</small>`:''}
           <footer><span class="cn-muted">${c.opportunity_stats?`历史机会胜率 ${pct(c.opportunity_stats.win_rate)} · ${c.opportunity_stats.trades} 笔`:c.key==='manual'?`开发期胜率 ${pct(c.full.win_rate)} · ${c.full.trades} 笔`:`历史胜率 ${pct(c.full.win_rate)} · PF ${pf(c.full)}`}</span><a href="#${c.key}" data-detail="${c.key}">逻辑与回测</a></footer>
         </article>`;
@@ -178,9 +179,10 @@
       <section id="cn-performance" class="cn-section">
       <div class="cn-chart-head"><h2>${c.key==='manual'?'精选确认 · 开发期模拟':'历史模拟表现'}</h2><span class="cn-muted">信号截至 ${esc(c.signal_asof)} · 账户截至 ${esc(c.account_asof)}</span></div>
       ${c.opportunity_stats?`<p class="cn-notice">全部历史精选机会：${c.opportunity_stats.trades} 笔，扣费盈利 ${c.opportunity_stats.wins} 笔，胜率 ${pct(c.opportunity_stats.win_rate)}，PF ${pf(c.opportunity_stats)}。下列资金账户仅统计实际分配模拟仓位的 ${c.full.trades} 笔，账户胜率 ${pct(c.full.win_rate)}，不是全部选股胜率。</p>`:''}
-      ${kpis(c.full)}<small>每只股票 ${num(c.allocation_pct,0)}% 仓位 · ${c.key==='bottom'?'同批最多两只，不加杠杆':'同一时间一批'} · 历史模拟，非实盘收益</small>
+      ${kpis(c.full)}<small>每只股票 ${num(c.allocation_pct,0)}% 仓位 · ${c.allocation_pct===10?'允许多笔重叠，不中途换股':c.key==='bottom'?'同批最多两只，不加杠杆':'同一时间一批'} · 历史模拟，非实盘收益</small>
       <canvas id="cn-equity" class="cn-chart" role="img" aria-label="${esc(c.name)}历史模拟账户净值曲线"></canvas>
       <p class="cn-muted">${esc(c.reference_note)}</p>
+      ${abcDiagnostics(c)}
       ${c.version_comparison?releaseComparison(c):''}
       ${c.upgrade_study?manualComparison(c):''}
       <section class="cn-section"><div class="cn-chart-head"><h2>滚动表现</h2><button id="cn-open-monitor">查看五线监测</button></div><div class="cn-table-wrap"><table><thead><tr><th>窗口</th><th>实际覆盖</th><th class="cn-num">账户收益</th><th class="cn-num">盈利胜率</th><th class="cn-num">PF</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${periodRows(c)}</tbody></table></div><p class="cn-muted">截至各账户最近数据日回看，不以今天冒充最新回测。胜率按窗口内退出计，收益包含跨窗持仓的净值变化。</p></section>
@@ -191,6 +193,11 @@
     panel.querySelectorAll('[data-section]').forEach(a=>a.onclick=e=>{e.preventDefault();document.getElementById(a.dataset.section).scrollIntoView({block:'start'});});
     mountRecords(active);
     requestAnimationFrame(()=>drawChart(c));
+  }
+  function abcDiagnostics(c) {
+    if(!c.abc_diagnostics)return '';
+    const labels={'2025H2':'2025下半年','2026':'2026主回测段','recent':'近期诊断（覆盖不连续）'};
+    return `<section class="cn-section"><h2>分段检验与近期风险</h2><p class="cn-notice">${esc(c.abc_recent_warning)}</p><div class="cn-table-wrap"><table><thead><tr><th>区间</th><th>信号日期</th><th>笔数</th><th>盈利胜率</th><th>PF</th><th>10%账户收益</th><th>最大回撤</th></tr></thead><tbody>${c.abc_diagnostics.map(r=>`<tr><td>${esc(labels[r.period]||r.period)}</td><td>${esc(r.start)} 至 ${esc(r.end)}</td><td>${r.fills}</td><td>${pct(r.win_rate)}</td><td>${num(r.profit_factor)}</td><td class="${tone(r.return_pct)}">${signed(r.return_pct)}</td><td>${pct(r.drawdown_pct)}</td></tr>`).join('')}</tbody></table></div><p class="cn-muted">各段独立起始账户，不能相加或拼接净值；胜率指扣费后盈利，不是涨停命中率。</p></section>`;
   }
   function releaseComparison(c) {
     const study=c.version_comparison;
@@ -204,7 +211,7 @@
     return `<section class="cn-section"><h2>规则来源与独立表现</h2><p class="cn-muted">单一来源不再单独发出精选信号；它们作为不同机制的组合证据，接受统一承接确认。以下为各来源独立运行的历史审计，不是当前组合绩效。</p><div class="cn-table-wrap"><table><thead><tr><th>市场 / 规则</th><th>机制</th><th>处理</th><th class="cn-num">样本</th><th class="cn-num">胜率</th><th class="cn-num">PF / 压力PF</th></tr></thead><tbody>${c.rules.map(r=>`<tr><td><a href="${esc(root+r.market+'/strategy/'+encodeURIComponent(r.strategy)+'.html')}">${esc(r.source)}</a></td><td>${esc(r.family)}</td><td>${esc(r.stage)}</td><td class="cn-num">${r.trades}</td><td class="cn-num">${pct(r.win_rate)}</td><td class="cn-num">${num(r.profit_factor)} / ${num(r.stress_pf)}</td></tr>`).join('')}</tbody></table></div></section>`;
   }
   function forwardMonitor() {
-    return `<section class="cn-section"><h2>盘前留存名单账户</h2><p class="cn-muted">每只股票50%仓位，按既定规则作日线模拟核算；不与开发期回测拼接，不等于实际成交。各行采用独立账户，小样本不认证实盘能力。</p><div class="cn-table-wrap"><table><thead><tr><th>产品线</th><th>核算截至</th><th class="cn-num">已结算</th><th class="cn-num">盈利胜率</th><th class="cn-num">收益</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${data.cards.map(c=>{const f=c.forward,a=f?.account;return `<tr><td><a href="#${c.key}" data-open="${c.key}">${esc(c.name)}</a></td><td>${esc(f?.account_asof||'暂无名单')}</td><td class="cn-num">${a?.trades??'—'}${a&&a.trades<20?'<small>小样本</small>':''}</td><td class="cn-num">${pct(a?.win_rate)}</td><td class="cn-num ${tone(a?.return_pct)}">${signed(a?.return_pct)}</td><td class="cn-num">${pct(a?.drawdown_pct)}</td></tr>`;}).join('')}</tbody></table></div></section>`;
+    return `<section class="cn-section"><h2>盘前留存名单账户</h2><p class="cn-muted">ABC每票10%，其余产品每票50%，按各自规则作日线模拟核算；不与开发期回测拼接，不等于实际成交。各行采用独立账户，小样本不认证实盘能力。</p><div class="cn-table-wrap"><table><thead><tr><th>产品线 / 仓位</th><th>核算截至</th><th class="cn-num">已结算</th><th class="cn-num">盈利胜率</th><th class="cn-num">收益</th><th class="cn-num">最大回撤</th></tr></thead><tbody>${data.cards.map(c=>{const f=c.forward,a=f?.account;return `<tr><td><a href="#${c.key}" data-open="${c.key}">${esc(c.name)}</a><small>每票${num(c.allocation_pct,0)}%</small></td><td>${esc(f?.account_asof||'暂无名单')}</td><td class="cn-num">${a?.trades??'—'}${a&&a.trades<20?'<small>小样本</small>':''}</td><td class="cn-num">${pct(a?.win_rate)}</td><td class="cn-num ${tone(a?.return_pct)}">${signed(a?.return_pct)}</td><td class="cn-num">${pct(a?.drawdown_pct)}</td></tr>`;}).join('')}</tbody></table></div></section>`;
   }
   function renderMonitor() {
     const panel=document.getElementById('cn-panel');

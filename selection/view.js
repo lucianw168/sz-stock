@@ -2,6 +2,8 @@
 (function (scope) {
   'use strict';
   function snapshot(card, market, expected) {
+    if(card.activation_pending) return {date:null,rows:[],archived:false,stale:false,
+      state:'pending_activation',message:card.signal_message};
     if(card.daily_run && card.daily_run.date<=expected) {
       const run=card.daily_run;
       const rows=card.candidates.filter(r=>r.date===run.date &&
